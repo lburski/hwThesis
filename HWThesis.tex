@@ -1,0 +1,168 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                     Heriot-Watt University Thesis Template  
+%   Created by : Lavinia Burski
+%   Date:        November 2014
+%   Department of Computer Science
+%   Heriot-Watt University
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[a4paper,12pt]{report}
+
+
+%==============================title page info=================================
+
+% Name of the author
+\newcommand{\auth}{Lavinia Burski}   
+% Title of Thesis                
+\newcommand{\thesistitle}{From Formal Specification to Full Proof:\newline A Stepwise Method}
+% Degree  
+\newcommand{\degree}{Doctor of Philosophy} 
+% Date submitted
+\newcommand{\supdate}{March 2016}            
+
+%===================================packages===================================
+\usepackage[top=20mm, bottom=20mm, left=40mm, right=20mm]{geometry}
+\usepackage{setspace}
+\usepackage{fancyhdr}
+\usepackage[citecolor=black, urlcolor=black,
+  linkcolor=black, colorlinks=true, bookmarksopen=false, bookmarks=true]{hyperref}
+\usepackage[nonumberlist, acronym]{glossaries}
+\input{Glossaries}
+\usepackage{graphicx}
+\usepackage{subfigure}
+\usepackage{xspace}
+\usepackage{listings}
+\usepackage{pdfpages}
+\usepackage{alltt}
+\usepackage{float} % to use [H] 
+\usepackage[notindex, nottoc, notlof, notlot ]{tocbibind} 
+
+%My packages
+\usepackage{graphicx}
+
+\usepackage{pbox}
+
+\usepackage{array,amsmath}
+\usepackage{amsfonts}
+\usepackage[linesnumbered,lined,boxed]{algorithm2e}
+
+\usepackage{amsthm}
+\usepackage{parcolumns}
+\usepackage{fancyvrb}
+\usepackage{zed}
+\usepackage{longtable}
+\usepackage{color}
+\usepackage{zmathlang}
+\usepackage[colorinlistoftodos]{todonotes}
+\newcommand{\insertref}[1]{\todo[inline, color=green!40]{#1}} %My own to do note
+\newcommand{\writechapter}[1]{\todo[inline, color=blue!20!white]{#1}} %My own todo note
+\def\xstrut{\rule[-2ex]{0pt}{5ex}} %Fractions in tables
+%\usepackage{lscape}    % if you want to use land scape in one paper 
+                       %...\begin{landscape}\end{landscape}
+
+\setcounter{tocdepth}{3} 
+\setcounter{secnumdepth}{3}
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{defin}{Definition}[section]
+\newtheorem{exam}{Example}[section]
+
+\newcommand\liftup[1]{%used in chapter formalising for table
+\begin{small}
+\multirow{1}{*}[2.5\baselineskip]{#1}
+\end{small}
+}
+%===================================Document===================================
+\begin{document}
+\doublespacing
+
+%==================================Title page==================================
+\pagestyle{empty}
+\begin{center}
+\begin{spacing}{2}
+{\large{\ \\  \vspace{1.5cm}\textbf{\MakeUppercase{\thesistitle}}}}\\
+\end{spacing}
+\vfill
+{\Large\textit{by}}\\\vspace{0.2cm}
+{\Large\upshape{\auth}}\\\vspace{1.0cm}
+\includegraphics[width=3.5cm]{Figures/LogoBlack.jpg}\\
+\vspace{1cm}
+{\large Submitted for the degree of \\ \degree}\\
+\vspace{1cm}
+{\large\textsc{Department of Computer Science}\\
+\textsc{School of Mathematical and Computer Sciences}\\
+\textsc{Heriot-Watt University}}\vfill
+{\large{\supdate}}
+\end{center}
+{\small The copyright in this thesis is owned by the author. Any quotation from the report or use of any of the information contained in it must acknowledge this report as the source of the quotation or information.}
+%===================================Abstract===================================
+\clearpage
+\input{Abstract}
+
+%==================================frontmater==================================
+\clearpage
+\pagestyle{plain}
+\clearpage\pagenumbering{roman}
+%%\input{Acknowledgements}
+\tableofcontents
+%%\listoftables
+%%\listoffigures
+%%\listoflistings
+%\listoftodos
+% In order for the glossaries to appear you should run this command
+ %makeglossaries HWThesis
+\printglossary[type=\acronymtype]
+ 
+\printglossary
+%===================================headings===================================
+\clearpage
+\pagestyle{fancy}
+\pagenumbering{arabic}
+\fancyhead{}
+\lhead{\slshape \leftmark} 
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.0pt}
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter:\ #1}{}}
+%===================================Chapters===================================
+
+%%\input{Introduction}%-done
+
+\input{Background}
+\writechapter{Write background chapter}
+% Z
+% Weak type theory
+% Mathlang for mathematics
+% Current translations
+
+%%\input{Design}
+\writechapter{write design chapter}
+%%\input{zcga}%-done
+
+%%\input{zdra}%-done
+%%\input{skeletons}%-done
+%%\input{Formalising} %-done
+%%\input{Interface}%-done
+%%\input{Fullexample}%-done
+%%\input{Analysis}%-done
+
+%%\input{Conclusion} 
+\writechapter{write conclusion chapter}
+% Results and discussion
+%Future Developments
+
+
+%===================================Appendix===================================
+\appendix
+\renewcommand{\chaptermark}[1]{\markboth{Appendix \thechapter.\ #1}{}}
+%%\input{Appendix1}
+
+%=================================Bibliography=================================
+\bibliographystyle{abbrv}
+\bibliography{Bibliography}
+
+\end{document}
+
+

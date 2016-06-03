@@ -1,5 +1,4 @@
-\begin{verbatim}
-theory clubstate_fillin1
+theory 5
 
 imports 
 Main 
@@ -169,4 +168,3 @@ sorry
 
 end
 end
-\end{verbatim}

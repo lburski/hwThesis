@@ -1,5 +1,7 @@
-\contentsline {todo}{\color@fb@x {}{black}{}{blue!20!white}{\leavevmode {\color {blue!20!white}o}}\ write introduction chapter}{1}{section*.2}
-\contentsline {todo}{\color@fb@x {}{black}{}{blue!20!white}{\leavevmode {\color {blue!20!white}o}}\ Write background chapter}{1}{section*.3}
-\contentsline {todo}{\color@fb@x {}{black}{}{blue!20!white}{\leavevmode {\color {blue!20!white}o}}\ write design chapter}{1}{section*.4}
-\contentsline {todo}{\color@fb@x {}{black}{}{blue!20!white}{\leavevmode {\color {blue!20!white}o}}\ write zcga chapter}{1}{section*.5}
-\contentsline {todo}{\color@fb@x {}{black}{}{blue!20!white}{\leavevmode {\color {blue!20!white}o}}\ write conclusion chapter}{29}{section*.6}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Explain different ways users can identify properties to prove for their Z specs}{21}{section*.7}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Write a conclusion for background chapter}{21}{section*.8}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Describe how the ZMathLang LaTeX package is written}{31}{section*.9}
+\contentsline {todo}{\color@fb@x {}{black}{}{green!40}{\leavevmode {\color {green!40}o}}\ reference Mihaelas user manual}{105}{section*.34}
+\contentsline {todo}{\color@fb@x {}{black}{}{blue!20!white}{\leavevmode {\color {blue!20!white}o}}\ write conclusion chapter}{132}{section*.35}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Add an example of non working stateInvariants specification}{225}{section*.36}
+\contentsline {todo}{\color@fb@x {}{black}{}{orange}{\leavevmode {\color {orange}o}}\ Find year for atelier b proof obligation user manual}{225}{section*.37}

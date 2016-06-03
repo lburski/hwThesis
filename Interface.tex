@@ -1,7 +1,7 @@
 \chapter{Interface}
 \label{ch:interface}
 
-The interface was designed so that the steps to convert a Z specification to a fully proven specification would be easier to complete by the user. It made the \gls{zmath} process more user friendly then by just typing commands in a terminal. Full details for the user interface and all its functions can be found in Mihaela's user guide \insertref{reference mihaelas user manual}. This chapter only explains the process needed to translate a specification into a full proof, other steps such as writing the specification in the first place and outputing pdf using the interface can be found in the manual.
+The interface was designed so that the steps to convert a Z specification to a fully proven specification would be easier to complete by the user. It made the \gls{zmath} process more user friendly then by just typing commands in a terminal. Full details for the user interface and all its functions can be found in Mihaela's user guide \insertref{reference Mihaelas user manual}. This chapter only explains the process needed to translate a specification into a full proof, other steps such as writing the specification in the first place and outputting pdf using the interface can be found in the manual.
 
 \section{Inserting a specification}
 To use the \gls{zmath} framework through the interface the user can download the files from \cite{zmathweb} then using a terminal run the interface program by typing \newline \verb|python Interface.py|, figure \ref{fig:startinterface} shows an example of this.
@@ -11,7 +11,7 @@ To use the \gls{zmath} framework through the interface the user can download the
 \caption{Example of how to start the interface for the \gls{zmath} framework. \label{fig:startinterface}}
 \end{figure}
 
-An example of the interface can be seen in figure \ref{fig:openspec}. Depending on the operating system the interface may look slightly different however the main panels and buttons will be the same. The main menu bar is at the top left had side and the main panel ison the left. There is a messages panel on the right top side which displays any messages when checking for correctness and converting to skeletons. To check a specification the user can click \emph{file} then \emph{open} from the main menu as shown in figure \ref{fig:openspec}.
+An example of the interface can be seen in figure \ref{fig:openspec}. Depending on the operating system the interface may look slightly different however the main panels and buttons will be the same. The main menu bar is at the top left had side and the main panel is on the left. There is a messages panel on the right top side which displays any messages when checking for correctness and converting to skeletons. To check a specification the user can click \emph{file} then \emph{open} from the main menu as shown in figure \ref{fig:openspec}.
 
 \begin{figure}[H]
 \includegraphics[scale=0.4]{Figures/Interface/openspec.png}
@@ -131,7 +131,7 @@ The user may then wish to open the filled-in isabelle skeleton externally or in 
 
 \section{Output messages which could occur}
 
-Sometimes there is an error in any of the actions previously described in this chapter. The messgae box not only tells the user what has been succesful but it also gives the user information if there has been some error in the action they were trying. Table \ref{tab:uimessages} shows all the possible messages which can appear in the message box along with an explanation about the message.
+Sometimes there is an error in any of the actions previously described in this chapter. The message box not only tells the user what has been successful but it also gives the user information if there has been some error in the action they were trying. Table \ref{tab:uimessages} shows all the possible messages which can appear in the message box along with an explanation about the message.
 
 {\def\arraystretch{0.5}\tabcolsep=0.5pt
 \begin{longtable}[H]{|l | l |}
@@ -144,15 +144,15 @@ Sometimes there is an error in any of the actions previously described in this c
 \hline
 \verb|Warning! Specification not| & Not all preconditions have an alternative \\
 \verb|correcty totalised| & output (skeleton can still be created) \\
-& \textit{s(ee chapter \ref{chap:zdra})} \\
+& \textit{(see chapter \ref{chap:zdra})} \\
 \hline
 \verb|Specification is Rhetorically| & Specification is ZDRa correct \\
 \verb|Correct| & \textit{(see chapter \ref{chap:zdra})} \\
 \hline
-\verb|Skeleton Created| & General proof skeleton has been succesfully \\
+\verb|Skeleton Created| & General proof skeleton has been successfully \\
 & created \\
 \hline
-\verb|Isabelle Skeleton Created| & Isabelle skeleton has been succesfully created \\
+\verb|Isabelle Skeleton Created| & Isabelle skeleton has been successfully created \\
 \hline
 \verb|Isabelle Skeleton successfully| & Isabelle proof skeleton has been \\
 \verb|filled in| & filled in using ZCGa text \\
@@ -161,7 +161,7 @@ Sometimes there is an error in any of the actions previously described in this c
 \verb|into Isabelle Skeleton first| & Isabelle skeleton first before filling it in \\
 & \textit{(see chapter \ref{ch:skeletons})} \\
 \hline
-\verb|Please select your isabelle| & Please locacate the Isabelle skeleton\\
+\verb|Please select your isabelle| & Please locate the Isabelle skeleton\\
 \verb|skeleton:| & which you wish to be filled in \textit{(see chapter \ref{ch:skeletons})}\\
 \hline
 \verb|Please convert specification| & Can not find the \\

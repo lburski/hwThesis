@@ -1,74 +1,8 @@
-\begin{thebibliography}{10}
+\begin{thebibliography}{1}
 
-\bibitem{mv}
-N.~de~Bruijn.
-\newblock The mathematical vernacular, a language for mathematics with typed
-  set.
-\newblock {\em In Workshop on Programming Logic}, 1987.
-
-\bibitem{researchprop}
-F.~Kamareddine and J.B.Wells.
-\newblock A research proposal to uk funding body.
-\newblock Formath, 2000.
-
-\bibitem{restoringtsa}
-F.~Kamareddine, R.~Lamar, M.~Maarek, and J.~B. Wells.
-\newblock Restoring natural language as a computerised mathematics input
-  method.
-\newblock In M.~Kauers, M.~Kerber, R.~Miner, and W.~Windsteiger, editors, {\em
-  Calculemus/MKM}, volume 4573 of {\em Lecture Notes in Computer Science},
-  pages 280--295. Springer, 2007.
-
-\bibitem{mathintomizar}
-F.~Kamareddine, M.~Maarek, K.~Retel, and J.~B. Wells.
-\newblock Gradual computerisation/formalisation of mathematical texts into
-  mizar.
-\newblock In {\em From Insight to Proof: Festschrift in Honour of Andrzej
-  Trybulec}, pages 81--95. Springer-Verlag, 2007.
-
-\bibitem{oomathlang}
-F.~Kamareddine, M.~Maarek, and J.~B. Wells.
-\newblock Toward an object-oriented structure for mathematical text.
-\newblock In M.~Kohlhase, editor, {\em MKM}, volume 3863 of {\em Lecture Notes
-  in Computer Science}, pages 217--233. Springer, 2005.
-
-\bibitem{cmtim}
-F.~Kamareddine, J.~B. Wells, and C.~Zengler.
-\newblock {Computerising mathematical texts in MathLang.}
-\newblock Technical report, Heriot-Watt University, 2008.
-
-\bibitem{secondyear}
-R.~Lamar.
-\newblock The mathlang formalisation path into isabelle -- a second-year
-  report, 2003.
-
-\bibitem{lamarphd}
-R.~Lamar.
-\newblock {\em A Partial Translation Path from MathLang to Isabelle}.
-\newblock PhD thesis, Heriot-Watt University, 2011.
-
-\bibitem{mathintoisa}
-R.~Lamar, F.~Kamareddine, and J.~B. Wells.
-\newblock Mathlang translation to isabelle syntax.
-\newblock In J.~Carette, L.~Dixon, C.~S. Coen, and S.~M. Watt, editors, {\em
-  Calculemus/MKM}, volume 5625 of {\em Lecture Notes in Computer Science},
-  pages 373--388. Springer, 2009.
-
-\bibitem{firstyear}
-M.~Maarek.
-\newblock Mathematical documents faithfully computerised:the grammatical and
-  text \& symbol aspects of the mathlang framework, first year report, 2003.
-
-\bibitem{manuelphd}
-M.~Maarek.
-\newblock {\em Mathematical documents faithfully computerised: the grammatical
-  and test \& symbol aspects of the MathLang Framework}.
-\newblock PhD thesis, Heriot-Watt University, 2007.
-
-\bibitem{krzysztofphd}
-K.~Retel.
-\newblock {\em Gradual Computerisation and Verification of Mathematics:
-  MathLang's Path into Mizar}.
-\newblock PhD thesis, Heriot-Watt University, 2009.
+\bibitem{zmathuser}
+M.~Mihaylova.
+\newblock Zmathlang user interface user manual.
+\newblock 2015.
 
 \end{thebibliography}

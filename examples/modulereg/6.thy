@@ -1,5 +1,4 @@
-\begin{verbatim}
-theory modulereg_proof
+theory 6
 imports 
 Main 
 
@@ -68,7 +67,75 @@ RegForModule modulereg modulereg' students' degModules' taking' p m)
  apply auto
 done
 
-end
-end
+definition InitModuleReg::
+"ModuleReg \<Rightarrow> PERSON set \<Rightarrow> MODULE set \<Rightarrow> (PERSON * MODULE) set \<Rightarrow> bool"
+where
+"InitModuleReg modulereg' students' degmodules' taking' == ((
+(students' = {})
+\<and> (degmodules' = {})
+\<and> (taking' = {})))"
 
-\end{verbatim}
+(*PO1 proof obligation showing init goes with the state invariants*)
+
+lemma InitOK:
+"(\<exists> modulereg'. InitModuleReg modulereg' students' degmodules' taking')
+\<longrightarrow>  ((
+(students' = {})
+\<and> (degmodules' = {})
+\<and> (taking' = {})))
+\<and> ((Domain taking' \<subseteq> students')
+\<and> (Range taking' \<subseteq> degModules'))"
+by (simp add: InitModuleReg_def)
+
+(*PO2 obligations *)
+
+lemma AddStudentDoesntChangeSI:
+"(\<exists> taking taking'  :: (PERSON * MODULE) set.
+ \<exists>degModules degModules':: MODULE set.
+ \<exists>students students':: PERSON set.
+  \<exists>p :: PERSON.
+(students' = students \<union> {(p)}) 
+\<and> (taking' = taking)
+\<and> (degModules' = degModules)
+\<and> (Domain taking \<subseteq> students)
+\<and> (Range taking \<subseteq> degModules)
+\<and> (Domain taking' \<subseteq> students')
+\<and> (Range taking' \<subseteq> degModules')
+) "
+by blast
+
+lemma RegForModuleDoesntChangeSI:
+"(\<exists> taking taking'  :: (PERSON * MODULE) set.
+ \<exists>degModules degModules':: MODULE set.
+ \<exists>students students':: PERSON set.
+  \<exists>p :: PERSON.
+ \<exists>m :: MODULE.
+(taking' = taking \<union> {(p, m)})
+\<and> (students' = students) 
+\<and> (degModules' = degModules)
+\<and> (Domain taking \<subseteq> students)
+\<and> (Range taking \<subseteq> degModules)
+\<and> (Domain taking' \<subseteq> students')
+\<and> (Range taking' \<subseteq> degModules')
+) "
+by blast
+
+
+(* Here I start PO3 obligations *)
+
+lemma RegForModuleNotEmpty:
+"(\<exists> modulereg modulereg' students' degModules' taking' p m.
+RegForModule modulereg modulereg' students' degModules' taking' p m)
+ \<longrightarrow> (students \<noteq> {})
+ \<and> (degModules \<noteq> {})"
+by (smt RegForModule_def empty_iff empty_iff)
+
+(*Here i start PO4 which are other proof obligations*)
+
+lemma notEmpty:
+"(taking' = taking \<union> {(p,m)}) \<longrightarrow> (taking' \<noteq> {})"
+by (smt Un_empty insert_not_empty)
+
+
+end
+end

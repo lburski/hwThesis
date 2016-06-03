@@ -2,7 +2,7 @@
 \label{ch:zdra}
 The \gls{zdra} is similar to the \gls{dra} for mathematics. Here we describe how the \gls{zdra} was designed an implemented. 
 
-We use the ZMathLang \LaTeX{} package to chunk specifications together and see the relationships between them. The instances used are \textit{theory and axiom}, these are all mathematical instances used in theorem prover syntax. We also use \textit{precondition}, \textit{postcondition}, \textit{output}, \textit{stateInvariants}, \textit{stateschema}, \textit{outputschema}, \textit{changeschema} and \textit{totalise}.
+We use the ZMathLang \LaTeX{} package to chunk specifications together and see the relationships between them. The mathematical instances used are \textit{theory} and \textit{axiom}, which are used in theorem prover syntax. We also use \textit{precondition}, \textit{postcondition}, \textit{output}, \textit{stateInvariants}, \textit{stateschema}, \textit{outputschema}, \textit{changeschema} and \textit{totaliseSchema}.
 
 We created the ZDRa for the following:
 
@@ -376,6 +376,8 @@ The \gls{zdra} program also checks for rhetorical correctness, that is it checks
 \subsubsection{Errors}
 \label{subsubsec:zdra_looperrors}
 
+\todo[inline]{Refer back to appendix of nonworking zdra}
+
 The specification is correct when there are no loops in the created directed graph. For example if there was a graph with edges [a$\rightarrow$b, a$\rightarrow$c, b$\rightarrow$c] then that would still be legal as there are no directed loops, however, if there was a graph with edges [a$\rightarrow$b, b$\rightarrow$c, c$\rightarrow$a] then that would cause a loop in the reasoning and the specfication will not be \gls{zdra} correct. The program outputs a message informing the user whethere the specification is \gls{zdra} correct or not.
 
 \begin{figure}[H]
@@ -445,7 +447,7 @@ The \gls{zdra} specification Dependency graph uses the labels and annotations fr
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{Figures/zdra/depgraph.png}
+\includegraphics[scale=0.5]{Figures/zdra/depgraph.png}
 \caption{An example of a dependency graph. \label{fig:depgraph}}
 \end{figure}
 
@@ -456,7 +458,7 @@ An example of a \emph{dependency graph} can be seen in figure \ref{fig:depgraph}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.4]{Figures/zdra/gotograph.png}
+\includegraphics[scale=0.5]{Figures/zdra/gotograph.png}
 \caption{An example of a goto graph \gls{zdra} correct. \label{fig:gotograph}}
 \end{figure}
 

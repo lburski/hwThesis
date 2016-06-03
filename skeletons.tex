@@ -1,9 +1,9 @@
-\chapter{GPSa and beyond}
+\chapter{From ZDRa to General Proof Sketch}
 \label{ch:skeletons}
 
-The skeletons described in this chapter are automatically generated if the specification passes the \gls{zdra} check. Section \ref{sec:zdra2gen} describes the general proof skeleton. Which uses the graphs generated in the \gls{zdra} to provide the order the instaces should go to into any theorem prover. Section \ref{sec:gpsa2isa} then explains how a general proof skeleton can be automatically translated into a skeleton in Isabelle format automatically. In section \ref{sec:isa2ful} we describe how the Isabelle Skeleton can be used to fully prove a formal specification which requires two steps, the first is an automatic step to fill in the Isabelle skeleton and the final step is up to the user to prove the lemma's and properties of the specification.
+The skeletons described in this chapter are automatically generated if the specification passes the \gls{zdra} check. Section \ref{sec:zdra2gen} describes the general proof skeleton. Which uses the graphs generated in the \gls{zdra} to provide the order the instaces should go to into any theorem prover. Section \ref{chap:gpsa2isa} then explains how a general proof skeleton can be automatically translated into a skeleton in Isabelle format automatically. In section \ref{sec:isa2ful} we describe how the Isabelle Skeleton can be used to fully prove a formal specification which requires two steps, the first is an automatic step to fill in the Isabelle skeleton and the final step is up to the user to prove the lemma's and properties of the specification.
 
-\section{From ZDRa to General Proof Sketch}
+\section{What is a General Proof Sketch}
 \label{sec:zdra2gen}
 
 When checking for ZDRa correctness the program adds all the annotated chunks into a dependency graph and a GoTo graph. Both these graphs are directed graphs.
@@ -24,7 +24,7 @@ We then run an algorithm on the GoTo graph to generate a proof skeleton. Figure 
 \label{fig:code}
 \end{figure}
 
-\subsection{Creating the Graph}
+\section{Creating the Graph}
 
 Here we show how a Proof skeleton is calculated using the Goto graph created when running the ZDRa check on a specification.
 
@@ -68,237 +68,118 @@ Figure \ref{fig:4} shows the next stage of adding nodes to the Proof Skeleton. S
 
 We come to the final stage of the dependency graph, when all the nodes are in the dependency graph except for one which is added to the end.
 
-\section{General Proof Sketch aspect into Isabelle Skeleton}
-\label{sec:gpsa2isa}
+\section{Proof Obligations}
 
-When translating from the \gls{zdra} annotated specification to the Isabelle skeleton, the syntax needed to be changed in order for the specification to parse through Isabelle. In this section we outline how the Z specification is translated into Isabelle.
+There are many properties one may wish to prove about their specification. These certain properties are called proof obligations. Proof obligations for formal notations are an entire research area in their own right. However as the \gls{zmath} framework concentrates on giving the novice an idea of how to prove their specification we will focus on checking the specification for consistancy. Using the description in \cite{DBLP:conf/icsea/WenMZ06}, checking the specification is consitant can fall under two categories:
 
-If the user has labelled a theory in the specification (T\#) then that will begin writing an Isabelle skeleton.
+\begin{itemize}
+\item POb1, Feasability of an operation
+\item POb2, Other specific proof obligation for the chosen specification
+\end{itemize}
 
-For example if we had an empty specification and named it a then the program will create an empty Isabelle skeleton such as:
+We use the syntax \textit{Context} $\vdash$ \textit{predicate} taken from the paper to define the proof obligations.
 
-\begin{verbatim}
-theory gpsa_a
-imports
-main
-begin
-end
-\end{verbatim}
+\subsection{POb1, Proof Obligation type 1}
 
-If the user labels a schema `\texttt{SS1}' meaning the state schema of the specification then that in Isabelle becomes a `\texttt{record}' and a `\texttt{locale}' is created. Using our example of specifcation named `\texttt{a}' we get the following (after the premuable descibed before):
-\begin{verbatim}
-record SS1 =
-(*DECLARATIONS*)
-locale a =
-fixes (*GLOBAL DECLARATIONS*)
-assumes SI#
-begin
-end
-end
-\end{verbatim}
+\begin{defin}\label{defa}POb1\\
 
-If there are no state invarients in the state schema at this point then there is no `\texttt{assumes SI\#}') line.
+$Context \vdash \exists var, var' \bullet SI\# \land SI\#' \land PRE\# \land PO\#$ \\
 
-All other schemas including changeSchemas, outputSchemas, preconditions that are schemas, post conditions that are schemas and all other state schema become definitions in the Isabelle skeleton.
-So for example if we have the following schema writte in \gls{zdra}
-\begin{verbatim}
-\draschema{CS1}{
-\begin{schema}{b}
-someDeclaration
-\where
-\draline{PO1}{someExpression}
-\end{schema}}
-\end{verbatim}
+\noindent where var and var' are the variables and variables' used in the schema with their types, SI\# is the state Invariants of the specification, SI\#' is the state invariants prime in the specification, PRE\# is the precondition of the schema, PO\# is the post operation of the schema and \# is some arbitary number.
+\end{defin}
 
-Then when translating into the Isabelle skeleton it becomes:
-\begin{verbatim}
-definition CS1 ::
-"(*CS1_TYPES*) => bool"
-where
-"CS1 (*CS1_VARIABLES*) == PO1"
-\end{verbatim}
+POb1 shows the feasability of an operation. When an operation can transfor a state to another state in the state space (a $\Delta$ schema). If an operation is feasible, the preconditional state and postconditional state should satisfy the state invariants of the specification.
 
-At this stage it doesn't matter what the declarations and expressions are as they get filled in at the next stage. The Isabelle skeleton only uses the \gls{zdra} labels to be created.
-
-Totalising schemas, written either horizontally or vertically in a specification become lemmas when translating into the Isabelle skeleton. If the use wishes to prove the correctness of certain safety aspects (such as the specification is total) then they can label the schema's the the annotation \verb|\draline{TS#}|. For example if we have the following totalisingSchema:
-
-\verb|\draline{TS1}{someSchema == someExpression}|
-
-This would translate to the Isabelle skeleton as:
+Again by using the ModuleReg specification we can see a proof obligation is needed when adding a student doesnt change the state invariants of the specification.
 
 \begin{verbatim}
-lemma TS1:
-"(*TS1_EXPRESSION*)"
-sorry
+lemma AddStudentDoesntChangeSI:
+"(\<exists> taking taking'  :: (PERSON * MODULE) set.
+ \<exists> degModules degModules':: MODULE set.
+ \<exists> students students':: PERSON set.
+  \<exists> p :: PERSON.
+(students' = students \<union> {(p)}) 
+\<and> (taking' = taking)
+\<and> (degModules' = degModules)
+\<and> (Domain taking \<subseteq> students)
+\<and> (Range taking \<subseteq> degModules)
+\<and> (Domain taking' \<subseteq> students')
+\<and> (Range taking' \<subseteq> degModules')
+) "
 \end{verbatim}
 
-Again, at this stage it doesn't matter what the expression is. We put `\texttt{sorry}' at the end of the lemma as this lemma will need to be proved  by the user in the final stage.
-
-\subsection{Benefits}
-
-The Isabelle skeleton allows for incomplete specifications to also be automated into a half-baked proof. This way the user can have a general outline for their specification and fill in the missing information directly into the Isabelle skeleton at a later stage. For this reason it is good to have an Isabelle skeleton before the full filled in half-baked proof.
-
-\section{ZCGa specification to Fill in the Isabelle Skeleton}
-
-Since translating using ZMathLang to translate Z specifications into an Isabelle skeleton can even been done on incomplete specifications, it is important to note that if some missing information is missing e.g. a declaration, expression etc then the comments of where these should go will not be changed. 
-For example if we have the line \verb|"(*CS1_TYPES*) => bool"| in the skeleton and the schema CS1 has no declarations yet then the line will not be changed, and it is up to the user to input the variables and the types of that definition.
-
-It is important to note that all the \gls{zcga} annotations at this stage disappear as the labelled information is automatically put into Isabelle syntax.
-
-\subsection{Z Types and FreeTypes}
-
-The program which fills in the Isabelle skeleton goes through the entire specification and adds any Z declared types and freetypes before the record. For example, if a specification has the following:
-\begin{verbatim}
-\begin{zed}
-[STUDENT]
-\end{zed}
-\end{verbatim}
-
-Then the line \verb|typedecl STUDENT| will be added after the first begin in the skeleton.
-
-If the specification had the following freetype:
-\begin{verbatim}
-\begin{zed} 
-REPORT ::= ok | already\_known | not\_known
-\end{zed}
-\end{verbatim}
-
-Then again, in the same place as the Z-Types the line
-\begin{verbatim}
-datatype  REPORT = ok | already_known | not_known
-\end{verbatim}
-is added to the skeleton.
-
-\subsection{Declarations}
-
-In Isabelle the types and variables are added speratly. For insance if we had the following schema:
+The ZDRa syntax of this proof obligation would be :
 
 \begin{verbatim}
-\draschema{OS1}{
-\begin{schema}{ab}
-d: \power COLOUR
-c: COLOUR
-\where
-\draline{PO1}{c \in d}
-\end{schema}}
+lemma AddStudentDoesntChangeSI:
+" \<exists> (*CS1_variables :: CS1_TYPES*).
+(PRE1)
+\<and> (PO1)
+\<and> (SI1)
+\<and (SI1')"
 \end{verbatim}
 
-Then the Isabelle skeleton for this schema will be as follows:
+In this property we check that the preconditional state and post conditional state of the operational schema still hold the state invariants and prime state invariants. The ZDRa syntax of the proof obligation stays that there exists some variables of the operational schema where the precondition (PRE1) postCondition (PO1) stateInvariants (SI1) and stateInvariants prime all hold.
+
+\subsection{POb2, Proof Obligation type 2}
+
+As POb2 are any other relevent properties users wish to prove about the specification we can not formally define it. However an example would be if there existed a specification where an operator which added a member to a club and then removed a member from the club. Then the amount of members should be the same after both operators have completed the task.
+
+One such example is in the ModuleReg specification the RegForModule schema postcondition shows that \verb|(taking' = taking ∪ {(p, m)}) | therefore if this were to happen then we should make sure that \verb|taking'| is not empty after the operation. This proof obligation is very specific to the ModuleReg specification and the user would need to write and check this themselves. To do such we have the following lemma:
 
 \begin{verbatim}
-definition OS1 ::
-"(*OS1_TYPES*) => bool"
-where
-"OS1 (*OS1_VARIABLES*) == (PO1)"
+lemma notEmpty:
+"(taking' = taking \<union> {(p,m)}) 
+\<longrightarrow> (taking' \<noteq> {})"
 \end{verbatim}
 
-Since we have two declarations, the filling in program would change the definition in the skeleton as follows:
+Where the name of the lemma is \verb|notEmpty| then the postOperation of the ChangeSchema is \verb|(taking' = taking \<union> {(p,m)}) | then checking that the set is not empty follows the right arrow \verb|(taking' \<noteq> {})|.
 
-\begin{verbatim}
-definition ab ::
-"COLOUR set => COLOUR => bool"
-where
-"ab d c == (c \<in> d)"
-\end{verbatim}
+POb1 can be automate. Since POb2 is specification specific, each user will need to define these themselves if they so wish.
 
-Therefore, from the declarations, the types replace the line \verb|(*OS1_TYPES*)| and the variables replace the line \verb|(*OS1_VARIABLES*)|.
+\subsection{Proof Obligations in the General Proof Skeleton}
 
-\subsection{Expressions}
+Since the POb2 are specific to the specification only POb1 are automatically added. They are generated as `\emph{lemma's}' in the general proof skeleton. 
 
-Since the majority of the syntax for expressions is very similar to the syntax in Isabelle, the expressions are put in directly with minor changes. The expressions replace the \gls{zdra} labellings.
+\begin{figure}[H]
+\includegraphics[scale=0.6]{Figures/skeleton/pobcode.png}
+\caption{Part of the algorithm to create Proof Obligation ZDRa names.}
+\label{fig:codepob}
+\end{figure}
 
-Using our previous example shown in the last section, we have the schema `\texttt{ab}', in the skeleton we have a label `\texttt{PO1}' which is then replaced by the expression \verb|c \<in> d|. Note this expression is very similar to the expression in \LaTeX{} \verb|c \in d| apart from the symbol \verb|\in| becomes \verb|\<in>|. Table \ref{tab:latextoisabelle} shows the rest of these automatic changes of the syntax made from \LaTeX{} to Isabelle.
+The proof obligations which check that changeSchema's and outputSchema's follow the stateInvariants are added to the original general proof skeleton. The general proof skeleton starts of with being an ordered list (GPSaOL), then the algorithm for generating a list of proof obligations is run and added to the original proof skeleton. Figure \ref{fig:codepob} shows the algorithm which creates the ordered list of proof obligations.
 
-{\def\arraystretch{0.5}\tabcolsep=0.5pt
-\begin{longtable}[H]{|c | c | c |}
-\hline
-\textbf{Syntax in Z} & \textbf{Syntax in \LaTeX} & \textbf{Syntax in Isabelle} \\
-\hline
-$\{...\}$ & \verb|\{...\}| & \verb|{...}|\\
-$\limg...\rimg$ & \verb|\limg...\rimg| & \verb|\<lparr>...\<rparr>| \\
-$\langle...\rangle$ & \verb|\langle...\rangle| & \verb|\<langle>...\<rangle>| \\
-$\# $ A & \verb|\#| & \verb|card| \textit{if A is set}, \\
-& & \verb|length| \textit{if A is list} \\
-$\cup $ & \verb|\cup| & \verb|\<union>| \\
-$\cap$ & \verb|\cap| & \verb|\<inter>| \\
-$\cross$ & \verb|\cross| & \verb|\<times>| \\
-$\setminus$ & \verb|\setminus| & \verb|-| \\
-$\geq$ & \verb|\geq| & \verb|\<ge>| \\
-$\leq$ & \verb|\leq| & \verb|\<le>| \\
-$\lhd$ & \verb|\lhd| & \verb|\<lhd>| \\
-$\rhd$ & \verb|\rhd| & \verb|\<rhd>| \\
-$\nrres$ & \verb|\nrres| & \verb|\<unlhd>| \\
-$\ndres$ & \verb|\ndres| & \verb|\<unrhd>| \\
-$\implies$ & \verb|\implies| & \verb|\<Longrightarrow>| \\
-$\iff$ & \verb|\iff| & \verb|\<Longleftrightarrow>| \\
-$\notin$ & \verb|\notin| & \verb|\<notin>| \\
-$\in$ & \verb|\in| & \verb|\<in>| \\
-$\subset$ & \verb|\subset| & \verb|\<subset>| \\
-$\subseteq$ & \verb|\subseteq| & \verb|\<subseteq>| \\
-$\land$ & \verb|\land| & \verb|\<and>| \\
-$\lor$ & \verb|\lor| & \verb|\<or>| \\
-$\lnot$ & \verb|\lnot| & \verb|\<not>| \\
-$\neq$ & \verb|\neq| & \verb|\<noteq>| \\
-$a \mapsto b$ & \verb|a \mapsto b| & \verb|(a,b)| \\
-$\power A$ & \verb|\power A| & \verb|A set| \\
-$\nat$ & \verb|\nat| & \verb|nat| \\
-$\nat_1$ & \verb|\nat_1| & \verb|nat| \\
-$\num$ & \verb|\num| & \verb|num| \\
-$A \pfun B$ & \verb|A \pfun B| & \verb|(A * B) set| \\
-$A \fun B$ & \verb|A \fun B| & \verb|(A * B) set| \\
-$A \rel B$ & \verb|A \rel B| & \verb|(A * B) set| \\
-$\seq A$ & \verb|\seq A| & \verb|A list| \\
-$\iseq A$ & \verb|\iseq A| & \verb|A list| \\
-$\seq_1 A$ & \verb|\iseq_1 A| & \verb|A list| \\
-$\dom A$ & \verb|\dom A| & \verb|Domain A| \\
-$\ran A$ & \verb|\ran A| & \verb|Range A| \\
-$\exists$ & \verb|\exists| & \verb|\<exists>| \\
-$\forall$ & \verb|\forall| & \verb|\<forall>| \\
-$@$ & \verb|@| & \verb|\<bullet>| \\
-$R\inv$ & \verb|R\inv| & \verb|\<R^-1>| \\
-$R^{k}$ & \verb|R^{k}| & \verb|\<R^k>| \\
-\hline
-\caption{A table showing the symbols which are changed from Z specifications in \LaTeX{} to Isabelle.}
-\label{tab:latextoisabelle}
-\end{longtable}
-}
+Lines 338-344 find all the existing lemma's in the \gls{gpsol} and sets \emph{i} to be the highest number. For example if there are existing lemmas in \gls{gpsol} (L1, L2, L3), then \emph{i} becomes 3. If there are no existing lemmas in \gls{gpsol} then \emph{i} stays as 0. Lines 347-250 take all the elements which are \emph{changeSchema} instances and adds them to a list of \emph{setCSandOS}. Then lines 350-359 loops through all the changeSchema's, takes the \gls{zdra} name, add's L + a number + \gls{zdra} name and adds it to the \emph{listOfProofObligations}.
 
-Another part of the Z mathematical toolkit which we need to rewrite are the use of partial functions. In HOL all functions are total but there are ways to do certain proofs about partial functions \cite{Krauss08definingrecursive}. Therefore the variables which have a type as a partial function will are translated as a set of pairs. Any proofs to check for partial functions if needed can be done by the user in step 6 shown in figure \ref{fig:steps} but the details of these proofs are beyond the scope of this thesis.
+\paragraph{For Example}
 
-\subsection{Schema Names}
+if we had the following \gls{gpsol}: \\
+\noindent [(SS1, stateSchema), (IS1, initialSchema), (CS1, changeSchema), (CS2, changeSchema), (TS1, totaliseSchema)] \\
+Then in this case:
+\begin{itemize}
+\item lemmaSet = []
+\item i = 0
+\item setofCsandOs = [(CS1, changeSchema), (CS2, changeSchema)]
+\end{itemize}
 
-The Names of the Schema are added to the skeleton by using the \gls{zdra} name. For example if the specification had the line \verb|\draschema{TS1}{\begin{schema}{ab}{..| then anywhere `\texttt{TS1}' is listed in the skeleton it will be converted to `\texttt{ab}'. This is done throughout the entire skeleton.
+Then for each element in setofCsandOs we would add the new elements (L1\_CS1, lemma) and (L2\_CS2, lemma) to the ordered list \emph{listOfProofObligations}.
 
-\section{Filled in Isabelle Skeleton to a Full Proof}
-\label{sec:isa2ful}
+The new \gls{gpsol} would then become [(SS1, stateSchema), (IS1, initialSchema), (CS1, changeSchema), (CS2, changeSchema), (TS1, totaliseSchema), (L1\_CS1, lemma) and (L2\_CS2, lemma)]
 
-The final step to get from a half-baked proof into a full proof is labelled as step 7 in Figure \ref{fig:steps}, this is also named fill in 2. Technically the specification the user automatically generates in fill in 1 is fully formalised in Isabelle if there are no other properties to be proved. If the specification is not fully formalised, using the half-baked proof generated in step 5, the user then adds any safety properties about the specification they wish to prove in the form of \emph{lemmas}. As the properties will be specific to the user and/or specification it is difficult to automate this step. Therefore some theorem prover knowledge may be required for step 6. Some of the automated theorem prover tools such as Sledgehammer \cite{sledgehammer} may be useful when proving the properties.
+If for example the original \gls{gpsol} was \\
+\noindent [(SS1, stateSchema), (IS1, initialSchema), (CS1, changeSchema), (CS2, changeSchema), (TS1, totaliseSchema), (L1, lemma), (L2, lemma)]\\
+Then then new proof obligation lemmas would be (L3\_CS1, lemma) and (L4\_CS2, lemma) as we would already have L1 and L2.
 
-It is important to note that when proving the properties sometimes it is useful to unfold the definitions which have been automatically created from the specification.
-For example figure \ref{fig:exampleproof} shows an example of a lemma automatically generated from the \gls{zdra} annotated specification (black) and the user input needed to prove this lemma (red). Notice that the user has deleted the word "\texttt{sorry}" which would have automatically come after the lemma. The user usually needs to unfold the definitions by applying the unfold rule to the definitions of the schemas. More information on proving these lemmas can be found in the Isabelle Manual \cite{isabelle} and is beyond the scope of this thesis.
-
-\begin{center}
 \begin{figure}[H]
 \centering
-\begin{footnotesize}
-\begin{BVerbatim}[commandchars=+\[\]]
-lemma pre_VM1: 
-"(\<exists> stock' takings' cash_refunded bars_delivered.
-VM1 cash_tendered stock takings stock' takings' cash_refunded bars_delivered)
-\<longleftrightarrow> (0 < stock) \<and> (cash_tendered = price) \<and> 
-(0 \<le> takings)"
-[+color[red]apply (unfold VM1_def exact_cash_def some_stock_def VM_sale_def)]
-[+color[red]apply auto]
-[+color[red]done]
-\end{BVerbatim}
-\end{footnotesize}
-\caption{\label{fig:exampleproof} An example of a proof completed by user input.}
+\includegraphics[scale=0.5]{Figures/skeleton/proofskeletonwithpo.png}
+\caption{Example of a General Proof Skeleton with lemma's.}
+\label{fig:gpswithpo}
 \end{figure}
-\end{center}
+
+An example of a General Proof Skeleton with added proof obligations is shown in Figure \ref{fig:gpswithpo}. The changeSchema's in this specification are CS1 and CS2. Therefore to make sure the changeSchemas do not change the state of the specification and comply with the state invariants the two lemma's L1\_CS1 and L2\_CS2 have been added.
 
 \section{Conclusion}
 \label{sec:skeletonsConclusion}
 
-This chapter described the final steps in computerising a formal specification into full proof. It has described how the \gls{zdra} program uses the GoTo graph to generate a general proof skeleton (step 2$\rightarrow$3 in figure \ref{fig:steps}), then it examples how the program uses the automatically generated general skeleton to  create an Isabelle skeleton. From the Isabelle skeleton the user can then automatically fill in the skeleton using the \gls{zcga} annoatated specification giving a \gls{half}. The last step would be to fill in any mising proofs in the \gls{half}, this is still a difficult step and may require some theorem prover knowledge however this part is difficult to automate as different system specifications have different properties users wish to prove, therefore tools such as sledgehammer \cite{sledgehammer} may be useful at this point.
-
-In the next chapeter we demonstrate a full example of a specification being taken through all the steps of the ZMathLang framework.
+This chapter describes how the \gls{zdra} program uses the GoTo graph to generate a general proof skeleton (step 2$\rightarrow$3 in figure \ref{fig:steps}). The general proof skeleton is an automatically generated .txt file which displays the order in which this instances must go in a theorem prover to be logically correct. This chapter gives a basic understanding of proof obligations for Z and examples which proof obligations are automatically generated when translating Z specifications into Isabelle. We give a formal definition of the proof obligation to check for consistancy of the state invariants and show an example. The next chapter describes how the general proof skeleton is translated into Isabelle syntax.

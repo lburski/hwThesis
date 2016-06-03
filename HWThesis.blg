@@ -3,44 +3,46 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: HWThesis.aux
 The style file: abbrv.bst
 Database file #1: Bibliography.bib
-You've used 12 entries,
+Warning--empty note in zmathuser
+You've used 1 entry,
             2118 wiz_defined-function locations,
-            574 strings with 5813 characters,
-and the built_in function-call counts, 3918 in all, are:
-= -- 377
-> -- 187
-< -- 7
-+ -- 75
-- -- 59
-* -- 242
-:= -- 655
-add.period$ -- 38
-call.type$ -- 12
-change.case$ -- 59
+            516 strings with 3994 characters,
+and the built_in function-call counts, 195 in all, are:
+= -- 18
+> -- 7
+< -- 0
++ -- 3
+- -- 2
+* -- 10
+:= -- 45
+add.period$ -- 3
+call.type$ -- 1
+change.case$ -- 4
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 159
-empty$ -- 308
-format.name$ -- 59
-if$ -- 844
+cite$ -- 2
+duplicate$ -- 6
+empty$ -- 12
+format.name$ -- 2
+if$ -- 33
 int.to.chr$ -- 0
-int.to.str$ -- 12
-missing$ -- 5
-newline$ -- 61
-num.names$ -- 30
-pop$ -- 76
+int.to.str$ -- 1
+missing$ -- 0
+newline$ -- 8
+num.names$ -- 2
+pop$ -- 2
 preamble$ -- 1
-purify$ -- 49
+purify$ -- 3
 quote$ -- 0
-skip$ -- 126
+skip$ -- 5
 stack$ -- 0
-substring$ -- 172
-swap$ -- 55
-text.length$ -- 7
+substring$ -- 5
+swap$ -- 0
+text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 48
-warning$ -- 0
-while$ -- 36
-width$ -- 14
-write$ -- 133
+type$ -- 4
+warning$ -- 1
+while$ -- 2
+width$ -- 2
+write$ -- 11
+(There was 1 warning)

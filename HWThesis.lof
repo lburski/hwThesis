@@ -1,82 +1,92 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces The MathLang approach to computerisation/formalisation \cite {mathintomizar}}}{9}{figure.2.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces The steps required to obtain a full proof from a raw specification.}}{8}{figure.3.1}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces The steps required to obtain a full proof from a raw specification.}}{22}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Example of a partial Z specification.}}{24}{figure.3.2}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Example of a ZCGa annotated specification.}}{25}{figure.3.3}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Example of a ZDRa annotated specification.}}{26}{figure.3.4}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Example of an automatically generated goto graph.}}{26}{figure.3.5}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Example of a general proof skeleton.}}{27}{figure.3.6}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Example of an Isabelle skeleton.}}{28}{figure.3.7}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Example of an Isabelle skeleton automatically filled in.}}{29}{figure.3.8}
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Flow chart of ZMathLang.}}{30}{figure.3.9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Basic example of a specification }}{11}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Constant giving a term }}{19}{figure.4.2}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Constant giving a term }}{19}{figure.4.3}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Correct term declaration labelled in zcga }}{20}{figure.4.4}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Correct set declaration labelled in zcga }}{20}{figure.4.5}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Correct expression labelled in zcga }}{20}{figure.4.6}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Correct definition labelled in zcga }}{21}{figure.4.7}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Example of correct schematext }}{21}{figure.4.8}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Outputting message when specification is correct (left) and incorrect (right).}}{22}{figure.4.9}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Basic example of a specification }}{34}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Constant giving a term }}{41}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Constant giving a term }}{41}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Correct term declaration labelled in zcga }}{42}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Correct set declaration labelled in zcga }}{42}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Correct expression labelled in zcga }}{43}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Correct definition labelled in zcga }}{43}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Example of correct schematext }}{43}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Outputting message when specification is correct (left) and incorrect (right).}}{44}{figure.4.9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces A stateschema and stateinvariants labelled in \gls {zdra}.}}{30}{figure.5.1}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces An initialschema labelled in \gls {zdra}.}}{30}{figure.5.2}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces A changeschema labelled in \gls {zdra}.}}{31}{figure.5.3}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces A outputschema labelled in \gls {zdra}.}}{32}{figure.5.4}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces A totalise schema instance labelled in \gls {zdra}.}}{33}{figure.5.5}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces A totalise line instance labelled in \gls {zdra}.}}{33}{figure.5.6}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces A axiom instance labelled in \gls {zdra}.}}{34}{figure.5.7}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces A precondition schema instance labelled in \gls {zdra}.}}{34}{figure.5.8}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces An example of a loop in the reasoning in a labelled ZDRa specification.}}{39}{figure.5.9}
-\contentsline {figure}{\numberline {5.10}{\ignorespaces The pdflatex output of figure \ref {fig:aloop}. }}{39}{figure.5.10}
-\contentsline {figure}{\numberline {5.11}{\ignorespaces An example of an error message when a specification is not \gls {zdra} correct. }}{40}{figure.5.11}
-\contentsline {figure}{\numberline {5.12}{\ignorespaces An example of a dependency graph. }}{40}{figure.5.12}
-\contentsline {figure}{\numberline {5.13}{\ignorespaces An example of a goto graph \gls {zdra} correct. }}{41}{figure.5.13}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces A stateschema and stateinvariants labelled in \gls {zdra}.}}{52}{figure.5.1}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces An initialschema labelled in \gls {zdra}.}}{52}{figure.5.2}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces A changeschema labelled in \gls {zdra}.}}{53}{figure.5.3}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces A outputschema labelled in \gls {zdra}.}}{54}{figure.5.4}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces A totalise schema instance labelled in \gls {zdra}.}}{55}{figure.5.5}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces A totalise line instance labelled in \gls {zdra}.}}{55}{figure.5.6}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces A axiom instance labelled in \gls {zdra}.}}{56}{figure.5.7}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces A precondition schema instance labelled in \gls {zdra}.}}{56}{figure.5.8}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces An example of a loop in the reasoning in a labelled ZDRa specification.}}{61}{figure.5.9}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces The pdflatex output of figure \ref {fig:aloop}. }}{61}{figure.5.10}
+\contentsline {figure}{\numberline {5.11}{\ignorespaces An example of an error message when a specification is not \gls {zdra} correct. }}{62}{figure.5.11}
+\contentsline {figure}{\numberline {5.12}{\ignorespaces An example of a dependency graph. }}{63}{figure.5.12}
+\contentsline {figure}{\numberline {5.13}{\ignorespaces An example of a goto graph \gls {zdra} correct. }}{63}{figure.5.13}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Part of the algorithm to create a proof sketch.}}{44}{figure.6.1}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces GoTo graph and proof skeleton of vending machine step 1.}}{44}{figure.6.2}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces GoTo graph and proof skeleton of vending machine step 2.}}{45}{figure.6.3}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces GoTo graph and proof skeleton of vending machine step 3.}}{45}{figure.6.4}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces GoTo graph and proof skeleton of vending machine step 4.}}{46}{figure.6.5}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces GoTo graph and proof skeleton of vending machine step 5.}}{46}{figure.6.6}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces An example of a proof completed by user input.}}{53}{figure.6.7}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Part of the algorithm to create a proof sketch.}}{66}{figure.6.1}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces GoTo graph and proof skeleton of vending machine step 1.}}{66}{figure.6.2}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces GoTo graph and proof skeleton of vending machine step 2.}}{67}{figure.6.3}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces GoTo graph and proof skeleton of vending machine step 3.}}{67}{figure.6.4}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces GoTo graph and proof skeleton of vending machine step 4.}}{68}{figure.6.5}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces GoTo graph and proof skeleton of vending machine step 5.}}{68}{figure.6.6}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Part of the algorithm to create Proof Obligation ZDRa names.}}{72}{figure.6.7}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Example of a General Proof Skeleton with lemma's.}}{73}{figure.6.8}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Relation with un-nested precondition and postcondition. }}{63}{figure.7.1}
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Relation with nested precondition and postcondition. }}{63}{figure.7.2}
-\contentsline {figure}{\numberline {7.3}{\ignorespaces All annotations from table \ref {tab:verticiesandedges} combined into one specification. }}{64}{figure.7.3}
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Dependency graph of the example in \ref {fig:draspec} }}{64}{figure.7.4}
-\contentsline {figure}{\numberline {7.5}{\ignorespaces Example of a draschema fully annotated in \gls {zcga} and \gls {zdra} }}{65}{figure.7.5}
-\contentsline {figure}{\numberline {7.6}{\ignorespaces User annotated in \gls {zdra} for the modulereg specification with arrows coloured. }}{70}{figure.7.6}
-\contentsline {figure}{\numberline {7.7}{\ignorespaces The dependency graph of modulereg specification with arrows coloured. }}{70}{figure.7.7}
-\contentsline {figure}{\numberline {7.8}{\ignorespaces The goto graph of modulereg specification with arrows coloured. }}{70}{figure.7.8}
-\contentsline {figure}{\numberline {7.9}{\ignorespaces All annotations from table \ref {tab:verticiesandedges} combined into one specification. }}{72}{figure.7.9}
-\contentsline {figure}{\numberline {7.10}{\ignorespaces Goto graph of the example in \ref {fig:draspeca} }}{72}{figure.7.10}
+\contentsline {figure}{\numberline {7.1}{\ignorespaces An example of a proof completed by user input.}}{85}{figure.7.1}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces Example of how to start the interface for the \gls {zmath} framework. }}{75}{figure.8.1}
-\contentsline {figure}{\numberline {8.2}{\ignorespaces Example of the interface and opening a specification. }}{76}{figure.8.2}
-\contentsline {figure}{\numberline {8.3}{\ignorespaces Asking the user to insert the specification. }}{76}{figure.8.3}
-\contentsline {figure}{\numberline {8.4}{\ignorespaces Example of a specification inserted in the main panel. }}{77}{figure.8.4}
-\contentsline {figure}{\numberline {8.5}{\ignorespaces An example of how to check the specification for ZCGa correctness (left) and the message which appears when the specification is ZCGa correct. }}{77}{figure.8.5}
-\contentsline {figure}{\numberline {8.6}{\ignorespaces An example of how to check the specification for ZDRa correctness (left) and the message which appears when the specification is ZDRa correct. }}{78}{figure.8.6}
-\contentsline {figure}{\numberline {8.7}{\ignorespaces How to create a general proof skeleton using the user interface. }}{79}{figure.8.7}
-\contentsline {figure}{\numberline {8.8}{\ignorespaces New general proof skeleton. }}{79}{figure.8.8}
-\contentsline {figure}{\numberline {8.9}{\ignorespaces The user choosing to create an Isabelle skeleton in the user interface. }}{79}{figure.8.9}
-\contentsline {figure}{\numberline {8.10}{\ignorespaces New buttons which appear if the user chooses to create a general proof skeleton or an Isabelle skeleton. }}{80}{figure.8.10}
-\contentsline {figure}{\numberline {8.11}{\ignorespaces Popup box in the user interface showing the isabelle skeleton. }}{80}{figure.8.11}
-\contentsline {figure}{\numberline {8.12}{\ignorespaces The user choosing to fill in the isabelle skeleton in the user interface . }}{81}{figure.8.12}
+\contentsline {figure}{\numberline {8.1}{\ignorespaces Relation with un-nested precondition and postcondition. }}{95}{figure.8.1}
+\contentsline {figure}{\numberline {8.2}{\ignorespaces Relation with nested precondition and postcondition. }}{95}{figure.8.2}
+\contentsline {figure}{\numberline {8.3}{\ignorespaces All annotations from table \ref {tab:verticiesandedges} combined into one specification. }}{96}{figure.8.3}
+\contentsline {figure}{\numberline {8.4}{\ignorespaces Dependency graph of the example in \ref {fig:draspec} }}{96}{figure.8.4}
+\contentsline {figure}{\numberline {8.5}{\ignorespaces User annotated in \gls {zdra} for the modulereg specification with arrows coloured. }}{100}{figure.8.5}
+\contentsline {figure}{\numberline {8.6}{\ignorespaces The dependency graph of modulereg specification with arrows coloured. }}{100}{figure.8.6}
+\contentsline {figure}{\numberline {8.7}{\ignorespaces The goto graph of modulereg specification with arrows coloured. }}{100}{figure.8.7}
+\contentsline {figure}{\numberline {8.8}{\ignorespaces All annotations from table \ref {tab:verticiesandedges} combined into one specification. }}{102}{figure.8.8}
+\contentsline {figure}{\numberline {8.9}{\ignorespaces Goto graph of the example in \ref {fig:draspeca} }}{102}{figure.8.9}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {9.1}{\ignorespaces Part of the raw schema.}}{84}{figure.9.1}
-\contentsline {figure}{\numberline {9.2}{\ignorespaces Part of a raw specification output. }}{84}{figure.9.2}
-\contentsline {figure}{\numberline {9.3}{\ignorespaces Part of the raw schema.}}{85}{figure.9.3}
-\contentsline {figure}{\numberline {9.4}{\ignorespaces Part of a ZCGa labelled specification output. }}{85}{figure.9.4}
-\contentsline {figure}{\numberline {9.5}{\ignorespaces Message which appears after running the ZCGa checker on our example. }}{86}{figure.9.5}
-\contentsline {figure}{\numberline {9.6}{\ignorespaces An example of a specification labelled in \gls {zcga} and \gls {zdra}.).}}{87}{figure.9.6}
-\contentsline {figure}{\numberline {9.7}{\ignorespaces An example of a specification output labelled in \gls {zcga} and \gls {zdra}.).}}{87}{figure.9.7}
-\contentsline {figure}{\numberline {9.8}{\ignorespaces Message which appears after running the ZDRa checker on our example. }}{88}{figure.9.8}
-\contentsline {figure}{\numberline {9.9}{\ignorespaces Dependency graph automatically generated from the ZDRa for our example. }}{88}{figure.9.9}
-\contentsline {figure}{\numberline {9.10}{\ignorespaces GoTo graph automatically generated from the ZDRa for our example. }}{89}{figure.9.10}
-\contentsline {figure}{\numberline {9.11}{\ignorespaces The GPSa button the interface which allows the user to generate the general proof skeleton. }}{90}{figure.9.11}
-\contentsline {figure}{\numberline {9.12}{\ignorespaces General proof skeleton. }}{90}{figure.9.12}
-\contentsline {figure}{\numberline {9.13}{\ignorespaces The Isabelle skeleton button the interface which allows the user to generate an Isabelle skeleton of their specification. }}{90}{figure.9.13}
-\contentsline {figure}{\numberline {9.14}{\ignorespaces Isabelle proof skeleton. }}{91}{figure.9.14}
-\contentsline {figure}{\numberline {9.15}{\ignorespaces The Fill in Isabelle Skeleton button the interface which allows the user to fill in the skeleton they previously created. }}{91}{figure.9.15}
-\contentsline {figure}{\numberline {9.16}{\ignorespaces Filled In proof skeleton. }}{92}{figure.9.16}
-\contentsline {figure}{\numberline {9.17}{\ignorespaces An example of a property and it's proof for the Vending Machine example. }}{93}{figure.9.17}
+\contentsline {figure}{\numberline {9.1}{\ignorespaces Example of how to start the interface for the \gls {zmath} framework. }}{105}{figure.9.1}
+\contentsline {figure}{\numberline {9.2}{\ignorespaces Example of the interface and opening a specification. }}{106}{figure.9.2}
+\contentsline {figure}{\numberline {9.3}{\ignorespaces Asking the user to insert the specification. }}{106}{figure.9.3}
+\contentsline {figure}{\numberline {9.4}{\ignorespaces Example of a specification inserted in the main panel. }}{107}{figure.9.4}
+\contentsline {figure}{\numberline {9.5}{\ignorespaces An example of how to check the specification for ZCGa correctness (left) and the message which appears when the specification is ZCGa correct. }}{107}{figure.9.5}
+\contentsline {figure}{\numberline {9.6}{\ignorespaces An example of how to check the specification for ZDRa correctness (left) and the message which appears when the specification is ZDRa correct. }}{108}{figure.9.6}
+\contentsline {figure}{\numberline {9.7}{\ignorespaces How to create a general proof skeleton using the user interface. }}{109}{figure.9.7}
+\contentsline {figure}{\numberline {9.8}{\ignorespaces New general proof skeleton. }}{109}{figure.9.8}
+\contentsline {figure}{\numberline {9.9}{\ignorespaces The user choosing to create an Isabelle skeleton in the user interface. }}{109}{figure.9.9}
+\contentsline {figure}{\numberline {9.10}{\ignorespaces New buttons which appear if the user chooses to create a general proof skeleton or an Isabelle skeleton. }}{110}{figure.9.10}
+\contentsline {figure}{\numberline {9.11}{\ignorespaces Popup box in the user interface showing the isabelle skeleton. }}{110}{figure.9.11}
+\contentsline {figure}{\numberline {9.12}{\ignorespaces The user choosing to fill in the isabelle skeleton in the user interface . }}{111}{figure.9.12}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {10.1}{\ignorespaces Part of the raw schema.}}{114}{figure.10.1}
+\contentsline {figure}{\numberline {10.2}{\ignorespaces Part of a raw specification output. }}{114}{figure.10.2}
+\contentsline {figure}{\numberline {10.3}{\ignorespaces Part of the raw schema.}}{115}{figure.10.3}
+\contentsline {figure}{\numberline {10.4}{\ignorespaces Part of a ZCGa labelled specification output. }}{115}{figure.10.4}
+\contentsline {figure}{\numberline {10.5}{\ignorespaces Message which appears after running the ZCGa checker on our example. }}{116}{figure.10.5}
+\contentsline {figure}{\numberline {10.6}{\ignorespaces An example of a specification labelled in \gls {zcga} and \gls {zdra}.).}}{117}{figure.10.6}
+\contentsline {figure}{\numberline {10.7}{\ignorespaces An example of a specification output labelled in \gls {zcga} and \gls {zdra}.).}}{117}{figure.10.7}
+\contentsline {figure}{\numberline {10.8}{\ignorespaces Message which appears after running the ZDRa checker on our example. }}{118}{figure.10.8}
+\contentsline {figure}{\numberline {10.9}{\ignorespaces Dependency graph automatically generated from the ZDRa for our example. }}{118}{figure.10.9}
+\contentsline {figure}{\numberline {10.10}{\ignorespaces GoTo graph automatically generated from the ZDRa for our example. }}{119}{figure.10.10}
+\contentsline {figure}{\numberline {10.11}{\ignorespaces The GPSa button the interface which allows the user to generate the general proof skeleton. }}{120}{figure.10.11}
+\contentsline {figure}{\numberline {10.12}{\ignorespaces General proof skeleton. }}{120}{figure.10.12}
+\contentsline {figure}{\numberline {10.13}{\ignorespaces The Isabelle skeleton button the interface which allows the user to generate an Isabelle skeleton of their specification. }}{120}{figure.10.13}
+\contentsline {figure}{\numberline {10.14}{\ignorespaces Isabelle proof skeleton. }}{121}{figure.10.14}
+\contentsline {figure}{\numberline {10.15}{\ignorespaces The Fill in Isabelle Skeleton button the interface which allows the user to fill in the skeleton they previously created. }}{121}{figure.10.15}
+\contentsline {figure}{\numberline {10.16}{\ignorespaces Filled In proof skeleton. }}{122}{figure.10.16}
+\contentsline {figure}{\numberline {10.17}{\ignorespaces An example of a property and it's proof for the Vending Machine example. }}{123}{figure.10.17}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

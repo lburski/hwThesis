@@ -4,7 +4,7 @@
 
 Industries developing high integrity software are always looking for ways to make their software safer. Safety Integrity Levels (SILs) are used to define a level of risk-reduction provided by a safety-function. The highest SIL which could be given to hardware or safety integrity, as given by the International Electro technical Commission's (IEC) standard, is a SIL4. SIL4 has a probability of failure of 0.0001-0.00001\%, although this is very low since it is still not at 0\% which means there is always room for improvement. Software testing usually takes place when the program or a prototype has been implemented. However by the time the product is fully implemented and errors are caught it is expensive to go back to the planning stage to find solutions to those bugs. Catching errors at an earlier stage of the project life cycle would be more time and cost effective for the whole project team.
 
-One idea to detect errors at an early stage of the project life cycle is by applying the use of \gls{fm} at the design/specification stage of the project life cycle. The benefit of using \gls{fm} is that they provide a means to symbolicaly examine the entire state space of a design and establish a correctness that is true for all possible inputs \cite{wifrm}. However due to the enormous complexity of real time systems they are rarely used. \Gls{fm} come in different shapes and sizes; the \gls{asm} theory is a state machine which operates on states or arbitrary data structures. The B-method \cite{bmeth} is a formal method for the development of progra code from a specification in the \gls{asm} notation. Z \cite{spiveyreferencemanual} is a specification languaged used for describing computer-based systems. \Gls{uml} provides system architects with a considtent language for specifying, construing and documenting different components of systems. These are just a selection of various \gls{fm} methods however there are a great deal more which are still applied to systems today to add a degree of safety to certain high integrity products.
+One idea to detect errors at an early stage of the project life cycle is by applying the use of \gls{fm} at the design/specification stage of the project life cycle. The benefit of using \gls{fm} is that they provide a means to symbolically examine the entire state space of a design and establish a correctness that is true for all possible inputs \cite{wifrm}. However due to the enormous complexity of real time systems they are rarely used. \Gls{fm} come in different shapes and sizes; the \gls{asm} theory is a state machine which operates on states or arbitrary data structures. The B-method \cite{bmeth} is a formal method for the development of program code from a specification in the \gls{asm} notation. Z \cite{spiveyreferencemanual} is a specification languages used for describing computer-based systems. \Gls{uml} provides system architects with a consistent language for specifying, construing and documenting different components of systems. These are just a selection of various \gls{fm} methods however there are a great deal more which are still applied to systems today to add a degree of safety to certain high integrity products.
 
 Specifications models and verification may be done using different levels of rigour. Level 1 represents the use of mathematical logic to specify a system, level 2 uses a handwritten approach to proofs and level 3 is the most rigorous application of formal methods which uses theorem provers to undertake fully formal machine-checked proofs. Level 3 is the most expensive out of the three levels and only practically worthwhile when the cost of making mistakes is extremely high.
 
@@ -32,7 +32,7 @@ A summary of contributions is given in the following points:
 
 \item A weak type checker, which reads the \gls{zcga} annotations and checks them has been implemented.
 
-\item Examples given for various specifications.
+\item Examples given for various specifications \footnote{The examples for various specifications can be found on http://www.macs.hw.ac.uk/~lb89/zmathlang/examples}.
 \end{itemize}
 
 \item ZMathLang's \gls{zdra} has been created and implemented. Dependency Graphs and Goto Graphs have been implemented to be automatically generated from the \gls{zdra} annotated document.
@@ -49,7 +49,7 @@ A summary of contributions is given in the following points:
 \item Examples given for various specifications.
 \end{itemize}
 
-\item \gls{gpsa} and Isabelle skeletons have been implemented so they are automatically generated frm the \gls{zdra} annotated document.
+\item \gls{gpsa} and Isabelle skeletons have been implemented so they are automatically generated from the \gls{zdra} annotated document.
 
 \begin{itemize}
 
@@ -63,7 +63,7 @@ A summary of contributions is given in the following points:
 \item A gradual computerisation path from Z specifications (BirthdayBook, Vending Machine and Ed Curries book) have been documented. These are the first translations from raw Z specifications to complete proofs done using the \gls{zmath} framework. Out of these translations we get new dependency graphs and proof skeletons for the individual specifications.
 
 \begin{itemize}
-\item Clear ad concise translation paths from various Z specifications into \gls{zcga} annotated and checked documents, \gls{zdra} annotated and check documents.
+\item Clear and concise translation paths from various Z specifications into \gls{zcga} annotated and checked documents, \gls{zdra} annotated and check documents.
 
 \item Dependency graphs, GoTo Graphs and general proof skeletons are generated for all example specifications.
 

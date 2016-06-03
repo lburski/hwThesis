@@ -60,6 +60,13 @@
 \def\xstrut{\rule[-2ex]{0pt}{5ex}} %Fractions in tables
 %\usepackage{lscape}    % if you want to use land scape in one paper 
                        %...\begin{landscape}\end{landscape}
+                       
+\definecolor{lightblue}{HTML}{D2E4F5}
+\definecolor{aqua}{HTML}{1CEAC1}
+\definecolor{lightgreen}{HTML}{90EE90}
+\definecolor{lightpink}{HTML}{FFC0CB}
+\definecolor{lightorange}{HTML}{FFDEA2}
+
 
 \setcounter{tocdepth}{3} 
 \setcounter{secnumdepth}{3}
@@ -76,6 +83,7 @@
 }
 %===================================Document===================================
 \begin{document}
+\lstset{language=Python} 
 \doublespacing
 
 %==================================Title page==================================
@@ -129,26 +137,18 @@
 %===================================Chapters===================================
 
 %%\input{Introduction}%-done
-
-\input{Background}
-\writechapter{Write background chapter}
-% Z
-% Weak type theory
-% Mathlang for mathematics
-% Current translations
-
-%%\input{Design}
-\writechapter{write design chapter}
+%%\input{Background}%-done
+%%\input{Design}%-done
 %%\input{zcga}%-done
-
 %%\input{zdra}%-done
 %%\input{skeletons}%-done
+%%\input{skeletons2}%-done
 %%\input{Formalising} %-done
 %%\input{Interface}%-done
 %%\input{Fullexample}%-done
 %%\input{Analysis}%-done
 
-%%\input{Conclusion} 
+\input{Conclusion} 
 \writechapter{write conclusion chapter}
 % Results and discussion
 %Future Developments
@@ -161,6 +161,7 @@
 
 %=================================Bibliography=================================
 \bibliographystyle{abbrv}
+\todo[inline]{Find year for atelier b proof obligation user manual}
 \bibliography{Bibliography}
 
 \end{document}

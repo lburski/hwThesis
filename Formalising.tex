@@ -321,99 +321,99 @@ $
 \newline
 \noindent and $\mathbb{D}_{comb} = \mathbb{V}_{comb} \union \mathbb{E}_{comb}$
 
-\begin{defin}
-The function anns(s) returns all annotations ann within a draschema. Thus:
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.45]{Figures/Formalising/anns2.png}
-\end{figure}
-\end{defin}
-
-We have a definition for the function \emph{anns(s)} which returns all the \gls{zcga} annotations for a vertex in a graph.
-
-\begin{defin}
-\textbf{(First child of an annotation}) For an annotation 
-
-\includegraphics[scale=0.3]{Figures/Formalising/anns.png}
-
-we introduce the function first(ann):
-
-\includegraphics[scale=0.2]{Figures/Formalising/firstann2.png}
-
-\end{defin}
-
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.15]{Figures/Formalising/exampleschema.png}
-\caption{Example of a draschema fully annotated in \gls{zcga} and \gls{zdra} \label{fig:draschemaanns}}
-\end{figure}
-
-\begin{table}[H]
-\begin{tabular}{|l | l | l |}
-\hline
-\textbf{Set} & \textbf{Description} & \textbf{Example for} \\
-& & \textbf{figure \ref{fig:draschemaanns}} \\
-\hline
-$\mathtt{T}(v)$ & $\{\mathbf{R}(x)| x \in anns(s) \land role(x) = \mathbf{term}\}$ & $\{y, x, 1\}$ \\
-\hline
-$\mathtt{S}(v)$ & $\{\mathbf{R}(x)| x \in anns(s) \land role(x) = \mathbf{set}\}$ & \{\} \\
-\hline
-$\mathtt{P}(v)$ & $\{\mathbf{R}(x)| x \in anns(s) \land role(x) = \mathbf{expression}\}$ & $\{B, lessthan(x, y)$ \\
-& & $equal(x',plus(x,1)) \}$\\
-\hline
-$\mathtt{DC}(v)$ & $\{inter(first(x))| x \in anns(s) \land role(x) = \mathbf{dec}\}$ & $\{y\}$ \\
-\hline
-$\mathtt{DF}(v)$ & $\{inter(first(x))| c \in anns(s) \land role(x) = \mathbf{def}\}$ & $\{\}$ \\
-\hline
-$\mathtt{ST}(v)$ & $\{\mathbf{R}(x)| x \in anns(s) \land role(x) = \mathbf{schematext}\}$ & $\{y:B,$ \\
-& & $lessthan(x,y),$ \\
-& & $equal(x',plus(x,1)) \}$ \\
-\hline
-$\mathtt{ENV}(v)$ & $\{\mathbf{R}(x) | \exists v' \neq v$ with $v'$ is a vertex in the & \\
-& preorder path from the root vertex to vertex $v$ & \\
-& and $x \in anns(v') \land role(x) = expression\}$ & \\
-\hline
-\end{tabular}
-\caption{ Sets for a node $v$ and examples. \label{tab:setsfornodes}}
-\end{table}
-
-\begin{defin}
-\textbf{(Introduced Symbols.)} We define the set $\mathtt{IN}(v)$ of introduced symbols and facts of a node v as follows:
-
-$\mathtt{IN}(v) := \mathtt{DF}(v) \union \mathtt{DC}(v) \union \{s|s \in \mathtt{P}(v) \land s \notin \mathtt{ENV}(v)\} \bigcup\limits_{c\ childOf\ v} \mathtt{IN}(c)$
-\end{defin}
-
-\begin{defin}
-\textbf{(Used Symbols.)} A node v uses the set $\mathtt{USE}(v)$ is as follows:
-
-$\mathtt{USE}(v) := \mathtt{T}(v) \union \mathtt{S}(v) \union \mathtt{P}(v) \bigcup\limits_{c\ childOf\ v} \mathtt{USE}(c)$
-\end{defin}
-
-With our new definitions for symbols and facts along with table \ref{tab:setsfornodes} showing the available sets in a node we can prove some properties about the nodes in the dependency graph.
-
-\begin{thm}
-\label{dfdcvertex}
-$\mathtt{DF}(v) \union \mathtt{DC}(v) \subseteq \mathtt{T}(v) \union \mathtt{S}(v)$ for each vertex v.
-\end{thm}
-
-\begin{proof}
-By using table \ref{tab:setsfornodes}, $\mathtt{DF}(v)$ and $\mathtt{DC}(v)$ only ontain the first children of the defintion and declarations of the annotations. Thus by the definition of first child of annotation and the \gls{zcga} weak types in chapter \ref{chap:zcga} the only children can be of type \texttt{term} or \texttt{set} and are therefore in the sets $\mathtt{T}(v)$ or $\mathtt{S}(v)$ respectively.
-\end{proof}
-
-\begin{thm}
-\label{insubsetuse}
-$\mathtt{IN}(v) \subseteq \mathtt{USE}(v)$ in each node v.
-\end{thm}
-
-\begin{proof}
-In theorem \ref{insubsetuse} we have two scenarios to consider:
-
-\begin{itemize}
-\item If $v$ have no children then use theorem \ref{dfdcvertex}.
-
-\item If $v$ has children then by assume the theorem holds for all children $c$ of $v$ then by theorem \ref{dfdcvertex} and the induction hypothesis it is true that $\mathtt{IN}(v) \subseteq \mathtt{USE}(v)$
-\end{itemize}
-\end{proof}
+%\begin{defin}
+%The function anns(s) returns all annotations ann within a draschema. Thus:
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale=0.45]{Figures/Formalising/anns2.png}
+%\end{figure}
+%\end{defin}
+%
+%We have a definition for the function \emph{anns(s)} which returns all the \gls{zcga} annotations for a vertex in a graph.
+%
+%\begin{defin}
+%\textbf{(First child of an annotation}) For an annotation 
+%
+%\includegraphics[scale=0.3]{Figures/Formalising/anns.png}
+%
+%we introduce the function first(ann):
+%
+%\includegraphics[scale=0.2]{Figures/Formalising/firstann2.png}
+%
+%\end{defin}
+%
+%\begin{figure}[H]
+%\centering
+%\includegraphics[scale=0.15]{Figures/Formalising/exampleschema.png}
+%\caption{Example of a draschema fully annotated in \gls{zcga} and \gls{zdra} \label{fig:draschemaanns}}
+%\end{figure}
+%
+%\begin{table}[H]
+%\begin{tabular}{|l | l | l |}
+%\hline
+%\textbf{Set} & \textbf{Description} & \textbf{Example for} \\
+%& & \textbf{figure \ref{fig:draschemaanns}} \\
+%\hline
+%$\mathtt{T}(v)$ & $\{\mathbf{R}(x)| x \in anns(s) \land role(x) = \mathbf{term}\}$ & $\{y, x, 1\}$ \\
+%\hline
+%$\mathtt{S}(v)$ & $\{\mathbf{R}(x)| x \in anns(s) \land role(x) = \mathbf{set}\}$ & \{\} \\
+%\hline
+%$\mathtt{P}(v)$ & $\{\mathbf{R}(x)| x \in anns(s) \land role(x) = \mathbf{expression}\}$ & $\{B, lessthan(x, y)$ \\
+%& & $equal(x',plus(x,1)) \}$\\
+%\hline
+%$\mathtt{DC}(v)$ & $\{inter(first(x))| x \in anns(s) \land role(x) = \mathbf{dec}\}$ & $\{y\}$ \\
+%\hline
+%$\mathtt{DF}(v)$ & $\{inter(first(x))| c \in anns(s) \land role(x) = \mathbf{def}\}$ & $\{\}$ \\
+%\hline
+%$\mathtt{ST}(v)$ & $\{\mathbf{R}(x)| x \in anns(s) \land role(x) = \mathbf{schematext}\}$ & $\{y:B,$ \\
+%& & $lessthan(x,y),$ \\
+%& & $equal(x',plus(x,1)) \}$ \\
+%\hline
+%$\mathtt{ENV}(v)$ & $\{\mathbf{R}(x) | \exists v' \neq v$ with $v'$ is a vertex in the & \\
+%& preorder path from the root vertex to vertex $v$ & \\
+%& and $x \in anns(v') \land role(x) = expression\}$ & \\
+%\hline
+%\end{tabular}
+%\caption{ Sets for a node $v$ and examples. \label{tab:setsfornodes}}
+%\end{table}
+%
+%\begin{defin}
+%\textbf{(Introduced Symbols.)} We define the set $\mathtt{IN}(v)$ of introduced symbols and facts of a node v as follows:
+%
+%$\mathtt{IN}(v) := \mathtt{DF}(v) \union \mathtt{DC}(v) \union \{s|s \in \mathtt{P}(v) \land s \notin \mathtt{ENV}(v)\} \bigcup\limits_{c\ childOf\ v} \mathtt{IN}(c)$
+%\end{defin}
+%
+%\begin{defin}
+%\textbf{(Used Symbols.)} A node v uses the set $\mathtt{USE}(v)$ is as follows:
+%
+%$\mathtt{USE}(v) := \mathtt{T}(v) \union \mathtt{S}(v) \union \mathtt{P}(v) \bigcup\limits_{c\ childOf\ v} \mathtt{USE}(c)$
+%\end{defin}
+%
+%With our new definitions for symbols and facts along with table \ref{tab:setsfornodes} showing the available sets in a node we can prove some properties about the nodes in the dependency graph.
+%
+%\begin{thm}
+%\label{dfdcvertex}
+%$\mathtt{DF}(v) \union \mathtt{DC}(v) \subseteq \mathtt{T}(v) \union \mathtt{S}(v)$ for each vertex v.
+%\end{thm}
+%
+%\begin{proof}
+%By using table \ref{tab:setsfornodes}, $\mathtt{DF}(v)$ and $\mathtt{DC}(v)$ only ontain the first children of the defintion and declarations of the annotations. Thus by the definition of first child of annotation and the \gls{zcga} weak types in chapter \ref{chap:zcga} the only children can be of type \texttt{term} or \texttt{set} and are therefore in the sets $\mathtt{T}(v)$ or $\mathtt{S}(v)$ respectively.
+%\end{proof}
+%
+%\begin{thm}
+%\label{insubsetuse}
+%$\mathtt{IN}(v) \subseteq \mathtt{USE}(v)$ in each node v.
+%\end{thm}
+%
+%\begin{proof}
+%In theorem \ref{insubsetuse} we have two scenarios to consider:
+%
+%\begin{itemize}
+%\item If $v$ have no children then use theorem \ref{dfdcvertex}.
+%
+%\item If $v$ has children then by assume the theorem holds for all children $c$ of $v$ then by theorem \ref{dfdcvertex} and the induction hypothesis it is true that $\mathtt{IN}(v) \subseteq \mathtt{USE}(v)$
+%\end{itemize}
+%\end{proof}
 
 
 \subsection{Conclusion}

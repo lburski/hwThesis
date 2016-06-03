@@ -1,5 +1,5 @@
 \begin{verbatim}
-theory fillinbb
+theory 6
 imports 
 Main 
 
@@ -8,8 +8,6 @@ begin
 typedecl NAME
 typedecl DATE
 datatype REPORT = ok | already_known | not_known
-
-datatype  REPORT = ok | already_known | not_known
 
 record BirthdayBook = 
 KNOWN :: " NAME set"
@@ -22,9 +20,11 @@ assumes "known = Domain birthday"
 begin
 
 definition InitBirthdayBook :: 
- "(NAME * DATE) set =>  NAME set => bool"
+ "BirthdayBook \<Rightarrow> (NAME * DATE) set =>  NAME set => bool"
 where 
-"InitBirthdayBook  birthday' known' == ((
+"InitBirthdayBook birthdaybook  birthday' known' == ((
+((birthday' = {}))
+\<and>
 (known' = {})))"
 
 definition FindBirthday :: 
@@ -36,7 +36,7 @@ where
 ((name, date) \<in> birthday ))"
 
 definition AddBirthday :: 
-"SS1 => SS1 =>  NAME set => (NAME * DATE) set => 
+"BirthdayBook => BirthdayBook =>  NAME set => (NAME * DATE) set => 
 NAME => DATE => bool"
 where 
 "AddBirthday birthdaybook birthdaybook' known' 
@@ -47,7 +47,7 @@ birthday' name date ==
 (birthday' = birthday \<union> {(name, date)})))"
 
 definition NotKnown :: 
- "SS1 => SS1 => NAME => REPORT => bool"
+ "BirthdayBook => BirthdayBook => NAME => REPORT => bool"
 where 
 "NotKnown birthdaybook birthdaybook' name result == ((
 (name \<notin> known)))
@@ -55,7 +55,7 @@ where
 (result = not_known)))"
 
 definition AlreadyKnown :: 
- "SS1 => SS1 => NAME => REPORT => bool"
+ "BirthdayBook  => BirthdayBook => NAME => REPORT => bool"
 where 
 "AlreadyKnown birthdaybook birthdaybook' name result == ((
 (name \<in> known)))
@@ -114,17 +114,17 @@ apply (unfold birthdaybookstate_def)
 apply auto
 done
 
-lemma InitIsOk:
-"(\<exists> birthdaybook. InitBirthdayBook birthdaybook known' birthday' 
-\<longleftrightarrow> (known' = {}) \<and> birthday'= {})"
+lemma InitisOk:
+"(\<exists> birthdaybook. InitBirthdayBook birthdaybook  birthday' known') 
+\<longleftrightarrow> (known' = {}) \<and> (birthday'= {})"
 apply (unfold InitBirthdayBook_def)
 apply auto
 done
 
 lemma knownAddBirthday:
-"( AddBirthday birthdaybook birthdaybook' 
+"(AddBirthday birthdaybook birthdaybook' 
 known' birthday' name date) \<and> 
-(InitBirthdayBook birthdaybook known' birthday')
+(InitBirthdayBook birthdaybook birthday' known')
 \<longrightarrow> known' = known \<union> {(name)}"
 apply (unfold AddBirthday_def)
 apply (unfold InitBirthdayBook_def)

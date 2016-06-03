@@ -22,15 +22,25 @@ This thesis presents a very basic user interface to use with \gls{zmath}. Furthe
 \subsection{Future Developments}
 \label{subsec:futuredevelopments}
 
-The future developments of \gls{zmath} 
+The future developments of \gls{zmath} have been discussed occasionally between students and supervisors during meetings. This section puts together and summarises these ideas and presents them to the reader in order to provide a general idea of future developments.
 
 \subsubsection{Automisation of the annotation}
 
+At present, the user needs to annotate their formal specification by hand using \LaTeX{} commands before being check by the various correctness checkers. This sometimes can be a time-consuming task especially if the user isn't familar to \LaTeX{} syntax. An advancement on this would be if the user would be able to visually see the Z specification as schema boxes (such as the compiled version of \LaTeX{}) and then drag and highlight using mouse and buttons to annotate the specification with \gls{zcga} colours and \gls{zdra} instances. This idea could be done in a similar way to the annotations done in the original \gls{math}. Another way to ease the users input is if the labels would automatically label what user input. For example if the user labelled the variable `\emph{v?}' as a term then all other variables `\emph{v?}' would also be labelled a term automatically. This way the user wouldn't need to repeat the labels they have already done. This would drastically increse the workload for the user especially on very large specifications.
+
 \subsubsection{Extension to more complex proof obligations}
+
+The proof obligations described in this thesis are properties to check the consistancy of the specification. The current proof obligations for Z specifications are to give a flavour of what kind of properties to prove about the system and to ease the user in proving these properties. As mentioned before proof obligations for formal specifications is indeed a research subject in it's own right and more complex proof obligations can be developed to work alongside the \gls{zmath} framework. These proof obligation can come into the \gls{gps} part of the translation and follow through to the complete proof. If there are hint's or simple proof tactics to prove these properties then they can also be added to step 6 which would allow the user to get an idea of how to finish of the proofs.
 
 \subsubsection{Any formal specification to any theorem prover}
 
+This thesis describes how the \gls{zmath} framework can translate a Z specification into the theorem prover Isabelle. However, there are many other theorem provers which are prefered by certain users and ultimatly the \gls{zmath} framework should be able to translate from the \gls{gps} into a theorem prover of the users choice and not just be restricted to Isabelle. In this case steps 1 to 4 would be the same, regardless of which theorem prover the user wishes to translate to. The change would be made in step 5 when creating a skeleton of the specification in the chosen theorem prover. Other theorem provers which \gls{zmath} could transate to would be Mizar/HOL-Z/ProofPower-Z/Coq etc.
+
+There are many other formal languages to write specifications in which could be another idea for future research. \Gls{zmath} currently parses through Z specifcations however, further research could be done for \gls{zmath} to work on any formal language such as alloy, event B, UML or VDM. Investigation on whether the grammatical categories in the \gls{zcga} or instances in the \gls{zdra} would need adapting. Otherwise the current annotations would be suitable for any formal notation and only the implementation would need to be changed.
+
 \subsubsection{Informal specifications}
+
+A final future idea would be to combine parts of \gls{math} which handles mathematical documents written in part mathematics and part english and to translate informal specifications into theorem provers. With this idea, perhaps a TSa aspect would need to be adapted for informal specifications. So that a system specification written completely in english could be checked for \gls{zcga}, \gls{zdra} and ultimatly translated fully into a theorem prover.
 
 \section{Related Works}
 \label{sec:relatedworks}

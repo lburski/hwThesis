@@ -6,6 +6,7 @@
 *.dvi
 *.glo
 *.glg
+*.gls
 *.lot
 *.out
 *.toc
@@ -13,3 +14,5 @@
 #*#
 *~
 *.gz
+*.acr
+*.blg

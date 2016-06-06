@@ -3,10 +3,70 @@
 
 In this chapter we discuss the current development of \gls{zmath} and it's future works. We also conclude a comparisson between \gls{zmath} framework to other ststems. Finally in section we give add concluding thoughts to this thesis.
 
+
+\section{Achievements of this thesis}
+
+At the beginning of this thesis we described the motivations and aims of this thesis these are summarised by the following points:
+
+\begin{enumerate}
+
+\item To create a weak type checker which checks the grammatical categories of a specifiction, which could be used on formal or semi formal specifications.
+
+\item To create a document rhetorical checker which checks a formal specification for loops in the reasoning and give warnings if there are outstanding preconditions to be totalised.
+
+\item To automatically produce documents such as dependency and goto graphs to assist the users in analysing the system specification and to help with the translation into a theorem prover.
+
+\item To create an easy step by step method to translate formal specifications into a theorem prover for userwho are novices in theorem proving. With each step in this path will be it's own correctness checker with some level of rigor.
+
+\end{enumerate}
+
+\subsection{To create a weak type checker which checks the grammatical categories of a specifiction.}
+
+The first point is outlined in chapter \ref{ch:design} and described in detail in chapter \ref{ch:zcga}. The weak type checker can check for grammatical correctness of formal and semi formal specification. A \LaTeX{} package named \texttt{zmathlang.sty} has been implemented which allows the user to annotated their specification in weak typing categories. When the document is compiled the annotations then output coloured boxes around each of the categories in their colours which can be visually analysed by the user. An automatic weak type checker has been implemented to parse through the specification with it's annotation to check if the specification is correct or not. The automatic weak type checker follows a set of rules described in chapter \ref{ch:zcga}.
+
+One limitation of the \gls{zcga} checker is that the user needs to annotate their specifications by hand using the \LaTeX{} package. This may sometimes be a repetitive and boring task and improvement to this limitation is described in section \ref{subsubsec:automisation}. Another restriction to this point is that although the \gls{zcga} can weakly type semi formal specifications it can only check the parts which are written in a formal syntax. For example a \textit{declaration} must be written in the form `\texttt{variable:type}' for the weak type checker to parse it. A more beneficial weak type checker would possible be able to parse over \textbf{informal} specifications. More on this idea is described in section \ref{subsubsec:informalspecs}.
+
+\subsection{To create a document rhetorical checker which checks a formal specification for loops in the reasoning.}
+
+The second achievement of this thesis was to create a document rhetorical checker which is described in detail in chapter \ref{ch:zdra}. The document rhetorical checker can check for any loops in the reasoning in the dependency and goto graph of the specification. The annotations for the \gls{zdra} are implemented in \texttt{zmathlang.sty} which can be used on the specification to annotate chunks of the specification. When using this package to compile the document, boxes around each of the instances of the specification are shown and be analysed by the user. An automatic \gls{zdra} program then parses through the annotations and checks the specification if it is \gls{zdra} correct. Similarly to the \gls{zcga} checker, the \gls{zdra} checker is implemented in \texttt{Python}.
+
+Like the \gls{zcga}, the \gls{zdra} annotations for the specification has to be done by the user. An more user friendly way to do this task would be a drag-and-drop idea where the user can highlight a piece of specification and click a button to add what instance this is. The relationships of the \gls{zdra} could be done in a similar way. This could added to the current userface described in chapter \ref{ch:interface}. A second limitation of the current \gls{zdra} is that users can chunk any part of specification (formal or informal) the translation from the \gls{zdra} annotated text can only be done from Z into Isabelle. It may be useful to translate from any formal specification into Isabelle (or any other theorem prover). More information on this extension is described in section \ref{subsubsec:anyformanythe}.
+
+\subsection{To automatically produce documents such as dependency and goto graphs to assist users in analysing the system specification.}
+
+The third creation of this research is automatically produce documents which will be used to aid system engineers and software developers in analysing their system specifications.There is in total 5 items automatically produce in \gls{zmath}.
+
+\begin{itemize}
+\item dependency graph
+
+\item goto graph
+
+\item \gls{gps}
+
+\item isabelle skeleton
+
+\item \gls{half}
+\end{itemize}
+
+The first 4 are automatically produced and stem from a \gls{zdra} correct specification. The \gls{half} can be automatically produced from a specification which is both \gls{zcga} and \gls{zdra} correct.
+
+The dependency graph and goto graph (chapter \ref{ch:zdra}) show how the instances are related to eachother, the \gls{gps} (chapter \ref{ch:skeletons}) show in which logical order the instances should be in order to be translated into a theorem prover with added instance to act as proof obligations. The Isabelle skeleton (chapter \ref{chap:gpsa2isa}) uses the \gls{zdra} instance names and creates a skeleton in Isabelle syntax. The \gls{half} (chapter \ref{chap:gpsa2isa}) is produced by using the Isabelle skeleton and the \gls{zcga} annotated document. The filled in Isabelle skeleton is therefore the original specification translated in Isabelle syntax along with added proof obligations.
+
+One limitation of the \gls{half} is that not all mathematical Z syntax is translated into Isabelle using \gls{zmath}. The syntax which is translated is shown in table \ref{tab:latextoisabelle} in chapter \ref{chap:gpsa2isa}. The current syntax covers all the examples which are in the appendix and in \cite{mathlangexamples}. However the syntax for all of mathematics is large and more work can be done on translating more complpex mathematical syntax into Isabelle in \gls{zmath}. These can include schema hiding, piping, conditional expressions, Mu-expressions \cite{zrefcard} etc.
+
+The proof obligations created in the \gls{gps} are properties which check the consistance of the specification. These proof obligations are examples of properties which the user may wish to prove about the specification. Other complex proof obligations could also be added to \gls{zmath}, more details on this topic are described in section \ref{subsubsec:extenproofobli}.
+
+\subsection{To create an easy step by step method to translate a specification into a theorem prover for novices in theorem proving.}
+
+The final accomplishment of this thesis is also the general aim of this thesis. The step by step method is outlined in chapter \ref{ch:design}, which outlines how a user can get from a Z specification to a full proof in Isabelle. An example of this on a single specification is given in chapter \ref{ch:fullexample}. Each of these steps are decribed individually throughout this thesis. There are 6 steps to achieve a full proof for the specification in question. The first 2 steps require user input and automation, the last step requires user input and 3 steps in between are fully automated. By following this method it is easier to translate a specification into a theorem prover with no theorem prover knowledge up to step 5 (as described in chapter \ref{ch:analysis}).
+
+However the limitation of this is that step 5 to step 6 requires user input and this stage requires some theorem prover knowledge. Proving lemma's in a theorem prover is not easy and requires expertise in the chosen theorem prover. Apart from the theorem provers own help tools (such as sledgehammer in Isabelle), future work may include investigating how to help users with this final stage. For example automating a way to show users which tactics they may find useful in proving a certain lemma. Another limitation of this outcome is that even though the user doesn't need Isabelle expertise to translate their specification into Isabelle they still need to learn the \gls{zmath} framework. This limitation can be aided with a user friendly interface and well documented guides such as \cite{zmathuser}.
+
+
 \section{ZMathLang Current and Future Developments}
 \label{sec:zmathcurandfut}
 
-\subsection{Current Developmets}
+\subsection{Other Current Developmets}
 \label{subsec:currendevelopments}
 
 The research on ZMathLang was started in 2013 and provides a novice approach to translating Formal specification to theorem provers. With this approach the gradual translation of the formal specification document is made via "aspects". Each aspect checks for a different type of correctness of the formal specification and output different products in order to analyse the system. Moreover, the annotation of the formal specification document should not require any expertise skills in the language of the targatted theorem prover. The only expertise needed for the annotations include the expertise of the formal specification document.
@@ -25,25 +85,28 @@ This thesis presents a very basic user interface to use with \gls{zmath}. Furthe
 The future developments of \gls{zmath} have been discussed occasionally between students and supervisors during meetings. This section puts together and summarises these ideas and presents them to the reader in order to provide a general idea of future developments.
 
 \subsubsection{Automisation of the annotation}
+\label{subsubsec:automisation}
 
 At present, the user needs to annotate their formal specification by hand using \LaTeX{} commands before being check by the various correctness checkers. This sometimes can be a time-consuming task especially if the user isn't familar to \LaTeX{} syntax. An advancement on this would be if the user would be able to visually see the Z specification as schema boxes (such as the compiled version of \LaTeX{}) and then drag and highlight using mouse and buttons to annotate the specification with \gls{zcga} colours and \gls{zdra} instances. This idea could be done in a similar way to the annotations done in the original \gls{math}. Another way to ease the users input is if the labels would automatically label what user input. For example if the user labelled the variable `\emph{v?}' as a term then all other variables `\emph{v?}' would also be labelled a term automatically. This way the user wouldn't need to repeat the labels they have already done. This would drastically increse the workload for the user especially on very large specifications.
 
 \subsubsection{Extension to more complex proof obligations}
+\label{subsubsec:extenproofobli}
 
 The proof obligations described in this thesis are properties to check the consistancy of the specification. The current proof obligations for Z specifications are to give a flavour of what kind of properties to prove about the system and to ease the user in proving these properties. As mentioned before proof obligations for formal specifications is indeed a research subject in it's own right and more complex proof obligations can be developed to work alongside the \gls{zmath} framework. These proof obligation can come into the \gls{gps} part of the translation and follow through to the complete proof. If there are hint's or simple proof tactics to prove these properties then they can also be added to step 6 which would allow the user to get an idea of how to finish of the proofs.
 
 \subsubsection{Any formal specification to any theorem prover}
+\label{subsubsec:anyformanythe}
 
 This thesis describes how the \gls{zmath} framework can translate a Z specification into the theorem prover Isabelle. However, there are many other theorem provers which are prefered by certain users and ultimatly the \gls{zmath} framework should be able to translate from the \gls{gps} into a theorem prover of the users choice and not just be restricted to Isabelle. In this case steps 1 to 4 would be the same, regardless of which theorem prover the user wishes to translate to. The change would be made in step 5 when creating a skeleton of the specification in the chosen theorem prover. Other theorem provers which \gls{zmath} could transate to would be Mizar/HOL-Z/ProofPower-Z/Coq etc.
 
 There are many other formal languages to write specifications in which could be another idea for future research. \Gls{zmath} currently parses through Z specifcations however, further research could be done for \gls{zmath} to work on any formal language such as alloy, event B, UML or VDM. Investigation on whether the grammatical categories in the \gls{zcga} or instances in the \gls{zdra} would need adapting. Otherwise the current annotations would be suitable for any formal notation and only the implementation would need to be changed.
 
 \subsubsection{Informal specifications}
+\label{subsubsec:informalspecs}
 
 A final future idea would be to combine parts of \gls{math} which handles mathematical documents written in part mathematics and part english and to translate informal specifications into theorem provers. With this idea, perhaps a TSa aspect would need to be adapted for informal specifications. So that a system specification written completely in english could be checked for \gls{zcga}, \gls{zdra} and ultimatly translated fully into a theorem prover.
 
-\section{Related Works}
-\label{sec:relatedworks}
-
 \section{Conclusion}
 \label{sec:conclusion}
+
+This thesis presents an approach to translate a formal specification into a theorem prover in a step by step fashion. This new approach is aimed at novices at theorem proving which could learn by example on how to translate specifications. Proving the properties themselves is still a difficult task but a large chunk of the work is done already automatically by \gls{zmath}. By checking a system specification within a theorem prover adds a level of rigour to the planned system and therefore adds a degree of safety. Perhaps one day there will be a system which can parse through a specification written in natural language with diagrams and tell the user automatically if it is all correct and all conditions are satisfied. Perhaps one day, we will have systems with no bugs at all.

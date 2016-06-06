@@ -19,11 +19,11 @@ The vending machine example shown in appendix \ref{app:vmspec} is a simple speci
 \hline
 One step into & much & Either ascii or & fl = 19  \\
 \gls{ppz} & & windows extended & ep = 140 \\
-& & characters & (see appendix \ref{app:vm_ppz})\\
+& & characters & \\
 \hline
 Multiple steps & little & \LaTeX{} partially & fl = 3  \\
 using \gls{zmath} & & automated & ep = 124 (63 automated) \\
-& & into Isabelle & (see appendix \ref{app:vm_mathlang}) \\
+& & into Isabelle & \\
 \hline
 \end{tabular}
 \end{center}
@@ -31,9 +31,9 @@ using \gls{zmath} & & automated & ep = 124 (63 automated) \\
 \label{tab:comparevm}
 \end{table}
 
-Table \ref{tab:comparevm} shows an outlined comparison between the vending machine proof done in \gls{ppz} (see appendix \ref{app:vm_ppz}) and the vending machine proof done using the \gls{zmath} method (see appendix \ref{app:vm_mathlang}). To calculate the lines of proof, all comments and empty lines have been removed from the proof and only the content is left. Although the syntax of the proof can differ depending on the author, for example some of the tactics can be put on a single line or can be put on two separate ones, the lines of proof give a rough estimate in the size of  proof.
+Table \ref{tab:comparevm} shows an outlined comparison between the vending machine proof done in \gls{ppz} \cite{pp} and the vending machine proof done using the \gls{zmath} method (see appendix \ref{app:vm}). To calculate the lines of proof, all comments and empty lines have been removed from the proof and only the content is left. Although the syntax of the proof can differ depending on the author, for example some of the tactics can be put on a single line or can be put on two separate ones, the lines of proof give a rough estimate in the size of  proof.
 
-Although the entire proof using the \gls{zmath} method is 124 lines, 63 of those lines are automatically generated using the annotated \LaTeX{} document (see \ref{app:vm_annotate}), which is 79 lines. This means that 50.8\% of the proof is already automatically generated without the user having any knowledge of the theorem prover they are using. The actual amount of lines in both the proofs are somewhat similar (140 lines compared with 124).
+The entire proof using the \gls{zmath} method is 124 lines, 63 of those lines are automatically generated using the annotated \LaTeX{} document (79 lines). This means that 50.8\% of the proof is already automatically generated without the user having any knowledge of the theorem prover they are using. The actual amount of lines in both the proofs are somewhat similar (140 lines compared with 124).
 
 \begin{table}[H]
 \begin{center}
@@ -80,7 +80,7 @@ Discounting the tactics and lemmas needed to prove the specification. A large pa
 
 \section{Birthday Book Example}
 
-The birthday book example (shown in appendix \ref{app:bbspec}), was created by Spivey \cite{spiveyreferencemanual}. This example is a specification which describes a system of a birthday book where the main functions include adding a person and their birthday, removing a person and their birthday etc. This system uses sets and it's own types, \texttt{NAME} and \texttt{DATE}.
+The birthday book example (shown in appendix {app:bb}), was created by Spivey \cite{spiveyreferencemanual}. This example is a specification which describes a system of a birthday book where the main functions include adding a person and their birthday, removing a person and their birthday etc. This system uses sets and it's own types, \texttt{NAME} and \texttt{DATE}.
 
 \begin{table}[H]
 \begin{center}
@@ -104,11 +104,11 @@ using \gls{zmath} & & automated & ep = 120 \\
 \label{tab:comparebb}
 \end{table}
 
-Table \ref{tab:comparebb} shows the comparison between the birthday book proof done in \gls{hol} (see appendix \ref{app:bb_hol}) and the birthday book proof done using the \gls{zmath} method (see appendix \ref{app:bb_fullproof}). Again to calculate the lines of proof, all comments and empty lines have been removed from the proof. Since the birthday book proof in \gls{hol} comes in many different files, all the lines from these files have been added.
+Table \ref{tab:comparebb} shows the comparison between the birthday book proof done using Hol-Z \cite{hol-z} and the birthday book proof done using the \gls{zmath} method (see appendix \ref{tab:comparebb}). Again to calculate the lines of proof, all comments and empty lines have been removed from the proof. Since the birthday book proof in \gls{hol} comes in many different files, all the lines from these files have been added. The translation via \gls{zmath} translates to Isabelle using just the \texttt{Main} isabelle package.
 
 The first lemma (fl) in the table has been calculated from the "pre addBirthday lemma" which is called \texttt{lemma AddBirthdayIsHonest} in the \gls{zmath} method and \texttt{zlemma lemma2} in the \emph{Rel\_Refinement.thy} file using the \gls{hol} method. The full proof using the \gls{hol} method is 361 lines, however this is split up into 5 files. The \emph{BBSpec.holz} which is automatically generated using the ZeTa-to-\gls{hol} converter. This converted consists an adapter that is plugged into ZeTa and converts the \LaTeX{} specification into an SML-file. The \emph{BB.thy} file which is used to import \emph{Fun\_Refinement.thy} and \emph{Rel\_Refinement.thy} and \emph{BBSpec.thy} which is used to import the specification from the SML-file. In order to prove the specifications in \gls{hol}, there are 17 other theory files which have been created in order to use tactics an lemmas, these include \emph{ZSeq.thy}, \emph{Z.thy}, \emph{ZPure.thy}.
 
-The raw \LaTeX{} file used for the \gls{hol} method is 97 lines (see appendix \ref{app:bb_annotate_hol}), this is automatically generated into an SML file which can be imported into \gls{hol} which is 17 lines long. The raw \LaTeX{} file which is used for the \gls{zmath} method is 96 lines (see appendix \ref{app:bb_annotate}) which automatically generates a single theory file containing the environment and the specification, this file is 70 lines.
+The raw \LaTeX{} file used for the \gls{hol} method is 97 lines, this is automatically generated into an SML file which can be imported into \gls{hol} which is 17 lines long. The raw \LaTeX{} file which is used for the \gls{zmath} method is 96 lines which automatically generates a single theory file containing the environment and the specification, this file is 70 lines.
 
 \begin{table}[H]
 \begin{center}
@@ -157,8 +157,13 @@ In both these methods the user would need at least some form of \gls{hol} prover
 To input the specification into the chosen theorem prover using \gls{zmath} the user will need no theorm prover knowledge at all. This is because the annotated specification will be automatically translated into Isabelle/Hol when using the \gls{zmath} method. The program will automatically generate an `.thy' file which is a skeleton of the specification and then automatically fill in the specification using the information from the ZCGa annotations.
 
 \section{Conclusion}
+This section compares 2 specifications written in Z which have been proven in a theorem prover previously with the proofs done using \gls{zmath}. The \gls{zmath} framework allows the user analyse their formal specification and assists them translating the specification itself into a theorem prover. However the last step of the framework to prove properties about the specification is still a difficult step in both translation paths (via \gls{zmath} or via another route). However the \gls{zmath} framework is there to give a helping hand to users who are complete beginners in proving formal specifications. Proving the actual properties and the proof obligations of the specification are a whole research area on their own and beyond the scope of this thesis but touched upon in chapter \ref{ch:background}.
 
-Even when teaching the syntax of Z in an academic setting, the \gls{zmath} aspects and programs can be used as helpful tools to help students understand the syntax of their formal specifications.
+Even when teaching the syntax of Z in an academic setting, the \gls{zmath} aspects and it's tools can be used as helpful tools to help students understand the syntax of their formal specifications.
+Such as allowing students to annotate the grammatical categories ie what is a declaration, what is an expression. The students can also use the \gls{zdra} instance to highlight which schema is a totaliseSchema, and which schema is a changeSchema etc.
+
+In the next chapter we conclude our findings of this thesis and highlight what areas are of interest for future work.
+
 %
 %
 %\subsubsection{Specification Input}

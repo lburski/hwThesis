@@ -118,7 +118,7 @@
 %%\listoftables
 %%\listoffigures
 %%\listoflistings
-%\listoftodos
+\listoftodos
 % In order for the glossaries to appear you should run this command
  %makeglossaries HWThesis
 \printglossary[type=\acronymtype]
@@ -136,28 +136,24 @@
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter:\ #1}{}}
 %===================================Chapters===================================
 
-\input{Chapter/Introduction}%-done
-%%\input{Chapter/Background}%-done
-%%\input{Chapter/Design}%-done
-%%\input{Chapter/zcga}%-done
-%%\input{Chapter/zdra}%-done
-%%\input{Chapter/skeletons}%-done
-%%\input{Chapter/skeletons2}%-done
-%%\input{Chapter/Formalising} %-done
-%%\input{Chapter/Interface}%-done
-%%\input{Chapter/Fullexample}%-done
-%%\input{Chapter/Analysis}%-done
-
-\input{Chapter/Conclusion} 
-\writechapter{write conclusion chapter}
-% Results and discussion
-%Future Developments
+\input{Chapter/Introduction}
+\input{Chapter/Background}
+\input{Chapter/Design}
+\input{Chapter/zcga}
+\input{Chapter/zdra}
+\input{Chapter/skeletons}
+\input{Chapter/skeletons2}
+\input{Chapter/Formalising}
+\input{Chapter/Interface}
+\input{Chapter/Fullexample}
+\input{Chapter/Analysis}
+\input{Chapter/Conclusion}
 
 
 %===================================Appendix===================================
 \appendix
 \renewcommand{\chaptermark}[1]{\markboth{Appendix \thechapter.\ #1}{}}
-%%\input{Appendix1}
+\input{Appendix1}
 
 %=================================Bibliography=================================
 \bibliographystyle{abbrv}

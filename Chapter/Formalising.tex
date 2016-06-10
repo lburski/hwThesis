@@ -4,13 +4,17 @@
 In this chapter we take a formal view on the \gls{zdra} and skeletons created. The \gls{zcga} has already been semi formalised using weak type theory \cite{wtt}. 
 
 \section{Formal View on ZDRa}
-We denote the star character `*' to denote one or many. We remind the reader that '$\mathbf{\Gamma}$' denotes the schematext of a specification.
+We denote the star character `*' to denote one or many. We remind the reader that `$\mathbf{\Gamma}$' denotes the schematext of a specification, $\mathcal{Z}, \mathcal{E}, \mathcal{T}$ and $\mathbb{S}$ are correctly typed \emph{declatation}, \emph{expression}, \emph{term} and \emph{set} respectively (from table \ref{tab:zcga1} in chapter \ref{ch:zcga}).
 
 \begin{defin}
 Let $\mathcal{E}$ be a correctly typed expression. \\ Let $\mathcal{D}$ be a correctly typed definition. \\
 Where $((\mathcal{Z}@\mathcal{E})$*$|\mathcal{T}$*$|\mathbb{S}$*$) \in \mathcal{E}$ and $(\mathcal{T}$*$|\mathbb{S}$*$) \in \mathcal{D}$\\
 Let $\mathcal{ED}$ be the set containing $\mathcal{E}$'s and $\mathcal{D}$'s.
 \end{defin}
+
+For example an expression can be the following:
+\verb|t = t| where $t$ is a term. Therefore this expression contains two terms. Another example of an expression could be:
+$\forall t: S \bullet t = 0$. This expression contains a declaration with an expression (a $(\mathcal{Z}@\mathcal{E})$, which is $t:S$.
 
 
 \begin{table}[H]
@@ -71,7 +75,8 @@ $\cgatext{\declaration{\mathcal{Z}$*$} \& \expression{\mathcal{E}}\definition{\m
 \caption{ZCGa annotations allowed in ZDRa instances \label{tab:zcgainzdra}}
 \end{table}
 
-Table \ref{tab:zcgainzdra} shows which \gls{zcga} are allowed to be in certain \gls{zdra} instances.
+Table \ref{tab:zcgainzdra} shows which \gls{zcga} are allowed to be in certain \gls{zdra} instances. Where `\&' means these weak type categories must be included in the instance. For example a \emph{stateSchema} can be made up of one or more $\mathcal{Z}$ \textbf{AND} one or more $\mathcal{ED}$ \textbf{OR} one or more $\mathcal{Z}$ on their own.
+Therefore a \emph{stateSchema} can not be made up of $\mathcal{ED}$ on it's own.
 
 \paragraph{precondition, postcondition, output, stateInvariants.}
 These instances can only contain a correctly typed expression or definition within the schematext. There may be one or more expressions or definitions.

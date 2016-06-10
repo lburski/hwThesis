@@ -179,6 +179,25 @@ Then then new proof obligation lemmas would be (L3\_CS1, lemma) and (L4\_CS2, le
 
 An example of a General Proof Skeleton with added proof obligations is shown in Figure \ref{fig:gpswithpo}. The changeSchema's in this specification are CS1 and CS2. Therefore to make sure the changeSchemas do not change the state of the specification and comply with the state invariants the two lemma's L1\_CS1 and L2\_CS2 have been added.
 
+\subsubsection{Proof Obligations in specification examples}
+Since the vending machine specification (appendix \ref{app:vm2}) doesn't have any stateInvaritants then the \gls{gps} will not have any added proof obligations to check for consistance. That is we can't check that the postconditions do not change the state if the state has no restrictions. However the birthdaybook example (appendix \ref{app:bb3}) does have stateInvariants. Therfore we must add properties to check that any changeSchema's follow the state restrictions. Part of the birthdaybook \gls{gps} is shown in figure \ref{fig:bbgps}. Since there are stateInvariants (SI1) and a changing state Schema (CS1) then the proof obligation \texttt{L1\_(CS1)} has been added to the \gls{gps}.
+
+\begin{figure}[H]
+\begin{verbatim}
+stateSchema SS1 
+stateInvarients SI1 
+initialSchema IS1 
+postcondition PO2 
+outputSchema OS1 
+precondition PRE2 
+changeSchema CS1 
+totaliseSchema TS1 
+.......
+lemma L1_(CS1) 
+\end{verbatim}
+\caption{Part of the GPSa for the birthdayBook example. (Full version shown in appendix \ref{app:bb3}) \label{fig:bbgps}}
+\end{figure}
+
 \section{Conclusion}
 \label{sec:skeletonsConclusion}
 

@@ -6,63 +6,89 @@
 \label{app:vm}
 
 \subsection{Raw Latex}
+\label{app:vm0}
 \input{examples/vm/0.tex}
 \subsection{Raw Latex output}
+\label{app:vm0o}
 \includepdf[pages={1-2}]{examples/vm/0comp.pdf}
 \subsection{ZCGa Annotated Latex Code}
+\label{app:vm1}
 \input{examples/vm/1.tex}
 \subsection{ZCGa output}
+\label{app:vm1o}
 \includepdf[pages={1-2}]{examples/vm/1comp.pdf}
 \subsection{ZDRa Annotated Latex Code}
+\label{app:vm2}
 \input{examples/vm/2.tex}
 \subsection{ZDRa Output}
+\label{app:vm2o}
 \includepdf[pages={1}]{examples/vm/2comp.pdf}
 \subsection{ZCGa and ZDRa Annotated Latex Code}
+\label{app:vm1n2}
 \input{examples/vm/1n2.tex}
 \subsection{ZCGa and ZDRa Output}
+\label{app:vm1n2o}
 \includepdf[pages={1}]{examples/vm/1n2comp.pdf}
 \subsection{Dependency and Goto Graphs}
+\label{app:vm2.5}
 \includegraphics[scale=0.7]{examples/vm/25a.png}
 \includegraphics[scale=0.7]{examples/vm/25b.png}
 \subsection{General Proof Skeleton}
+\label{app:vm3}
 \input{examples/vm/3.txt}
 \subsection{Isabelle Proof Skeleton}
+\label{app:vm4}
 \input{examples/vm/4.thy}
 \subsection{Isabelle Filled In}
+\label{app:vm5}
 \input{examples/vm/5.thy}
 \subsection{Full Proof in Isabelle}
+\label{app:vm6}
 \input{examples/vm/6.thy}
 
 \section{BirthdayBook}
 \label{app:bb}
 
 \subsection{Raw Latex}
+\label{app:bb0}
 \input{examples/bb/0.tex}
 \subsection{Raw Latex ouput}
+\label{app:bb0o}
 \includepdf[pages={1-2}]{examples/bb/0comp.pdf}
 \subsection{ZCGa Annotated Latex Code}
+\label{app:bb1}
 \input{examples/bb/1.tex}
 \subsection{ZCGa output}
+\label{app:bb1o}
 \includepdf[pages={1-3}]{examples/bb/1comp.pdf}
 \subsection{ZDRa Annotated Latex Code}
+\label{app:bb2}
 \input{examples/bb/2.tex}
 \subsection{ZDRa Output}
+\label{app:bb2o}
 \includepdf[pages={1}]{examples/bb/2comp.pdf}
 \subsection{ZCGa and ZDRa Annotated Latex Code}
+\label{app:bb1n2}
 \input{examples/bb/1n2.tex}
 \subsection{ZCGa and ZDRa output}
+\label{app:bb1n2o}
 \includepdf[pages={1}]{examples/bb/1n2comp.pdf}
 \input{examples/bb/1n2.tex}
 \subsection{Dependency and Goto Graphs}
+\label{app:bb2.5}
 \includegraphics[scale=0.7]{examples/bb/25a.png}
 \includegraphics[scale=0.7]{examples/bb/25b.png}
 \subsection{General Proof Skeleton}
+\label{app:bb3}
 \input{examples/bb/3.txt}
 \subsection{Isabelle Proof Skeleton}
+\label{app:bb4}
 \input{examples/bb/4.thy}
 \subsection{Isabelle Filled In}
+\label{app:bb5}
 \input{examples/bb/5.thy}
 \subsection{Full Proof in Isabelle}
+\label{app:bb6}
 \input{examples/bb/6.thy}
 
 \section{An example of a specification which fails \gls{zcga} but passes \gls{zdra}}
@@ -104,7 +130,8 @@ This section shows an auto pilot specification which is partially written in nat
 \includepdf[pages={1}]{examples/semiform/1n2.pdf}
 \todo[inline]{Add the output message when running zcga check and zdra check for semiform}
 
-\section{An example of a specification which a changeSchema does not comply with the stateInvariants}
+\section{An example of a specification which a changeSchema
+does not comply with the stateInvariants}
 This section shows a specification which is \gls{zcga} and \gls{zdra} correct however when it translates to Isabelle syntax one of the proof obligations can not be satisfied as a changeSchema does  not comply with the stateInvariants.
 
 %\subsection{Raw Latex}
@@ -116,6 +143,15 @@ This section shows a specification which is \gls{zcga} and \gls{zdra} correct ho
 %\subsection{ZCGa and ZDra output}
 %\includepdf[pages={1}]{examples/semiform/1n2.pdf}
 \todo[inline]{Add an example of non working stateInvariants specification}
+
+\section{ModuleReg}
+\label{app:moduleregfullproof}
+
+\subsection{ModuleReg Full Proof}
+
+This section shows the full proof for the modulereg example from \cite{essenceofz}. It includes the filled in Isabelle skeleton. Along with added proofs which have been input by the user.
+
+\input{examples/modulereg/new6.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%CURRIES SPECIFICATIONS%%%%%%%%%%%%%%%%%%%

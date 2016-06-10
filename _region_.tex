@@ -1,4 +1,4 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\message{ !name(HWThesis.tex)}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                     Heriot-Watt University Thesis Template  
 %   Created by : Lavinia Burski
 %   Date:        November 2014
@@ -83,82 +83,10 @@
 }
 %===================================Document===================================
 \begin{document}
-\lstset{language=Python} 
-\doublespacing
 
-%==================================Title page==================================
-\pagestyle{empty}
-\begin{center}
-\begin{spacing}{2}
-{\large{\ \\  \vspace{1.5cm}\textbf{\MakeUppercase{\thesistitle}}}}\\
-\end{spacing}
-\vfill
-{\Large\textit{by}}\\\vspace{0.2cm}
-{\Large\upshape{\auth}}\\\vspace{1.0cm}
-\includegraphics[width=3.5cm]{Figures/LogoBlack.jpg}\\
-\vspace{1cm}
-{\large Submitted for the degree of \\ \degree}\\
-\vspace{1cm}
-{\large\textsc{Department of Computer Science}\\
-\textsc{School of Mathematical and Computer Sciences}\\
-\textsc{Heriot-Watt University}}\vfill
-{\large{\supdate}}
-\end{center}
-{\small The copyright in this thesis is owned by the author. Any quotation from the report or use of any of the information contained in it must acknowledge this report as the source of the quotation or information.}
-%===================================Abstract===================================
-\clearpage
-\input{Abstract}
-
-%==================================frontmater==================================
-\clearpage
-\pagestyle{plain}
-\clearpage\pagenumbering{roman}
-\input{Acknowledgements}
-\tableofcontents
-%%\listoftables
-%%\listoffigures
-%%\listoflistings
-\listoftodos
-% In order for the glossaries to appear you should run this command
- %makeglossaries HWThesis
-\printglossary[type=\acronymtype]
- 
-\printglossary
-%===================================headings===================================
-\clearpage
-\pagestyle{fancy}
-\pagenumbering{arabic}
-\fancyhead{}
-\lhead{\slshape \leftmark} 
-\cfoot{\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
-\renewcommand{\footrulewidth}{0.0pt}
-\renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter:\ #1}{}}
-%===================================Chapters===================================
-
-%\input{Chapter/Introduction}
-%\input{Chapter/Background}
-%\input{Chapter/Design}
-%\input{Chapter/zcga}
-%\input{Chapter/zdra}
-%\input{Chapter/skeletons}
-%\input{Chapter/skeletons2}
-%\input{Chapter/Formalising}
-%\input{Chapter/Interface}
-\input{Chapter/Fullexample}
-%\input{Chapter/Analysis}
-%\input{Chapter/Conclusion}
-
-
-%===================================Appendix===================================
-\appendix
-\renewcommand{\chaptermark}[1]{\markboth{Appendix \thechapter.\ #1}{}}
-%\input{Appendix1}
-
-%=================================Bibliography=================================
-\bibliographystyle{abbrv}
-\todo[inline]{Find year for atelier b proof obligation user manual}
-\bibliography{Bibliography}
+\message{ !name(HWThesis.tex) !offset(10) }
+\includegraphics[width=3.5cm]{Figures/LogoBlack.jpg}
+\message{ !name(HWThesis.tex) !offset(76) }
 
 \end{document}
 

@@ -1,4 +1,4 @@
-theory new5
+theory new6
 imports 
 Main 
 
@@ -142,7 +142,7 @@ lemma LeaveHall_L1:
 \<and> (card hall \<le> maxPlayers)
 \<and> (hall' \<subseteq> badminton') 
 \<and> (card hall' \<le> maxPlayers))"
-sorry
+by auto
 
 lemma AddMember_L2:
 "(\<exists> hall' :: (STUDENT set).
@@ -157,7 +157,7 @@ lemma AddMember_L2:
 \<and> (card hall \<le> maxPlayers)
 \<and> (hall' \<subseteq> badminton') 
 \<and> (card hall' \<le> maxPlayers))"
-sorry
+by auto
 
 
 lemma EnterHall_L3:
@@ -175,7 +175,7 @@ lemma EnterHall_L3:
 \<and> (card hall \<le> maxPlayers)
 \<and> (hall' \<subseteq> badminton') 
 \<and> (card hall' \<le> maxPlayers))"
-sorry
+by blast
 
 
 lemma RemoveMember_L4:
@@ -191,7 +191,7 @@ lemma RemoveMember_L4:
 \<and> (card hall \<le> maxPlayers)
 \<and> (hall' \<subseteq> badminton') 
 \<and> (card hall' \<le> maxPlayers))"
-sorry
+by blast
 
 end
 end

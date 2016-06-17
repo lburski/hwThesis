@@ -20,12 +20,9 @@ assumes "Domain taking \<subseteq> students"
 begin
 
 definition RegForModule :: 
-"ModuleReg \<Rightarrow> ModuleReg \<Rightarrow> PERSON
-\<Rightarrow> MODULE => MODULE set \<Rightarrow> PERSON set
-\<Rightarrow> (PERSON * MODULE) set \<Rightarrow> bool"
+"ModuleReg \<Rightarrow> ModuleReg \<Rightarrow> PERSON \<Rightarrow> MODULE => MODULE set \<Rightarrow> PERSON set \<Rightarrow> (PERSON * MODULE) set \<Rightarrow> bool"
 where 
-"RegForModule modulereg modulereg' p m degModules'
-students' taking' ==
+"RegForModule modulereg modulereg' p m degModules' students' taking' ==
 (p \<in> students) 
 \<and> (m \<in> degModules) 
 \<and> ((p, m) \<notin> taking)

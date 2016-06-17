@@ -12,16 +12,16 @@ Using the methodology of MathLang for mathematics (section \ref{sec:mathlang}), 
 \end{center}
 \end{figure} 
 
-The framework is targeted at novices in theorem proving. The users should have some idea of formal specifications but no or little knowledge of the targetted theorem prover. Figure \ref{fig:steps} shows the outline of the framework. The higher the user goes up the steps the more rigorous the checks for correctness. Step 1 and step 2 are interchangable and can be done in any order. However they both must be completed before moving up to step 3. Step 6 is the highest level of rigour and checks for full correctness in a theorem prover. For this thesis I have chose to translate Z specifications into Isabelle, however this framework is an outline for any formal specification into any theorem prover which could done in the future.
+The framework is targeted at beginners in theorem proving. The users should have some idea of formal specifications but no or little knowledge of the targetted theorem prover. Figure \ref{fig:steps} shows the outline of the framework. The higher the user goes up the steps the more rigorous the checks for correctness. Step 1 and step 2 are interchangable and can be done in any order. However they both must be completed before moving up to step 3. Step 6 is the highest level of rigour and checks for full correctness in a theorem prover. For this thesis I have chose to translate Z specifications into Isabelle, however this framework is an outline for any formal specification into any theorem prover which could done in the future.
 
-The user doesn't need to go all the way to the top to check for correctness, one advantage of breaking up the translation is that the user gets some level of rigour and can be satisfied with some level of correctness along the way. However the main advantage of breaking up the translation is that the level of expertise needed to check for the correctness of a system specification can be done by someone who has little or no expertise in checking for correctness by a theorem prover or otherwise. The small black arrows represent the amount of expertise needed for each step. The last step the arrow is slightly thicker as some theorem prover knowledge is needed. However these arrows are still small in comparison to the red thick arrow which represents the translation in one big step.
+The user doesn't need to go all the way to the top to check for correctness, one advantage of breaking up the translation is that the user gets some level of rigour and can be satisfied with some level of correctness along the way. However the main advantage of breaking up the translation is that the level of expertise needed to check for the correctness of a system specification can be done by someone who has little or no expertise in checking for correctness by a theorem prover.This tool could also aid user in learning theorem proving as it translates their specification and thus they have examples of the syntx used in their theorem prover for their specification. The small black arrows represent the amount of expertise needed for each step. The last step the arrow is slightly thicker as some theorem prover knowledge is needed. However these arrows are still small in comparison to the red thick arrow which represents the translation in one big step.
 
 The framework breaks the translation into 6 steps most of which are partially or fully automated. These are:
 
 \begin{itemize}
 \item Step 0: Raw LaTeX Z Specification. {\color{set}Start}
 \item Step 1: Check for Core Grammatical correctness (ZCGa). {\color{set}User Input + Automated}
-\item Step 2: Check for Document Rhetorical correctness. {\color{set}(ZDRa) User Input + Automated}
+\item Step 2: Check for Document Rhetorical correctness (ZDRa). {\color{set}User Input + Automated}
 \item Step 3: Generate a General Proof Skeleton (GPSa). {\color{set}Automated}
 \item Step 4: Generate an Isabelle Skeleton. {\color{set}Automated}
 \item Step 5: Fill in the Isabelle Skeleton. {\color{set}Automated}
@@ -34,7 +34,7 @@ The first step requires the user to write or have a formal specification they wi
 
 \begin{figure}[H]
  \begin{center}
- \includegraphics [scale=0.2]{Figures/Design/zspec.png}
+ \includegraphics [scale=0.25]{Figures/Design/zspec.png}
  \caption{Example of a partial Z specification.}
  \label{fig:zexample}
 \end{center}
@@ -46,7 +46,7 @@ The next step in figure \ref{fig:steps} shows the specification should be \gls{z
 
 \begin{figure}[H]
  \begin{center}
- \includegraphics [scale=0.2]{Figures/Design/zcgaexample.png}
+ \includegraphics [scale=0.25]{Figures/Design/zcgaexample.png}
  \caption{Example of a ZCGa annotated specification.}
  \label{fig:zcgaexample}
 \end{center}
@@ -58,19 +58,19 @@ The \gls{zdra} (chapter \ref{ch:zdra}) step shown as step 2 in figure \ref{fig:s
 
 \begin{figure}[H]
  \begin{center}
- \includegraphics [scale=0.2]{Figures/Design/zdracomp.png}
+ \includegraphics [scale=0.25]{Figures/Design/zdracomp.png}
  \caption{Example of a ZDRa annotated specification.}
  \label{fig:zdraexample}
 \end{center}
 \end{figure} 
 
-The \gls{zdra} automatically produces a dependency and a goto graph (section \ref{subsec:zdra_prodcuts}), these a shown as 2.5a and 2.5b respectively in figure \ref{fig:steps}. The loops in reasoning are checked in both the dependecy graph and goto graph. An example of a goto graph is shown in figure \ref{fig:gotoexample}.
+The \gls{zdra} automatically produces a dependency and a goto graph (section \ref{subsec:zdra_prodcuts}), these a shown as 2.5a and 2.5b respectively in figure \ref{fig:steps}. The loops in reasoning are checked in both the dependecy graph and goto graph. An example of a goto graph is shown in figure \ref{fig:gotoexamplee}.
 
 \begin{figure}[H]
  \begin{center}
  \includegraphics [scale=0.4]{Figures/Design/goto.png}
  \caption{Example of an automatically generated goto graph.}
- \label{fig:gotoexample}
+ \label{fig:gotoexamplee}
 \end{center}
 \end{figure} 
 

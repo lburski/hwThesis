@@ -1,4 +1,4 @@
-theory gpsa1n2
+theory 5
 imports 
 Main 
 
@@ -13,25 +13,34 @@ ALT_ENG :: "mode_status"
 CAS_ENG :: "mode_status"
 ATT_CWS :: "mode_status"
 FPA_SEL :: "mode_status"
+ALT_ENG' :: "mode_status"
+CAS_ENG' :: "mode_status"
+ATT_CWS' :: "mode_status"
+FPA_SEL' :: "mode_status"
 
 
-locale 1n2 = 
+locale theautopilot = 
 fixes alt_eng :: "mode_status"
 and cas_eng :: "mode_status"
 and att_cws :: "mode_status"
 and fpa_sel :: "mode_status"
+and alt_eng' :: "mode_status"
+and cas_eng' :: "mode_status"
+and att_cws' :: "mode_status"
+and fpa_sel' :: "mode_status"
  
 begin
 
-definition off\_eng :: 
+definition off_eng :: 
  "mode_status => bool"
 where 
-"off\_eng mode == (O1)"
+"off_eng mode == (mode = off \<or> mode = engaged)"
 
-definition CS1 :: 
-"(*CS1_TYPES*) => bool"
+
+definition att_cwsDo :: 
+" bool"
 where 
-"CS1 (*CS1_VARIABLES*) ==
+"att_cwsDo  ==
  (att_cws = off)
 \<and> (att_cws' = engaged) 
 \<and> (fpa_sel' = off) 

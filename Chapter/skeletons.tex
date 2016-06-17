@@ -83,7 +83,7 @@ We use the syntax \textit{Context} $\vdash$ \textit{predicate} taken from the pa
 
 \begin{defin}\label{defa}POb1\\
 
-$Context \vdash \exists var, var' \bullet SI\# \land SI\#' \land PRE\# \land PO\#$ \\
+$Context \vdash \exists var, var' \bullet PRE\# \land PO\# \longrightarrow SI\# \land SI\#'$\\
 
 \noindent where var and var' are the variables and variables' used in the schema with their types, SI\# is the state Invariants of the specification, SI\#' is the state invariants prime in the specification, PRE\# is the precondition of the schema, PO\# is the post operation of the schema and \# is some arbitary number.
 \end{defin}
@@ -101,11 +101,10 @@ lemma AddStudentDoesntChangeSI:
 (students' = students \<union> {(p)}) 
 \<and> (taking' = taking)
 \<and> (degModules' = degModules)
-\<and> (Domain taking \<subseteq> students)
+\<longrightarrow> ((Domain taking \<subseteq> students)
 \<and> (Range taking \<subseteq> degModules)
 \<and> (Domain taking' \<subseteq> students')
-\<and> (Range taking' \<subseteq> degModules')
-) "
+\<and> (Range taking' \<subseteq> degModules'))) "
 \end{verbatim}
 
 The ZDRa syntax of this proof obligation would be :
@@ -115,11 +114,11 @@ lemma AddStudentDoesntChangeSI:
 " \<exists> (*CS1_variables :: CS1_TYPES*).
 (PRE1)
 \<and> (PO1)
-\<and> (SI1)
-\<and (SI1')"
+\<longrightarrow> ((SI1)
+\<and (SI1'))"
 \end{verbatim}
 
-In this property we check that the preconditional state and post conditional state of the operational schema still hold the state invariants and prime state invariants. The ZDRa syntax of the proof obligation stays that there exists some variables of the operational schema where the precondition (PRE1) postCondition (PO1) stateInvariants (SI1) and stateInvariants prime all hold.
+ The ZDRa syntax of the proof obligation stays that there exists some variables of the operational schema where the precondition (PRE1) \emph{and} postCondition (PO1) imply that the stateInvariants (SI1) and stateInvariants prime hold.
 
 \subsection{POb2, Proof Obligation type 2}
 

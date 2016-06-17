@@ -1,4 +1,3 @@
-\begin{verbatim}
 theory 6
 imports 
 Main 
@@ -146,4 +145,3 @@ done
 
 end
 end
-\end{verbatim}

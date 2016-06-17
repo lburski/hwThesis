@@ -1,4 +1,4 @@
-theory new5
+theory new6
 imports 
 Main 
 
@@ -7,13 +7,11 @@ typedecl NAME
 typedecl DATE
 datatype REPORT = ok | already_known | not_known
 
-
 record BirthdayBook = 
 BIRTHDAY :: "(NAME \<rightharpoonup> DATE)"
 KNOWN :: "(NAME set)"
 
-
-locale gpsabirthdaybook =
+locale gpsabirthdaybook = 
 fixes birthday :: "(NAME \<rightharpoonup> DATE)"
 and known :: "(NAME set)"
  
@@ -59,14 +57,16 @@ where
 definition RFindBirthday :: 
 "(NAME set) \<Rightarrow> NAME \<Rightarrow> BirthdayBook \<Rightarrow> BirthdayBook \<Rightarrow> DATE \<Rightarrow> (NAME \<rightharpoonup> DATE) \<Rightarrow> REPORT => bool"
 where 
-"RFindBirthday known' name birthdaybook birthdaybook' date birthday' result == (((FindBirthday known' name birthdaybook birthdaybook' date birthday') \<and>
+"RFindBirthday known' name birthdaybook birthdaybook' date birthday' result == 
+(((FindBirthday known' name birthdaybook birthdaybook' date birthday') \<and>
  (Success result)) \<or>
  (NotKnown known' name birthdaybook birthdaybook' birthday' result))"
 
 definition RAddBirthday :: 
 "(NAME set) \<Rightarrow> NAME \<Rightarrow> BirthdayBook \<Rightarrow> BirthdayBook \<Rightarrow> DATE \<Rightarrow> (NAME \<rightharpoonup> DATE) \<Rightarrow> REPORT => bool"
 where 
-"RAddBirthday known' name birthdaybook birthdaybook' date birthday' result == (((AddBirthday known' name birthdaybook birthdaybook' date birthday') \<and>
+"RAddBirthday known' name birthdaybook birthdaybook' date birthday' result ==
+ (((AddBirthday known' name birthdaybook birthdaybook' date birthday') \<and>
  (Success result)) \<or>
  (AlreadyKnown known' name birthdaybook birthdaybook' birthday' result))"
 
@@ -81,7 +81,55 @@ lemma AddBirthday_L1:
 \<and> (birthday' = birthday (name \<mapsto> date ))
 \<and> (known = dom birthday)
 \<and>(known' = dom birthday'))"
-sorry
+by auto
+
+(*Here I add my own properties about the birthdaybook specification *)
+
+definition (in gpsabirthdaybook)
+birthdaybookstate :: "BirthdayBook \<Rightarrow> bool"
+where
+"birthdaybookstate birthdaybook == (known = dom birthday)"
+
+lemma AddBirthdayIsHonest:
+"(\<exists> known' birthday' birthdaybook birthdaybook' date.
+AddBirthday known' name birthdaybook birthdaybook' date birthday')
+\<longleftrightarrow>
+(name \<notin> known)"
+apply (unfold AddBirthday_def)
+apply auto
+done
+
+lemma preAddBirthdayTotal:
+" (name \<notin> known) \<or> (name \<in> known)"
+apply (rule excluded_middle)
+done
+
+lemma BirthdayBookPredicate:
+"(\<exists> birthdaybook. birthdaybookstate birthdaybook) 
+\<longrightarrow> known = dom birthday"
+apply (rule impI)
+apply (unfold birthdaybookstate_def)
+apply auto
+done
+
+lemma InitisOk:
+"(\<exists> birthdaybook. InitBirthdayBook birthdaybook' known' birthday' birthdaybook) 
+\<longleftrightarrow> (known' = {}) "
+apply (unfold InitBirthdayBook_def)
+apply auto
+done
+
+lemma RAddBirthdayIsTotal:
+"(\<exists> known' birthday' birthdaybook 
+birthdaybook' date.
+RAddBirthday known' name birthdaybook birthdaybook' date birthday' result)
+\<longrightarrow>
+(name \<notin> known) \<or> (name \<in> known)"
+apply (unfold RAddBirthday_def)
+apply (unfold AddBirthday_def AlreadyKnown_def Success_def)
+apply auto
+done
+
 
 end
 end

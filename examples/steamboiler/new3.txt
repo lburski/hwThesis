@@ -1,3 +1,5 @@
+axiom A1 
+
 axiom A2 
 
 axiom A3 
@@ -8,6 +10,8 @@ axiom A5
 
 axiom A6 
 
+stateInvarients SI1 
+
 stateSchema SS1 
 
 initialSchema IS1 
@@ -16,35 +20,33 @@ postcondition PO1
 
 stateSchema SS2 
 
-initialSchema IS6 
+initialSchema IS2 
 
 postcondition PO10 
 
-precondition PRE4 
+changeSchema CS11 
 
-changeSchema CS8 
-
-precondition PRE17 
-
-changeSchema CS5 
-
-precondition PRE14 
+precondition PRE12 
 
 changeSchema CS7 
 
-precondition PRE16 
-
-changeSchema CS3 
-
 precondition PRE8 
 
-changeSchema CS12 
+changeSchema CS13 
 
-precondition PRE21 
+precondition PRE14 
+
+changeSchema CS2 
+
+precondition PRE2 
 
 outputSchema OS1 
 
 output O1 
+
+changeSchema CS15 
+
+precondition PRE16 
 
 outputSchema OS3 
 
@@ -58,89 +60,97 @@ outputSchema OS5
 
 outputSchema OS4 
 
+changeSchema CS14 
+
+precondition PRE15 
+
 outputSchema OS6 
 
 output O3 
 
+changeSchema CS20 
+
+precondition PRE21 
+
+changeSchema CS21 
+
+precondition PRE22 
+
+precondition PRE4 
+
 postcondition PO23 
 
-initialSchema IS9 
+postcondition PO24 
 
-precondition PRE11 
+changeSchema CS19 
 
-initialSchema IS8 
+precondition PRE20 
 
-precondition PRE10 
+changeSchema CS18 
 
-initialSchema IS3 
-
-precondition PRE2 
-
-initialSchema IS2 
-
-precondition PRE1 
-
-initialSchema IS7 
-
-precondition PRE9 
-
-initialSchema IS5 
-
-initialSchema IS4 
-
-precondition PRE3 
-
-axiom A1 
+precondition PRE19 
 
 postcondition PO9 
 
 changeSchema CS10 
 
-precondition PRE19 
+precondition PRE11 
+
+changeSchema CS12 
+
+precondition PRE13 
+
+postcondition PO3 
+
+changeSchema CS17 
+
+precondition PRE18 
+
+changeSchema CS16 
+
+precondition PRE17 
+
+postcondition PO21 
+
+postcondition PO20 
+
+postcondition PO22 
+
+changeSchema CS9 
+
+precondition PRE10 
+
+changeSchema CS8 
+
+precondition PRE9 
+
+changeSchema CS5 
+
+precondition PRE5 
+
+changeSchema CS4 
+
+changeSchema CS6 
+
+precondition PRE7 
+
+changeSchema CS1 
+
+precondition PRE1 
+
+changeSchema CS3 
+
+precondition PRE3 
+
+postcondition PO8 
+
+postcondition PO6 
 
 postcondition PO4 
 
 postcondition PO5 
 
 postcondition PO2 
-
-postcondition PO3 
-
-postcondition PO21 
-
-changeSchema CS9 
-
-precondition PRE18 
-
-changeSchema CS4 
-
-precondition PRE13 
-
-changeSchema CS6 
-
-precondition PRE15 
-
-changeSchema CS1 
-
-precondition PRE5 
-
-changeSchema CS2 
-
-precondition PRE7 
-
-postcondition PO8 
-
-changeSchema CS11 
-
-precondition PRE20 
-
-changeSchema CS13 
-
-precondition PRE22 
-
-initialSchema IS10 
-
-precondition PRE12 
 
 postcondition PO11 
 
@@ -160,23 +170,57 @@ postcondition PO18
 
 postcondition PO19 
 
-totaliseSchema TS5 
+totaliseSchema TS6 
 
 totaliseSchema TS4 
 
-totaliseSchema TS1 
+totaliseSchema TS5 
 
 totaliseSchema TS2 
 
+totaliseSchema TS1 
+
 totaliseSchema TS3 
 
-postcondition PO6 
+lemma L1_(CS11) 
 
-postcondition PO20 
+lemma L2_(CS7) 
 
-postcondition PO22 
+lemma L3_(CS13) 
 
-postcondition PO24 
+lemma L4_(CS2) 
 
-totaliseSchema TS6 
+lemma L5_(CS15) 
+
+lemma L6_(CS14) 
+
+lemma L7_(CS20) 
+
+lemma L8_(CS21) 
+
+lemma L9_(CS19) 
+
+lemma L10_(CS18) 
+
+lemma L11_(CS10) 
+
+lemma L12_(CS12) 
+
+lemma L13_(CS17) 
+
+lemma L14_(CS16) 
+
+lemma L15_(CS9) 
+
+lemma L16_(CS8) 
+
+lemma L17_(CS5) 
+
+lemma L18_(CS4) 
+
+lemma L19_(CS6) 
+
+lemma L20_(CS1) 
+
+lemma L21_(CS3) 
 

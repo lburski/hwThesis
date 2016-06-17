@@ -1,0 +1,64 @@
+SS1
+SI1
+IS1
+PO1
+CS7
+CS2
+OS1
+OS3
+OS2
+CS5
+CS4
+CS6
+CS1
+CS3
+TS2
+TS1
+TS3
+
+SS2
+IS2
+PO2
+CS11
+CS13
+CS15
+OS5
+OS4
+CS14
+OS6
+CS20
+CS21
+CS19
+CS18
+CS10
+CS12
+CS17
+CS16
+CS9
+CS8
+CS6
+TS6
+TS4
+TS5
+
+lemma CS11_L1:
+lemma CS7_L2:
+lemma CS13_L3:
+lemma CS2_L4:
+lemma CS15_L5:
+lemma CS14_L6:
+lemma CS20_L7:
+lemma CS21_L8:
+lemma CS19_L9:
+lemma CS18_L10:
+lemma CS10_L11:
+lemma CS12_L12:
+lemma CS17_L13:
+lemma CS16_L14:
+lemma CS9_L15:
+lemma CS8_L16:
+lemma CS5_L17:
+lemma CS4_L18:
+lemma CS6_L19:
+lemma CS1_L20:
+lemma CS3_L21:

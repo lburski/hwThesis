@@ -1,4 +1,4 @@
-theory timetable
+theory 6
 imports 
 Main 
 

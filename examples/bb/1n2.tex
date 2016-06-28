@@ -1,4 +1,3 @@
-\begin{verbatim}
 \documentclass{article}
 \usepackage{zmathlang}
 
@@ -42,7 +41,8 @@
 \text{\declaration{\term{date?}: \expression{DATE}}}
 \where
 \draline{PRE1}{\text{\expression{\term{name?} \notin \set{known}}}}\\
-\draline{PO3}{\text{\expression{\set{birthday'} = \set{\set{birthday} \cup \set{\{\term{\term{name?} \mapsto \term{date?}}\}}}}}}
+\draline{PO3}{\text{\expression{\set{birthday'} = \set{\set{birthday} 
+\cup \set{\{\term{\term{name?} \mapsto \term{date?}}\}}}}}}
 \end{schema}}
 
 \uses{CS1}{IS1}
@@ -56,7 +56,8 @@
 \text{\declaration{\term{date!}: \expression{DATE}}}
 \where
 \draline{PRE2}{\text{\expression{\term{name?} \in \set{known}}}}\\
-\draline{O1}{\text{\expression{\term{date!} = \term{\set{birthday}~(\term{name?})}}}}
+\draline{O1}{\text{\expression{\term{date!} = 
+\term{\set{birthday} (\term{name?})}}}}
 \end{schema}}
 
 \allows{PRE2}{O1}
@@ -106,8 +107,10 @@
 \uses{OS5}{SS1}
 
 \begin{zed} 
-\draline{TS1}{RAddBirthday == \text{\expression{(\text{AddBirthday} \land \text{Success})\\  \lor \text{AlreadyKnown}}}} \\
-\draline{TS2}{RFindBirthday == \text{\expression{(\text{FindBirthday} \land \text{Success}) \lor \text{NotKnown}}}} 
+\draline{TS1}{RAddBirthday == \text{\expression{(\text{AddBirthday} 
+\land \text{Success})\\  \lor \text{AlreadyKnown}}}} \\
+\draline{TS2}{RFindBirthday == \text{\expression{(\text{FindBirthday}
+ \land \text{Success}) \lor \text{NotKnown}}}} 
 \end{zed}
 
 \totalises{TS1}{CS1}
@@ -119,4 +122,3 @@
 
 }
 \end{document}
-\end{verbatim}

@@ -38,5 +38,5 @@ totaliseSchema TS2
 
 totaliseSchema TS1 
 
-lemma L1_(CS1) 
+lemma L1\_(CS1) 
 

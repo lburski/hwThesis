@@ -1,3 +1,4 @@
+\begin{verbatim}
 theory new6
 imports 
 Main 
@@ -133,3 +134,5 @@ done
 
 end
 end
+content...
+\end{verbatim}

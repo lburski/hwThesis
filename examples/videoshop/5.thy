@@ -26,7 +26,7 @@ begin
 
 definition StillRented :: 
  "VideoShop => VideoShop => TITLE => MESSAGE  => bool"
-where 
+where
 "StillRented videoshop videoshop' t outcome == (
 (t \<in> Range rented)
 \<and>

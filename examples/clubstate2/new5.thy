@@ -65,12 +65,11 @@ where
 lemma NewGame_L1:
 "(\<exists> badminton :: (STUDENT set).
 \<exists> badminton' :: (STUDENT set).
-\<exists> hall :: (STUDENT set).
 \<exists> hall' :: (STUDENT set).
-\<exists> onCourt :: (STUDENT set).
 \<exists> onCourt' :: (STUDENT set).
-\<exists> waiting :: (STUDENT list).
 \<exists> waiting' :: (STUDENT list).
+\<exists> clubstate2' :: ClubState2.
+\<exists> clubstate2 :: ClubState2.
 onCourt = {}
 \<and> (length waiting \<ge> 2)
 \<and> ((length waiting \<ge> 4) \<longrightarrow> (card onCourt' = 4))
@@ -80,50 +79,46 @@ onCourt = {}
 (*\<and> (waiting' = waiting \<restriction> ((Range waiting) - onCourt'))*)
 \<and> (hall' = hall)
 \<and> (badminton' = badminton)
-\<and> (hall \<subseteq> badminton)
+\<longrightarrow> ((hall \<subseteq> badminton)
 \<and> (card hall \<le> maxPlayers)
 \<and> (hall' \<subseteq> badminton')
-\<and> (card hall' \<le> maxPlayers))"
-by force
+\<and> (card hall' \<le> maxPlayers)))"
+sorry
 
 lemma LeaveHall_L2:
-"(\<exists> badminton :: (STUDENT set).
-\<exists> badminton' :: (STUDENT set).
-\<exists> hall :: (STUDENT set).
+"(\<exists> badminton' :: (STUDENT set).
 \<exists> hall' :: (STUDENT set).
-\<exists> onCourt :: (STUDENT set).
 \<exists> onCourt' :: (STUDENT set).
-\<exists> waiting :: (STUDENT list).
 \<exists> waiting' :: (STUDENT list).
 \<exists> p :: STUDENT.
+\<exists> clubstate2' :: ClubState2.
+\<exists> clubstate2 :: ClubState2.
 (p \<in> set waiting)
 (* \<and> (waiting' = squash(waiting \<unlhd> {(p)})) *)
 \<and> (hall' = hall - {(p)}) 
 \<and> (badminton' = badminton)
 \<and> (hall \<subseteq> badminton)
-\<and> (card hall \<le> maxPlayers)
+\<longrightarrow> ((card hall \<le> maxPlayers)
 \<and> (hall' \<subseteq> badminton')
-\<and> (card hall' \<le> maxPlayers))"
-by (metis Diff_eq_empty_iff List.set_insert Nat.le_iff_add add_0_left card.empty empty_Diff equals0I insert_not_empty)
+\<and> (card hall' \<le> maxPlayers)))"
+sorry
 
 lemma FinishGame_L3:
-"(\<exists> badminton :: (STUDENT set).
-\<exists> badminton' :: (STUDENT set).
-\<exists> hall :: (STUDENT set).
+"(\<exists> badminton' :: (STUDENT set).
 \<exists> hall' :: (STUDENT set).
-\<exists> onCourt :: (STUDENT set).
 \<exists> onCourt' :: (STUDENT set).
-\<exists> waiting :: (STUDENT list).
 \<exists> waiting' :: (STUDENT list).
+\<exists> clubstate2' :: ClubState2.
+\<exists> clubstate2 :: ClubState2.
 (onCourt \<noteq> {})
 \<and> (onCourt' = {})
 \<and> (\<exists>s::STUDENT list. (set s=onCourt') \<and> (waiting' =  concat [s]))
 \<and> (hall' = hall) 
 \<and> (badminton' = badminton)
-\<and> (card hall \<le> maxPlayers)
+\<longrightarrow> ((card hall \<le> maxPlayers)
 \<and> (hall' \<subseteq> badminton')
-\<and> (card hall' \<le> maxPlayers))"
-using LeaveHall_L2 by auto
+\<and> (card hall' \<le> maxPlayers)))"
+sorry
 
 
 

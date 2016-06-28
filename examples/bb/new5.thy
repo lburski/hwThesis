@@ -1,3 +1,5 @@
+\begin{verbatim}
+
 theory new5
 imports 
 Main 
@@ -85,3 +87,5 @@ sorry
 
 end
 end
+
+\end{verbatim}

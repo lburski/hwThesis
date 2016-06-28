@@ -1,6 +1,6 @@
-\begin{verbatim}
+
 \documentclass{article}
-\usepackage{zmathlang}
+\usepackage{zed}
 \begin{document}
 
 \begin{zed}
@@ -120,14 +120,17 @@ message! = numberDoesntExist
 
 \begin{zed}
 TotalAddPerson \defs (AddPerson \land Success) \lor AlreadyInDirectory \\
-TotalRemovePerson \defs (RemovePerson \land Success) \lor NameNotInDirectory \\
-TotalAddNumber \defs (AddNumber \land Success) \lor NameNotInDirectory \lor NumberInUse \\
-TotalRemoveNumber \defs (RemoveNumber \land Success) \lor NumberDoesntExist \lor NameNotInDirectory \\
+TotalRemovePerson \defs (RemovePerson \land Success) \\
+ \lor NameNotInDirectory \\
+TotalAddNumber \defs (AddNumber \land Success) \\
+ \lor NameNotInDirectory \lor NumberInUse \\
+TotalRemoveNumber \defs (RemoveNumber \land Success)  \\
+\lor NumberDoesntExist \lor NameNotInDirectory \\
 \end{zed}
 
 
 \begin{zed}
-TotalPhone \defs TotalAddPerson \lor TotalRemovePerson \lor TotalAddNumber \lor TotalRemoveNumber
+TotalPhone \defs TotalAddPerson \lor TotalRemovePerson \\ \lor TotalAddNumber \lor TotalRemoveNumber
 \end{zed}
 
 \begin{zed}
@@ -135,4 +138,3 @@ TotalPhoneAndTotalAddPerson \defs TotalPhone \lor TotalAddPerson
 \end{zed}
 
 \end{document}
-\end{verbatim}

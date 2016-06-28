@@ -1,3 +1,4 @@
+\begin{verbatim}
 theory gpsa1n2
 imports 
 Main 
@@ -68,3 +69,5 @@ sorry
 
 end
 end
+content...
+\end{verbatim}

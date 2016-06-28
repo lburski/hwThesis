@@ -1,226 +1,225 @@
-axiom A1 
+axiom A1
 
-axiom A2 
+stateInvariants SI1
 
-axiom A3 
+axiom A2
 
-axiom A4 
+axiom A3
 
-axiom A5 
+stateSchema SS1
 
-axiom A6 
+initialSchema IS1
 
-stateInvarients SI1 
+postcondition PO1
 
-stateSchema SS1 
+changeSchema CS7
 
-initialSchema IS1 
+precondition PRE8
 
-postcondition PO1 
+postcondition PO9
 
-stateSchema SS2 
+changeSchema CS2
 
-initialSchema IS2 
+precondition PRE2
 
-postcondition PO10 
+postcondition PO3
 
-changeSchema CS11 
+outputSchema OS1
 
-precondition PRE12 
+output O1
 
-changeSchema CS7 
+outputSchema OS3
 
-precondition PRE8 
+precondition PRE6
 
-changeSchema CS13 
+outputSchema OS2
 
-precondition PRE14 
+output O2
 
-changeSchema CS2 
+changeSchema CS5
 
-precondition PRE2 
+precondition PRE5
 
-outputSchema OS1 
+postcondition PO6
 
-output O1 
+changeSchema CS4
 
-changeSchema CS15 
+precondition PRE4
 
-precondition PRE16 
+postcondition PO5
 
-outputSchema OS3 
+changeSchema CS6
 
-precondition PRE6 
+precondition PRE7
 
-outputSchema OS2 
+postcondition PO8
 
-output O2 
+changeSchema CS1
 
-outputSchema OS5 
+precondition PRE1
 
-outputSchema OS4 
+postcondition PO2
 
-changeSchema CS14 
+changeSchema CS3
 
-precondition PRE15 
+precondition PRE3
 
-outputSchema OS6 
+postcondition PO4
 
-output O3 
+totaliseSchema TS2
 
-changeSchema CS20 
+totaliseSchema TS1
 
-precondition PRE21 
+totaliseSchema TS3
 
-changeSchema CS21 
+axiom A4
 
-precondition PRE22 
+stateSchema SS2
 
-precondition PRE4 
+initialSchema IS2
 
-postcondition PO23 
+postcondition PO10
 
-postcondition PO24 
+axiom A5
 
-changeSchema CS19 
+axiom A6
 
-precondition PRE20 
+outputSchema OS5
 
-changeSchema CS18 
+output O4
 
-precondition PRE19 
+outputSchema OS4
 
-postcondition PO9 
+output O3
 
-changeSchema CS10 
+changeSchema CS9
 
-precondition PRE11 
+precondition PRE10
 
-changeSchema CS12 
+postcondition PO12
 
-precondition PRE13 
+changeSchema CS8
 
-postcondition PO3 
+precondition PRE9
 
-changeSchema CS17 
+postcondition PO11
 
-precondition PRE18 
+changeSchema CS11
 
-changeSchema CS16 
+precondition PRE12
 
-precondition PRE17 
+postcondition PO14
 
-postcondition PO21 
+changeSchema CS13
 
-postcondition PO20 
+precondition PRE14
 
-postcondition PO22 
+postcondition PO16
 
-changeSchema CS9 
+changeSchema CS15
 
-precondition PRE10 
+precondition PRE16
 
-changeSchema CS8 
+postcondition PO18
 
-precondition PRE9 
+changeSchema CS14
 
-changeSchema CS5 
+precondition PRE15
 
-precondition PRE5 
+postcondition PO17
 
-changeSchema CS4 
+outputSchema OS6
 
-changeSchema CS6 
+output O5
 
-precondition PRE7 
+changeSchema CS20
 
-changeSchema CS1 
+precondition PRE21
 
-precondition PRE1 
+postcondition PO23
 
-changeSchema CS3 
+changeSchema CS21
 
-precondition PRE3 
+precondition PRE22
 
-postcondition PO8 
+postcondition PO24
 
-postcondition PO6 
+changeSchema CS19
 
-postcondition PO4 
+precondition PRE20
 
-postcondition PO5 
+postcondition PO22
 
-postcondition PO2 
+changeSchema CS18
 
-postcondition PO11 
+precondition PRE19
 
-postcondition PO12 
+postcondition PO21
 
-postcondition PO13 
+changeSchema CS10
 
-postcondition PO14 
+precondition PRE11
 
-postcondition PO15 
+postcondition PO13
 
-postcondition PO16 
+changeSchema CS12
 
-postcondition PO17 
+precondition PRE13
 
-postcondition PO18 
+postcondition PO15
 
-postcondition PO19 
+changeSchema CS17
 
-totaliseSchema TS6 
+precondition PRE18
 
-totaliseSchema TS4 
+postcondition PO20
 
-totaliseSchema TS5 
+changeSchema CS16
 
-totaliseSchema TS2 
+precondition PRE17
 
-totaliseSchema TS1 
+postcondition PO19
 
-totaliseSchema TS3 
+totaliseSchema TS6
 
-lemma L1_(CS11) 
+totaliseSchema TS4
 
-lemma L2_(CS7) 
+totaliseSchema TS5
 
-lemma L3_(CS13) 
+lemma L_(CS7)
 
-lemma L4_(CS2) 
+lemma L_(CS2)
 
-lemma L5_(CS15) 
+lemma L_(CS5)
 
-lemma L6_(CS14) 
+lemma L_(CS4)
 
-lemma L7_(CS20) 
+lemma L_(CS6)
 
-lemma L8_(CS21) 
+lemma L_(CS1)
 
-lemma L9_(CS19) 
+lemma L_(CS3)
 
-lemma L10_(CS18) 
+lemma L_(CS9)
 
-lemma L11_(CS10) 
+lemma L_(CS8)
 
-lemma L12_(CS12) 
+lemma L_(CS11)
 
-lemma L13_(CS17) 
+lemma L_(CS13)
 
-lemma L14_(CS16) 
+lemma L_(CS15)
 
-lemma L15_(CS9) 
+lemma L_(CS14)
 
-lemma L16_(CS8) 
+lemma L_(CS20)
 
-lemma L17_(CS5) 
+lemma L_(CS21)
 
-lemma L18_(CS4) 
+lemma L_(CS19)
 
-lemma L19_(CS6) 
-
-lemma L20_(CS1) 
-
-lemma L21_(CS3) 
-
+lemma L_(CS18)
+lemma L_(CS10)
+lemma L_(CS12)
+lemma L_(CS17)
+lemma L_(CS16)

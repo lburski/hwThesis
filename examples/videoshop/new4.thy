@@ -13,6 +13,11 @@ fixes (*GLOBAL DECLARATIONS*)
 assumes SI1
 begin
 
+definition IS1 :: 
+ "(*IS1_TYPES*) => bool"
+where 
+"IS1 (*IS1_VARIABLES*) == (PO1)"
+
 definition OS10 :: 
  "(*OS10_TYPES*) => bool"
 where 
@@ -72,11 +77,6 @@ definition OS6 ::
 where 
 "OS6 (*OS6_VARIABLES*) == (PRE9)
 \<and> (O6)"
-
-definition IS1 :: 
- "(*IS1_TYPES*) => bool"
-where 
-"IS1 (*IS1_VARIABLES*) == (PO1)"
 
 definition CS1 :: 
 "(*CS1_TYPES*) => bool"

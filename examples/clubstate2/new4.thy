@@ -43,48 +43,48 @@ lemma CS1_L1:
 "(\<exists> (*CS1_VARIABLESANDTYPES*).
 (PRE1)
 \<and> (PO2)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2'))"
+\<longrightarrow> ((SI1)
+\<and> (SI2))"
 sorry
 
 lemma CS3_L2:
 "(\<exists> (*CS3_VARIABLESANDTYPES*).
 (PRE3)
 \<and> (PO4)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2'))"
+\<longrightarrow> ((SI1)
+\<and> (SI2))"
 sorry
 
 lemma CS2_L3:
 "(\<exists> (*CS2_VARIABLESANDTYPES*).
 (PRE2)
 \<and> (PO3)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2'))"
+\<longrightarrow> ((SI1)
+\<and> (SI2))"
 sorry
 
 lemma CS1_L1:
 "(\<exists> (*CS1_VARIABLESANDTYPES*).
 (PRE1)
 \<and> (PO2)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2'))"
+\<longrightarrow> ((SI1)
+\<and> (SI2))"
 sorry
 
 lemma CS3_L2:
 "(\<exists> (*CS3_VARIABLESANDTYPES*).
 (PRE3)
 \<and> (PO4)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2'))"
+\<longrightarrow> ((SI1)
+\<and> (SI2))"
 sorry
 
 lemma CS2_L3:
 "(\<exists> (*CS2_VARIABLESANDTYPES*).
 (PRE2)
 \<and> (PO3)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2)
-\<and> (SI1\<and>SI2\<and>SI1\<and>SI2'))"
+\<longrightarrow> ((SI1)
+\<and> (SI2))"
 sorry
 
 end

@@ -1,8 +1,6 @@
 \chapter{Background}
 \label{ch:background}
 
-
-
 \section{MathLang for Mathematics}
 \label{sec:mathlangbackground}
 
@@ -135,6 +133,42 @@ Using fast, effective proof checkers can increase the speed of execution of the 
 
 The Z notation is based upon set theory and mathematical logic. It is a particular formal method to which was originally developed to specify the new Customer Information Control System (CICS) functionality \cite{cics}. The set theory includes standard set operators, set comprehensions, cartesian products and power sets. Z also has other aspects such as schemas which are used to group mathematical objects and their properties. The schema language can be used to describe the state of a system and the ways in which that state may change \cite{Woodcock:1996:UZS:235337}.
 
+In the Z notation there are two languages: the mathmatical language and the schema language. The mathematical language is used to describe various aspects of a design: object, and the relationships between them. The schema language is used to structure and compose descriptions: collecting pieces of information and naming them for re-use. A schema consists of two parts: a \emph{declaration part} and a \emph{predicate part}. Which consists of declared variables and their values respectively. We can write a schema either horizontally (figure \ref{fig:horizontalschema}) or vertically (figure \ref{fig:verticalschema}).
+
+\begin{figure}[H]
+\vspace{-0.2in}
+\centering
+\begin{minipage}{0.45\textwidth}
+\begin{zed}
+Schema\ Name \defs [declarations | predicates]
+\end{zed}
+\vspace{-0.18in}
+\caption{An example of a schema written horizontally.\label{fig:horizontalschema}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\begin{schema}{Schema\ Name}
+declarations
+\where
+predicates
+\end{schema}
+\vspace{-0.2in}
+\caption{An example of a schema written vertically. \label{fig:verticalschema}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+Therefore if we wanted a property of some system which consists of two variables $x$ and $y$ and state that $x$ must be smaller than $y$ then we can write:
+
+\begin{schema}{xLessThany}
+x: \nat \\
+y: \nat
+\where
+x < y
+\end{schema}
+
+The full language of Z can be explored in \cite{spiveyreferencemanual}, \cite{essenceofz} and \cite{Woodcock:1996:UZS:235337}.
+
 The semantics of Z specifications have already been studied. This has helped in the design of better specification languages by allowing critical comparison of specification techniques. As the basis semantics of Z have already been research, this gives us a head start in formulating the different aspects of \gls{math} for Z. The study in the semantics of Z provide a foundation for reasoning about specifications.
 
 In \cite{formsem} it states that many of the proofs needed during the development process are `\textit{very shallow but contain a mass of detail}'. This detail would be difficult to understand by other stakeholders in the system being designed. This is where \gls{zmath} steps in, as it is a tool which produces documents in which anyone in the development team and clients should be able to understand.
@@ -155,4 +189,12 @@ Type-free lambda calculus \cite{bar93} allows for every expression to be applied
 \cite{DBLP:conf/icsea/WenMZ06}, \cite{DBLP:conf/sefm/FraserB07}, \cite{stepney1998tale}, \cite{Woodcock:1996:UZS:235337}, \cite{woodcock2004tutorial}
 
 \section{Conclusion}
-\todo[inline]{Write a conclusion for background chapter}
+This chapter has described in depth the reasearch old and new which has relevence to this thesis. The MathLang framework which was designed and implemented for mathematics has been described and gives details of the method in which plain mathematical documents are formalised and translated into theorem provers. In this section we show a diagram which was proposed to identlify the steps in which a complete proof can be achieved from a mathematical text. 
+
+The next section of this chapter highlights formal methods and formal languages used in practice. Formal methods which have been used in an industrial setting has been explained and analysed. We then outlined other methods for checking for software correctness which may or may not have been used in practice but also investigated in an academic setting.
+
+Since this thesis concentrates on Z specifications we have outlined what are Z specifications and compared it with other formal languages. 
+
+We also researched into types and their properties since the first aspect of \gls{zmath} is heavily based on a weak typing system.
+
+This chapter concluded with different ways one can generate properties to prove their formal specifications.

@@ -1,6 +1,8 @@
 \chapter{Specifications in ZMathLang}
 \label{app:other}
 
+The specifications translated using \gls{zmath} written here are the ones which a refered to in this thesis. The full range of examples of specifications can be found in \cite{mathlangexamples}.
+
 \section{Vending Machine}
 \label{app:vm}
 
@@ -187,19 +189,44 @@
 %\input{examples/bb/new6.thy}
 
 \section{An example of a specification which fails \gls{zcga} but passes \gls{zdra}}
+\label{app:nonworkingzcga}
 This section shows an example of a specification which is rhetorically correct and passes the \gls{zdra} check however the grammar of the specification is incorrect and therefore fails the \gls{zcga} check. We input the compiled output for each of the examples. For reference to the code the reader is directed to \cite{mathlangexamples}.
 
-%\subsection{Raw Latex}
+\subsection{Raw Latex}
+\includegraphics[scale=0.5]{examples/nonworkzcga/0imagea.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/0imageb.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/0imagec.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/0imaged.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/0imagee.png}
+
 %\input{examples/nonworkzcga/0.tex}
 \subsection{Raw Latex output}
 
 \noindent \includegraphics[clip, trim=4cm 8cm 4cm 4.2cm]{examples/nonworkzcga/0.pdf}
 
-\noindent \includegraphics[clip, trim=4cm 8cm 4cm 4.2cm]{examples/nonworkzcga/0comp2.pdf}
+\noindent \includegraphics[clip, trim=4cm 8cm 3cm 4.2cm]{examples/nonworkzcga/0comp2.pdf}
 
 %\includepdf[pages={1-2}]{examples/nonworkzcga/0.pdf}
-%\subsection{ZCGa and ZDRa Annotated Latex Code}
-%\input{examples/nonworkzcga/1n2.tex}
+\subsection{ZCGa and ZDRa Annotated Latex Code}
+\label{app:nonzcga1n2}
+\includegraphics[scale=0.5]{examples/nonworkzcga/1n2imagea.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/1n2imageb.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/1n2imagec.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/1n2imaged.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/1n2imagee.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/1n2imagef.png}
+
+\noindent \includegraphics[scale=0.5]{examples/nonworkzcga/1n2imageg.png}
+
 \subsection{ZCGa and ZDRa output}
 \noindent \includegraphics[clip, trim=0cm 4cm 6cm 4.2cm]{examples/nonworkzcga/1n2.pdf}
 
@@ -245,6 +272,7 @@ This section shows an example of a specification which is grammatically correct 
 \end{figure}
 
 \section{An example of a specification which is semi formal}
+\label{app:semiform}
 This section shows an auto pilot specification which is partially written in natural language and partially written formally. Thus it is a natural langauge specification which is on it's way to being formalised.
 
 %\subsection{Raw Latex}
@@ -324,6 +352,26 @@ This section shows the full proof for the modulereg example from \cite{essenceof
 \noindent \includegraphics[scale=0.5]{examples/modulereg/6imagee.png}
 
 \noindent \includegraphics[scale=0.5]{examples/modulereg/6imagef.png}
+
+\chapter{ZMathLang \LaTeX{} package}
+\label{app:zmathlatex}
+
+This chapter shows the \gls{zmath} \LaTeX{} package which was implemented to accomadate the labels to annotate th users Z specification in \gls{zcga} and \gls{zdra}. This package draws the coloured boxes for the \gls{zcga} and the boxes and labelled arrows in the \gls{zdra} when the specification is compiled with \texttt{pdflatex}.
+
+\todo[inline]{insert zmathlang latex package in appendix}
+
+\noindent \includegraphics[scale=0.5]{Figures/appendix/zmatha.png}
+
+\noindent \includegraphics[scale=0.5]{Figures/appendix/zmathb.png}
+
+\noindent \includegraphics[scale=0.5]{Figures/appendix/zmathc.png}
+
+\noindent \includegraphics[scale=0.5]{Figures/appendix/zmathd.png}
+
+\noindent \includegraphics[scale=0.5]{Figures/appendix/zmathe.png}
+
+\noindent \includegraphics[scale=0.5]{Figures/appendix/zmathf.png}
+
 
 %\input{examples/modulereg/new6.tex}
 

@@ -608,7 +608,9 @@ The error message \emph{not a correct set} will appear when a user has labelled 
 
 In this case the incorrect set would be \verb|\set{\set{w} \cup \term{v}}|. This is because the constant \verb|\cup| takes two sets as parameters. However this labelling shows that a set `\verb|w|' and a term `\verb|v|' have been applied. 
 
-\todo[inline]{Refer back to appendix of nonworking zcga}
+An example of a specification not passing the \gls{zcga} check is shown in appendix \ref{pp:nonworkingzcga}. This specification shows a telephone directory which adds telephone numbers and names to a theoretical directory. It shows a schema `\emph{TheTelephoneDirectory}' being usedd in the \emph{AddPerson} schema, however `\emph{TheTelephoneDirectory}' is not a valid schema. The term `\emph{person}' is being used in the `\emph{AlreadyInDirectory}' schema but only the variable `\emph{persons}' has been declared. The term `\emph{numberInUse}' is being used in the `\emph{NameNotInDirectory}' schema however the user might of mistaken this term for the `\emph{nameNotInDirectory}' which has been declared in the `\emph{OUTPUT}' freetype. The user has also forgotten the variable decorations `\emph{?}' and `\emph{!}' on the `\emph{n}' and `\emph{s}' variables in the `\emph{AddNumber}' schema.
+
+All these errors may not be visible to the user when typing the specification or looking at it with the naked eye, however with the user going through and labelling each part in \gls{zcga} annotations along with the \gls{zcga} checker, all these grammatical errors should be identified.
 
 %If the user wished to ammend this then the set would change to \verb|\set{\set{w} \cup \set{\{\term{v}\}}}|. By adding the curly brackets \verb|\{..\}| it changes the term into a set which can now be applied as a parameter to \verb|\cup|.
 

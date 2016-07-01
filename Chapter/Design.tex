@@ -131,11 +131,96 @@ Figure \ref{fig:zmathflow} shows a flow chart describing the documents produced 
 The \colorbox{lightpink}{pink} diamond is the starting point for all users. The \colorbox{lightorange}{orange} ovals describe procedures of the ZCGa and ZDRa. The ZCGa procedure requires user input and automation and produces a `ZCGa annotated text'. The ZDRa procedure requires user input to annotated and the check is automated. Both the \gls{zcga} and \gls{zdra} procedures done together produce a `\gls{zcga} and \gls{zdra} annotated text'. After completing the \gls{zdra} procedure a 'dependency graph' is automatically generated, which can then in turn generate a `GoTo graph' which in turn can create a general proof skeleton. From the `general proof skeleton' we can then create an `Isabelle skeleton'  which can be filled in using information from the `\gls{zcga} and \gls{zdra} annotated text'. Using the `Filled in Isabelle skeleton' the user needs to fill in the missing information to obtain a `fully proven Z specification'.
 
 \section{The ZMathLang LaTeX Package}
-\todo[inline]{Describe how the ZMathLang LaTeX package is written}
 
-\subsection{ZCGa part}
+The \gls{zmath} \LaTeX{} package (shown in appendix \ref{app:zmathlatex}) was implemented to allow the user to annotate their Z specification document in \gls{zcga} and \gls{zdra} annotations. Coloured boxes will then appear around the grammatical categories when the new \gls{zcga} annotated document is compiled with \texttt{pdflatex}. Instances and labelled arrows showing the relations are also displayed when annotated with \gls{zdra} and compiled with \texttt{pdflatex}. 
 
-\subsection{ZDRa part}
+\subsection{Overview}
+
+The \gls{zmath} style file invokes the following packages:
+
+\begin{itemize}
+\item tcolorbox - Used to draw colours around individual grammatical categories with a black outline for the \gls{zcga}.
+\item tikz - Used to identify the instances as nodes so the arrows can join from one nodes to another.
+\item varwidth - Used to chunk each instance as a single entity.
+\item zed - Used to draw Z specification schemas, freetypes, axiomatic definitions in the zed environment.
+\item xcolor - Used to define specific colours and gives a wider range of colours compared to the standard.
+\end{itemize}
+
+After invoking the packages we define the colours which are used in the outputting pdf result. We use the same colours as the original \gls{math} framework for the grammatical categories which are the same (sets, terms, expressions, declarations, context and definitions) and choose a different colour for the weak type `specification' as this hasn't been used in the original \gls{math} framework.
+
+\begin{figure}[H]
+\includegraphics[scale=0.7]{Figures/Design/zmatha.png}
+\caption{Part of the syntax to define the colours for \gls{zcga} in the \gls{zmath} \LaTeX{} file. \label{fig:definecolourlatex}}
+\end{figure}
+
+The command \verb|\definecolor{*NameOfZCGaType*}{HTML}{*ColourInHtml*}| is used to define a colour for each grammatical category (shown in figure \ref{fig:definecolourlatex}). Where \verb|*NameOfZCGaType*| is the name of the category i.e. definition, term, set etc and \verb|*ColourInHtml*| is the HTML number for the colour. For example the colour for term in the original \gls{zmath} is \term{light blue} which in HTML format is \emph{3A9FF1}. Therefore we define the colour for \emph{term} as \emph{3A9FF1}.
+
+\subsection{\LaTeX{} commands to identify ZDRa Instances}
+
+The \gls{zdra} section of the \LaTeX{} file provides three new commands: \verb|\draschema|, \verb|\draline| and \verb|\dratheory|. The \verb|\dratheory| annotation is for the entire specification which contins all the intances and relations. The \verb|\draschema| command is to annotate the instances which are entire zed schemas, this command should go before any \verb|\begin{schema}| or \verb|\begin{zed}| command. The \verb|\draline| annotation is to annotate any instance that is a line of text which contains plain text or \gls{zcga} annotated text. But does not include any \gls{zdra} annotated text. For example in figure \ref{fig:zdraincorrectannotations} the \verb|\draline{PRE1}| annotation is embedded in the \verb|\draline{CS1}{| which will not compile. Therefore the correct way this schema is labelled is shown in figure \ref{fig:zdracorrectannotations} where the \verb|\draline{PRE1}| annotation is embedded in the \verb|\draschema{CS1}| annotation.
+
+\begin{figure}[H]
+\vspace{-0.2in}
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{small}
+\begin{BVerbatim}
+\draline{CS1}{
+\begin{schema}{B}
+\Delta A
+\where
+\draline{PRE1}{a<b}
+\end{schema}
+}
+\end{BVerbatim}
+\end{small}
+\vspace{-0.18in}
+\caption{Incorrect annotating of \gls{zdra}.\label{fig:zdraincorrectannotations}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{small}
+\begin{BVerbatim}
+\draschema{CS1}{
+\begin{schema}{B}
+\Delta A
+\where
+\draline{PRE1}{a<b}
+\end{schema}
+}
+\end{BVerbatim}
+\end{small}
+\vspace{-0.2in}
+\caption{Correct annotating of \gls{zdra}.\label{fig:zdracorrectannotations}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+It is important to note this embedding order as by annotating a chunk of specification using the \gls{zdra} annotation \verb|\draline| it keeps the inside of the part inside as maths mode. Since the annotation \verb|\draschema| is outside the zed commands (eg \verb|\begin{schema}|) then the zed commands make everything inside the instance into math mode.
+
+\begin{figure}[H]
+\includegraphics[scale=0.7]{Figures/Design/zmathb.png}
+\caption{The syntax to define a \gls{zdra} schema instance in the \gls{zmath} \LaTeX{} file. \label{fig:latexzdraschema}}
+\end{figure}
+
+The new command we are defining for \verb|\draschema| is shown in figure \ref{fig:latexzdraschema}. The commands for defining \verb|\dratheory| and \verb|\draline| are similar as the \verb|draschema| definition. The command takes two arguments, the first argument will be the name of the instance (e.g SS1, IS4, CS2 etc) and the second argument is the instance itself. Any text within the instance will then become grey so it looks faded as we are only interested in the instance itself and not the context at this point. The background of the box is white with a black outline. We then use the first argument to name the instance and it becomes a node. The name of the instance is also printed in black over the instance itself.
+
+\subsection{\LaTeX{} commands to identify ZDRa Relations}
+
+There are 5 new commands to define the relations for the \gls{zdra}, these are \emph{initialOf}, \emph{uses}, \emph{totalises}, \emph{requires} and \emph{requires}. Information on these relations are described in chapter \ref{ch:zdra}, however this section of the thesis describes the \LaTeX{} commands implemented so that they can be used to annotated a specification in \gls{zdra}.
+
+\begin{figure}[H]
+\includegraphics[scale=0.7]{Figures/Design/zmathd.png}
+\caption{The syntax to define a \gls{zdra} schema relation in the \gls{zmath} \LaTeX{} file. \label{fig:latexzdrauses}}
+\end{figure}
+
+Figure \ref{fig:latexzdrauses} shows how the command \verb|uses| has been implemented. The command takes 2 arguments (which are 2 instances which have been previously annotated) and draws an arrow going from the first instance to the second one. The arrow bend angle is at 90, the arrow width is at 1mm and the arrow goes from the east part of the first instance to the east part of the second instance. The word \textbf{uses} is written next to the arrow. All the other relation commands are written in a similar way however the direction of the arrows differ and some arrows bend to the left whilst others bend to the right. The bending of the arrows has been implemented at random so that the compiled document has arrows showing on both sides of the theory and are not over lapping too much.
+
+\subsection{\LaTeX{} commands to identify ZCGa grammatical types}
+
+\todo[inline]{Describe how the ZMathLang LaTeX package is written for ZCGa}
 
 \section{Conclusion}
 

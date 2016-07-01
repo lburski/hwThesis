@@ -1,10 +1,9 @@
-\begin{verbatim}
 \documentclass{article}
 \usepackage{zmathlang}
 
 \begin{document}
 
-\dratheory{T1}{0.2}{
+\dratheory{T1}{0.18}{
 
 \begin{zed}
 [\set{NAME}] 
@@ -42,12 +41,12 @@
 \text{TheTelephoneDirectory} \\
 \text{\declaration{\term{name?}: \expression{NAME}}} \\
 \text{\declaration{\term{surname?}: \expression{SURNAME}}} \\
-\text{\declaration{\term{phone?}: \expression{TELEPHONE}}}
 \where
 \draline{PRE1}{
 \text{\expression{\term{\term{name?} \mapsto \term{surname?}} \notin \set{persons}}}}\\
 \draline{PO2}{
-\text{\expression{\set{phoneNumbers'} = \set{\set{phoneNumbers} \cup \set{\{\term{\term{name?} \mapsto \term{phone?}}\}}}}}}
+\text{\expression{\set{persons'} = \set{\set{persons} \cup 
+\set{\{\term{\term{name?} \mapsto \term{surname?}}\}}}}}}
 \end{schema}}
 
 \uses{CS1}{IS1}
@@ -65,7 +64,8 @@
 \text{\expression{\term{\term{n} \mapsto \term{s}} \in \set{persons}}}\\
 \text{\expression{\term{p?} \notin \set{\ran \set{phoneNumbers}}}}} \\
 \draline{PO3}{
-\text{\expression{\set{phoneNumbers'} = \set{\set{phoneNumbers} \cup \set{\{\term{\term{n} \mapsto \term{phone?}}\}}}}}}
+\text{\expression{\set{phoneNumbers'} = \set{\set{phoneNumbers} 
+\cup \set{\{\term{\term{n} \mapsto \term{phone?}}\}}}}}}
 \end{schema}}
 
 \uses{CS2}{IS1}
@@ -83,7 +83,8 @@
 \text{\expression{\term{\term{n?} \mapsto \term{s?}} \in \set{persons}}} \\
 \text{\expression{\term{\term{n?} \mapsto \term{p?} \notin \set{phoneNumbers}}}}}\\
 \draline{PO4}{
-\text{\expression{\set{persons'} = \set{\set{persons} \setminus \set{\{\term{\term{n} \mapsto \term{s}}\}}}}}}
+\text{\expression{\set{persons'} = \set{\set{persons} \setminus 
+\set{\{\term{\term{n} \mapsto \term{s}}\}}}}}}
 \end{schema}}
 
 \uses{CS3}{IS1}
@@ -91,7 +92,8 @@
 \requires{CS3}{PRE3}
 
 \begin{zed}
-\set{OUTPUT} ::= \term{success} | \term{alreadyInDirectory} | \term{nameNotInDirectory} | \term{numberInUse}
+\set{OUTPUT} ::= \term{success} | \term{alreadyInDirectory} | 
+\term{nameNotInDirectory} | \term{numberInUse}
 \end{zed}
 
 \draschema{OS1}{
@@ -153,9 +155,13 @@
 \uses{OS4}{IS1}
 
 \begin{zed}
-\draline{TS1}{TotalAddPerson \defs \text{\expression{(\text{AddPerson} \land \text{Success}) \\ \lor \text{AlreadyInDirectory}}}} \\
-\draline{TS2}{TotalRemovePerson \defs \text{\expression{(\text{RemovePerson} \land \text{Success}) \\ \lor \text{NameNotInDirectory}}}} \\
-\draline{TS3}{TotalAddNumber \defs \text{\expression{(\text{AddNumber} \land \text{Success}) \\ \lor \text{NameNotInDirectory} \lor \text{NumberInUse}}}} \\
+\draline{TS1}{TotalAddPerson \defs \text{\expression{
+(\text{AddPerson} \land \text{Success}) \\ \lor \text{AlreadyInDirectory}}}} \\
+\draline{TS2}{TotalRemovePerson \defs \text{\expression{
+(\text{RemovePerson} \land \text{Success}) \\ \lor \text{NameNotInDirectory}}}} \\
+\draline{TS3}{TotalAddNumber \defs \text{\expression{
+(\text{AddNumber} \land \text{Success}) \\ \lor \text{NameNotInDirectory}
+ \lor \text{NumberInUse}}}} \\
 \end{zed}
 
 \totalises{TS1}{CS1}
@@ -169,4 +175,3 @@
 }
 
 \end{document}
-\end{verbatim}

@@ -1,7 +1,7 @@
 \chapter{Z Core Grammatical aspect}
 \label{ch:zcga}
 
-The \gls{zcga} is a weak type checker, which checks for grammatical correctness in fully formal Z specifications and partially formalised Z specification. It is not the same as pure Z type checkers as it only checks the grammar on a sentence level and not the logical correctness. The \gls{zcga} has it's roots in weak type theory for mathematics \cite{wtt} and has changed for Z specifications. Core grammatical correctness for Z has also adapted the rules from the \gls{cga} for mathematics (see section \ref{sec:mathlang} in chapter \ref{ch:background}).
+The \gls{zcga} is a weak type checker, which checks for grammatical correctness in fully formal Z specifications and partially formalised Z specification. It is not the same as pure Z type checkers as it only checks the grammar on a sentence level and not the logical correctness. The \gls{zcga} has it's roots in weak type theory for mathematics \cite{wtt} and has changed for Z specifications. Core grammatical correctness for Z has also adapted the rules from the \gls{cga} for mathematics (see section \ref{sec:mathlangbackground} in chapter \ref{ch:background}).
 
 This chapter focuses on the first step in the \gls{zmath} approach to translating formal specifcations into theorem provers. The user can check for grammatical correctness with the aim to translate the specification fully into a theorem prover or they can use this step on it's own to check their specification for some sort of correctness.
 
@@ -497,13 +497,13 @@ If the specification is correctly labelled and follows all the rules in table \r
 
 \begin{figure}[H]
 \begin{tabular}{c c}
-\includegraphics[scale=0.5]{Figures/zcga/zcgacorrect.png} 
-& \includegraphics[scale=0.5]{Figures/zcga/zcgaincorrect.png}
+\includegraphics[scale=0.55]{Figures/zcga/zcgacorrect.png} 
+& \includegraphics[scale=0.55]{Figures/zcga/zcgaincorrect.png}
 \end{tabular}
-\caption{Outputting message when specification is correct (left) and incorrect (right).\label{fig:correctandincorrect}}
+\caption{Message shown when specification is correct (left) and incorrect (right).\label{fig:correctandincorrect}}
 \end{figure}
 
-In figure \ref{fig:correctandincorrect} the left image shows the outputting message when a specification is \gls{zcga} correct. The right image shows a specification in which a specification is not \gls{zcga} correct as the type `\texttt{NAME}' has been used 6 times in the specification but has not been declared.
+In figure \ref{fig:correctandincorrect} the left image shows the message when a specification is \gls{zcga} correct. The right image shows a specification in which a specification is not \gls{zcga} correct as the type `\texttt{NAME}' has been used 6 times in the specification but has not been declared.
 
 \subsection{Errors}
 \label{subsec:zcgaerrors}
@@ -616,12 +616,20 @@ All these errors may not be visible to the user when typing the specification or
 
 \section{Benefits}
 
-In addition to the main use for the \gls{zcga} checker which is to check the grammar of a formal specification written in Z other benefits exists. The \gls{zcga} would also be an advantage to the user or designer of a system to translate their ideas to the developers of the system. For example by using the \gls{zcga} the developers can clearly see which parts of the systems are represented as sets and which parts are represented as terms. Not only does it help describe the system to developers but other memebers of the project development team and other stakeholders such as the client would also get a better idea of the layout of the system.
+In addition to the main use for the \gls{zcga} checker which is to check the grammar of a formal specification written in Z other \footnote{As a side note, when copying specifications into this thesis I mistyped some words and they were only caught when I ran the \gls{zcga} checker on them} benefits exists. The \gls{zcga} would also be an advantage to the user or designer of a system to translate their ideas to the developers of the system. For example by using the \gls{zcga} the developers can clearly see which parts of the systems are represented as sets and which parts are represented as terms. Not only does it help describe the system to developers but other memebers of the project development team and other stakeholders such as the client would also get a better idea of the layout of the system.
 A further advantage to the \gls{zcga} is that it is able to check the grammatical correctness of partially-formal specifications. These can include specifications written in the english natural langugage but are on their way to becoming formal, or specifications with formal parts to them.
 
 \section{ZCGa on a semiformal specification}
 
-\todo[inline]{Write how the ZCGa can be used on a semiformal specification with reference to semiform in the appendix}
+The \gls{zcga} can also be used on semiformal specification. An example is shown in appendix \ref{app:semiform}, which describes an auto pilot system. This specification is written partly in the english natural language and partly in Z. Therefore the specification is on it's way to becoming formal. The user can then annotate the formal parts and some of the informal parts in \gls{zcga}, it can then be checked and will the user if there are any grammatica errors in the specification so far, and if any variables which have been used need to be declared etc. For example, in the auto pilot specification, the \verb|off_eng| schema has a declaration which states \verb|mode:mode_status| (figure \ref{fig:zcgautopilot}). If the \verb|mode_status| type was not declared before it was used in the \verb|off_eng| schema, then the \gls{zcga} checker would identify this and would display an error message. However, after the type \verb|mode_status| has been declared in the specification it can be used throughout the rest of the specification, including in the informal text part.
+
+\begin{figure}[H]
+\centering
+\includegraphics[clip, trim=3.5cm 10cm 1.5cm 2cm, scale=0.6]{examples/semiform/1.pdf}
+\caption{Part of the Autopilot specification labelled in \gls{zcga}. \label{fig:zcgautopilot}}
+\end{figure}
+
+The full version of the semi formal specification is shown in appendix \ref{app:zcgazdrasemiform}. Even though this specification is only partially formal, we are able to translate the annotated parts all the way to the Isabelle syntax (step 5 from figure \ref{fig:steps}).
 
 \section{Conclusion}
 In this chapter we have seen how the \gls{zcga} has grown from weak type theory for mathematics \cite{wtt}. We have giving examples of different categories are used within a Z specification and highlighted the rules these categories need to follow in order to be \gls{zcga} correct. We have described a few properties of the checker and have explained how these categories are transformed into weak types for Z. We explained how a Z specification can be annotated and checked bu the \gls{zcga} and given and illustrated the different errors which may arise. The next step of the \gls{zmath} framework to check for another type of correctness, the \gls{zdra}.

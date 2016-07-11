@@ -106,7 +106,15 @@ There are many other formal languages to write specifications in which could be 
 
 A final future idea would be to combine parts of \gls{math} which handles mathematical documents written in part mathematics and part english and to translate informal specifications into theorem provers. With this idea, perhaps a TSa aspect would need to be adapted for informal specifications. So that a system specification written completely in english could be checked for \gls{zcga}, \gls{zdra} and ultimatly translated fully into a theorem prover.
 
-\todo[inline]{More than one system specification in one document}
+\subsubsection{More than one system specification in one document}
+
+On occasions, some systems are made up of lots of smaller subsystems. Or sometimes one may want to design a system specification which are unrelated to eachother in one single document. Currently the \gls{zcga} in the \gls{zmath} supports this. This is because the \gls{zcga} checker first goes through the annotated specification and adds all correct categories into sets e.g correct terms\footnote{By correct terms we mean terms which are labelled with \gls{zcga} annotations such as $\backslash$\texttt{term} and are weakly correctly typed.} go into a python list called `\texttt{correct\_terms}' and all correct sets go into a python list called `\texttt{correct\_sets}' etc. 
+
+%\footnote{By correct terms we mean terms which are labelled with \verb|\term{..}| and are weakly correctly typed.}
+
+If the program reads the line \verb|\specification{}|, which denotes a new specification, all these python lists a reset and the weak type checker starts again.
+
+However the \gls{zdra} does not have the ability to check multiple specifications e.g create many seperate dependency graphs or multiple \gls{gps}. If there are more than two specifications in a document and they both contain the same instance name (e.g \texttt{SS1}) then the \gls{zdra} checker will regard this as the same instance and will ask to rename one of them. For future work, it may be ideal to do something similar. We can add the a function in the \gls{zdra} program to reset all instances and relationships if it sees a new specification or `\verb|\theory|'.
 
 \section{Conclusion}
 \label{sec:conclusion}

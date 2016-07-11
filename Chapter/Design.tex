@@ -42,7 +42,7 @@ The first step requires the user to write or have a formal specification they wi
 
 \section{Step 1- The Core Grammatical aspect for Z}
 
-The next step in figure \ref{fig:steps} shows the specification should be \gls{zcga} proved. Although this step is interchangable with step 2 (\gls{zdra}) it is shown as step 2 on the diagram for convinience. In this step the user annoates their document which they have obtained in step 0 with 7 categories and then checks these for correctness. Figure \ref{fig:steps} show this step is achieved by user input and automation. The user input of this step is the annotations and the automation is the \gls{zcga} checker. This automatically produces a document labeled with the various categories in difference colours and can help identify grammar types to other members interested in the the specification. A \gls{zcga} annotated specification is shown in figure \ref{fig:zcgaexample}. The \gls{zcga} is further explained in chapter \ref{ch:zcga}.
+The next step in figure \ref{fig:steps} shows the specification should be \gls{zcga} proved. Although this step is interchangable with step 2 (\gls{zdra}) it is shown as step 2 on the diagram for convinience. In this step the user annoates their document which they have obtained in step 0 with 7 categories and then checks these for correctness. Figure \ref{fig:steps} show this step is achieved by user input and automation. The user input of this step is the annotations and the automation is the \gls{zcga} checker. This automatically produces a document labeled with the various categories in difference colours and can help identify grammar types to other members interested in the specification. A \gls{zcga} annotated specification is shown in figure \ref{fig:zcgaexample}. The \gls{zcga} is further explained in chapter \ref{ch:zcga}.
 
 \begin{figure}[H]
  \begin{center}
@@ -216,11 +216,18 @@ There are 5 new commands to define the relations for the \gls{zdra}, these are \
 \caption{The syntax to define a \gls{zdra} schema relation in the \gls{zmath} \LaTeX{} file. \label{fig:latexzdrauses}}
 \end{figure}
 
-Figure \ref{fig:latexzdrauses} shows how the command \verb|uses| has been implemented. The command takes 2 arguments (which are 2 instances which have been previously annotated) and draws an arrow going from the first instance to the second one. The arrow bend angle is at 90, the arrow width is at 1mm and the arrow goes from the east part of the first instance to the east part of the second instance. The word \textbf{uses} is written next to the arrow. All the other relation commands are written in a similar way however the direction of the arrows differ and some arrows bend to the left whilst others bend to the right. The bending of the arrows has been implemented at random so that the compiled document has arrows showing on both sides of the theory and are not over lapping too much.
+Figure \ref{fig:latexzdrauses} shows how the command \verb|uses| has been implemented. The command takes 2 arguments (which are 2 instances which have been previously annotated) and draws an arrow going from the first instance to the second one. The arrow bend angle is at 90, the arrow width is at 1mm and the arrow goes from the east part of the first instance to the east part of the second instance. The word \textbf{uses} is written next to the arrow. All the other relation commands are written in a similar way however the direction of the arrows differ and some arrows bend to the left whilst others bend to the right. The bending of the arrows has been implemented at random so that the compiled document has arrows showing on both sides of the theory and are not overlapping too much.
 
 \subsection{\LaTeX{} commands to identify ZCGa grammatical types}
 
-\todo[inline]{Describe how the ZMathLang LaTeX package is written for ZCGa}
+The \gls{zcga} part of the \LaTeX{} file package uses the colours previously defined in the style file. To define each of the grammatical types we use the \texttt{fcolorbox} command. This creates a black outline and a coloured background for each of the grammatical categories.
+
+\begin{figure}[H]
+\includegraphics[scale=0.7]{Figures/Design/zmathe.png}
+\caption{The syntax to define a \gls{zcga} grammatical categories. \label{fig:latexzcga}}
+\end{figure}
+
+Figure \ref{fig:latexzcga} shows the commands to define the coloured boxes for \emph{declaration} and \emph{set}. As set is already defined in the mathematical \LaTeX{} library, we redefine the command. The command takes one argument (the text the user which to annotate), changes it to mathmode and draws the box around it. All the grammatical categories are defined in the same way, each with their own background colour. The only exception is the grammatical category of \emph{specification} as this command does not convert the specification into mathmode as it is already in mathmode.
 
 \section{Conclusion}
 

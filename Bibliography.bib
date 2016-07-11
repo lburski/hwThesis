@@ -22,12 +22,23 @@
 
 \%\% Saved with string encoding Unicode (UTF-8)
 
+
+@book{handbookofembed,
+author = {Lee, Insup and Leung, Joseph Y-T. and Son, Sang H.},
+title = {{Handbook of Real-Time and Embedded Systems}},
+year = {2007},
+isbn = {1584886781},
+edition = {1},
+publisher = {Chapman \& Hall/CRC}
+}
+
 @techreport{IEC61508,
     citeulike-article-id = {12555638},
     edition = {2011-02},
-    institution = {International Electrotechnical Commission},
+    author = {International Electrotechnical Commission},
     keywords = {iec\_61508},
     organization = {International Electrotechnical Commission},
+    institution = {International Electrotechnical Commission},
     posted-at = {2013-08-13 16:43:31},
     priority = {2},
     publisher = {International Electrotechnical Commission},
@@ -57,6 +68,7 @@
 @techreport{Python,
  author = {Rossum, Guido},
  title = {{Python Reference Manual}},
+ institution = {Python Software Foundation},
  year = {1995},
  source = {http://www.ncstrl.org:8900/ncstrl/servlet/search?formname=detail\&id=oai%3Ancstrlh%3Aercim_cwi%3Aercim.cwi%2F%2FCS-R9525},
  publisher = {CWI (Centre for Mathematics and Computer Science)},
@@ -67,6 +79,7 @@
 author = {Mihaela Mihaylova},
 title = {{ZMathLang User Interface User Manual}},
 year = {2015},
+note = {Intern User Manual},
 url = {http://www.macs.hw.ac.uk/~lb89/zmathlang/documentation.html}
 }
 
@@ -74,6 +87,7 @@ url = {http://www.macs.hw.ac.uk/~lb89/zmathlang/documentation.html}
 author = {Mihaela Mihaylova},
 title = {{ZMathLang User Interface Internship Report}},
 year = {2015},
+note = {Internship Report},
 url = {http://www.macs.hw.ac.uk/~lb89/zmathlang/documentation.html}
 }
 
@@ -93,6 +107,7 @@ publisher = {Springer Proceedings in Mathematics and Statistics}
 author = {David Feller},
 title = {{Using MathLang to check the correctness of specification in Object-Z}},
 year = {2015},
+note = {Master Thesis Report},
 url = {http://www.macs.hw.ac.uk/~lb89/zmathlang/documentation.html}
 }
 
@@ -101,7 +116,8 @@ url = {http://www.macs.hw.ac.uk/~lb89/zmathlang/documentation.html}
 title = {{Atelier B, Proof Obligations Reference Manual}},
 organization = {CLEARSY},
 address = {Maintenance ATELIER B, Parc de la Duranne, 320 avenue Archimede, Les Pleiades III -Bat.A, 13857 Aix-en-Provence Cedex 3, France},
-edition = {3.7}
+edition = {3.7},
+year = {2010}
 }
 
 @inproceedings{stepney1998tale,
@@ -128,6 +144,19 @@ edition = {3.7}
   bibsource = {dblp computer science bibliography, http://dblp.org}
 }
 
+@article{JFR4576,
+	author = {Mark Adams},
+	title = {Proof Auditing Formalised Mathematics},
+	journal = {Journal of Formalized Reasoning},
+	volume = {9},
+	number = {1},
+	year = {2016},
+	issn = {1972-5787},
+	pages = {3--32},
+	doi = {10.6092/issn.1972-5787/4576},
+	url = {https://jfr.unibo.it/article/view/4576}
+}
+
 
 @inproceedings{DBLP:conf/icsea/WenMZ06,
   author    = {Zhicheng Wen and
@@ -151,12 +180,6 @@ edition = {3.7}
 author={Kolyang
 and Santen, T.
 and Wolff, B.},
-editor={Goos, Gerhard
-and Hartmanis, Juris
-and van Leeuwen, Jan
-and von Wright, Joakim
-and Grundy, Jim
-and Harrison, John},
 chapter={{A structure preserving encoding of Z in isabelle/HOL}},
 title={{Theorem Proving in Higher Order Logics: 9th International Conference, TPHOLs'96 Turku, Finland, August 26--30, 1996 Proceedings}},
 year={1996},
@@ -295,29 +318,36 @@ title = {{Dafny: An Automatic Program Verifier for Functional Correctness}},
   year = 2003
 }
 
-@INPROCEEDINGS{pvs,
-    author = {S. Owre and S. Rajan and J. M. Rushby and N. Shankar and M. Srivas},
-    title = {{PVS: Combining Specification, Proof Checking, and Model Checking}},
-    booktitle = {},
-    year = {1996},
-    pages = {411--414},
-    publisher = {Springer-Verlag}
+@inproceedings{pvs,
+    AUTHOR = {{S.} Owre and {S.} Rajan and {J.M.} Rushby and {N.} Shankar and {M.K.} Srivas},
+    TITLE = {{PVS:} Combining Specification, Proof Checking, and Model Checking},
+    BOOKTITLE = {Computer-Aided Verification, {CAV} '96},
+    YEAR = {1996},
+    EDITOR = {Rajeev Alur and Thomas {A.} Henzinger},
+    SERIES = {Lecture Notes in Computer Science},
+    NUMBER = {1102},
+    PAGES = {411--414},
+    ADDRESS = {New Brunswick, {NJ}},
+    MONTH = {July/August},
+    PUBLISHER = {Springer-Verlag},
+    URL = {http://www.csl.sri.com/papers/pvs-cav96/}
 }
 
 @article{hol-z,
-    doi = {10.3217/jucs-009-02-0152},
-    journal = {Journal of Universal Computer Science},
-    keywords = {refinement, theorem-proving, z},
-    month = feb,
-    number = {2},
-    pages = {152--172},
-    pdf = {http://www.brucker.ch/bibliography/download/2003/jucs\_holz\_02.pdf},
-    posted-at = {2013-09-17 18:40:16},
-    priority = {2},
-    title = {{HOL-Z 2.0: A Proof Environment for Z-Specifications}},
-    url = {http://www.brucker.ch/bibliography/abstract/brucker.ea-hol-z-2003},
-    volume = {9},
-    year = {2003}
+author = {Achim D. Brucker and Harald Hiss and Burkhart Wolff},
+doi = {10.3217/jucs-009-02-0152},
+journal = {Journal of Universal Computer Science},
+keywords = {refinement, theorem-proving, z},
+month = {feb},
+number = {2},
+pages = {152--172},
+pdf = {http://www.brucker.ch/bibliography/download/2003/jucs\_holz\_02.pdf},
+posted-at = {2013-09-17 18:40:16},
+priority = {2},
+title = {{HOL-Z 2.0: A Proof Environment for Z-Specifications}},
+url = {http://www.brucker.ch/bibliography/abstract/brucker.ea-hol-z-2003},
+volume = {9},
+year = {2003}
 }
 
 @inproceedings{woodcock2004tutorial,
@@ -357,15 +387,6 @@ title = {{Dafny: An Automatic Program Verifier for Functional Correctness}},
   url = {http://dblp.uni-trier.de/db/conf/mas/mas1998.html#NeculaL98},
   volume = {1419},
   year = {1998}
-}
-
-@ONLINE{zwikia,
-author = {Jonathan Bowen},
-title = {{Formal Methods Wiki, Z notation}},
-month = jul,
-year = {2014},
-url = {http://formalmethods.wikia.com/wiki/Z_notation},
-note = {Accessed:01/07/2014}
 }
 
 @inproceedings{fpcc,
@@ -605,6 +626,14 @@ address = {Los Alamitos, CA, USA},
       month = {May},
       year = {2015},
       howpublished = {\url{http://www.isabelle.in.tum.de}}
+}
+
+@misc{zwikia,
+title = {{Formal Methods Wiki, Z notation}},
+author = {Jonathan Bowen},
+month = {July},
+year = {2014},
+howpublished = {\url{http://formalmethods.wikia.com/wiki/Z_notation}}
 }
 
 @misc{fmeurope,

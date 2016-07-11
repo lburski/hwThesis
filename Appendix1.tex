@@ -243,6 +243,7 @@ This section shows an example of a specification which is rhetorically correct a
 \end{figure}
 
 \section{An example of a specification which fails \gls{zdra} but passes \gls{zcga}}
+\label{app:failzdra}
 This section shows an example of a specification which is grammatically correct and passes the \gls{zcga} check however there are loops in it's rhetorical reasoning and therefore fails the \gls{zdra} check. We input the compiled output for each of the examples. For reference to the code the reader is directed to \cite{mathlangexamples}.
 
 %\subsection{Raw Latex}
@@ -257,9 +258,11 @@ This section shows an example of a specification which is grammatically correct 
 %\subsection{ZCGa and ZDRa Annotated Latex Code}
 %\input{examples/nonworkzdra/1n2.tex}
 \subsection{ZCGa and ZDRa output}
+\label{app:failzdraout}
 \noindent \includegraphics[clip, trim=0cm 4cm 6cm 4.2cm]{examples/nonworkzdra/1n2.pdf}
 
 \subsection{Messages when running the specification through the ZCGa and ZDRa checks}
+\label{app:failzdraoutmes}
 
 \begin{figure}[H]
 \includegraphics[scale=0.7]{examples/nonworkzdra/correct.png}
@@ -268,7 +271,7 @@ This section shows an example of a specification which is grammatically correct 
 
 \begin{figure}[H]
 \includegraphics[scale=0.7]{examples/nonworkzdra/incorrect.png}
-\caption{Message when checking the specification for ZDRa correctness.}
+\caption{Message when checking the specification for ZDRa correctness. \label{app:failzdraoutmessgae}}
 \end{figure}
 
 \section{An example of a specification which is semi formal}
@@ -290,7 +293,7 @@ This section shows an auto pilot specification which is partially written in nat
 \noindent \includegraphics[scale=0.5]{examples/semiform/1n2c.png}
 %\input{examples/semiform/1n2images.tex}
 \subsection{ZCGa and ZDRa output}
-
+\label{app:zcgazdrasemiform}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\noindent \includegraphics[clip, trim=left lower right upper]{examples/bb/1comp3.pdf}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\includepdf[pages={1-3}]{examples/bb/1comp.pdf}
 \noindent \includegraphics[clip, trim=0cm 4cm 6cm 1.5cm]{examples/semiform/1n2.pdf}
@@ -357,8 +360,6 @@ This section shows the full proof for the modulereg example from \cite{essenceof
 \label{app:zmathlatex}
 
 This chapter shows the \gls{zmath} \LaTeX{} package which was implemented to accomadate the labels to annotate th users Z specification in \gls{zcga} and \gls{zdra}. This package draws the coloured boxes for the \gls{zcga} and the boxes and labelled arrows in the \gls{zdra} when the specification is compiled with \texttt{pdflatex}.
-
-\todo[inline]{insert zmathlang latex package in appendix}
 
 \noindent \includegraphics[scale=0.5]{Figures/appendix/zmatha.png}
 

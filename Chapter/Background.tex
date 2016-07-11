@@ -101,7 +101,7 @@ Traditionally, functional correctness has been obtained with pen and paper or an
 
 Proof assistants soomestimes limit which program properties they reason about. By using the ZMathLang framework the specification would undergo different levels of rigor (and thus different types of checks) for example one might only want to check the grammatical correctness of the specification or one might want to fully formally prove the specification, different projects require different amounts of verification therefore the ZMathLang will allow this choice.
 
-Dafny \cite{dafny} features modular verification, so that the separate verification of each part of the program implies the correctness of the whole program. This is similar to MathLang, Where Dafny checks different parts of the text and thus confirms confirms correctness of the full text, \gls{math} checks the correctness of the text through different levels of rigor.
+Dafny \cite{dafny} features modular verification, so that the separate verification of each part of the program implies the correctness of the whole program. This is similar to MathLang, Where Dafny checks different parts of the text and thus confirms correctness of the full text, \gls{math} checks the correctness of the text through different levels of rigor.
 
 Dafny was able to do a proof for the code of Schorr-Waited Algorithm, however the writer states that the loop invariants are complicated because they are concrete. A refinement approach such as Jean-Raymond Abrials approach \cite{abrial} may be preferred. This thesis presents a way of creating proofs for the program specifications in the essence of Z \cite{essenceofz} using the MathLang steps.  
 
@@ -117,7 +117,8 @@ Another tool which analysis the Z notation is Hol-Z \cite{hol-z}. It is a proof 
 
 Fuzz \cite{spiveyfuzz} is a typechecker for the original Z language. It includes style files for \LaTeX{} and checks for the logical correctness of Z specification. This is different to the \gls{zcga} type checker as the weak types in \gls{zcga} check for the grammatical correctness and not the full logical correctness of Z. Therefore the grammatical correctness of partially formal specification can aslo be checked. The \gls{zmath} framework presented in this thesis uses the `zed' \LaTeX{} style package to typeset the Z specifications in the documents.
 
-These tools are just some of the many Z tools available. There are many other tools for Z which can be found on the Z Notation Wikia page \cite{zwikia}.
+
+These tools are just some of the many Z tools available. There are many other tools for Z which can be found on the Z Notation Wikia page \cite{zwikia}. For this thesis we will concentrate on translating Z specifications into theorem prover Isabelle \cite{isabelle}. Isabelle is a generic proof assistant which allows mathematical formulas to be expressed in a formal language and includes numerous contributions worldwide. It contains a large mathematical toolkit (majority of Z can be represented in Isabelle) and has a lot of support in forms of documentation and online. It is distributed for free, easy to find, download and install and is regularly updated. The original \gls{math} has translated mathematical texts into Isabelle already (\cite{mathintoisa}) therefore we can use parts of that research to aid the research in this thesis.
 
 \section{Proof carrying-code}
 
@@ -184,9 +185,93 @@ Type systems are good for many things \cite{pierce}, one of which includes that 
 Type-free lambda calculus \cite{bar93} allows for every expression to be applied to every other expression, eg I = $\lambda x.x$ may be applied to any argument $x$ to give the same result $x$. The expression may also be applied to itself. There are also typed versions of lambda calculus introduced by Curry \cite{cu34}. Types are usually objects of a syntactic nature and may be assigned to lambda terms. Using Types in this nature, this thesis describes a way in the \gls{zcga} (chapter \ref{ch:zcga}) assigns grammatical types to parts of a specification written in Z or partially written in Z. By doing so, the grammatical correctness of a system specification could be checked. The grammatical types are an adaptation from the grammatical categories taken from \cite{wtt}. One of the main benefits of the \gls{zcga} is it can check the grammatical correctness of partial formal specifications, that is specifications which are written in natural language and are on the way to becoming formal. Other Z type checkers such as Z/Eves \cite{Saaltink99thez/eves} and Fuzz \cite{spiveyfuzz} check the logical type correctness of a fully formalised Z specification.
 
 \section{Generating properties to prove for Formal Specifications}
-\todo[inline]{Explain different ways users can identify properties to prove for their Z specs}
 
-\cite{DBLP:conf/icsea/WenMZ06}, \cite{DBLP:conf/sefm/FraserB07}, \cite{stepney1998tale}, \cite{Woodcock:1996:UZS:235337}, \cite{woodcock2004tutorial}
+\begin{defin}
+A logical formula associated to a correctness claim for a given verification property. The formula is valid if and only if the property holds. The correctness of the property under verification is “delegated” to proving the correctness of the new formula \cite{handbookofembed}.
+\end{defin}
+
+Therefore a proof obligation is a logical formular which the specifier must show to be a consequence of the specification so that a specification can be taken to be acceptable. In a more pragmatic sense proof obligations may be viewed as what the developer of a specification is obliged to prove in order to confirm that development is consistant.
+
+Woodcock and Cavalcanti \cite{woodcock2004tutorial} use the alphabetised relational calculus to give denotational sematics to different constructs from programming patterns. This paper describes `\emph{healthiness conditions}' which identifies properties that characterise theries. Each one of these healthiness conditions represents a fact about the computational model for the programs being studied.
+
+\begin{exam}
+The variable `\emph{clock}' is an observation of the current time which is always moving onwards. The following predicate `B' specifies the clock variable:
+
+\begin{zed}
+B \defs clock \leq clock'
+\end{zed}
+\end{exam}
+
+The healthiness condition described in this paper are specific proof obligations for the concept of \gls{utp}. The semantic model of \gls{utp} is presented a Z specification. Therefore the healthiness conditions for the specification would in one way be checking for the correctness of the \gls{utp} model. In a similar way, it is important to add healthiness conditions or as we call them in this thesis, `safety properties' in order to check each individual specification for various types of correctness.
+
+Stepney describes two proof project written in Z in her paper a tale of two proofs \cite{stepney1998tale}. She explains how the proof process is deelply affected by \textbf{why} something is being proved, \textbf{what} is being proved and \textbf{how} the finished proof is to be presented. Stepney suggests that the proofs for specifications themselves do not have to be deep but the workings of what to proves can add to the labour. It is also important to keep in mind how deep the customer wants the proof and what level of assurance they need. She highlights 5 different points to prove:
+
+\begin{figure}[H]
+\begin{enumerate}
+\item \textbf{Consistency checks}: Prove that your specification is cosistent and that it has a model.
+
+\item \textbf{Sanity Checks}: In a `state and operations' style specification, prove that the state invariants are satisfied throughout and that the precondition of each operation is not \emph{false}.
+
+\item \textbf{Emergent properties of a single specification}: Make explicit as a theorem some desired or suspected property of the specification, then prove it holds.
+
+\item \textbf{Required properties of a single specification}: If some property is required to hold of the specification, and the specification has captured it implicitly, it needs to be made explicit and shown to hold.
+
+\item \textbf{Properties across specifications}: Prove that a certain relationship holds between two specification such as the refinement relationship.
+\end{enumerate}
+\caption{Different points to prove in a specification \cite{stepney1998tale}. \label{fig:ptp}}
+\end{figure}
+
+Some of the points in figure \ref{fig:ptp} would be fairly easy to automate such as `consistancy checks' and `santity checks' however the other 3 points would be difficult to automate as they would all depend on the specification in question and would perhaps need some \emph{extra information} to decipher these properties. For example if one wish to automate proof obligations from point 5 the user would need to implement another specification (such as a refinement specification) and then prove the relationship between the original specification and the new one. In this thesis, we will concentrate on properties described in point 1 which have been automated. 
+
+Stepney also explains that if the development process is incremental, it would be worthwhile getting a good structure for a proof up front which you can add more details in later. \gls{zmath}  can automatically generate this first structure which could be added to if needed. It can produce a specification in Isabelle syntax where other properties and details could be added to by the user at a later stage.
+
+Most recently Mark Adams \cite{JFR4576} describes that even formalisation itself can be prone to error and therefore even if we do get a fully proven specification, the proof will also need to be checked. He outlines the flyspeck project which assists with the checking of formalised proofs. Adam calls this `\emph{proof auditing}', which adds another step of rigour to the theorem. \gls{zmath} assists with translating the specification into a theorem prover along with consistancy lemmas to prove. The user can then choose to prove these lemmas and the proof audit their thereom. However, even if proof auditting adds another level of rigour it is important to keep in mind who the user is doing the proofs for. As Stepney pointed out in \cite{stepney1998tale}, some clients wouldn't need that amount of rigor for their projects and only the proved safety properties may be enough.
+
+Woodcock et al also describes that a specification can be developed in such a way that can lead to a suitable implementation called refinement \cite{Woodcock:1996:UZS:235337}. 
+
+To refine a formal specification, more data must be added e.g. how certin calculations should be carried out. He states an abstract specification may leave design choices unresolved and its up to the refinement specificatino to resolve some of these choices. An example of this is shown in the following:
+
+\begin{exam}
+
+\begin{schema}{ResourceManager}
+free: \mathbb{F} \nat
+\end{schema}
+
+ Any resource that is free can be allocated
+
+\begin{schema}{Allocate}
+\Delta ResourceManager \\
+r!: \nat
+\where
+r! \in free \land free' = free \setminus \{r!\}
+\end{schema}
+
+\label{exam:allocate} 
+\end{exam}
+
+If there is more than one resource free in example \ref{exam:allocate} then this will class the specification as non deterministic.
+
+Example \ref{exam:allocate} can be refined in that if there is more than one resource free, the resource with the lowest number should be allocated. This is shown in the following example:
+
+\begin{exam}
+
+\begin{schema}{Allocate}
+\Delta ResourceManager \\
+r!: \nat
+\where
+r! \in min~free \land free' = free \setminus \{r!\}
+\end{schema}
+\label{exam:allocaterefine} 
+\end{exam}
+
+Refining an abstract specification which is descibed in \cite{Woodcock:1996:UZS:235337} and in \cite{spiveyreferencemanual} is exactly what Stepney points out in point 5 from figure \ref{fig:ptp}. To show that this property holds the user would need to produce another specification which refines their original one and then include propertie of how they relate to eachoether. Since each individual specification is different then refinement specifications would be different to. Thus we wouldn't be able to automate this point. \gls{zmath} aims to assist the user in translating and proving their specification, the proof effort will be focused on properties which can be automated e.g. item 1 in figure \ref{fig:ptp}. Items 3, 4 and 5 would be to difficult to automate and therefore out of the scope of this thesis.
+
+Fraser and banach describe .... in \cite{DBLP:conf/sefm/FraserB07} (Configurable Proof Obligations in the Frog Toolkit)
+
+Then in \cite{DBLP:conf/icsea/WenMZ06} (Generating Proof Obligation to Verify Object-Z Specification),
+
+\todo[inline]{Configurable Proof Obligations in the Frog Toolkit \cite{DBLP:conf/sefm/FraserB07},
+Generating Proof Obligation to Verify Object-Z Specification \cite{DBLP:conf/icsea/WenMZ06}}
 
 \section{Conclusion}
 This chapter has described in depth the reasearch old and new which has relevence to this thesis. The MathLang framework which was designed and implemented for mathematics has been described and gives details of the method in which plain mathematical documents are formalised and translated into theorem provers. In this section we show a diagram which was proposed to identlify the steps in which a complete proof can be achieved from a mathematical text. 

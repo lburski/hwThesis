@@ -20,6 +20,16 @@ definition intersect ::
 where
 "intersect A B == {}(*{x. x \<in>A \<and> x \<in> B}*)"
 
+definition allPairs ::
+"('X \<rightharpoonup> ('Y * 'Z) set) \<Rightarrow> ('Y * 'Z) set"
+where
+" allPairs f == \<Union>{yz. yz \<in> ran f} "
+
+definition allFunPairs ::
+"('X \<rightharpoonup> ('Y \<rightharpoonup> 'Z)) \<Rightarrow> ('Y * 'Z) set"
+where
+" allFunPairs f == \<Union>{yz. yz \<in> ran f} "
+
 locale thetimetable  = 
 fixes moduleTT :: "(MODULE \<rightharpoonup> (TIMESLOT * ROOM) set)"
 and studentTT :: "(STUDENT \<rightharpoonup> (TIMESLOT \<rightharpoonup> ROOM))"
@@ -34,10 +44,6 @@ and "(\<forall> s \<in> dom studentTT. \<forall> m \<in> dom moduleTT.
 
 begin
 
-definition allPairs ::
-"('X \<rightharpoonup> ('Y * 'Z) set) \<Rightarrow> ('Y * 'Z) set"
-where
-" allPairs f == \<Union>{yz. yz \<in> ran f} "
 
 definition initTimetable :: 
  "Timetable \<Rightarrow> (STUDENT \<rightharpoonup> (TIMESLOT \<rightharpoonup> ROOM)) \<Rightarrow> Timetable \<Rightarrow> (MODULE \<rightharpoonup> (TIMESLOT * ROOM) set)  => bool"
@@ -54,8 +60,9 @@ where
 \<and> (the (moduleTT m) \<noteq> {})
 \<and> ((dom (the (studentTT s))) \<inter> (Domain (the (moduleTT m))) \<noteq> {})
 \<and> (\<exists> newPairs :: TIMESLOT \<rightharpoonup> ROOM.
+\<exists> newPairss :: (TIMESLOT * ROOM) set.
 (dom newPairs = (Domain (the (moduleTT m))))
-(*\<and> (newPairs  ((moduleTT m)))*)
+\<and> (newPairss \<subseteq>  (the (moduleTT m)))
 (*\<and> studentTT' = (s \<mapsto> (studentTT s) newPairs))*))
 \<and> (moduleTT' = moduleTT)"
 

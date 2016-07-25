@@ -1,0 +1,180 @@
+stateSchema SS1 
+
+outputSchema OS1 
+
+stateInvarients SI1 
+
+output O1 
+
+initialSchema IS1 
+
+postcondition PO1 
+
+changeSchema CS5 
+
+precondition PRE5 
+
+changeSchema CS4 
+
+precondition PRE4 
+
+changeSchema CS6 
+
+precondition PRE6 
+
+changeSchema CS1 
+
+precondition PRE1 
+
+changeSchema CS3 
+
+precondition PRE3 
+
+changeSchema CS2 
+
+precondition PRE2 
+
+postcondition PO6 
+
+postcondition PO7 
+
+postcondition PO4 
+
+postcondition PO5 
+
+postcondition PO2 
+
+postcondition PO3 
+
+stateSchema SS1 
+
+outputSchema OS1 
+
+stateInvarients SI1 
+
+output O1 
+
+initialSchema IS1 
+
+postcondition PO1 
+
+changeSchema CS5 
+
+precondition PRE5 
+
+changeSchema CS4 
+
+precondition PRE4 
+
+changeSchema CS6 
+
+precondition PRE6 
+
+changeSchema CS1 
+
+precondition PRE1 
+
+changeSchema CS3 
+
+precondition PRE3 
+
+changeSchema CS2 
+
+precondition PRE2 
+
+postcondition PO6 
+
+postcondition PO7 
+
+postcondition PO4 
+
+postcondition PO5 
+
+postcondition PO2 
+
+postcondition PO3 
+
+stateSchema SS1 
+
+outputSchema OS1 
+
+stateInvarients SI1 
+
+output O1 
+
+initialSchema IS1 
+
+postcondition PO1 
+
+changeSchema CS5 
+
+precondition PRE5 
+
+changeSchema CS4 
+
+precondition PRE4 
+
+changeSchema CS6 
+
+precondition PRE6 
+
+changeSchema CS1 
+
+precondition PRE1 
+
+changeSchema CS3 
+
+precondition PRE3 
+
+changeSchema CS2 
+
+precondition PRE2 
+
+postcondition PO6 
+
+postcondition PO7 
+
+postcondition PO4 
+
+postcondition PO5 
+
+postcondition PO2 
+
+postcondition PO3 
+
+lemma L1_(CS5) 
+
+lemma L2_(CS4) 
+
+lemma L3_(CS6) 
+
+lemma L4_(CS1) 
+
+lemma L5_(CS3) 
+
+lemma L6_(CS2) 
+
+lemma L1_(CS5) 
+
+lemma L2_(CS4) 
+
+lemma L3_(CS6) 
+
+lemma L4_(CS1) 
+
+lemma L5_(CS3) 
+
+lemma L6_(CS2) 
+
+lemma L1_(CS5) 
+
+lemma L2_(CS4) 
+
+lemma L3_(CS6) 
+
+lemma L4_(CS1) 
+
+lemma L5_(CS3) 
+
+lemma L6_(CS2) 
+

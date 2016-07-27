@@ -2,7 +2,9 @@
 \chapter{Introduction}
 \label{ch:introduction}
 
-Industries developing high integrity software are always looking for ways to make their software safer. \gls{sil} are used to define a level of risk-reduction provided by a safety-function. The highest \gls{sil} which could be given to hardware or safety integrity system, as given by the \gls{iec} standard, is a SIL4. A SIL4 has a probability of failure of between 0.0001 and 0.00001 \cite{IEC61508}, and although these probabilities are very low, they are non-zero, and the upper bound of 0.000001 suggests a failure every once every 1,000,000 times on average, the outcome of which can be catastrophic. Software testing usually takes place when the program or a prototype has been implemented. However by the time the product is fully implemented and errors are caught it is expensive to go back to the planning stage to find solutions to those bugs. Catching errors at an earlier stage of the project life cycle is more time and cost effective for the whole project team.
+Industries developing high integrity software are always looking for ways to make their software safer. \gls{sil} are used to define a level of risk-reduction provided by a safety-function. The highest \gls{sil} \cite{siliso} which could be given to hardware or safety integrity system, as given by the \gls{iec} \cite{iec} standard, is a SIL4. A SIL4 has a probability of failure of between 0.0001 and 0.00001 \cite{IEC61508}, and although these probabilities are very low, they are non-zero, and the upper bound of 0.000001 suggests a failure every once every 1,000,000 times on average, the outcome of which can be catastrophic.
+
+Software testing usually takes place when the program or a prototype has been implemented. However by the time the product is fully implemented and errors are caught it is expensive to go back to the planning stage to find solutions to those bugs. Catching errors at an earlier stage of the project life cycle is more time and cost effective for the whole project team.
 
 One way of detecting errors at an early stage of the project life cycle is by applying the use of \gls{fm} at the design/specification stage of the project life cycle. The benefit of using \gls{fm} is that they provide a means to symbolically examine the entire state space of a design and establish a correctness that is true for all possible inputs \cite{wifrm}. However due to the enormous complexity of real time systems they are rarely used. \Gls{fm} come in different shapes and sizes; the \gls{asm} theory is a state machine which operates on states or arbitrary data structures. The B-method \cite{bmeth} is a formal method for the development of program code from a specification in the \gls{asm} notation. Z \cite{spiveyreferencemanual} is a specification languages used for describing computer-based systems. \Gls{uml} provides system architects with a consistent language for specifying, construing and documenting different components of systems. These are just a selection of various \gls{fm} methods however there are a great deal more which are still applied to systems today to add a degree of safety to certain high integrity products.
 
@@ -14,85 +16,39 @@ The jump from Level 1 rigour to Level 3 rigour is very difficult, but in many ca
 
 In order to facilitate the \gls{computerise} process, this thesis proposes smaller \gls{computerise} steps which allow the translation (and hence the correctness checking) of specifications written in Z into a theorem prover such as ProofPower-Z \cite{pp} or Isabelle \cite{isabelle}.
 
-The reason to break the translation path into simple steps is because the original path is difficult and requires serious expertise in theorem proving and the translation from Z to a theorem prover. The approach approach described in this thesis, of mini-\gls{computerise} steps, allows different experts to collaborate on the various steps to build the final proof.
+The reason to break the translation path into simple steps is because the original path is difficult and requires serious expertise in theorem proving and the translation from Z to a theorem prover. The approach  described in this thesis, of mini-\gls{computerise} steps, allows different experts to collaborate on the various steps to build the final proof.
 
-The list below provides the main motivations to the research of this thesis:
-
-\section{Contributions}
-
-A summary of contributions is given in the following points:
-
-\begin{itemize}
-\item ZMathLang's \gls{zcga} has been created and implemented.
-
-\begin{itemize}
-
-\item Weak types and weak typing rules have been thoroughly implemented. 
-
-\item A style file has been created to label a specification with \gls{zcga} annotations. This style file also outputs coloured boxes around weak types in the specification so that the user can see the weak types in a clear manner.
-
-\item A weak type checker, which reads the \gls{zcga} annotations and checks they have been implemented.
-
-\item Examples given for various specifications \footnote{The examples for various specifications can be found on \url{http://www.macs.hw.ac.uk/~lb89/zmathlang/examples}}.
-\end{itemize}
-
-\item ZMathLang's \gls{zdra} has been created and implemented. Dependency Graphs and Goto Graphs have been implemented to be automatically generated from the \gls{zdra} annotated document.
-
-\begin{itemize}
-\item Instance names and relations have been carefully realized and added to the \LaTeX{} style file.
-
-\item Relation rules have been outlined.
-
-\item The \gls{zdra} has been implemented to check for the document rhetorical correctness which outputs various warning and error messages.
-
-\item Using directed graphs, dependency and GoTo graphs can be automatically generated from the implementations. Formal aspects of these graphs have also been highlighted.
-
-\item Examples given for various specifications.
-\end{itemize}
-
-\item \gls{gpsa} and Isabelle skeletons have been implemented so they are automatically generated from the \gls{zdra} annotated document.
-
-\begin{itemize}
-
-\item Using the Goto graph a general proof skeleton can be automatically created from the implementation.
-
-\item Using the general proof skeleton an Isabelle skeleton and a filled in skeleton of the original specification can be automatically generated using the implementation.
-
-\item A formal definition of the \gls{zdra}, Dependency graph and GoTo graph has been given.
-\end{itemize}
-
-\item A gradual computerisation path from Z specifications (BirthdayBook \cite{spiveyreferencemanual}, Vending Machine \cite{pp} and all specifications in Curries \cite{essenceofz}) have been documented. These are the first translations from raw Z specifications to complete proofs done using the \gls{zmath} framework. Out of these translations we get new dependency graphs and proof skeletons for the individual specifications.
-
-\begin{itemize}
-\item Clear and concise translation paths from various Z specifications into \gls{zcga} annotated and checked documents, \gls{zdra} annotated and check documents.
-
-\item Dependency graphs, GoTo Graphs and general proof skeletons are generated for all example specifications.
-
-\item Isabelle skeletons automatically generated and filled in for all example specifications.
-
-\item Safety property's and lemma's added to example specifications and proved.
-\end{itemize}
-
-\end{itemize}
+%+ math is ancient but there are no uniform notations
+%+ attempts in late 19th/early 20th century e.g. Russell & Whitehead try to derive all smaths from logic
+%+ Bourbaki in mid 2oth century
+%+ advent of computers:
+%++ enabled automatic proof
+%++ drove need for consistent notations
+%+ de Bruijn AutoMath project brings uniform notation and automated proof together
+%+ Kamareddine & Wells
+%+ Maareck (I hope to talk reguallrly with Manuel about what you're doing)
+%+ but still hard to develop proofs using AutoMath
 
 \section{Outline}
 
-In chapter \ref{ch:background} we begin describing the origins of \gls{math}, it's success and where it has been used so far. We then describe Z specifications and the tools available for it so far.
+In chapter \ref{ch:background} we begin describing the origins of \gls{math}, its success and where it has been used so far. We then describe Z specifications and the tools available for it so far.
 
-In chapter \ref{ch:design}, we outline the basic idea of \gls{zmath}, how the original \gls{math} method has been adapted to perform with Z specifications and how this method is different to others previously described.
+In chapter \ref{ch:Contributions}, We highlight the contributions of this thesis as well as outline the basic idea of \gls{zmath}, how the original \gls{math} method has been adapted to perform with Z specifications and how this method is different to others previously described.
 
-Chapter \ref{ch:zcga} provides more in depth details of the first contribution of this thesis. The weak types which have been created are presented as well as how they work together with weak typing rules. The categories which have been extracted from the weak types are presented and examples are given on how these categories correspond to Z specifications. Examples are given for all the weak types, and categories for Z specification. The weak type checker, which is implemented in \texttt{Python} \cite{Python}, is thoroughly described and details of how the tool can be used is given.
+Chapter \ref{ch:zcga} provides more in depth details of the first contribution of this thesis. The weak types which have been created are presented as well as how they work together with weak typing rules. The categories which have been extracted from the weak types are presented and examples are given on how these categories correspond to Z specifications. Examples are given for all the weak types, and categories for Z specification. The weak type checker, which is implemented in \texttt{Python} \cite{Python}, is thoroughly described and details of how the tool can be used are given.
 
-Chapter \ref{ch:zdra} highlights another aspect which is a contribution of this thesis. An explanation of what rhetorical correctness for a specification is given. Instances and how they relate to each other are described as well as how a user can annotated these facts into a Z specification. Examples are given for all relations and instances and rules of what relations are allowed. An outline of the \gls{zdra} checker is given, along with explanations of various error and warning messages. A general explanation of the dependency and GoTo graphs are also given.
+Chapter \ref{ch:zdra} highlights another contribution of this thesis. An explanation of rhetorical correctness for a specification is given. Instances and how they relate to each other are described as well as how a user can annotate these facts into a Z specification. Examples are given for all relations and instances, and rules are provided of what relations are allowed. An outline of the \gls{zdra} checker is given, along with explanations of various error and warning messages. A general explanation of the dependency and GoTo graphs is also given.
 
-In chapter \ref{ch:skeletons} describes the different skeletons which can be automatically generated if the specification is \gls{zdra} correct. A detail explanation of how a general proof skeleton can be created from the GoTo graph is given along with the algorithm which creates it. A summary is given of how the general proof sketch can be used to generate an Isabelle skeleton of the specification. Details of how the Isabelle skeleton can be filled in using the \gls{zcga} annotated specification is also shown in this chapter. A demonstration of how we can use this filled in Isabelle skeleton to get a full proof is also described.
+Chapter \ref{ch:skeletons} describes the different skeletons which can be automatically generated if the specification is \gls{zdra} correct. A detail explanation of how a general proof skeleton can be created from the GoTo graph is given along with the algorithm which creates it. 
 
-Chapter \ref{ch:formal} gives formal definitions of the \gls{zdra} correctness checker, dependency graphs and GoTo graphs. We prove various properties about the \gls{zdra} using rules and definitions which have been given. We give examples of how each of these aspects can be represented in a formal manner. The algorithm which creates the dependency and GoTo graphs is given and explained.
+Chapter \ref{chap:gpsa2isa} summerises the path of how the general proof sketch can be used to generate an Isabelle skeleton of the specification. Details of how the Isabelle skeleton can be filled in using the \gls{zcga} annotated specification is also shown in this chapter. A demonstration of how we can use this filled in Isabelle skeleton to get a full proof is also described.
 
-In chapter \ref{ch:interface} we give an overview on the interface design and we explain how one can use \gls{zmath} on Z specifications. Explanations of how to use each aspect is given via examples and screen shots. The tables of output messages which a user can receive are highlighted and explained.
+Chapter \ref{ch:formal} gives formal definitions of the \gls{zdra} correctness checker, dependency graphs and GoTo graphs. We prove various properties about the \gls{zdra}. We give examples of how each of these aspects can be represented in a formal manner. The algorithm which creates the dependency and GoTo graphs is given and explained.
+
+In chapter \ref{ch:interface} we give an overview on the user interface for \gls{zmath} and we explain how one can use \gls{zmath} on Z specifications. Explanations of how to use each aspect are given via examples and screen shots. The tables of output messages which a user can receive are highlighted and explained.
 
 Chapter \ref{ch:fullexample} goes through one entire specification (modulereg specification \cite{essenceofz}) along the \gls{zmath} route. Each aspect is clearly highlighted and explained to the reader giving hints and tips along the way. Other examples are found in the appendix, however they are only taken along the \gls{zmath} route without any commentary.
 
-In chapter \ref{ch:analysis} we consider 2 specification examples which have been proven in a theorem prover using a single step, and compare them with the same specification examples which have been proven in multiple steps using \gls{zmath}. We give a table of comparison explaining the amount of expertise required, type of input and lines of proofs and lemmas. We explain and compare the type of expertise required for each of the specification examples and how they compare against doing the proof in one step or multiple steps.
+In chapter \ref{ch:analysis} we consider 2 specification examples which have been proven in a theorem prover using a single step, and compare them with the same specification examples which have been proven in multiple steps using \gls{zmath}. We give a table of comparison explaining the amount of expertise required, type of input and lines of proofs and lemmas. We explain and compare the type of expertise required for each of the specification examples and how doing the proof in one step compares against or multiple steps.
 
 Finally, a conclusion is presented in chapter \ref{ch:conclusion} which summarises the contributions made in this thesis. The limitations of this research and potential areas of future research are also discussed.

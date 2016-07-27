@@ -106,14 +106,14 @@ This schema describes constants giving sets, for example $S \cup T$ gives a set 
 \begin{schema}{CorrectDefinitions}
 \text{\Delta ZcgaState} \\
 \text{\declaration{\set{definedSet}: \expression{\power VARS \pfun VARS}}} \\
-\text{\declaration{\set{newdefinition}: \expression{\power VARS \pfun DEFINITION}}} \\
+\text{\declaration{\set{newdefinition}: \expression{\power VARS \pfun LINES}}} \\
 \text{\declaration{\set{parameters}: \expression{\power VARS}}} \\
 \text{\declaration{\term{newConstant}: \expression{VARS}}} \\
 \where
 \text{\expression{\term{newConstant} \notin \set{sets}}} \\
 \text{\expression{\term{newConstant} = \term{\set{definedSet}~\set{parameters}}}} \\
 \text{\expression{\set{definedConstants'} = \set{\set{definedConstants} \cup \set{\{\term{newConstant}\}}}}} \\
-%\text{\expression{\set{sets'} = \set{\set{sets} \cup \set{\{\term{newConstant}\}}}}} \\
+\text{\expression{\set{sets'} = \set{\set{sets} \cup \set{\{\term{newConstant}\}}}}} \\
 \text{\expression{\set{definitions'} = \set{\set{definitions} \cup \set{\{\term{newdefinition~parameters}\}}}}}
 \end{schema}
 

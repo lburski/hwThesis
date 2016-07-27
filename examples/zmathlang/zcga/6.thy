@@ -3,7 +3,7 @@ imports
 Main 
 
 begin 
-typedecl LINE
+typedecl LINES
 typedecl DECLARATION 
 typedecl EXPRESSION 
 typedecl DEFINITION
@@ -11,8 +11,8 @@ typedecl VARS
 
 record ZcgaState = 
 Declarations :: "(VARS * EXPRESSION) set"
-Expressions :: "(LINE set)"
-Definitions :: "(LINE set)"
+Expressions :: "(LINES set)"
+Definitions :: "(LINES set)"
 DefinedConstants :: "(VARS set)"
 TERMDECLARATION :: "(VARS * EXPRESSION) set"
 SETDECLARATION :: "(VARS * EXPRESSION) set"
@@ -23,8 +23,8 @@ DVAR :: "(VARS set)"
 
 locale ZCGa = 
 fixes declarations :: "(VARS * EXPRESSION) set"
-and expressions :: "(LINE set)"
-and definitions :: "(LINE set)"
+and expressions :: "(LINES set)"
+and definitions :: "(LINES set)"
 and definedConstants :: "(VARS set)"
 and TermDeclaration :: "(VARS * EXPRESSION) set"
 and SetDeclaration :: "(VARS * EXPRESSION) set"
@@ -40,7 +40,7 @@ and "sets \<inter> terms = {}"
 begin
 
 definition InitZcgaState :: 
-"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINE set)\<Rightarrow> (LINE set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
+"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINES set)\<Rightarrow> (LINES set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
 \<Rightarrow> (VARS * EXPRESSION) set\<Rightarrow> (VARS set)\<Rightarrow> (VARS set)\<Rightarrow> (VARS set) \<Rightarrow> bool"
 where 
 "InitZcgaState zcgastate zcgastate' declarations' expressions' definitions' definedConstants' TermDeclaration' 
@@ -55,9 +55,9 @@ SetDeclaration' terms' sets' dvar' == (declarations' = {})
 \<and> (dvar' = {})"
 
 definition CorrectExpression :: 
-"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINE set)\<Rightarrow> (LINE set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
-\<Rightarrow> (VARS * EXPRESSION) set\<Rightarrow> (VARS set)\<Rightarrow> (VARS set)\<Rightarrow> (VARS set) \<Rightarrow> LINE \<Rightarrow> 
-(VARS set) \<Rightarrow> ((VARS set) \<rightharpoonup> LINE) \<Rightarrow>  bool"
+"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINES set)\<Rightarrow> (LINES set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
+\<Rightarrow> (VARS * EXPRESSION) set\<Rightarrow> (VARS set)\<Rightarrow> (VARS set)\<Rightarrow> (VARS set) \<Rightarrow> LINES \<Rightarrow> 
+(VARS set) \<Rightarrow> ((VARS set) \<rightharpoonup> LINES) \<Rightarrow>  bool"
 where 
 "CorrectExpression zcgastate zcgastate' declarations' expressions' definitions' definedConstants' TermDeclaration' 
 SetDeclaration' terms' sets' dvar'
@@ -68,7 +68,7 @@ SetDeclaration' terms' sets' dvar'
 \<and> (expressions' = expressions \<union> {newExpression})"
 
 definition CorrectConstantSet :: 
-"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINE set)\<Rightarrow> (LINE set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
+"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINES set)\<Rightarrow> (LINES set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
 \<Rightarrow> (VARS * EXPRESSION) set\<Rightarrow> (VARS set)\<Rightarrow> (VARS set)\<Rightarrow> (VARS set) \<Rightarrow> VARS \<Rightarrow>
 (VARS set) \<Rightarrow> ((VARS set) \<rightharpoonup> VARS) \<Rightarrow>  bool"
 where 
@@ -80,9 +80,9 @@ SetDeclaration' terms' sets' dvar' newset setParameters setConstant ==
 \<and> (sets' = sets \<union> {newset})"
 
 definition CorrectDefinitions :: 
-"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINE set)\<Rightarrow> (LINE set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
+"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINES set)\<Rightarrow> (LINES set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
 \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (VARS set)\<Rightarrow> (VARS set)\<Rightarrow> (VARS set) \<Rightarrow> 
-(VARS set) \<Rightarrow> VARS \<Rightarrow> ((VARS set) \<rightharpoonup> VARS) => ((VARS set) \<rightharpoonup> LINE) \<Rightarrow> bool"
+(VARS set) \<Rightarrow> VARS \<Rightarrow> ((VARS set) \<rightharpoonup> VARS) => ((VARS set) \<rightharpoonup> LINES) \<Rightarrow> bool"
 where 
 "CorrectDefinitions zcgastate zcgastate' declarations' expressions' definitions' definedConstants' TermDeclaration' 
 SetDeclaration' terms' sets' dvar' parameters newConstant definedSet newdefinition ==
@@ -94,7 +94,7 @@ SetDeclaration' terms' sets' dvar' parameters newConstant definedSet newdefiniti
 \<and> (definitions' = definitions \<union> {the (newdefinition parameters)})"
 
 definition CorrectTermDeclaration :: 
-"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINE set)\<Rightarrow> (LINE set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
+"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINES set)\<Rightarrow> (LINES set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
 \<Rightarrow> (VARS * EXPRESSION) set\<Rightarrow> (VARS set)\<Rightarrow> (VARS set)\<Rightarrow> (VARS set) \<Rightarrow> 
 EXPRESSION \<Rightarrow> VARS \<Rightarrow> bool"
 where 
@@ -106,7 +106,7 @@ SetDeclaration' terms' sets' dvar' dvarExpression var ==
 \<and> (dvar' = dvar \<union> {(var)})"
 
 definition CorrectConstantTerm :: 
-"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINE set)\<Rightarrow> (LINE set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
+"ZcgaState \<Rightarrow> ZcgaState \<Rightarrow> (VARS * EXPRESSION) set \<Rightarrow> (LINES set)\<Rightarrow> (LINES set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
 \<Rightarrow> (VARS * EXPRESSION) set\<Rightarrow> (VARS set)\<Rightarrow> (VARS set)\<Rightarrow> (VARS set) \<Rightarrow> 
 (VARS set \<rightharpoonup> VARS) \<Rightarrow> VARS \<Rightarrow> VARS set \<Rightarrow> bool"
 where 
@@ -132,7 +132,7 @@ SetDeclaration' terms' sets' dvar' dvarExpression var ==
 definition CorrectSchemaText :: 
 "(VARS * EXPRESSION) set \<Rightarrow> (EXPRESSION set)\<Rightarrow> (DEFINITION set) => (VARS set) \<Rightarrow> (VARS * EXPRESSION) set
 \<Rightarrow> (VARS * EXPRESSION) set\<Rightarrow> (VARS set)\<Rightarrow> (VARS set)\<Rightarrow> (VARS set) \<Rightarrow> 
-(LINE set) \<Rightarrow> bool"
+(LINES set) \<Rightarrow> bool"
 where 
 "CorrectSchemaText declarations' expressions' definitions' definedConstants' TermDeclaration' 
 SetDeclaration' terms' sets' dvar' schemaText ==
@@ -143,17 +143,17 @@ lemma CorrectExpression_L1:
 "(\<exists> zcgastate :: ZcgaState.
 \<exists> zcgastate' :: ZcgaState.
 \<exists> declarations':: (VARS * EXPRESSION) set.
- \<exists> expressions' :: (LINE set).
-\<exists> definitions' :: (LINE set).
+ \<exists> expressions' :: (LINES set).
+\<exists> definitions' :: (LINES set).
 \<exists> definedConstants' :: (VARS set).
 \<exists> TermDeclaration' :: (VARS * EXPRESSION) set.
 \<exists> SetDeclaration' :: (VARS * EXPRESSION) set.
 \<exists> terms' :: (VARS set).
 \<exists> sets' :: (VARS set).
 \<exists> dvar' :: (VARS set).
-\<exists> newExpression :: LINE.
+\<exists> newExpression :: LINES.
 \<exists> expressParameters :: (VARS set).
-\<exists> expressConstant :: ((VARS set) \<rightharpoonup> LINE).
+\<exists> expressConstant :: ((VARS set) \<rightharpoonup> LINES).
  (expressParameters \<subseteq> sets \<union> terms) 
 \<and> (expressParameters \<noteq> {})
 \<and> (newExpression = the (expressConstant expressParameters))
@@ -161,15 +161,19 @@ lemma CorrectExpression_L1:
 \<longrightarrow> (TermDeclaration \<subseteq> declarations)
 \<and> (SetDeclaration \<subseteq> declarations)
 \<and> (dvars \<subset> sets \<union> terms)
-\<and> (sets \<inter> terms = {}))"
+\<and> (sets \<inter> terms = {})
+\<and> (TermDeclaration' \<subseteq> declarations')
+\<and> (SetDeclaration' \<subseteq> declarations')
+\<and> (dvars' \<subset> sets' \<union> terms')
+\<and> (sets' \<inter> terms' = {}))"
 by smt
 
 lemma CorrectConstantSet_L2:
 "(\<exists> zcgastate :: ZcgaState.
 \<exists> zcgastate' :: ZcgaState.
 \<exists> declarations':: (VARS * EXPRESSION) set.
- \<exists> expressions' :: (LINE set).
-\<exists> definitions' :: (LINE set).
+ \<exists> expressions' :: (LINES set).
+\<exists> definitions' :: (LINES set).
 \<exists> definedConstants' :: (VARS set).
 \<exists> TermDeclaration' :: (VARS * EXPRESSION) set.
 \<exists> SetDeclaration' :: (VARS * EXPRESSION) set.
@@ -186,15 +190,55 @@ lemma CorrectConstantSet_L2:
 \<longrightarrow> (TermDeclaration \<subseteq> declarations)
 \<and> (SetDeclaration \<subseteq> declarations)
 \<and> (dvars \<subset> sets \<union> terms)
-\<and> (sets \<inter> terms = {}))"
+\<and> (sets \<inter> terms = {})
+\<and> (TermDeclaration' \<subseteq> declarations')
+\<and> (SetDeclaration' \<subseteq> declarations')
+\<and> (dvars' \<subset> sets' \<union> terms')
+\<and> (sets' \<inter> terms' = {}))"
 by blast
 
-lemma CorrectTermDeclaration_L3:
+lemma CorrectDefinitions_L3:
 "(\<exists> zcgastate :: ZcgaState.
 \<exists> zcgastate' :: ZcgaState.
 \<exists> declarations':: (VARS * EXPRESSION) set.
-\<exists> expressions' :: (LINE set).
-\<exists> definitions' :: (LINE set).
+\<exists> expressions' :: (LINES set).
+\<exists> definitions' :: (LINES set).
+\<exists> definedConstants' :: (VARS set).
+\<exists> TermDeclaration' :: (VARS * EXPRESSION) set.
+\<exists> SetDeclaration' :: (VARS * EXPRESSION) set.
+\<exists> terms' :: (VARS set).
+\<exists> sets' :: (VARS set).
+\<exists> dvar' :: (VARS set).
+\<exists> parameters :: (VARS set).
+\<exists> newConstant :: VARS.
+\<exists> definedSet :: (VARS set \<rightharpoonup> VARS).
+\<exists> newdefinition :: (VARS set \<rightharpoonup> LINES).
+ (newConstant \<notin> sets)
+\<and> (parameters \<subseteq> sets \<union> terms)
+\<and> (newConstant = the (definedSet parameters)) 
+\<and> (definedConstants' = definedConstants \<union> {(newConstant)})
+\<and> (sets' = sets \<union> {newConstant})
+\<and> (definitions' = definitions \<union> {the (newdefinition parameters)})
+\<longrightarrow> (TermDeclaration \<subseteq> declarations)
+\<and> (SetDeclaration \<subseteq> declarations)
+\<and> (dvars \<subset> sets \<union> terms)
+\<and> (sets \<inter> terms = {})
+\<and> (TermDeclaration' \<subseteq> declarations')
+\<and> (SetDeclaration' \<subseteq> declarations')
+\<and> (dvars' \<subset> sets' \<union> terms')
+\<and> (sets' \<inter> terms' = {})
+\<and> (TermDeclaration' \<subseteq> declarations')
+\<and> (SetDeclaration' \<subseteq> declarations')
+\<and> (dvars' \<subset> sets' \<union> terms')
+\<and> (sets' \<inter> terms' = {}))"
+by blast
+
+lemma CorrectTermDeclaration_L4:
+"(\<exists> zcgastate :: ZcgaState.
+\<exists> zcgastate' :: ZcgaState.
+\<exists> declarations':: (VARS * EXPRESSION) set.
+\<exists> expressions' :: (LINES set).
+\<exists> definitions' :: (LINES set).
 \<exists> definedConstants' :: (VARS set).
 \<exists> TermDeclaration' :: (VARS * EXPRESSION) set.
 \<exists> SetDeclaration' :: (VARS * EXPRESSION) set.
@@ -210,15 +254,19 @@ lemma CorrectTermDeclaration_L3:
 \<longrightarrow> (TermDeclaration \<subseteq> declarations)
 \<and> (SetDeclaration \<subseteq> declarations)
 \<and> (dvars \<subset> sets \<union> terms)
-\<and> (sets \<inter> terms = {}))"
+\<and> (sets \<inter> terms = {})
+\<and> (TermDeclaration' \<subseteq> declarations')
+\<and> (SetDeclaration' \<subseteq> declarations')
+\<and> (dvars' \<subset> sets' \<union> terms')
+\<and> (sets' \<inter> terms' = {}))"
 by blast
 
-lemma CorrectConstantTerm_L4:
+lemma CorrectConstantTerm_L5:
 "(\<exists> zcgastate :: ZcgaState.
 \<exists> zcgastate' :: ZcgaState.
 \<exists> declarations':: (VARS * EXPRESSION) set.
-\<exists> expressions' :: (LINE set).
-\<exists> definitions' :: (LINE set).
+\<exists> expressions' :: (LINES set).
+\<exists> definitions' :: (LINES set).
 \<exists> definedConstants' :: (VARS set).
 \<exists> TermDeclaration' :: (VARS * EXPRESSION) set.
 \<exists> SetDeclaration' :: (VARS * EXPRESSION) set.
@@ -235,15 +283,19 @@ lemma CorrectConstantTerm_L4:
 \<longrightarrow> (TermDeclaration \<subseteq> declarations)
 \<and> (SetDeclaration \<subseteq> declarations)
 \<and> (dvars \<subset> sets \<union> terms)
-\<and> (sets \<inter> terms = {}))"
+\<and> (sets \<inter> terms = {})
+\<and> (TermDeclaration' \<subseteq> declarations')
+\<and> (SetDeclaration' \<subseteq> declarations')
+\<and> (dvars' \<subset> sets' \<union> terms')
+\<and> (sets' \<inter> terms' = {}))"
 by smt
 
-lemma CorrectSetDeclaration_L5:
+lemma CorrectSetDeclaration_L6:
 "(\<exists> zcgastate :: ZcgaState.
 \<exists> zcgastate' :: ZcgaState.
 \<exists> declarations':: (VARS * EXPRESSION) set.
-\<exists> expressions' :: (LINE set).
-\<exists> definitions' :: (LINE set).
+\<exists> expressions' :: (LINES set).
+\<exists> definitions' :: (LINES set).
 \<exists> definedConstants' :: (VARS set).
 \<exists> TermDeclaration' :: (VARS * EXPRESSION) set.
 \<exists> SetDeclaration' :: (VARS * EXPRESSION) set.
@@ -259,7 +311,11 @@ lemma CorrectSetDeclaration_L5:
 \<longrightarrow> (TermDeclaration \<subseteq> declarations)
 \<and> (SetDeclaration \<subseteq> declarations)
 \<and> (dvars \<subset> sets \<union> terms)
-\<and> (sets \<inter> terms = {}))"
+\<and> (sets \<inter> terms = {})
+\<and> (TermDeclaration' \<subseteq> declarations')
+\<and> (SetDeclaration' \<subseteq> declarations')
+\<and> (dvars' \<subset> sets' \<union> terms')
+\<and> (sets' \<inter> terms' = {}))"
 by blast
 
 lemma pre_CorrectExpression:
@@ -304,6 +360,15 @@ CorrectSetDeclaration zcgastate zcgastate' declarations' expressions' definition
 SetDeclaration' terms' sets' dvar' dvarExpression var)
 \<longrightarrow> (var \<notin> dvar)"
 by (simp add: CorrectSetDeclaration_def)
+
+lemma pre_CorrectDefinitions:
+"(\<exists> zcgastate zcgastate' declarations' expressions' definitions' definedConstants' TermDeclaration' 
+SetDeclaration' terms' sets' dvar' definedSet newdefinition.
+CorrectDefinitions zcgastate zcgastate' declarations' expressions' definitions' definedConstants' TermDeclaration' 
+SetDeclaration' terms' sets' dvar' parameters newConstant definedSet newdefinition)
+\<longrightarrow>  (newConstant \<notin> sets)
+\<and> (parameters \<subseteq> sets \<union> terms)"
+by (simp add: CorrectDefinitions_def)
 
 
 end

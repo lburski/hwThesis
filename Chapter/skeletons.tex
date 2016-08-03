@@ -24,6 +24,8 @@ We then run an algorithm on the GoTo graph to generate a proof skeleton. Figure 
 \label{fig:code}
 \end{figure}
 
+\todo[inline]{write psuedocode not real code of graphs into skeletons}
+
 \section{Creating the Graph}
 
 Here we show how a Proof skeleton is calculated using the Goto graph created when running the ZDRa check on a specification.
@@ -77,15 +79,15 @@ There are many properties one may wish to prove about their specification. These
 \item POb2, Other specific proof obligation for the chosen specification
 \end{itemize}
 
-We use the syntax \textit{Context} $\vdash$ \textit{predicate} taken from the paper to define the proof obligations.
+We use the syntax \textit{Context} $\vdash$ \textit{predicate} taken from \cite{DBLP:conf/icsea/WenMZ06} to define the proof obligations.
 
 \subsection{POb1, Proof Obligation type 1}
 
 \begin{defin}\label{defa}POb1\\
 
-$Context \vdash \exists var, var' \bullet PRE\# \land PO\# \longrightarrow SI\# \land SI\#'$\\
+$Context \vdash \exists (var::type)* \bullet PRE\# \land PO\# \longrightarrow SI\# \land SI\#'$\\
 
-\noindent where var and var' are the variables and variables' used in the schema with their types, SI\# is the state Invariants of the specification, SI\#' is the state invariants prime in the specification, PRE\# is the precondition of the schema, PO\# is the post operation of the schema and \# is some arbitary number.
+\noindent where $(var::type)*$ are the variables and types used in the schema with their types. We denote $*$ to declare there is 1 or many variables and types. $SI\#$ is the state Invariants of the specification, $SI\#'$ is the state invariants prime in the specification, $PRE\#$ is the precondition of the schema, $PO\#$ is the post operation of the schema and $\#$ is some arbitary number which the user has labeled their instance with.
 \end{defin}
 
 POb1 shows the feasability of an operation. When an operation can transfor a state to another state in the state space (a $\Delta$ schema). If an operation is feasible, the preconditional state and postconditional state should satisfy the state invariants of the specification.

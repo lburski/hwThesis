@@ -6,17 +6,21 @@ Industries developing high integrity software are always looking for ways to mak
 
 Software testing usually takes place when the program or a prototype has been implemented. However by the time the product is fully implemented and errors are caught it is expensive to go back to the planning stage to find solutions to those bugs. Catching errors at an earlier stage of the project life cycle is more time and cost effective for the whole project team.
 
-One way of detecting errors at an early stage of the project life cycle is by applying the use of \gls{fm} at the design/specification stage of the project life cycle. The benefit of using \gls{fm} is that they provide a means to symbolically examine the entire state space of a design and establish a correctness that is true for all possible inputs \cite{wifrm}. However due to the enormous complexity of real time systems they are rarely used. \Gls{fm} come in different shapes and sizes; the \gls{asm} theory is a state machine which operates on states or arbitrary data structures. The B-method \cite{bmeth} is a formal method for the development of program code from a specification in the \gls{asm} notation. Z \cite{spiveyreferencemanual} is a specification languages used for describing computer-based systems. \Gls{uml} provides system architects with a consistent language for specifying, construing and documenting different components of systems. These are just a selection of various \gls{fm} methods however there are a great deal more which are still applied to systems today to add a degree of safety to certain high integrity products.
+One way of detecting errors at early is by applying the use of \gls{fm} at the design/specification stage of the project life cycle. The benefit of using \gls{fm} is that they provide a means to symbolically examine the state space of a design and establish a correctness that is true for all possible inputs \cite{wifrm}. However due to the enormous complexity of systems these days they are rarely used as they may not be feasible. 
 
-Specifications models and verification may be done using different levels of rigour. Level 1 represents the use of mathematical logic to specify a system, level 2 uses a handwritten approach to proofs and level 3 is the most rigorous application of formal methods which uses theorem provers to undertake fully formal machine-checked proofs. Level 3 is clearly the most expensive level and is only practically worthwhile when the cost of making mistakes is extremely high.
+\Gls{fm} come in different shapes and sizes. The \gls{asm} theory \cite{Borger:2003:ASM:829603} is a state machine which operates on states or arbitrary data structures. The B-method \cite{bmeth} is a formal method for the development of program code from a specification in the \gls{asm} notation. Z \cite{spiveyreferencemanual} is a specification languages used for describing computer-based systems. These are just a selection of various \gls{fm} methods however there are a great deal more which are still applied to systems today to add a degree of safety to certain high integrity products.
 
-The jump from Level 1 rigour to Level 3 rigour is very difficult, but in many cases worthwhile. The purpose of this thesis is to introduce an approach where the large jump is broken up in to multiple smaller jumps, allowing the level 3 of rigour to be more accessible and thus more widely used. 
+Specifications models and verification \todo[inline]{Add these to glossary} may be done using different levels of rigour. Level 1 represents the use of mathematical logic to specify a system, level 2 uses a handwritten approach to proofs and level 3 is the most rigorous application of formal methods which uses theorem provers to undertake fully formal machine-checked proofs. Level 3 is clearly the most expensive level and is only practically worthwhile when the cost of making mistakes is extremely high \cite{encyclopedia}.
+
+The jump from Level 1 rigour to Level 3 rigour is very difficult, but in many cases worthwhile. The purpose of this thesis is to introduce an approach where the large jump is broken up into multiple smaller jumps, allowing the level 3 of rigour to be more accessible and thus more widely used. 
 
 \section{Motivations}
 
 In order to facilitate the \gls{computerise} process, this thesis proposes smaller \gls{computerise} steps which allow the translation (and hence the correctness checking) of specifications written in Z into a theorem prover such as ProofPower-Z \cite{pp} or Isabelle \cite{isabelle}.
 
 The reason to break the translation path into simple steps is because the original path is difficult and requires serious expertise in theorem proving and the translation from Z to a theorem prover. The approach  described in this thesis, of mini-\gls{computerise} steps, allows different experts to collaborate on the various steps to build the final proof.
+
+\todo[inline]{Fix motivations with what greg highlighted}
 
 %+ math is ancient but there are no uniform notations
 %+ attempts in late 19th/early 20th century e.g. Russell & Whitehead try to derive all smaths from logic
@@ -29,11 +33,86 @@ The reason to break the translation path into simple steps is because the origin
 %+ Maareck (I hope to talk reguallrly with Manuel about what you're doing)
 %+ but still hard to develop proofs using AutoMath
 
+\section{Contributions}
+
+The focus of this thesis presents a tool support for \gls{zmath}. There are aspects of formalisations and proofs contributed in this thesis however they are smaller parts which come from the tool support built to translate specifcation into Isabelle. We summarise the contributions of this thesis in the following list:
+
+\begin{enumerate}
+\item Staged an approach to translating semi-formal and formal specifications into Isabelle with automatic assistance.
+\item Built tools to enable this approach.
+\item Formalised and proved properties of tools and method.
+\item Evaluated method and tools on a convincing set of examples.
+\end{enumerate}
+
+\subsection{Staged an approach to translating semi-formal and formal specifications into Isabelle with automatic assistance.}
+
+Translating specifications into theorem provers has shown to be a great difficult task. Not everyone on the software project team will know how to computerise specifications. The main contribution this thesis presents a tool support to assist in the translating formal specifications into theorem provers. This new path has been designed for individuals who have no or little expertise in the chosen theorem prover. It is broken up so that each step in the path checks for some form of correctness of the specification. The checks become more and more rigorous the further one goes a long the path.
+
+Our approach can also translate partially formal specifications into theorem provers. That is specifications written in natural language which is on it's way to becoming formalised. The line belows shows a semi-formal sentence taken from a specification describing a clock.
+
+\begin{verbatim}
+A clock tells the time:nat.
+Time is on going therefore time' < time
+\end{verbatim}
+
+Not only does our new approach assist with translating the text but it can also performs the various checks of rigor along the way. For example, the grammatical correctness of this document can be checked (see \gls{zcga} chapter \ref{ch:zcga}) without it needing to be fully formalised. The documents rhetorical correctness (see \gls{zdra} chapter \ref{ch:zdra}) can also be checked without the need for the document to be fully formal. \Gls{zmath} is one framework made up of many smaller tools to deliver it's main aim, which is to computerise a system specification.
+
+\subsection{Built tools to enable this approach.}
+
+Another contribution of this thesis is the tools which we have built in order to check for various degrees of correctness and to produce documents which could be used for the system in question.
+
+Again the innovation in this research is that the tools can act upon system specifications which have been partially formalised. Some examples of the tools are listed below:
+
+\begin{itemize}
+\item A tool to check the grammar of the system specification.
+
+\item A tool which check the rhetorical layout of the specification.
+
+\item A tool which produces documents to order the chunks of the specification.
+\end{itemize}
+
+The first tool to check's the grammar of the document. To do this the user first annotates the specfication with grammatical labels and then uses the automatic grammar checker to check the labels. These labels are known as `\emph{categories}' and describe the elements found in formal specifications such as `\emph{terms}', `\emph{sets}' and `\emph{expressions}'. 
+
+The second tool checks the documents rhetorical correctness. That is, it checks for any loops in the reasoning. This tool can be used on a specification which is written formally, semi-formally or completely in natural language. The rhetorical checker chunks part of the text together and describes the relationships between each chunk. Similar to the previous tool, the user labels the text and then uses the program to check for any loops in the reasoning of the document. The chunks include sections which change the state of the specification, or output a message etc.
+
+One of \gls{zmath} tools is able automatically produce documents which can be used to analyse the system. These documents are simple to understand by stakeholders of the project and can be used to describe to clients, developers, managers etc. 
+
+\subsection{Formalised and proved properties of tools and method.}
+
+A third contribution given in this thesis is a formal view on some of \gls{zmath}'s tools (shown in chapter \ref{ch:formal}). The grammatical correctness checker for mathematics has already been formalised in previous research. Since the formal specification grammar checker is an adaptation of the mathematics one, we have presented a formal view on the adaptation. Rules and properties for the Document Rhetorical aspect have been implemented (see table \ref{tab:relationsallowed} in chapter \ref{ch:zdra}). We have identified these rules in order to reason with and show certain properties about them in chapter \ref{ch:formal}. Based on ideas from \cite{zengfirstyear}, we develop our own formalisation of the document rhetorical checking program as well as the products it automatically produces. 
+
+We give a formal view on the dependecy and goto graphs using various definitions to describe the relations between nodes and edges. We also give examples of the nodes and edges of an annotated text and describe its equivalent nodes and edges in the dependency and goto graphs. The formal definitions from \cite{zengfirstyear} have been used to construct the adapted definitions and properties for the document rhetorical aspect and graphs presented in this thesis.
+
+\subsubsection{Automatically generated properties to check the sanity of the specifications.}
+
+Although not the main contribution of this thesis, we have designed and implemented a tool which automatically generates safety properties to prove in Isabelle syntax. The properties used in the examples are in the class of sanity checks in which the state invariants of the system specification are checked against all the state changing schemas.
+
+There are many other properties one can check in systems such as properties across specifications, required properties of a single specification etc (see section \ref{sec:generatingpropforformal} in chapter \ref{ch:background}). However in this thesis we have supplied a formal definition for the sanity checks of Z specifications and implemented it in our tool so that it is automatically added during the translation.
+
+
+\subsection{Evaluated method and tools on a convincing set of examples.}
+
+\todo[inline]{Highlight the evaluation chapter of the thesis}
+
+Another contribution this thesis presents is our approach shown on a convincing set of examples. We have used our approach on the following specifications
+
+\begin{tabular}{l l}
+$\bullet$ BirthdayBook \cite{spiveyreferencemanual} & $\bullet$ Vending Machine \cite{pp} \\
+$\bullet$ Clubstate \cite{essenceofz} & $\bullet$ Clubstate2 \cite{essenceofz} \\
+$\bullet$ ModuleReg \cite{essenceofz} & $\bullet$ ProjectAlloc \cite{essenceofz} \\
+$\bullet$ TelephoneBook & $\bullet$ Timetable \cite{essenceofz} \\
+$\bullet$ VideoShop \cite{essenceofz} & $\bullet$ Steamboiler \\
+$\bullet$ A specification which fails ZCGa & \\
+$\bullet$ A specification which fails ZDRa & \\
+$\bullet$ Autopilot (A semi formal Specification) \cite{Butler96} & \\
+$\bullet$ The ZCGa type checker & \\
+\end{tabular}
+
 \section{Outline}
 
 In chapter \ref{ch:background} we begin describing the origins of \gls{math}, its success and where it has been used so far. We then describe Z specifications and the tools available for it so far.
 
-In chapter \ref{ch:Contributions}, We highlight the contributions of this thesis as well as outline the basic idea of \gls{zmath}, how the original \gls{math} method has been adapted to perform with Z specifications and how this method is different to others previously described.
+%In chapter \ref{ch:Contributions}, We highlight the contributions of this thesis as well as outline the basic idea of \gls{zmath}, how the original \gls{math} method has been adapted to perform with Z specifications and how this method is different to others previously described.
 
 Chapter \ref{ch:zcga} provides more in depth details of the first contribution of this thesis. The weak types which have been created are presented as well as how they work together with weak typing rules. The categories which have been extracted from the weak types are presented and examples are given on how these categories correspond to Z specifications. Examples are given for all the weak types, and categories for Z specification. The weak type checker, which is implemented in \texttt{Python} \cite{Python}, is thoroughly described and details of how the tool can be used are given.
 

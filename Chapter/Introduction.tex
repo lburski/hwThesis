@@ -10,28 +10,25 @@ One way of detecting errors at early is by applying the use of \gls{fm} at the d
 
 \Gls{fm} come in different shapes and sizes. The \gls{asm} theory \cite{Borger:2003:ASM:829603} is a state machine which operates on states or arbitrary data structures. The B-method \cite{bmeth} is a formal method for the development of program code from a specification in the \gls{asm} notation. Z \cite{spiveyreferencemanual} is a specification languages used for describing computer-based systems. These are just a selection of various \gls{fm} methods however there are a great deal more which are still applied to systems today to add a degree of safety to certain high integrity products.
 
-Specifications models and verification \todo[inline]{Add these to glossary} may be done using different levels of rigour. Level 1 represents the use of mathematical logic to specify a system, level 2 uses a handwritten approach to proofs and level 3 is the most rigorous application of formal methods which uses theorem provers to undertake fully formal machine-checked proofs. Level 3 is clearly the most expensive level and is only practically worthwhile when the cost of making mistakes is extremely high \cite{encyclopedia}.
+\Gls{specmod} and \gls{veri} may be done using different levels of rigour. Level 1 represents the use of mathematical logic to specify a system, level 2 uses a handwritten approach to proofs and level 3 is the most rigorous application of formal methods which uses theorem provers to undertake fully formal machine-checked proofs. Level 3 is clearly the most expensive level and is only practically worthwhile when the cost of making mistakes is extremely high \cite{encyclopedia}.
 
 The jump from Level 1 rigour to Level 3 rigour is very difficult, but in many cases worthwhile. The purpose of this thesis is to introduce an approach where the large jump is broken up into multiple smaller jumps, allowing the level 3 of rigour to be more accessible and thus more widely used. 
 
 \section{Motivations}
 
-In order to facilitate the \gls{computerise} process, this thesis proposes smaller \gls{computerise} steps which allow the translation (and hence the correctness checking) of specifications written in Z into a theorem prover such as ProofPower-Z \cite{pp} or Isabelle \cite{isabelle}.
+Mathematics is an ancient concept dating back to ancient Egypt and Babylonia times. Early mathematics was the study of measurements and quantity which influenced every day lives. As mathematics developed through logical reasoning, theoretical and applied mathematics it became more elabourate and complex. However no uniform notations ever became established.
 
-The reason to break the translation path into simple steps is because the original path is difficult and requires serious expertise in theorem proving and the translation from Z to a theorem prover. The approach  described in this thesis, of mini-\gls{computerise} steps, allows different experts to collaborate on the various steps to build the final proof.
+In the late 19th century and beginning of 20th century, Russell \& Whitehead \cite{whitehead1912principia} started to form a basis for mathematical notation. Their three volume work describes a set of rules from which all mathematical truths could be proven. In these early stages the authors try to dervive all maths from logic. This ambitious project was the first stepping stone in collaborating all mathematics under one notation.
 
-\todo[inline]{Fix motivations with what greg highlighted}
+Further to Russell \& Whitehead's work, Bourbanki\footnote{A name given to a collective of mathematicians} wrote a series of books beginning n the 1935's with the aim of grounding mathematics. Their main works is included in the Elements of Mathematics series \cite{opac-b1128208} which does not need any special of knowledge of mathematics. It describes mathematics from the very beginning and goes through core mathematical concepts such as set theory, algebra, function etc and gives complete proofs for these concepts.
 
-%+ math is ancient but there are no uniform notations
-%+ attempts in late 19th/early 20th century e.g. Russell & Whitehead try to derive all smaths from logic
-%+ Bourbaki in mid 2oth century
-%+ advent of computers:
-%++ enabled automatic proof
-%++ drove need for consistent notations
-%+ de Bruijn AutoMath project brings uniform notation and automated proof together
-%+ Kamareddine & Wells
-%+ Maareck (I hope to talk reguallrly with Manuel about what you're doing)
-%+ but still hard to develop proofs using AutoMath
+With many advances in performing digitalised calculations the computer was born, in which enabled automatic proofs. With these new automatic proofs, there was an incredible need for consistent notations of mathematics. De Bruijn had this exact thought it mind when he worked on the AutoMath \cite{mv} project. AutoMath (automating mathematics) was the first attempt to digitize and formally prove mathematics which was assited by a computer. AutoMath is described as a language for formalising mathematical texts and for automating the validation of mathematics. The AutoMath project is what brought uniform notations and automated proof together.
+
+Further work on de Bruijns formal language, Kamareddine and Nederpelt \cite{wtt} described a way in which mathematical texts can be divided and annotated using \emph{categories}. However, even with this work, it is still hard to develop proofs for mathematical and formal texts using AutoMath.
+
+Therefore in order to facilitate the \gls{computerise} process (and assist in developing an automated proof), this thesis proposes smaller \gls{computerise} steps which allow the translation (and hence the correctness checking) of formal specifications into a theorem prover such as ProofPower-Z \cite{pp} or Isabelle \cite{isabelle}. 
+
+The reason to break the translation path into simple steps is because the original path is difficult and requires high expertise in theorem proving and the translation from a formal language to a theorem prover.
 
 \section{Contributions}
 

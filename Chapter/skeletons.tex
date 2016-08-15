@@ -8,23 +8,39 @@ The skeletons described in this chapter are automatically generated if the speci
 
 When checking for ZDRa correctness the program adds all the annotated chunks into a dependency graph and a GoTo graph. Both these graphs are directed graphs.
 
-We then run an algorithm on the GoTo graph to generate a proof skeleton. Figure \ref{fig:code} shows part of the code in generating this proof sketch.
+We then run an algorithm on the GoTo graph to generate a proof skeleton. Algorithm \ref{alg:code} shows part of the code in generating this proof sketch.
 
-\begin{itemize}
-\item \textit{allnodes}, is a set of all the instances labelled by the user of a specification in ZDRa.
+%\begin{figure}[H]
+%\includegraphics[scale=0.5]{Figures/skeleton/code.png}
+%\caption{Part of the algorithm to create a proof sketch.}
+%\label{fig:code}
+%\end{figure}
 
-\item \textit{fromnodes}, is a set containing all the nodes which are dependent on another instance.
 
-\item \textit{tonodes}, is a set containing all the nodes which have some other nodes dependent on them.
-\end{itemize}
-
-\begin{figure}[H]
-\includegraphics[scale=0.5]{Figures/skeleton/code.png}
-\caption{Part of the algorithm to create a proof sketch.}
-\label{fig:code}
-\end{figure}
-
-\todo[inline]{write psuedocode not real code of graphs into skeletons}
+\begin{algorithm}[H]
+\KwData{instances are known as `nodes'}
+\KwData{OrderOfGraph is an ordered graph which lists the general proof skeleton}
+\KwData{ListOfAllNodes is an unordered list containing all nodes}
+\BlankLine
+\For{each node in ListOfAllNodes}{
+\eIf{node is a root}
+{push to OrderOfGraph}
+{$nothing$}
+}
+\For{each node in ListOfAllNodes}{
+\eIf{node in OrderOfGraph}{
+remove node from ListOfAllNodes}{
+$nothing$}}
+\While{there are nodes in ListOfAllNodes}{
+\For{each node in ListOfAllNodes}{
+predes = predecessor of each node\;
+\eIf{predes is a subset of OrderOfGraph}{
+push each node to OrderOfGraph\;
+remove each node\;}{
+$nothing$}}
+}
+\caption{Part of the algorithm to create a proof sketch\label{alg:code}.}
+\end{algorithm}
 
 \section{Creating the Graph}
 
@@ -71,6 +87,7 @@ Figure \ref{fig:4} shows the next stage of adding nodes to the Proof Skeleton. S
 We come to the final stage of the dependency graph, when all the nodes are in the dependency graph except for one which is added to the end.
 
 \section{Proof Obligations}
+\label{sec:proofobl}
 
 There are many properties one may wish to prove about their specification. These certain properties are called proof obligations. Proof obligations for formal notations are an entire research area in their own right. However as the \gls{zmath} framework concentrates on giving the novice an idea of how to prove their specification we will focus on checking the specification for consistancy. Using the description in \cite{DBLP:conf/icsea/WenMZ06}, checking the specification is consitant can fall under two categories:
 
@@ -142,13 +159,54 @@ POb1 can be automate. Since POb2 is specification specific, each user will need 
 
 Since the POb2 are specific to the specification only POb1 are automatically added. They are generated as `\emph{lemma's}' in the general proof skeleton. 
 
-\begin{figure}[H]
-\includegraphics[scale=0.6]{Figures/skeleton/pobcode.png}
-\caption{Part of the algorithm to create Proof Obligation ZDRa names.}
-\label{fig:codepob}
-\end{figure}
+%\begin{algorithm}[H]
+%\KwData{instances are known as `nodes'}
+%\KwData{OrderOfGraph is an ordered graph which lists the general proof skeleton}
+%\KwData{ListOfAllNodes is an unordered list containing all nodes}
+%\For{dupa}{If node is a root\;
+%push to OrderOfGraph\;}
+%\For{each node in ListOfAllNodes}{if node in OrderOfGraph\;
+%remove node from ListOfAllNodes\;}
+%\While{there are nodes in ListOfAllNodes}{
+%\For{each node in ListOfAllNodes}{
+%predes = predecessor of each node\;
+%if predes is a subset of OrderOfGraph\;
+%push each node to OrderOfGraph\;
+%remove each node\;}
+%}
+%\caption{Part of the algorithm to create a proof sketch\label{fig:code}.}
+%\end{algorithm}
 
-The proof obligations which check that changeSchema's and outputSchema's follow the stateInvariants are added to the original general proof skeleton. The general proof skeleton starts of with being an ordered list (GPSaOL), then the algorithm for generating a list of proof obligations is run and added to the original proof skeleton. Figure \ref{fig:codepob} shows the algorithm which creates the ordered list of proof obligations.
+%\begin{figure}[H]
+%\includegraphics[scale=0.6]{Figures/skeleton/pobcode.png}
+%\caption{Part of the algorithm to create Proof Obligation ZDRa names.}
+%\label{fig:codepob}
+%\end{figure}
+
+\begin{algorithm}[h]
+\KwData{listOfProofObligations is a set containing the ZDRa names of properties to prove}
+\KwData{i is the highest value of lemma, e.g if we have the following lemmas \[L1, L2, L3\]}
+\KwData{setOfCS is a set containing all the ZDRa names which are a change schema}
+\KwData{lemmaset is a set containing all ZDRa names of existing lemmas}
+\BlankLine
+\For{(ZDRa name, instance type) in GoTo graph}{
+Add ZDRa name to lemmaSet}
+\eIf{there are elements in lemmaSet}{i becomes highest value lemma}{i = 0}
+\For{(zdra Name, instance type) in GoTo graph}{
+\eIf{instance type is a changeSchema}{add zdra Name to setOfCS}{$nothing$}
+}
+\eIf{there are elements in setOfCS}{
+\For{(zdra name, instance type) in setOfCS}{
+indexOfElement = index of (zdra name, instance type)\;
+numberOfNewLemma = i + indexOfElement + 1\;
+ZDRaNameOfNewLemma = `L' + numberOfNewLemma\;
+push (ZDRaNameOfNewLemma, "lemma") to general proof skeleton\;
+}
+}{$nothing$}
+\caption{Part of the algorithm to create Proof Obligation ZDRa names \label{alg:codepob}.}
+\end{algorithm}
+
+The proof obligations which check that changeSchema's and outputSchema's follow the stateInvariants are added to the original general proof skeleton. The general proof skeleton starts of with being an ordered list (GPSaOL), then the algorithm for generating a list of proof obligations is run and added to the original proof skeleton. Algorithm \ref{alg:codepob} shows the algorithm which creates the ordered list of proof obligations.
 
 Lines 338-344 find all the existing lemma's in the \gls{gpsol} and sets \emph{i} to be the highest number. For example if there are existing lemmas in \gls{gpsol} (L1, L2, L3), then \emph{i} becomes 3. If there are no existing lemmas in \gls{gpsol} then \emph{i} stays as 0. Lines 347-250 take all the elements which are \emph{changeSchema} instances and adds them to a list of \emph{setCSandOS}. Then lines 350-359 loops through all the changeSchema's, takes the \gls{zdra} name, add's L + a number + \gls{zdra} name and adds it to the \emph{listOfProofObligations}.
 

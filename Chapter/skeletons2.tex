@@ -196,51 +196,93 @@ Using our previous example shown in the last section, we have the schema `\textt
 \hline
 \textbf{Syntax in Z} & \textbf{Syntax in \LaTeX} & \textbf{Syntax in Isabelle} \\
 \hline
+\hline
 $\{...\}$ & \verb|\{...\}| & \verb|{...}|\\
+\hline
 $\limg...\rimg$ & \verb|\limg...\rimg| & \verb|\<lparr>...\<rparr>| \\
+\hline
 $\langle...\rangle$ & \verb|\langle...\rangle| & \verb|\<langle>...\<rangle>| \\
+\hline
 $\# $ A & \verb|\#| & \verb|card| \textit{if A is set}, \\
 & & \verb|length| \textit{if A is list} \\
+\hline
 $\cup $ & \verb|\cup| & \verb|\<union>| \\
+\hline
 $\cap$ & \verb|\cap| & \verb|\<inter>| \\
+\hline
 $\cross$ & \verb|\cross| & \verb|\<times>| \\
+\hline
 $\setminus$ & \verb|\setminus| & \verb|-| \\
+\hline
 $\geq$ & \verb|\geq| & \verb|\<ge>| \\
+\hline
 $\leq$ & \verb|\leq| & \verb|\<le>| \\
+\hline
 $\lhd$ & \verb|\lhd| & \verb|\<lhd>| \\
+\hline
 $\rhd$ & \verb|\rhd| & \verb|\<rhd>| \\
+\hline
 $\nrres$ & \verb|\nrres| & \verb|\<unlhd>| \\
+\hline
 $\ndres$ & \verb|\ndres| & \verb|\<unrhd>| \\
+\hline
 $\implies$ & \verb|\implies| & \verb|\<Longrightarrow>| \\
+\hline
 $\iff$ & \verb|\iff| & \verb|\<Longleftrightarrow>| \\
+\hline
 $\notin$ & \verb|\notin| & \verb|\<notin>| \\
+\hline
 $\in$ & \verb|\in| & \verb|\<in>| \\
+\hline
 $\subset$ & \verb|\subset| & \verb|\<subset>| \\
+\hline
 $\subseteq$ & \verb|\subseteq| & \verb|\<subseteq>| \\
+\hline
 $\land$ & \verb|\land| & \verb|\<and>| \\
+\hline
 $\lor$ & \verb|\lor| & \verb|\<or>| \\
+\hline
 $\lnot$ & \verb|\lnot| & \verb|\<not>| \\
+\hline
 $\neq$ & \verb|\neq| & \verb|\<noteq>| \\
+\hline
 $a \mapsto b$ & \verb|a \mapsto b| & \verb|(a,b)| \\
-& & \verb|length| \textit{if set preceding using} \verb|\<rightharpoonup>| \\
+& & \verb|` '| \textit{if set preceding using} \verb|\<rightharpoonup>| \\
+\hline
 $\power A$ & \verb|\power A| & \verb|A set| \\
+\hline
 $\nat$ & \verb|\nat| & \verb|nat| \\
+\hline
 $\nat_1$ & \verb|\nat_1| & \verb|nat| \\
+\hline
 $\num$ & \verb|\num| & \verb|num| \\
+\hline
 $A \pfun B$ & \verb|A \pfun B| & \verb|(A \<rightharpoonup> B)| \\
+\hline
 $A \fun B$ & \verb|A \fun B| & \verb|(A * B) set| \\
+\hline
 $A \rel B$ & \verb|A \rel B| & \verb|(A * B) set| \\
+\hline
 $\seq A$ & \verb|\seq A| & \verb|A list| \\
+\hline
 $\iseq A$ & \verb|\iseq A| & \verb|A list| \\
+\hline
 $\seq_1 A$ & \verb|\iseq_1 A| & \verb|A list| \\
+\hline
 $\dom A$ & \verb|\dom A| & \verb|Domain A| \\
 & & \verb|dom| \textit{if set preceding using} \verb|\<rightharpoonup>| \\
+\hline
 $\ran A$ & \verb|\ran A| & \verb|Range A| \\
 & & \verb|ran| \textit{if set preceding using} \verb|\<rightharpoonup>| \\
+\hline
 $\exists$ & \verb|\exists| & \verb|\<exists>| \\
+\hline
 $\forall$ & \verb|\forall| & \verb|\<forall>| \\
+\hline
 $@$ & \verb|@| & \verb|.| \\
+\hline
 $R\inv$ & \verb|R\inv| & \verb|\<R^-1>| \\
+\hline
 $R^{k}$ & \verb|R^{k}| & \verb|\<R^k>| \\
 \hline
 \caption{A table showing the symbols which are changed from Z specifications in \LaTeX{} to Isabelle.}
@@ -248,7 +290,14 @@ $R^{k}$ & \verb|R^{k}| & \verb|\<R^k>| \\
 \end{longtable}
 }
 
-Another part of the Z mathematical toolkit which we need to rewrite are the use of partial functions. In HOL all functions are total but there are ways to do certain proofs about partial functions \cite{Krauss08definingrecursive}. Therefore the variables which have a type as a partial function will are translated as a set of pairs. Any proofs to check for partial functions if needed can be done by the user in step 6 shown in figure \ref{fig:steps} but the details of these proofs are beyond the scope of this thesis.
+Some symbols in the Z toolkit are the same regardless of whether they are a sequence/list/set or total function/partial function. However the syntax sometimes varies in Isabelle on these ocassions.
+
+\begin{itemize}
+\item $\#$ is a symbol which takes a set or list \footnote{ by list we mean an ordered set} as a parameter and returns the number of elements within that set or list. In zed $\#$ can be used for both set and list, however in Isabelle we must translate $\#$ into \verb|card| if the parameter is a set or \verb|length| if the parameter is a list.
+\item $\mapsto$
+\end{itemize}
+
+Another part of the Z mathematical toolkit which we need to rewrite are the use of partial functions. In HOL all functions are total but there are ways to do certain proofs about partial functions \cite{Krauss08definingrecursive}. We translate total functions as a set of pairs \verb|(A * B) set|, we use the \verb|\<rightharpoonup>| symbol to describe partial funcations. Any proofs to check for partial functions if needed can be done by the user in step 6 shown in figure \ref{fig:steps} but the details of these proofs are beyond the scope of this thesis.
 
 \subsection{Schema Names}
 

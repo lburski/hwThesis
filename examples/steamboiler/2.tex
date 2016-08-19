@@ -227,7 +227,7 @@ Note: Simplified version where all four pumps are swicthed on simultaneously.
 \Xi SteamBoiler0 \\
 Input 
 \where
-\draline{PRE6}{
+\draline{O3}{
 z = norm \\
 w? > w_{opt} - 3l \\
 w? \leq w_{opt}}
@@ -235,7 +235,7 @@ w? \leq w_{opt}}
 
 \uses{OS3}{IS1}
 \uses{OS3}{A2}
-\requires{OS3}{PRE6}
+\requires{OS3}{03}
 
 \draschema{CS6}{
 \begin{schema}{SNormalNotFill0}
@@ -628,7 +628,7 @@ pamount(p_{3}, k_{p3}?) + pamount(p_{4}, k_{p4}?)) \\
 \delta_{pumps} = \delta_{p} * (pamount(p_{1}, works) + (pamount(p_{2}, \\ works) + (pamount(p_{3}, works) + (pamount(p_{4}, works))}
 \end{schema}}
 
-\requires{OS6}{O3}
+\requires{OS6}{O4}
 \uses{OS6}{SS2}
 \uses{OS6}{A4}
 \uses{OS6}{A6}

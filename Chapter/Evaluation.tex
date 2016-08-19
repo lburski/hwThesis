@@ -1,23 +1,253 @@
 \chapter{Evaluation and Discussion}
 \label{ch:evaluation}
 
+In this chapter we go through a few case studies and discuss the difference between the specification translations if any. Table \ref{tab:specstranslated} shows the specifications we have translated into Isabelle using \gls{zmath}. We have classified these examples to show the different types of specifications which can be translated using the \gls{zmath} toolkit. In this chapter we take one example from each class and describe in more detail how the translation was done.
+
+\begin{table}[H]
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Examples using only terms} & \textbf{Examples using sets and terms} \\
+\hline
+Vending Machine & Birthday Book \\
+SteamBoiler & ClubState \\
+\cline{1-1}
+\cline{1-1}
+\textbf{Incomplete translations} & Clubstate2 \\
+\cline{1-1}
+Autopilot & GenDB \\
+A specification which fails ZCGa & ModuleReg \\
+A specification which fails ZDRa & ProjectAlloc \\
+& Timetable \\
+& Videoshop \\
+& TelephoneDirectory \\
+& ZCGa \\
+\hline
+\end{tabular}
+\caption{A table showing the specifications we have translated into Isabelle using \gls{zmath} \label{tab:specstranslated}}
+\end{table}
+
+We have categoriesed the specification into three groups; specifications which only use terms, specifications which use both terms and set and specifications which the translation is incomplete for a variety of reasons. All the specifications we have translated are `state based specifications', which means they operate within a state and to change the state their may become precondition and postconditions within the state. Some specifications are described differently such as functional specifications, however those type of specifications are out of the scope of this thesis.
+
+\section{Complexity of specifications}
+
+This section we analyse the complexity of the specifications we have translate using \gls{zmath}. First we check the complexity of the raw \LaTeX{} specification file, without any annoatation. Then we discuss the complexity of the \gls{zcga} annotated specifications and \gls{zdra} annotated specifications and how this affects the translation into Isabelle.
+
+\subsection{Raw Latex Count}
+
+Table \ref{ch:evaluation} how long each specification is by amount of lines of code and environments uses. We have listed the specifications in decreasing complexity of how many lines of \LaTeX{} the raw specification has.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l |l | l |l |l|| l|}
+\hline
+\textbf{Specification} & \multicolumn{4}{l||}{\textbf{Environment}} & \textbf{Lines of \LaTeX} \\
+\cline{2-5}
+& Zed & Schema & Axdef & \textbf{Total} & \\
+\hline
+Steamboiler & 10 & 34 & 3 & 47 & 507 \\
+ProjectAlloc & 4 & 17 & 0 & 21 & 213 \\
+VideoShop & 3 & 15 & 0 & 18 & 166 \\
+TelephoneDirectory & 6 & 11 & 0 & 17& 133 \\
+ClubState & 4 & 11 & 1 & 16 &129 \\
+ZCGa & 2 & 9 & 0 & 11 & 128 \\
+GenDB & 2 & 7 & 0 & 9 & 114 \\
+Timetable & 1 & 6 & 1 & 8 & 92 \\
+BirthdayBook & 3 & 7 & 0 & 10 & 83 \\
+AutoPilot & 2 & 3 & 0 & 5 & 83 \\
+ClubState2 & 1 & 6 & 1 & 8 & 80 \\
+Vending Machine & 4 & 7 & 0 & 11 & 68 \\
+ModuleReg & 1 & 3 & 0 & 4 & 43 \\
+\hline
+\end{tabular}
+\caption{How many zed, schema and axdef environments and lines of \LaTeX{} code makes up each specification \label{tab:numbersspec}}
+\end{table}
+
+We list information about how many different envronments and lines of \LaTeX{} make up each specification in table \ref{tab:numbersspec}. The environment numbers count how many different types of environments exist within the specification. That is how many `\verb|\begin{schema}...\end{schema}|' or `\verb|\begin{zed}|... etc. We add up the total amount of environments in the specification. From the table we can see that for most of the specifications the more lines of \LaTeX{} there is then the total amount of environments increse. However, there are three exceptions to this trend. The `\emph{BirthdayBook}' specification, `\emph{ClubState2}' specification and `\emph{Vendine Machine}' specification. Specifications for systems are can always be written in a variety of ways and still have the same meaning. Even formal specifications can be written different ways. For example one may have the following declarations:
+
+\begin{zed}
+t:\nat \\
+l: \nat 
+\end{zed}
+
+However, this declaration can also be written as the following:
+\begin{zed}
+t,l: ;\nat
+\end{zed}
+
+Thus removing a line. Formal specifications can also include comments written in natural language which are not part of the formal script. These extra comments about the specification may have also added to the line count in table \ref{tab:numbersspec}.
+
+\subsection{ZCGa Count}
+
+In this section, we evaluate the \gls{zcga} annotations on the specifications. We describe how many of each \gls{zcga} annotations occurs for each specification we have translated.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l |l | l |l | l| l | l |}
+\hline
+\textbf{Specification} & \multicolumn{6}{c|}{\textbf{ZCGa WeakTypes}}\\
+\cline{2-7}
+ & \cgatext{} & \declaration{} & \expression{} & \term{} & \set{} & \definition{} \\
+\hline
+Steamboiler & 297 & 26 & 282 & 595 & 4 & 0 \\
+ProjectAlloc & 98 & 43 & 113 & 154 & 165 & 0\\
+VideoShop  & 87 & 31 & 75 & 119 & 95 & 0 \\
+TelephoneDirectory & 78 & 26 & 53 & 72 & 50 & 0 \\
+ClubState & 75 & 17 & 51 & 55 & 51 & 0 \\
+ZCGa & 73 & 27 & 67 & 35 & 133 & 0 \\
+GenDB & 45 & 24 & 71 & 117 & 121 & 1 \\
+Timetable & 35 & 15 & 53 & 48 & 114 & 0 \\
+BirthdayBook & 26 & 11 & 24 & 28 & 19 & 0 \\
+AutoPilot & 16 & 9 & 19 & 31 & 2 & 0\\
+ClubState2 & 34 & 7 & 37 & 22 & 72 & 0 \\
+Vending Machine & 16 & 7 & 21 & 37 & 0 & 0 \\
+ModuleReg & 20 & 6 & 18 & 13 & 31 & 0 \\
+\hline
+\end{tabular}
+\caption{How many of each grammatical category exists in each specification. \label{tab:specgram}}
+\end{table}
+
+The amount of times a \gls{zcga} weak type occurs in each specification is shown in table \ref{tab:specgram}. We remind the reader the colours corresponding to each grammatical type are: \cgatext{schematext}, \declaration{declaration}, \expression{expression}, \term{term}, \set{set} and \definition{definition}. In this instance we don't use \specification{specification} as we assume each document contains a single specification.
+
+In our sample set we only have one specification (GenDB) with a `\texttt{definition}' annotation. This \texttt{definition} is locally defined within the specification. The `\emph{Vending Machine}' specification only uses \texttt{terms} and therefore there are no \gls{zcga} \texttt{term} annotations. However the `\emph{StemBoiler}' specification also only uses term yet there are 4 \texttt{set} \gls{zcga} annotations. This is because some of the \texttt{terms} used in the specification have to be intrduced by a \texttt{set}. For example in the \emph{SteamBoiler} specification we have the following annotation:
+
+\begin{verbatim}
+\begin{zed}
+\set{State} ::= \term{init} | \term{norm} |
+\term{broken} | \term{stop}
+\end{zed}
+\end{verbatim}
+
+Although the set \verb|State| is annotated as a set, it is not used in any of the schema's in the rest of the specification. It is only defined to present the terms \verb|init|, \verb|norm|, \verb|broken| and \verb|stop| which are used in the specification.
+
+We expect there to be more \texttt{schemaText}'s then \texttt{declarations} and \texttt{expressions} combined as \texttt{schemaText} contains all \texttt{declarations}, \texttt{expressions} and SchemaNames however, from the table we can see that this is not always the case. For example in the \emph{ProjectAlloc} example, there are 98 \texttt{schemaText}, 43 \texttt{declarations} and 113 \texttt{expressions}. The reason for this could be because a single \texttt{expression} can in itself contain many \texttt{expressions}. For example the following \texttt{schemaText} has been taken from the \emph{ProjectAlloc} specification:
+
+\begin{verbatim}
+\text{\expression{\forall 
+\declaration{\term{lec}: \expression{\dom maxPlaces}}\\
+@ \expression{\term{\# (\set{\set{allocation}
+\rres \set{\{\term{lec}\}}})} \leq \term{\set{maxPlaces}~\term{lec}}}}}
+\end{verbatim}
+
+In this example we can see that there contains 1 annotated \texttt{schemaText} but 3 \texttt{expressions}.
+Another reason why there may be more \texttt{expressions} than \texttt{schemaText} is because when annotating a specification with \gls{zcga}, \texttt{declarations} also contain \texttt{expressions}. If we have the following example, again taken from the ProjectAlloc specification:
+
+\begin{verbatim}
+\text{\declaration{\set{studInterests}, \set{lecInterests}:
+\expression{PERSON \pfun\iseq TOPIC}}}
+\end{verbatim}
+
+The \gls{zcga} text contains 1 annotation of \texttt{SchemaText}, 1 annotation of a \texttt{declaration}, 2 annotations of \texttt{sets} and 1 annotation of an \texttt{expression}. Since this is the case we expect to see more expressions than declarations in every specification, which is true according to table \ref{tab:specgram}.
+
+
+\subsection{ZDRa Count}
+
+In this section we analyse the amount of \gls{zdra} instances and relations are labeled for each of the specifications we translated. We give details of the amount of instances in table \ref{tab:speczdracount} and give details of the amount of relations in each specification in table \ref{tab:speczdrarelationscount}.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l |l | l |l | l| l | l | l | l | l | l |}
+\hline
+\textbf{Specification} & \multicolumn{10}{c|}{\textbf{ZDRa Instances}}\\
+\cline{2-11}
+ & \textbf{A} & \textbf{SS} & \textbf{IS} & \textbf{CS} & \textbf{OS} & \textbf{TS} & \textbf{PRE} & \textbf{PO} & \textbf{O} & \textbf{SI}  \\
+\hline
+Steamboiler & 6 & 2 & 2 & 21 & 6 & 6 & 21 & 23 & 12 & 1  \\
+ProjectAlloc & 0 & 1 & 1 & 5 & 11 & 0 & 11 & 6 & 22 & 1 \\
+VideoShop &  0 & 1 & 1 & 3 & 10 & 0 & 13 & 4 & 20 & 1  \\
+TelephoneDirectory & 0 & 1 & 1 & 4 & 5 & 5 & 8 & 5 & 10 & 1 \\
+ClubState & 1 & 1 & 1 & 4 & 6 & 4 & 9 & 6 & 11 & 0 \\
+ZCGa & 0 & 1 & 1 & 6 & 1 & 0 & 6 & 7 & 2 & 1 \\
+GenDB & 0 & 1 & 1 & 4 & 2 & 0 & 6 & 5 & 4 & 1 \\
+Timetable & 1 & 1 & 1 & 4 & 0 & 0 & 4 & 5 & 0 & 1 \\
+BirthdayBook & 0 & 1 & 1 & 1 & 4 & 2 & 4 & 2 & 8 & 1 \\
+AutoPilot & 0 & 2 & 0 & 1 & 1 & 0 & 1 & 1 & 2 & 0 \\
+ClubState2 & 1 & 2 & 1 & 3 & 0 & 0 & 3 & 4 & 0 & 2 \\
+Vending Machine & 0 & 1 & 0 & 3 & 0 & 3 & 3 & 2 & 0 & 0 \\
+ModuleReg & 0 & 1 & 0 & 2 & 0 & 0 & 2 & 2 & 0 & 1 \\
+\hline
+\end{tabular}
+\caption{How many of each ZDRa instances exists in each specification. \label{tab:speczdracount}}
+\end{table}
+
+From table \ref{tab:speczdracount} we can see that all specifications have either 1 or 2 statesSchema's. For state base specification it should be the case that then specification has at least 1 state. Most state based specifications have stateInvariants that must be conformed to through all the changes of the specification. However this is not a must and some specification (even from our sample) do not have any stateInvariants. 
+
+All precondition must have a corresponding postcondition or output, therefore we can say:
+
+\begin{lemma}
+$precondition \longrightarrow postcondition \lor output$
+\end{lemma}
+
+The table supports this informatio as there are more combined postconditions and outputs then there are precondition. However not all postconditions and outputs need to have a precondition, they can be executed without one. Therefore the number of preconditions does not need to equal the total number of postcondition and outputs.
+
+\begin{table}[H]
+\begin{tabular}{|l |l | l |l | l| l |}
+\hline
+\textbf{Specification} & \multicolumn{5}{c|}{\textbf{ZDRa Relations}}\\
+\cline{2-6}
+ & \textbf{initiaOf} & \textbf{requires} & \textbf{allows} & \textbf{totalises} & \textbf{uses} \\
+\hline
+Steamboiler & 2 & 28 & 21 & 24 & 92  \\
+ProjectAlloc & 1 & 16 & 11 & 0 & 16  \\
+VideoShop  & 0 & 15 & 13 & 0 & 142  \\
+TelephoneDirectory &  1 & 11 & 8 & 14 & 8 \\
+ClubState &  1 & 12 & 9 & 14 & 12  \\
+ZCGa & 1 & 9 & 6 & 0 & 7  \\
+GenDB & 1 & 8 & 6 & 0 & 6  \\
+Timetable & 1 & 6 & 4 & 0 & 6  \\
+BirthdayBook & 1 & 7 & 4 & 6 & 5  \\
+AutoPilot & 0 & 2 & 1 & 0 & 2 \\
+ClubState2 & 1 & 6 & 3 & 0 & 6 \\
+Vending Machine & 0 & 2 & 0 & 2 & 8  \\
+ModuleReg & 0 & 3 & 2 & 0 & 2  \\
+\hline
+\end{tabular}
+\caption{How many of each ZDRa relations exists in each specification. \label{tab:speczdrarelationscount}}
+\end{table}
+
+We can cross reference the table showing the amount of instances (table \ref{tab:speczdracount}) with the table showing the relations (table \ref{tab:speczdrarelationscount}). For example, the relation \emph{initialOf} can only occur if the specification has an \emph{initialSchema}. Not all specifictions have an \emph{initialSchema} and therefore do not have an \emph{initialOf} relation.
+
+There is also an equal amount of \emph{allows} relations as there is \emph{preconditions}. As was written previously, all preconditions must have a corresponding output or postcondition, therefore the relation `\emph{allows}' links each precondition to its corresponding postcondition or output. However, the vendingMachine specification is an exception to this as the preconditions are written as entire schema's. For example we have the following instance in the vending machine specification:
+
+\begin{verbatim}
+\draschema{PRE3}{
+\begin{schema}{some\_stock}
+stock: \nat
+\where
+stock > 0
+\end{schema}}
+\end{verbatim}
+
+This chunk of specification describes an entire schema as a precondition. The totalising schema then joints the precondition to their corresponding output or postcondition. The specification is written in this way as it is a personal choice of writing the specification formally. All other specifications in our sample set are written in the style where the precondition and corresponding output or postcondition are written inside the same schema environment.
+
+Obviously, the relation `\emph{totalises}' only occurs in specifications where totaliseSchema's are present. Therefore the `\emph{totalise}' relation is not necessary in all specifications.
+
+VideoShop specification is one of the largest specifications (in terms of lines of \LaTeX{}) in our sample set however it has quite a small amount of relations
+
+
 \todo[inline]{Complete Evaluation and discussion chapter}
 % Write case studies
 % Discuss Case Studies
-% Write how many lines of code, pages of schemas etc 
-% Divide case studies in similar ones, eg which ones uses only terms, which ones uses terms and sets, which ones doesnt have state invariants
 % Any assumptions  made
+% What properties are extracted from the case study specifications
 
 %reflect on the amount and complexity of manual proof still needed, and in particular whether this should
 %be within grasp of a software/system designer, who is not necessarily an expert in Isabelle/HOL.
 
-\section{Case Study 1: A specification using only terms.}
+\section{Case Studies}
 
-This section describes a case study of a Z specification translated and proved in Isabelle using the \gls{zmath} framework. This case study only uses variables which are terms.
+This section describes a few specification case studies in which we have used the \gls{zmath} tool kit to translate and prove formal specifications into the Isabelle automated theorem prover. The first case study present a formal specification only using terms, the second is a formal specification where both sets and terms are used and therefore the syntax used in Isabelle is more complex. The final case study we present is a partial translation of a specification which is not fully formalised but on it's way to becoming fully formal.
 
-\section{Case Study 2: A specification using both terms and sets.}
+\subsection{Case Study 1: A specification using only terms.}
 
-\section{Case Study 3: A semi formal specification.}
+The following case study is based on the \emph{Steamboiler} specification which has been translated and proved in Isabelle using the \gls{zmath} framework. This case study only uses variables which are terms.
+
+\subsection{Case Study 2: A specification using both terms and sets.}
+
+This case study based is on the \emph{Project Allocation} specification which uses both terms and sets. The specification has been translated into Isabelle using the \gls{zmath} framework.
+
+\subsection{Case Study 3: A semi formal specification.}
+
+In this case study we present the \emph{AutoPilot} specification. The specification is a semi formal specification and has been partially translated into Isabelle. The parts which have been translated are written formally and have been annotated accordingly. This gives an example of a specification which is written in natural language and is on it's way to being formalised.
 
 \section{Analysing examples}
 

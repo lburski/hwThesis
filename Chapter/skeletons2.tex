@@ -292,12 +292,17 @@ $R^{k}$ & \verb|R^{k}| & \verb|\<R^k>| \\
 
 Some symbols in the Z toolkit are the same regardless of whether they are a sequence/list/set or total function/partial function. However the syntax sometimes varies in Isabelle on these ocassions.
 
-\begin{itemize}
-\item $\#$ is a symbol which takes a set or list \footnote{ by list we mean an ordered set} as a parameter and returns the number of elements within that set or list. In zed $\#$ can be used for both set and list, however in Isabelle we must translate $\#$ into \verb|card| if the parameter is a set or \verb|length| if the parameter is a list.
-\item $\mapsto$
-\end{itemize}
+One part of the Z mathematical toolkit which we need to rewrite are the use of partial functions. In Isabelle/HOL all functions are total but there are ways to do certain proofs about partial functions \cite{Krauss08definingrecursive}. We translate total functions as a set of pairs \verb|(A * B) set|, we use the \verb|\<rightharpoonup>| symbol to describe partial funcations. Any proofs to check for partial functions if needed can be done by the user in step 6 shown in figure \ref{fig:steps} but the details of these proofs are beyond the scope of this thesis.
 
-Another part of the Z mathematical toolkit which we need to rewrite are the use of partial functions. In HOL all functions are total but there are ways to do certain proofs about partial functions \cite{Krauss08definingrecursive}. We translate total functions as a set of pairs \verb|(A * B) set|, we use the \verb|\<rightharpoonup>| symbol to describe partial funcations. Any proofs to check for partial functions if needed can be done by the user in step 6 shown in figure \ref{fig:steps} but the details of these proofs are beyond the scope of this thesis.
+Other parts which differ are the following:
+
+\begin{itemize}
+\item `\verb|\#|' is a symbol which takes a set or list \footnote{by list we mean an ordered set} as a parameter and returns the number of elements within that set or list. In Z, `\verb|\#|' can be used for both set and list, however in Isabelle we must translate `\verb|\#|' into `\verb|card|' if the parameter is a set or `\verb|length|' if the parameter is a list.
+
+\item `\verb|\mapsto|' is a symbol which takes two terms and returns a term. If we have a set `\verb|funset|', which has type `\verb|A \fun B|' and $f \mapsto s \in funset$ then in Isabelle the term `\verb|f \mapsto s|' will be translated as `\verb|(f,s)|'. However if `\verb|funset|' had the type `\verb|A \pfun B|' then the Isabelle translation of `\verb|f \mapsto s|' would be `\verb|f s|'.
+
+\item `\verb|\dom|' and `\verb|\ran|' in Z are the same regardless whether it is being applied to an element in a partial function or a total function. However in Isabelle the syntax varies between the two types of functions. If the `\verb|dom|' being applied to an element `\verb|k|', with type `\verb|(A * B) set|' then the Isabelle translation would be `\verb|Domain k|' whereas if `\verb|k|' has type `\verb|A \<rightharpoonup B|' then the `\verb|domain|' of `\verb|k|' in Isabelle would be translated as `\verb|dom k|'. Similarly we would have `\verb|Range k|' and `\verb|ran k|' for total and partial functions of `\verb|k|' respectively.
+\end{itemize}
 
 \subsection{Schema Names}
 

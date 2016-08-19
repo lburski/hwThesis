@@ -89,8 +89,6 @@ There are many other properties one can check in systems such as properties acro
 
 \subsection{Evaluated method and tools on a convincing set of examples.}
 
-\todo[inline]{Highlight the evaluation chapter of the thesis}
-
 Another contribution this thesis presents is our approach shown on a convincing set of examples. We have used our approach on the following specifications
 
 \begin{tabular}{l l}
@@ -104,6 +102,8 @@ $\bullet$ A specification which fails ZDRa & \\
 $\bullet$ Autopilot (A semi formal Specification) \cite{Butler96} & \\
 $\bullet$ The ZCGa type checker & \\
 \end{tabular}
+
+We have analysed the complexity of each of these specifications and shown in detail a few case studies of translating these specification using the toolkit of \gls{zmath}. We have discussed how the complexity affects the translation and given details on lines of code in each specification, amount of different environments for each specification and the amount of annatations needed for each specification.
 
 \section{Outline}
 
@@ -126,5 +126,7 @@ In chapter \ref{ch:interface} we give an overview on the user interface for \gls
 Chapter \ref{ch:fullexample} goes through one entire specification (modulereg specification \cite{essenceofz}) along the \gls{zmath} route. Each aspect is clearly highlighted and explained to the reader giving hints and tips along the way. Other examples are found in the appendix, however they are only taken along the \gls{zmath} route without any commentary.
 
 In chapter \ref{ch:analysis} we consider 2 specification examples which have been proven in a theorem prover using a single step, and compare them with the same specification examples which have been proven in multiple steps using \gls{zmath}. We give a table of comparison explaining the amount of expertise required, type of input and lines of proofs and lemmas. We explain and compare the type of expertise required for each of the specification examples and how doing the proof in one step compares against or multiple steps.
+
+Chapter \ref{ch:evaluation} evaluates the \gls{zmath} toolkit. Gives details on the complexity of the specifications we have translated and goes through some specification case studies.
 
 Finally, a conclusion is presented in chapter \ref{ch:conclusion} which summarises the contributions made in this thesis. The limitations of this research and potential areas of future research are also discussed.

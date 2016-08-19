@@ -222,7 +222,7 @@ Note: Simplified version where all four pumps are swicthed on simultaneously.
 \text{\Xi SteamBoiler0} \\
 \text{Input}
 \where
-\draline{PRE6}{
+\draline{O3}{
 \text{\expression{\term{z} = \term{norm}}} \\
 \text{\expression{\term{w?} > \term{\term{w_{opt}} - \term{\term{3}\term{l}}}}} \\
 \text{\expression{\term{w?} \leq \term{w_{opt}}}}}
@@ -230,7 +230,7 @@ Note: Simplified version where all four pumps are swicthed on simultaneously.
 
 \uses{OS3}{IS1}
 \uses{OS3}{A2}
-\requires{OS3}{PRE6}
+\requires{OS3}{O3}
 
 \draschema{CS6}{
 \begin{schema}{SNormalNotFill0}
@@ -364,7 +364,7 @@ Auxilary Schemata
 \text{Pumps'} \\
 \text{ControlInput}
 \where
-\draline{O3}{
+\draline{O4}{
 \text{\expression{\expression{\term{p_{1}'} = \term{\term{pswitch}(\term{on}, \term{k_{p1}?})}} \land
  \expression{\term{p_{2}'} = \term{\term{pswitch}(\term{on},\term{k_{p2}?})}}}} \\
 \text{\expression{\expression{\term{p_{2}'} = \term{\term{pswitch}(\term{on}, \term{k_{p3}?})}} \land

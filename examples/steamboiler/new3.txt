@@ -219,7 +219,11 @@ lemma L_(CS21)
 lemma L_(CS19)
 
 lemma L_(CS18)
+
 lemma L_(CS10)
+
 lemma L_(CS12)
+
 lemma L_(CS17)
+
 lemma L_(CS16)

@@ -249,6 +249,98 @@ This case study based is on the \emph{Project Allocation} specification which us
 
 In this case study we present the \emph{AutoPilot} specification. The specification is a semi formal specification and has been partially translated into Isabelle. The parts which have been translated are written formally and have been annotated accordingly. This gives an example of a specification which is written in natural language and is on it's way to being formalised.
 
+We have taken the natural language specification for an autopilot system from \cite{Butler96} and started to formalise it.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[clip, trim=5.5cm 11cm 4cm 4.5cm, scale=0.6]{examples/semiform/informal.pdf}
+\vspace{-0.18in}
+\caption{An example of the original Autopilot specification. \label{fig:originalautopilot}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+%[clip,l,b,r,t]
+\includegraphics[clip, trim=5.5cm 11cm 4cm 4.5cm, scale=0.6]{examples/semiform/semiformal.pdf}
+\vspace{-0.2in}
+\caption{An example of the Autopilot specification partially formalised. \label{fig:semiformautopilot}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+We give the informal specification in figure \ref{fig:originalautopilot} and one which we are beginning to formalised in figure \ref{fig:semiformautopilot}. We have highlighted in {\color{set}red} the parts which we have formalised in figure \ref{fig:semiformautopilot}. The formalised parts of the semi formal specification are taken from the text in the informal specification.
+
+We then annotate the partial formal specification in \gls{zcga} annotations and \gls{zdra} annotations taken from chapters \ref{ch:zcga} and \ref{ch:zdra} respectively. Once annotated we can check the annotated document for \gls{zcga} and \gls{zdra} errors. 
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[clip, trim=0cm 8cm 6cm 2cm, scale=0.6]{examples/semiform/1n2.pdf}
+\vspace{-0.18in}
+\caption{An example of the original Autopilot specification annotated in \gls{zcga} and \gls{zdra}. \label{fig:autopilot1n2}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+%[clip,l,b,r,t]
+\includegraphics[clip, trim=0cm 8.5cm 9cm 0cm, scale=0.5]{examples/semiform/zcgacorrect.png}
+\includegraphics[clip, trim=0cm 8.5cm 9cm 0cm, scale=0.5]{examples/semiform/zdracorrect.png}
+\vspace{-0.2in}
+\caption{The outputting result when checking the autopilot specification with the \gls{zcga} and \gls{zdra} checkers. \label{fig:autopilotcorrect}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+Even though the specification is not fully formalised we can still annotate it with \gls{zcga} and \gls{zdra} and check for the correctness of the parts which have been annotated (shown in figures \ref{fig:autopilot1n2} and \ref{fig:autopilotcorrect}). When checking with \gls{zdra} we have a warning message telling the user that the specification is not correctlty totalised. That is there is a precondition outstand with not postcondition counter part. This does not matter for now as we can still carry on with the tranlation.
+
+When checking the specification for \gls{zdra}, \gls{zmath} has also produced a dependecy graph and goto graphs (shown in figures \ref{fig:autodepgraph} and \ref{fig:autogotograph}):
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[scale=0.5]{examples/semiform/25a.png}
+\vspace{-0.18in}
+\caption{The dependecy graph produced for the autopilot specification. \label{fig:autodepgraph}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.43\textwidth}
+\centering
+%[clip,l,b,r,t]
+\includegraphics[scale=0.5]{examples/semiform/25b.png}
+\vspace{-0.2in}
+\caption{The goto graph produced for the autopilot specification. \label{fig:autogotograph}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+With the dependency graph (figure \ref{fig:autodepgraph}) we can say that $SS2$ uses $SS1$, $CS1$ uses $SS2$, $PRE1$ requires $CS1$ and allows $PO1$. Which makes up the main tree dependencies. $OS1$ and $O1$ are seperate as they do not have any relations which any parts of the main tree, the only dependency they have is on eachother where $O1$ requires $OS1$.
+
+We can say that the dependecy graph \emph{describes} the relation between instances and the goto graph (figure \ref{fig:autogotograph}) \emph{orders} the instances in a way as to parse through a theorem prover.
+
+We can now generate a general proof skeleton for the Autopilot specification even though it is not fully formalised (shown in figure \ref{fig:autopilotgps}). We can clearly see that the arrow has changed direction for the $OS1$ and $O1$ relationship from the dependency graph. Again since these two instances are not dependency on any part of the main tree they are seperate. However in the dependency graph described the relation that $O1\ requires\ OS1$ ($O1$ root and $OS1$ child) the goto graph flips this relationship as in a theorem prover we woud need $OS1$ to appear before $O1$ since $O1$ requires $OS1$ to exist. We can also say that $SS2$ uses $SS1$ therefore $SS2$ needs $SS1$ to exist for itself to exist. Then $CS1$ uses $SS2$ therefore $CS1$ needs $SS2$ to exist for itself to exit. We can say that $PRE1$ requires $CS1$ and allows $PO1$. Thefore $PO1$ needs $PRE1$ to exist before it is allowed to exist itself.
+
+\begin{figure}[H]
+\centering
+\begin{center}
+\begin{verbatim}
+stateSchema SS1 
+outputSchema OS1 
+output O1 
+stateSchema SS2 
+changeSchema CS1 
+precondition PRE1 
+postcondition PO1 
+\end{verbatim}
+\end{center}
+\caption{\Gls{gps} for the Autopilot specification. \label{fig:autopilotgps}}
+\end{figure}
+
+Since the Autopilot specification has passed the \gls{zcga} and \gls{zdra} checks we can then generate a \gls{gps} for the specification using the goto graph produced in the previous stage. The way this is done is described in section \ref{sec:zdra2gen}. Note that even though there is a $changeSchema$ instance, there are no $stateInvariants$ in the specification (as yet). Therefore \gls{zmath} does not generate any lemma's to prove in this case since \gls{zmath} only checks for consistancy accross the specification and thus need state invariants to be present.
+
 \section{Analysing examples}
 
 \section{Reflection and Discussion}

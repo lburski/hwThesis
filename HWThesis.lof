@@ -6,12 +6,14 @@
 \contentsline {figure}{\numberline {1.5}{\ignorespaces The outputting result when checking the steamboiler specification with the \gls {zcga} and \gls {zdra} checkers. }}{13}{figure.1.5}
 \contentsline {figure}{\numberline {1.6}{\ignorespaces The dependecy graph produced for the steamboiler specification. }}{14}{figure.1.6}
 \contentsline {figure}{\numberline {1.7}{\ignorespaces The goto graph produced for the steamboiler specification. }}{14}{figure.1.7}
-\contentsline {figure}{\numberline {1.8}{\ignorespaces An example of the original Autopilot specification. }}{15}{figure.1.8}
-\contentsline {figure}{\numberline {1.9}{\ignorespaces An example of the Autopilot specification partially formalised. }}{15}{figure.1.9}
-\contentsline {figure}{\numberline {1.10}{\ignorespaces An example of the original Autopilot specification annotated in \gls {zcga} and \gls {zdra}. }}{16}{figure.1.10}
-\contentsline {figure}{\numberline {1.11}{\ignorespaces The outputting result when checking the autopilot specification with the \gls {zcga} and \gls {zdra} checkers. }}{16}{figure.1.11}
-\contentsline {figure}{\numberline {1.12}{\ignorespaces The dependecy graph produced for the autopilot specification. }}{17}{figure.1.12}
-\contentsline {figure}{\numberline {1.13}{\ignorespaces The goto graph produced for the autopilot specification. }}{17}{figure.1.13}
-\contentsline {figure}{\numberline {1.14}{\ignorespaces \Gls {gps} for the Autopilot specification. }}{18}{figure.1.14}
-\contentsline {figure}{\numberline {1.15}{\ignorespaces The Isabelle skeleton produced for the autopilot specification. }}{19}{figure.1.15}
-\contentsline {figure}{\numberline {1.16}{\ignorespaces The autopilot specification in Isabelle syntax. }}{19}{figure.1.16}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces \Gls {gps} for the steamboiler specification. }}{15}{figure.1.8}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Part of the isabelle skeleton for the steamboiler specification.}}{16}{figure.1.9}
+\contentsline {figure}{\numberline {1.10}{\ignorespaces An example of the original Autopilot specification. }}{18}{figure.1.10}
+\contentsline {figure}{\numberline {1.11}{\ignorespaces An example of the Autopilot specification partially formalised. }}{18}{figure.1.11}
+\contentsline {figure}{\numberline {1.12}{\ignorespaces An example of the original Autopilot specification annotated in \gls {zcga} and \gls {zdra}. }}{19}{figure.1.12}
+\contentsline {figure}{\numberline {1.13}{\ignorespaces The outputting result when checking the autopilot specification with the \gls {zcga} and \gls {zdra} checkers. }}{19}{figure.1.13}
+\contentsline {figure}{\numberline {1.14}{\ignorespaces The dependecy graph produced for the autopilot specification. }}{20}{figure.1.14}
+\contentsline {figure}{\numberline {1.15}{\ignorespaces The goto graph produced for the autopilot specification. }}{20}{figure.1.15}
+\contentsline {figure}{\numberline {1.16}{\ignorespaces \Gls {gps} for the Autopilot specification. }}{21}{figure.1.16}
+\contentsline {figure}{\numberline {1.17}{\ignorespaces The Isabelle skeleton produced for the autopilot specification. }}{22}{figure.1.17}
+\contentsline {figure}{\numberline {1.18}{\ignorespaces The autopilot specification in Isabelle syntax. }}{22}{figure.1.18}

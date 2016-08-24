@@ -347,9 +347,40 @@ Since we only have a warning and no errors when checking the steamboiler specifi
 
 The dependecy and goto graphs are shown in figures \ref{fig:steamdepgrap} and \ref{fig:steamgotograph} respectively. Since there are a lot of \gls{zdra} instances and therefore a lot of nodes, both the dependecy graph and goto graph are cluttered. We will discuss this as a limitation in the next section.
 
+From the goto graph the \gls{zmath} tool kit automatically generates a general proof skeleton, which uses the order from the goto graph to order the instances in how they should appear in any theorem prover. Part of the skeleton for the steamboiler specification is shown in figure \ref{fig:steamgpsa}.
+
+\begin{figure}[H]
+\includegraphics[scale=0.9]{Figures/Evaluation/steamboilergpsa.png}
+\caption{\Gls{gps} for the steamboiler specification. \label{fig:steamgpsa}}
+\end{figure}
+
+We can now translate the \gls{gps} into Isabelle syntax using the \gls{zmath} toolkit.
+
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.43\textwidth}
+\centering
+\includegraphics[ scale=0.5]{Figures/Evaluation/4image.png}
+\end{minipage}\hfill
+\begin{minipage}{0.53\textwidth}
+%[clip,l,b,r,t]
+\centering
+\includegraphics[scale=0.5]{Figures/Evaluation/4imageb.png}
+\end{minipage}
+\begin{minipage}{0.45\textwidth}
+%[clip,l,b,r,t]
+\centering
+\includegraphics[scale=0.5]{Figures/Evaluation/4imagec.png}
+\end{minipage}
+\caption{Part of the isabelle skeleton for the steamboiler specification.\label{fig:steamisaskel}}
+\end{figure}
+
+Part of the isabelle skeleton for the steamboiler specification is shown in figure \ref{fig:steamisaskel}. Since the steamboiler example has 2 stateSchema's the \gls{zmath} toolset creates 2 isabelle 	\texttt{records} in the theory file. The top left image shows the beginning part of the isabelle skeleton, where the first stateSchema (or record) sets the state of the theory. Midway down the theory file the first record \texttt{ends} and a new one is added with the line \verb|record SS2 = SS1 +|. Towards the end the isabelle skeleton there are lemma's to check the consistency for all state changing schema's (\texttt{CS}) in the format decribed in chapter \ref{ch:skeletons} section \ref{subsec:pob1}.
+
 \subsection{Case Study 2: A specification using both terms and sets.}
 
-This case study based is on the \emph{Project Allocation} specification which uses both terms and sets. The specification has been translated into Isabelle using the \gls{zmath} framework.
+This case study based is on the \emph{ModuleReg} specification which uses both terms and sets. The specification has been translated into Isabelle using the \gls{zmath} framework. The entire \gls{zmath} works for the ModuleReg example is shown in chapter \ref{ch:fullexample}.
 
 \subsection{Case Study 3: A semi formal specification.}
 

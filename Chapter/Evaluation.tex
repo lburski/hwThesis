@@ -239,7 +239,113 @@ This section describes a few specification case studies in which we have used th
 
 \subsection{Case Study 1: A specification using only terms.}
 
-The following case study is based on the \emph{Steamboiler} specification which has been translated and proved in Isabelle using the \gls{zmath} framework. This case study only uses variables which are terms.
+The following case study is based on the \emph{Steamboiler} \cite{steamboilerslides} specification which has been translated and proved in Isabelle using the \gls{zmath} framework. This case study only uses variables which are terms. The steamboiler specification is the larges from our examples. It is made up of 507 lines of \LaTeX{} code, 10 zed environemnts, 34 schmes and 3 axiom definitions. When annotating with \gls{zcga} there were 297 schematext, 26 declarations, 282 expressions, 595 terms and 4 sets. When annotated with \gls{zdra} there were 6 axioms, 2 stateSchema's, 2 initialSchema's, 21 changeSchema's, 6 outputSchema's, 6 totaliseSchema's, 21 preconditions, 23 postconditions, 12 outputs and 1 set of stateInvariants.
+
+\subsubsection{Natural Lanaguge Specification of the Steamboiler}
+
+The steam boiler itself is a water level and steam quantity measuring device, with four pumps and four pump controlers. There is a valve for emptying the boiler.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{Figures/Evaluation/steamboilerimage.png}
+\caption{A diagram showing a theoretical Steamboiler. \label{fig:steamboiler}}
+\end{figure}
+
+An example of how the steamboiler could look is shown in figure \ref{fig:steamboiler}. The variables of the steamboiler are shown in table \ref{tab:steamboilervariables}.
+
+\todo[inline]{find out what $l$ does}
+\begin{table}[H]
+\begin{tabular}{l|l}
+\textbf{variables} & \textbf{description} \\
+\hline
+$w_{min}$ & minimal water level \\
+$w_{max}$ & maximal water level \\
+$l$ & \\
+$d_{max}$ & maximal quantity of steam exiting the boiler \\
+$\delta_{p}$ & error in the value of the pumps \\
+$\delta_{d}$ & error in steam\\
+$w$ & water level \\
+$d$ &  amount of steam exiting the boiler \\
+$k_{p,i}$ & pump $i$ works/broken \\
+$k_{w}$ & water level measuring device works/broken \\
+$k_{d}$ & steam amount measuring device works/broken\\
+$p_{i}$ & pump $i$ on/off \\
+$v$ & valve open/closed \\
+$a$ & boiler on/off \\
+$z$ & state init/norm/broken/stop 
+\end{tabular}
+\caption{The variables of the steamboiler and their descriptions. \label{tab:steamboilervariables}}
+\end{table}
+
+The full formal specification for the steamboiler is 10 pages long which can be found in \cite{mathlangexamples}. Therefore we have given small examples taken from the full specification.
+
+\subsubsection{ZMathLang steps for the steamboiler case study.}
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{{Figures/Evaluation}/0steamboilerimage.png}
+\vspace{-0.18in}
+\caption{The formal specification \LaTeX{} code for the steamboiler system. \label{fig:steamboiler0}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+%[clip,l,b,r,t]
+\includegraphics[clip, trim=5.5cm 4cm 5cm 4cm, scale=0.6]{examples/steamboiler/0.pdf}
+\vspace{-0.2in}
+\caption{The formal specification for the steamboiler system. \label{fig:steamboiler0comp}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+We show the \LaTeX{} code for part of the raw steamboiler specification in figure \ref{fig:steamboiler0} and it's pdflatex counterpart in figure \ref{fig:steamboiler0comp}.
+
+We then annotate the specification using \gls{zcga} and \gls{zdra} labels.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[clip, trim=3cm 8cm 6cm 2cm]{examples/steamboiler/1n2.pdf}
+\vspace{-0.18in}
+\caption{An example of the original steamboiler specification annotated in \gls{zcga} and \gls{zdra}. \label{fig:steamboilert1n2}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+%[clip,l,b,r,t]
+\includegraphics[ scale=0.5]{examples/steamboiler/zcgacorrect.png}
+\includegraphics[ scale=0.5]{examples/steamboiler/zdracorrect.png}
+\vspace{-0.2in}
+\caption{The outputting result when checking the steamboiler specification with the \gls{zcga} and \gls{zdra} checkers. \label{fig:steamboilercorrect}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+Since we only have a warning and no errors when checking the steamboiler specification we can now generate a goto graph and dependency graphs for it.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[trim=4cm 1cm 1cm 1cm, scale=0.5]{examples/steamboiler/25a.png}
+\vspace{-0.18in}
+\caption{The dependecy graph produced for the steamboiler specification. \label{fig:steamdepgraph}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.43\textwidth}
+%[clip,l,b,r,t]
+\centering
+\includegraphics[trim=4cm 1cm 1cm 1cm, scale=0.5]{examples/steamboiler/25b.png}
+\vspace{-0.2in}
+\caption{The goto graph produced for the steamboiler specification. \label{fig:steamgotograph}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+The dependecy and goto graphs are shown in figures \ref{fig:steamdepgrap} and \ref{fig:steamgotograph} respectively. Since there are a lot of \gls{zdra} instances and therefore a lot of nodes, both the dependecy graph and goto graph are cluttered. We will discuss this as a limitation in the next section.
 
 \subsection{Case Study 2: A specification using both terms and sets.}
 
@@ -269,6 +375,8 @@ We have taken the natural language specification for an autopilot system from \c
 \vspace{-0.2in}
 \end{minipage}
 \end{figure}
+
+\subsubsection{ZMathLang steps for the autopilot case study.}
 
 We give the informal specification in figure \ref{fig:originalautopilot} and one which we are beginning to formalised in figure \ref{fig:semiformautopilot}. We have highlighted in {\color{set}red} the parts which we have formalised in figure \ref{fig:semiformautopilot}. The formalised parts of the semi formal specification are taken from the text in the informal specification.
 
@@ -341,8 +449,47 @@ postcondition PO1
 
 Since the Autopilot specification has passed the \gls{zcga} and \gls{zdra} checks we can then generate a \gls{gps} for the specification using the goto graph produced in the previous stage. The way this is done is described in section \ref{sec:zdra2gen}. Note that even though there is a $changeSchema$ instance, there are no $stateInvariants$ in the specification (as yet). Therefore \gls{zmath} does not generate any lemma's to prove in this case since \gls{zmath} only checks for consistancy accross the specification and thus need state invariants to be present.
 
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[clip, trim=0cm 0cm 15cm 0cm, scale=0.5]{examples/semiform/4image.png}
+\vspace{-0.18in}
+\caption{The Isabelle skeleton produced for the autopilot specification. \label{fig:autoisskel}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.43\textwidth}
+\centering
+%[clip,l,b,r,t]
+\includegraphics[clip, trim=0cm 0cm 4cm 0cm, scale=0.35]{examples/semiform/5imageal.png}
+\vspace{-0.2in}
+\caption{The autopilot specification in Isabelle syntax. \label{fig:autoisa}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+\Gls{zmath} can automatically translate the \gls{gps} into Isabelle syntax (figure \ref{fig:autoisskel}), this is now an Isabelle skeleton. The Isabelle skeleton has not yet taken the \gls{zcga} information as one can get to this step with just the \gls{zdra} annotated document. Once the Isabelle is filled in (figure \ref{fig:autoisa}) we have the annotated specification in Isabelle form. This can now give the user an idea of how to input their specifiation into Isabelle syntax, without them having prior knowledge of Isabelle. It is important to note that this is as far as the \gls{zmath} translation goes. Since there are no state Invariants with this case study no lemma's to check for consistancy have been generated. The user can add the state Invariants in their raw \LaTeX{} specification, or fully formalise their specification. Another way to fully prove their specification is to add other properties to the Isabelle document.
+
 \section{Analysing examples}
 
+
+
 \section{Reflection and Discussion}
+
+Assumptions
+
+\begin{itemize}
+\item ....
+\end{itemize}
+
+Limitations
+
+\begin{itemize}
+\item If we totalise preconditions e.g \verb|\totalises{TS#}{PRE#}| and all preconditions have been totalised then no warning. If we totalise schemas with preconditions within them e.g. \verb|\totalises{TS#}{CS#}| then the \gls{zdra} checker doesnt pick up on it.
+
+\item Specification = 1 theory. Can't do more than 1 specification in 1 document.
+
+\item when viewing goto and dep graph if there are a lot of nodes they are all bundled together. Would be better if spaced out more.
+\end{itemize}
 
 \section{Conclusion}

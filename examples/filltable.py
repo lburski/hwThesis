@@ -142,6 +142,32 @@ def givezdrarelationships(theFile):
     print theFile + ": " + str(initialof) + " & " + str(requires) + " & " + str(allows) + " & " + str(totalises) + " & " + str(uses)
     f.close()
     
+def numberoflemmas(theFile):
+    initialof = 0
+    f = open(theFile, "r")
+    for line in f:
+        lineswithinitialof = re.findall(r'lemma [a-zA-Z\_0-9]+\_L[0-9]+', line)
+        if lineswithinitialof:
+            t = len(lineswithinitialof)
+            initialof = initialof + t
+    print theFile + ": " + str(initialof) 
+    f.close()
+    
+def doNumberOfLemmas():
+    numberoflemmas("steamboiler/new6.thy")
+    numberoflemmas("projectalloc/6.thy")
+    numberoflemmas("videoshop/new6.thy")
+    numberoflemmas("telephone/6.thy")
+    numberoflemmas("clubstate/new6.thy")
+    numberoflemmas("zmathlang/zcga/6.thy")
+    numberoflemmas("gendb/6.thy")
+    numberoflemmas("timetable/new6.thy")
+    numberoflemmas("bb/new6.thy")
+    numberoflemmas("semiform/5.thy")
+    numberoflemmas("clubstate2/new6.thy")
+    numberoflemmas("vm/6.thy")
+    numberoflemmas("modulereg/new6.thy")
+    
 def doZCGaInfo():
     giveMeInfo("steamboiler/1.tex")
     giveMeInfo("projectalloc/1.tex")
@@ -187,6 +213,7 @@ def doZDRaRelations():
     givezdrarelationships("vm/2.tex")
     givezdrarelationships("modulereg/2.tex")
     
-giveMeInfoForZDRa("videoshop/1n2.tex")
-print "\n"
-givezdrarelationships("videoshop/1n2.tex")
+#giveMeInfoForZDRa("videoshop/1n2.tex")
+#print "\n"
+#givezdrarelationships("videoshop/1n2.tex")
+doNumberOfLemmas()

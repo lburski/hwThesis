@@ -40,7 +40,7 @@ changeschema & CS & $\backslash$draschema\{\textit{CS\#}\}\{\textit{instance}\} 
 \hline
 outputschema & OS & $\backslash$draschema\{\textit{OS\#}\}\{\textit{instance}\}  \\
 \hline
-totalise & TS & $\backslash$draschema\{\textit{TS\#}\}\{\textit{instance}\}  \\
+totaliseSchema & TS & $\backslash$draschema\{\textit{TS\#}\}\{\textit{instance}\}  \\
 \hline
 axiom & A  & $\backslash$draschema\{\textit{A\#}\}\{\textit{instance}\}  \\
 \hline
@@ -68,6 +68,8 @@ uses & $\backslash$uses \{\textit{instance\_1}\}\{\textit{instance\_2}\}\\
 requires & $\backslash$requires \{\textit{instance\_1}\}\{\textit{instance\_2}\}\\
 \hline
 allows & $\backslash$allows \{\textit{instance\_1}\}\{\textit{instance\_2}\}\\
+\hline
+totalises & $\backslash$totalises \{\textit{instance\_1}\}\{\textit{instance\_2}\}\\
 \hline
 \end{tabular}
 \caption{\label{tab:relations} \gls{zdra} Relations with their notations and \LaTeX{} commands.}
@@ -173,7 +175,7 @@ result!: REPORT
 \caption{\label{fig:exampleofos} A outputschema labelled in \gls{zdra}.}
 \end{figure}
 
-\subsubsection{totalise}
+\subsubsection{totaliseSchema}
 
 A \emph{totalise} instance are parts of the specification which totalise preconditions and schemas within the specification. These are labelled as \verb|TS#| where \verb|#| is some number. \emph{Totoalise} instances can written in two ways. Either using the double equals operator:
 
@@ -440,7 +442,8 @@ When the specification is checked with \gls{zcga} then the output message says t
 \subsection{Products}
 \label{subsec:zdra_prodcuts}
 
-When the specification has been ZDRa checked the program will then output two new files.
+When the specification has been ZDRa checked the program will then output two new files. 
+
 \begin{enumerate}
 
 \item ZDRa specification Dependency Graph
@@ -448,13 +451,13 @@ When the specification has been ZDRa checked the program will then output two ne
 \item ZDRa specification GoTo Graph
 \end{enumerate}
 
-The \gls{zdra} specification Dependency graph uses the labels and annotations from the \gls{zdra} to show the dependencies between each of the instances. The ZDRa GoTo graph illustrates which instances are dependent or are needed for another instance to exist. Both graphs are built using the directed graph built in the \gls{zdra} check (see section \ref{subsec:loops}).
+The \gls{zdra} specification Dependency graph uses the labels and annotations from the \gls{zdra} to show the dependencies between each of the instances. The ZDRa GoTo graph illustrates which instances are dependent or are needed for another instance to exist. Both graphs are built using the directed graph built in the \gls{zdra} check (see section \ref{subsec:loops}). Further information on how these products are formed can be found in the next chapter.
 
 \subsubsection{Dependency Graph}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/zdra/depgraph.png}
+\includegraphics[scale=0.6]{Figures/zdra/depgraph.png}
 \caption{An example of a dependency graph. \label{fig:depgraph}}
 \end{figure}
 
@@ -465,7 +468,7 @@ An example of a \emph{dependency graph} can be seen in figure \ref{fig:depgraph}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/zdra/gotograph.png}
+\includegraphics[scale=0.6]{Figures/zdra/gotograph.png}
 \caption{An example of a goto graph \gls{zdra} correct. \label{fig:gotograph}}
 \end{figure}
 
@@ -473,7 +476,200 @@ An example of a \emph{goto graph} is shown in figure \ref{fig:gotograph}, it is 
 
 The other \gls{zdra} relations which also reverse the direction of the arrow in the \emph{goto graph} are \emph{uses},\emph{requires} and \emph{totalises}.
 
-\todo[inline]{Remove formalising chapter and put some of it in zdra chapter}
+\section{A formal view on the \gls{zdra}.}
+
+We denote the star character `*' to denote one or many. We remind the reader that `$\mathbf{\Gamma}$' denotes the schematext of a specification, $\mathcal{Z}, \mathcal{E}, \mathcal{T}$ and $\mathbb{S}$ are correctly typed \emph{declatation}, \emph{expression}, \emph{term} and \emph{set} respectively (from table \ref{tab:zcga1} in chapter \ref{ch:zcga}).
+
+\begin{defin}
+Let $\mathcal{E}$ be a correctly typed expression. \\ Let $\mathcal{D}$ be a correctly typed definition. \\
+Where $((\mathcal{Z}@\mathcal{E})$*$|\mathcal{T}$*$|\mathbb{S}$*$) \in \mathcal{E}$ and $(\mathcal{T}$*$|\mathbb{S}$*$) \in \mathcal{D}$\\
+Let $\mathcal{ED}$ be the set containing $\mathcal{E}$'s and $\mathcal{D}$'s.
+\end{defin}
+
+For example an expression can be the following:
+\verb|t = t| where $t$ is a term. Therefore this expression contains two terms. Another example of an expression could be:
+$\forall t: S \bullet t = 0$. This expression contains a declaration within an expression ($(\mathcal{Z}@\mathcal{E})$, which is $t:S$.
+
+
+\begin{table}[H]
+\begin{footnotesize}
+\begin{tabular}{| l | l | l |}
+\hline
+\textbf{Instance} & \textbf{Allowed weak types} & \textbf{Annotations} \\
+\hline
+\hline
+precondition &
+$\mathcal{ED} \in \mathbf{\Gamma}$ &
+\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
+
+postcondition &
+$\mathcal{ED} \in \mathbf{\Gamma}$ &
+\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
+
+output &
+$\mathcal{ED} \in \mathbf{\Gamma}$ &
+\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
+
+stateInvariants &
+$\mathcal{ED} \in \mathbf{\Gamma}$ &
+\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
+
+stateSchema &
+$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \in \mathbf{\Gamma}$ &
+$(\cgatext{\declaration{\mathcal{Z}$*$} \& \expression{\mathcal{E}}\definition{\mathcal{D}}}) | \cgatext{\declaration{\mathcal{Z}$*$}}$ \\
+
+theory &
+$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \in \mathbf{\Gamma}$ &
+$(\cgatext{\declaration{\mathcal{Z}$*$} \& \expression{\mathcal{E}}\definition{\mathcal{D}}}) | \cgatext{\declaration{\mathcal{Z}$*$}}$\\
+
+changeSchema &
+$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \in \mathbf{\Gamma}$ &
+$(\cgatext{\declaration{\mathcal{Z}$*$} \& \expression{\mathcal{E}}\definition{\mathcal{D}}}) | \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+
+totaliseSchema &
+$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \in \mathbf{\Gamma}$ &
+$(\cgatext{\declaration{\mathcal{Z}$*$} \& \expression{\mathcal{E}}\definition{\mathcal{D}}}) | \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+
+axiom &
+$\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
+$\cgatext{\declaration{\mathcal{Z}$*$} \& \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+
+outputSchema &
+$\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
+$\cgatext{\declaration{\mathcal{Z}$*$} \& \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+
+initSchema &
+$\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
+$\cgatext{\declaration{\mathcal{Z}$*$} \& \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+
+\hline
+\end{tabular}
+
+\end{footnotesize}
+\caption{ZCGa annotations allowed in ZDRa instances \label{tab:zcgainzdra}}
+\end{table}
+
+Table \ref{tab:zcgainzdra} shows which \gls{zcga} are allowed to be in certain \gls{zdra} instances. Where `\&' means these weak type categories must be included in the instance. For example a \emph{stateSchema} can be made up of one or more $\mathcal{Z}$ \textbf{AND} one or more $\mathcal{ED}$ \textbf{OR} one or more $\mathcal{Z}$ on their own.
+Therefore a \emph{stateSchema} can not be made up of $\mathcal{ED}$ on it's own.
+
+\paragraph{precondition, postcondition, output, stateInvariants.}
+These instances can only contain a correctly typed expression or definition within the schematext. There may be one or more expressions or definitions.
+
+\paragraph{stateSchema, theory.}
+These instances can only contain one or more correctly typed declaration \emph{and} one or more correctly typed expression and definition or one or more correctly typed declarations.
+
+\paragraph{changeSchema, totalise.}
+These instances can only contain one or more correctly typed declaration \emph{and} one or more correctly typed expression and definition or one or more correctly typed expressions or definitions.
+
+\paragraph{axiom, outputSchema, initSchema}
+These instances can only contain one or more correctly typed declarations \emph{and} one or more correctly typed expression and definitions.
+
+\subsection{Allowances when combining the ZCGa and ZDRa}
+
+Since we have formally outlined the \gls{zdra} in table \ref{tab:zcgainzdra} we can now show some rules which occur when we combing the \gls{zcga} and \gls{zdra} together.
+
+\begin{thm}
+Using table \ref{tab:zcgainzdra}, the initialOf relation only permits the annotations: \\
+ $\mathcal{Z} \& \mathcal{ED}, initialOf, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$.
+\end{thm}
+
+\begin{proof}
+From table \ref{tab:relationsallowed} (section \ref{subsec:zdrarelations}) we can see the only legal relation for initialOf is `initSchema $\longrightarrow$ stateSchema'. An initSchema can only have the annotation $\mathcal{Z} \& \mathcal{ED}$ and a stateSchema can only have the annotations $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$ (from table \ref{tab:zcgainzdra}). Since $\longrightarrow$ represents the relation \emph{initialOf} then we get $\mathcal{Z} \& \mathcal{ED}, initialOf, ((\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z})$.
+\end{proof}
+
+\begin{thm}
+Using table \ref{tab:zcgainzdra}, the allows relation only permits the annotations: \\
+$\mathcal{ED}, allows, \mathcal{ED}$.
+\end{thm}
+
+\begin{proof}
+The allows relation only permits `precondition $\longrightarrow$ postcondition' (table \ref{tab:relationsallowed}). Both a precondition and postcondition have the \gls{zcga} annotations $\mathcal{ED}$. Since $\longrightarrow$ represents the relation. Then the result is $\mathcal{ED}, allows, \mathcal{ED}$.
+\end{proof}
+
+\begin{thm}
+Using table \ref{tab:zcgainzdra}, the requires relation only permits the annotations:
+\begin{itemize}
+\item $\mathcal{Z} \& \mathcal{ED}, requires, \mathcal{ED}$
+\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, requires, \mathcal{ED}$
+\end{itemize}
+\end{thm}
+
+\begin{proof}
+Using table (table \ref{tab:relationsallowed}) of permitted relations the requires relation has the following syntax:
+\begin{enumerate}
+\item `outputSchema $\longrightarrow$ precondition'
+\item `outputSchema $\longrightarrow$ output', 
+\item `changeSchema $\longrightarrow$ precondition', 
+\item `changeSchema $\longrightarrow$ postcondition', 
+\end{enumerate} 
+\begin{itemize}
+
+\item Using the allowed \gls{zcga} annotations in table \ref{tab:zcgainzdra} we can see that an outputSchema contains only $\mathcal{Z} \& \mathcal{ED}$ and a precondition and output both only contain $\mathcal{ED}$ thus 1 and 2 become $\mathcal{Z} \& \mathcal{ED} \longrightarrow \mathcal{ED}$. Since $\longrightarrow$ represents the relation then we end up with $\mathcal{Z} \& \mathcal{ED}, requires, \mathcal{ED}$.
+
+\item The allowed \gls{zcga} annotations for changeSchema are $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}$ and the allowed \gls{zcga} annotations for both precondition and postcondition are $\mathcal{ED}$ therefore we end up with ($(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \longrightarrow \mathcal{ED}$. Again the $\longrightarrow$ represents the relation so the $\longrightarrow$ becomes `requires' and we are left with $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, requires, \mathcal{ED}$.
+\end{itemize}
+\end{proof}
+
+\begin{thm}
+Using table \ref{tab:zcgainzdra}, the totalises relation only permits the annotations:
+\begin{itemize}
+\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}$
+\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, \mathcal{Z} \& \mathcal{ED}$
+\end{itemize}
+\end{thm}
+
+\begin{proof}
+Using table (table \ref{tab:relationsallowed}) of permitted relations the totalises relation has the following syntax:
+\begin{enumerate}
+\item `totaliseSchema $\longrightarrow$ changeSchema'
+\item `totaliseSchema $\longrightarrow$ outputSchema'
+\item `totaliseSchema $\longrightarrow$ totaliseSchema'
+\end{enumerate} 
+
+\begin{itemize}
+\item Table \ref{tab:relationsallowed} shows the \gls{zcga} syntax for totaliseSchema and changeSchema is $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$. Thus the permitted relations would be $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}) \longrightarrow (\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$ for points 1 and 3. Since $\longrightarrow$ represents the relation `totalises' in this case we would have $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$. Hence the first part of the theorem is proven.
+
+\item Output schema has the \gls{zcga} sytntax $(\mathcal{Z} \& \mathcal{ED})$ according to table \ref{tab:zcgainzdra}. If totaliseSchema has the \gls{zcga} syntax $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$ then using point 2 the permitted relation would be $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}) \longrightarrow \mathcal{Z} \& \mathcal{ED}$. Again since $\longrightarrow$ represent totalise in this case we conclude with $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, \mathcal{Z} \& \mathcal{ED}$.
+\end{itemize}
+\end{proof}
+
+\begin{thm}
+Using table \ref{tab:zcgainzdra}, the uses relation only permits the annotations:
+\begin{itemize}
+\item $\mathcal{Z} \& \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$
+\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$
+\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$
+\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, \mathcal{Z} \& \mathcal{ED}$
+\item $\mathcal{Z} \& \mathcal{ED}, uses, \mathcal{Z} \& \mathcal{ED}$
+\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, \mathcal{Z} \& \mathcal{ED}$
+\end{itemize}
+\end{thm}
+
+\begin{proof}
+Using table (table \ref{tab:relationsallowed}) of permitted relations the uses relation has the following syntax:
+\begin{enumerate}
+\item `outputSchema $\longrightarrow$ stateSchema'
+\item `changeSchema $\longrightarrow$ stateSchema'
+\item `stateSchema $\longrightarrow$ stateSchema'
+\item `stateSchema $\longrightarrow$ axiom'
+\item `outputSchema $\longrightarrow$ axiom'
+\item `changeSchema $\longrightarrow$ axiom'
+\end{enumerate} 
+
+\begin{itemize}
+\item According to table \ref{tab:zcgainzdra} the \gls{zcga} syntax for outputSchema is $\mathcal{Z}\&\mathcal{ED}$ and the syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Therefore using point 1 we get `$\mathcal{Z}\&\mathcal{ED} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$'. Since $\longrightarrow$ represents the relation uses in this case we get $\mathcal{Z} \& \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$.
+
+\item The syntax for changeSchema is $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}$ and the syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$ according from table \ref{tab:zcgainzdra}. Substituting the \gls{zcga} for instance names in point 2 we get $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. By substituting the relation uses for $\longrightarrow$ we end up with $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$.
+
+\item Using table \ref{tab:zcgainzdra} the \gls{zcga} syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Using point 3, we substitute the \gls{zcga} syntax for the instance name and we get $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Since $\longrightarrow$ represents uses then we get $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$.
+
+\item The \gls{zcga} syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$ and the \gls{zcga} syntax for axiom is  $\mathcal{Z} \& \mathcal{ED}$. By subsituting these \gls{zcga} syntax's in point 4 we get $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. Since $\longrightarrow$ in this case is the relationship uses, we can change $\longrightarrow$ to `uses' and get $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, \mathcal{Z} \& \mathcal{ED}$.
+
+\item According to table \ref{tab:zcgainzdra} the \gls{zcga} syntax for outputSchema and axiom are both $\mathcal{Z} \& \mathcal{ED}$. Therefore if we put in the \gls{zcga} syntax instead of the instance names in point 5 we get $\mathcal{Z} \& \mathcal{ED} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. From table \ref{tab:relationsallowed} we can deduce that $\longrightarrow$ mean `uses' so we finish with $\mathcal{Z} \& \mathcal{ED}, uses, \mathcal{Z} \& \mathcal{ED}$.
+
+\item Finally, the \gls{zcga} syntax for changeSchema is $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}$ and the \gls{zcga} syntax for axiom is $\mathcal{Z} \& \mathcal{ED}$ according to table \ref{tab:zcgainzdra}. If we substitute the allowed \gls{zcga} syntax in point 6 we get $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. Since $\longrightarrow$ is the relation `uses' in this case we end up with $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, \mathcal{Z} \& \mathcal{ED}$.
+\end{itemize}
+\end{proof}
 
 \section{Conclusion}
-In this chapter the \gls{zdra} step of the \gls{zmath} has been described. A \LaTeX{} style package has been created to allow a user to annotate a Z specification and see the structure of the system. A \gls{zdra} program has been created to check for rhetorical correctness and make sure there are no loops in the reasoning of the specification. Warning messages appear if the specification is still lacking some totalising schemas for some preconditions. If the specification is correct at the \gls{zdra} stage then the user may then go on to create general and theorem prover specific skeletons which are described in the next chapter.
+In this chapter the \gls{zdra} step of the \gls{zmath} has been described. A \LaTeX{} style package has been created to allow a user to annotate a Z specification and see the structure of the system. A \gls{zdra} program has been created to check for rhetorical correctness and make sure there are no loops in the reasoning of the specification. Warning messages appear if the specification is still lacking some totalising schemas for some preconditions. We have also formally outlined the \gls{zdra} and shown some rules which occur when combining the \gls{zcga} and \gls{zdra} together. If the specification is correct at the \gls{zdra} stage then the user may then go on to create general and theorem prover specific skeletons which are described in the next chapter.

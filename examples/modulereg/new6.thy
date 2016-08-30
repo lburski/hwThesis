@@ -51,8 +51,7 @@ lemma RegForModule_L1:
 \<exists> students' :: PERSON set.
 \<exists> taking' :: (PERSON * MODULE) set.
 \<exists> m :: MODULE.
-(
-(p \<in> students) 
+((p \<in> students) 
 \<and> (m \<in> degModules) 
 \<and> ((p, m) \<notin> taking)
 \<and> (taking' = taking \<union> {(p, m)}) 
@@ -61,8 +60,7 @@ lemma RegForModule_L1:
 \<and> (Domain taking \<subseteq> students)
 \<and> (Range taking \<subseteq> degModules)
 \<and> (Domain taking' \<subseteq> students')
-\<and> (Range taking' \<subseteq> degModules')
-)"
+\<and> (Range taking' \<subseteq> degModules'))"
 by (smt Domain_empty Domain_insert Range.intros Range_empty 
 Range_insert Un_empty Un_insert_right empty_iff empty_subsetI 
 empty_subsetI insert_mono insert_mono singletonI singletonI 

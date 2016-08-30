@@ -602,13 +602,15 @@ We can see that the complexity of the proof used for the \verb|RegForModule_L1| 
 
 \subsection{Vending Machine}
 
-The vending machine example has 3 state changing schemas (shown in table \ref{tab:speczdracount}) however since it does not have any labeled stateInvariants, \gls{zmath} can not automatically produce any properties to prove the consistency of the specification.
+The vending machine example has 3 state changing schemas (shown in table \ref{tab:speczdracount}) however since it does not have any labeled stateInvariants, \gls{zmath} can not automatically produce any properties to prove the consistency of the specification. If we refer back to figure \ref{fig:timeline} in chapter \ref{ch:design} it shows that the \gls{zmath} toolkit goes slightly past the point of `\emph{specification in isabelle with no proof}' however the automation of \gls{zmath} can only go past that point \textbf{if} there are changeschema's and stateInvariants labelled. Otherwise the \gls{zmath} toolkit can only translate the specification into isabelle syntax with no lemma's or properties to prove. Thus it is up to the user to carry on manually inputting their properties to obtain a fully proven specification.
 
 %Complexity of proofs
 % how far the user must go to finish the proof
 %refer back to diagram in design chapter
 
 \subsection{Other examples}
+
+\todo[inline]{gendb and projectalloc, lemmas to prove for consitancy}
 
 \section{Reflection and Discussion}
 
@@ -619,15 +621,15 @@ The vending machine example has 3 state changing schemas (shown in table \ref{ta
 Assumptions
 
 \begin{itemize}
-\item ....
+\item Specification = 1 theory. Can't do more than 1 specification in 1 document.
+
+\item we assume the user wishes to check for consistancy. As stated in 2proofs, the properties to prove is down to stakeholders
 \end{itemize}
 
 Limitations
 
 \begin{itemize}
 \item If we totalise preconditions e.g \verb|\totalises{TS#}{PRE#}| and all preconditions have been totalised then no warning. If we totalise schemas with preconditions within them e.g. \verb|\totalises{TS#}{CS#}| then the \gls{zdra} checker doesnt pick up on it.
-
-\item Specification = 1 theory. Can't do more than 1 specification in 1 document.
 
 \item when viewing goto and dep graph if there are a lot of nodes they are all bundled together. Would be better if spaced out more.
 \end{itemize}

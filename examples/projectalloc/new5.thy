@@ -128,36 +128,57 @@ where
 "RemoveLecsTopic  projectalloc projectalloc' studInterests' lecInterests' allocation' maxPlaces' l t x==
 (l \<in> dom lecInterests)
 \<and> (t \<in> Range (the (lecInterests l)))
-\<and> (lecInterests' = lecInterests(l \<mapsto> {p. (p, t) \<in> the (lecInterests l)}))
+(*\<and> (lecInterests' = lecInterests(l \<mapsto> {p. (p, t) \<in> the (lecInterests l)}))*)
 \<and> (studInterests' = studInterests)
+\<and> (allocation' = allocation)"
+
+definition DeAllocate :: 
+"ProjectAlloc => ProjectAlloc => (PERSON \<rightharpoonup> ((nat * TOPIC) set))  => (PERSON \<rightharpoonup> ((nat * TOPIC) set)) => (PERSON \<rightharpoonup> PERSON) => (PERSON \<rightharpoonup> nat) => PERSON \<Rightarrow> bool"
+where 
+"DeAllocate projectalloc projectalloc' studInterests' lecInterests' allocation' maxPlaces' s ==
+(\<exists> sup \<in> dom lecInterests. (the (allocation s) = sup)
+(*\<and> (allocation' = allocation - {s,sup})*))
+\<and> (studInterests' = studInterests)
+\<and> (lecInterests' = lecInterests)"
+
+definition AddStudent :: 
+"ProjectAlloc => ProjectAlloc => (PERSON \<rightharpoonup> ((nat * TOPIC) set))  => (PERSON \<rightharpoonup> ((nat * TOPIC) set)) => (PERSON \<rightharpoonup> PERSON) => (PERSON \<rightharpoonup> nat) => ((nat * TOPIC) set) \<Rightarrow> PERSON \<Rightarrow> bool"
+where 
+"AddStudent projectalloc projectalloc' studInterests' lecInterests' allocation' maxPlaces' ts s ==
+ (s \<notin> (dom studInterests \<union> dom lecInterests))
+\<and> (studInterests' = studInterests(s \<mapsto> ts))
+\<and> (lecInterests' = lecInterests)
 \<and> (allocation' = allocation)
-"
+\<and> (maxPlaces' = maxPlaces)"
 
-definition CS4 :: 
- "(*CS4_TYPES*) => bool"
+definition Allocate :: 
+"ProjectAlloc => ProjectAlloc => (PERSON \<rightharpoonup> ((nat * TOPIC) set))  => (PERSON \<rightharpoonup> ((nat * TOPIC) set)) => (PERSON \<rightharpoonup> PERSON) => (PERSON \<rightharpoonup> nat) => PERSON => bool"
 where 
-"CS4 (*CS4_VARIABLES*) == (PO5)"
+"Allocate projectalloc projectalloc' studInterests' lecInterests' allocation' maxPlaces' s ==
+ (s \<in> dom studInterests)
+\<and> (s \<notin> dom allocation)
+\<and> ((\<exists> sup \<in> dom lecInterests. \<exists> t :: TOPIC. \<exists> i j :: nat. 
+(the (maxPlaces sup) > (card ({q. the (allocation q) = sup})))
+\<and> ((i, t) \<in> the (studInterests s))
+\<and> ((j, t) \<in> the (lecInterests sup))
+\<longrightarrow>
+(\<forall> lec \<in> dom lecInterests. \<forall> k :: nat. (
+(the (maxPlaces lec) > (card ({j. the (allocation j) = lec}))))
+\<longrightarrow> (((k, t) \<in> the (lecInterests lec)) \<longrightarrow> (k \<ge> j)
+\<and> ((*ran(1..i-1 studInterests s) \<inter>*) Range (the (lecInterests lec)) = {}))
+\<and> (allocation' = allocation(s \<mapsto> sup)))))
+\<and> (studInterests' = studInterests)
+\<and> (lecInterests' = lecInterests)"
 
-definition CS1 :: 
-"(*CS1_TYPES*) => bool"
+definition AddLecturer :: 
+"ProjectAlloc => ProjectAlloc => (PERSON \<rightharpoonup> ((nat * TOPIC) set))  => (PERSON \<rightharpoonup> ((nat * TOPIC) set)) => (PERSON \<rightharpoonup> PERSON) => (PERSON \<rightharpoonup> nat) => PERSON \<Rightarrow> nat \<Rightarrow> ((nat * TOPIC) set) \<Rightarrow> bool"
 where 
-"CS1 (*CS1_VARIABLES*) ==
- (PRE1)
-\<and> (PO2)"
-
-definition CS3 :: 
-"(*CS3_TYPES*) => bool"
-where 
-"CS3 (*CS3_VARIABLES*) ==
- (PRE3)
-\<and> (PO4)"
-
-definition CS2 :: 
-"(*CS2_TYPES*) => bool"
-where 
-"CS2 (*CS2_VARIABLES*) ==
- (PRE2)
-\<and> (PO3)"
+"AddLecturer projectalloc projectalloc' studInterests' lecInterests' allocation' maxPlaces' l maxAlloc ts ==
+ (l \<notin> ((dom studInterests) \<union> (dom lecInterests)))
+\<and> (lecInterests' = lecInterests(l \<mapsto> ts))
+\<and> (maxPlaces' = maxPlaces(l \<mapsto> maxAlloc))
+\<and> (studInterests' = studInterests)
+\<and> (allocation' = allocation)"
 
 lemma CS5_L1:
 "(\<exists> (*CS5_VARIABLESANDTYPES*).

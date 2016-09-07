@@ -62,64 +62,32 @@ lemma CS3_L1:
 "(\<exists> (*CS3_VARIABLESANDTYPES*).
 (PRE3)
 \<and> (PO4)
-\<and> (SI1\<and>SI1)
-\<and> (SI1\<and>SI1'))"
+\<longrightarrow> (SI1)
+\<and> (SI1'))"
 sorry
 
 lemma CS4_L2:
 "(\<exists> (*CS4_VARIABLESANDTYPES*).
 (PRE4)
 \<and> (PO5)
-\<and> (SI1\<and>SI1)
-\<and> (SI1\<and>SI1'))"
+\<longrightarrow> (SI1)
+\<and> (SI1'))"
 sorry
 
 lemma CS1_L3:
 "(\<exists> (*CS1_VARIABLESANDTYPES*).
 (PRE1)
 \<and> (PO2)
-\<and> (SI1\<and>SI1)
-\<and> (SI1\<and>SI1'))"
+\<longrightarrow> (SI1)
+\<and> (SI1'))"
 sorry
 
 lemma CS2_L4:
 "(\<exists> (*CS2_VARIABLESANDTYPES*).
 (PRE2)
 \<and> (PO3)
-\<and> (SI1\<and>SI1)
-\<and> (SI1\<and>SI1'))"
-sorry
-
-lemma CS3_L1:
-"(\<exists> (*CS3_VARIABLESANDTYPES*).
-(PRE3)
-\<and> (PO4)
-\<and> (SI1\<and>SI1)
-\<and> (SI1\<and>SI1'))"
-sorry
-
-lemma CS4_L2:
-"(\<exists> (*CS4_VARIABLESANDTYPES*).
-(PRE4)
-\<and> (PO5)
-\<and> (SI1\<and>SI1)
-\<and> (SI1\<and>SI1'))"
-sorry
-
-lemma CS1_L3:
-"(\<exists> (*CS1_VARIABLESANDTYPES*).
-(PRE1)
-\<and> (PO2)
-\<and> (SI1\<and>SI1)
-\<and> (SI1\<and>SI1'))"
-sorry
-
-lemma CS2_L4:
-"(\<exists> (*CS2_VARIABLESANDTYPES*).
-(PRE2)
-\<and> (PO3)
-\<and> (SI1\<and>SI1)
-\<and> (SI1\<and>SI1'))"
+\<longrightarrow> (SI1)
+\<and> (SI1'))"
 sorry
 
 end

@@ -1,4 +1,4 @@
-theory new5
+theory new6
 imports 
 Main 
 
@@ -203,7 +203,7 @@ lemma RemoveLecsTopic_L1:
 \<and>(ran allocation' \<subseteq> dom lecInterests')
 \<and>(dom maxPlaces' = dom lecInterests')
 \<and> (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) = lec})) \<le> the (maxPlaces' lec))))"
-sorry
+by (metis (full_types) dom_restrict empty_iff inf_bot_right)
 
 lemma DeAllocate_L2:
 "(\<exists> projectalloc :: ProjectAlloc.
@@ -227,7 +227,7 @@ lemma DeAllocate_L2:
 \<and>(ran allocation' \<subseteq> dom lecInterests')
 \<and>(dom maxPlaces' = dom lecInterests')
 \<and> (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) = lec})) \<le> the (maxPlaces' lec))))"
-sorry
+by auto
 
 lemma AddStudent_L3:
 "(\<exists> projectalloc :: ProjectAlloc.
@@ -253,7 +253,7 @@ lemma AddStudent_L3:
 \<and>(ran allocation' \<subseteq> dom lecInterests')
 \<and>(dom maxPlaces' = dom lecInterests')
 \<and> (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) = lec})) \<le> the (maxPlaces' lec))))"
-sorry
+by fastforce
 
 lemma Allocate_L4:
 "(\<exists> projectalloc :: ProjectAlloc.
@@ -287,7 +287,7 @@ lemma Allocate_L4:
 \<and>(ran allocation' \<subseteq> dom lecInterests')
 \<and>(dom maxPlaces' = dom lecInterests')
 \<and> (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) = lec})) \<le> the (maxPlaces' lec))))"
-sorry
+using dom_empty by fastforce
 
 lemma AddLecturer_L5:
 "(\<exists> projectalloc :: ProjectAlloc.
@@ -314,7 +314,7 @@ lemma AddLecturer_L5:
 \<and>(ran allocation' \<subseteq> dom lecInterests')
 \<and>(dom maxPlaces' = dom lecInterests')
 \<and> (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) = lec})) \<le> the (maxPlaces' lec))))"
-sorry
+by (metis (full_types) dom_empty dom_empty dom_empty dom_eq_singleton_conv dom_restrict inf.idem insert_not_empty)
 
 
 end

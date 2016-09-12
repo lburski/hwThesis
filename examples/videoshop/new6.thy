@@ -55,8 +55,7 @@ definition TitlesOut ::
  "(TITLE \<rightharpoonup> nat) \<Rightarrow> VideoShop \<Rightarrow> PERSON \<Rightarrow> (TITLE set) \<Rightarrow> (PERSON set) \<Rightarrow> VideoShop \<Rightarrow> (PERSON * TITLE) set => bool"
 where 
 "TitlesOut stockLevel' videoshop' p titles members' videoshop rented' == (p \<in> members)
-(*\<and> 
-(titles = rented \<lparr> {(p)} \<rparr>)*)"
+\<and> (titles = rented``{p})"
 
 definition CopiesRentedOut :: 
  "nat \<Rightarrow> (TITLE \<rightharpoonup> nat) \<Rightarrow> TITLE \<Rightarrow> VideoShop \<Rightarrow> (PERSON set) \<Rightarrow> VideoShop \<Rightarrow> (PERSON * TITLE) set => bool"
@@ -106,8 +105,7 @@ definition DeleteTitle ::
 where 
 "DeleteTitle stockLevel' t videoshop' members' videoshop rented' == (t \<notin> Range rented) 
 \<and> (t \<in> dom stockLevel)
-(*({p. (p, t) \<in> rented})*)
-(*stockLevel' = {t} \<unlhd> stockLevel*)
+\<and> ({stockLevel'} = ({n. t \<notin> dom stockLevel}))
 \<and> (members' = members)
 \<and> (rented' = rented)"
 
@@ -117,16 +115,15 @@ where
 "ChangeStockLevel stockLevel' t videoshop' members' videoshop rented' change == (t \<in> dom stockLevel) 
 \<and> (the (stockLevel t) + change > 0)
 \<and> (the (stockLevel t) + change \<ge> card ({p. (p, t) \<in> rented}))
-(*\<and> stockLevel' = stockLevl \<oplus> {(t, (the (stockLevel t) + change))}*)
+\<and> (stockLevel' = stockLevel((t) \<mapsto>(the (stockLevel t) + change)))
 \<and> (rented' = rented)
 \<and>(members' = members)"
 
 definition SuccessMessage ::
 "MESSAGE \<Rightarrow> bool"
 where
-"SuccessMessage outcome == ((
-(outcome = success)
-))"
+"SuccessMessage outcome == 
+(outcome = success)"
 
 definition TotalRentVideo::
 "(TITLE \<rightharpoonup> nat) \<Rightarrow> TITLE \<Rightarrow> VideoShop \<Rightarrow> PERSON \<Rightarrow> (PERSON set) \<Rightarrow> VideoShop \<Rightarrow> (PERSON * TITLE) set \<Rightarrow> MESSAGE => bool"
@@ -173,7 +170,6 @@ where
 \<and> (SuccessMessage outcome)
 \<or> (NotInStock stockLevel' t videoshop' outcome members' videoshop rented')"
 
-
 lemma RentVideo_L1:
 "(\<exists> stockLevel' :: (TITLE \<rightharpoonup> nat).
 \<exists> t :: TITLE.
@@ -202,14 +198,13 @@ lemma DeleteTitle_L2:
 \<exists> rented' :: (PERSON * TITLE) set.
 (t \<notin> Range rented) 
 \<and> (t \<in> dom stockLevel)
-(*({p. (p, t) \<in> rented})*)
-(*stockLevel' = {t} \<unlhd> stockLevel*)
+\<and> ({stockLevel'} = ({n. t \<notin> dom stockLevel}))
 \<and> (members' = members)
 \<and> (rented' = rented))
 \<longrightarrow> (Domain rented \<subseteq> members)
 \<and> (Range rented \<subseteq> dom stockLevel)
 \<and> (\<forall>t \<in> Range rented. card ({p. (p, t) \<in> rented}) < (the (stockLevel t)))"
-sorry
+by blast
 
 lemma ChangeStockLevel_L3:
 "(\<exists> stockLevel' :: (TITLE \<rightharpoonup> nat).
@@ -219,7 +214,7 @@ lemma ChangeStockLevel_L3:
 (t \<in> dom stockLevel) 
 \<and> (the (stockLevel t) + change > 0)
 \<and> (the (stockLevel t) + change \<ge> card ({p. (p, t) \<in> rented}))
-(*\<and> stockLevel' = stockLevl \<oplus> {(t, (the (stockLevel t) + change))}*)
+\<and> (stockLevel' = stockLevel((t) \<mapsto>(the (stockLevel t) + change)))
 \<and> (rented' = rented)
 \<and>(members' = members)
 \<longrightarrow> (Domain rented \<subseteq> members)

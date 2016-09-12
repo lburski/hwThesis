@@ -15,20 +15,10 @@ record Timetable =
 MODULETT :: "(MODULE \<rightharpoonup> (TIMESLOT * ROOM) set)"
 STUDENTTT :: "(STUDENT \<rightharpoonup> (TIMESLOT \<rightharpoonup> ROOM))"
 
-definition intersect ::
-"('a \<rightharpoonup> 'b) \<Rightarrow> ('a * 'b) set \<Rightarrow> ('a * 'b) set"
-where
-"intersect A B == {}(*{x. x \<in>A \<and> x \<in> B}*)"
-
 definition allPairs ::
 "('X \<rightharpoonup> ('Y * 'Z) set) \<Rightarrow> ('Y * 'Z) set"
 where
 " allPairs f == \<Union>{yz. yz \<in> ran f} "
-
-definition allFunPairs ::
-"('X \<rightharpoonup> ('Y \<rightharpoonup> 'Z)) \<Rightarrow> ('Y * 'Z) set"
-where
-" allFunPairs f == \<Union>{yz. yz \<in> ran f} "
 
 locale thetimetable  = 
 fixes moduleTT :: "(MODULE \<rightharpoonup> (TIMESLOT * ROOM) set)"
@@ -38,6 +28,7 @@ assumes
 "(\<forall> r \<in> ran moduleTT. \<forall> s \<in> ran moduleTT.
 disjoint [r,s])"
 (*and allPairs studentTT \<subseteq> allPairs moduleTT*)
+(*and "allPairs (studentTT)"*)
 and "(\<forall> s \<in> dom studentTT. \<forall> m \<in> dom moduleTT.
 ((the (studentTT s)) (*\<inter> (the (moduleTT m)))*)) \<noteq> empty)
 \<longrightarrow> ((dom (the (studentTT s))) \<inter> (Domain (the (moduleTT m))) = Domain (the (moduleTT m)))"
@@ -63,7 +54,7 @@ where
 \<exists> newPairss :: (TIMESLOT * ROOM) set.
 (dom newPairs = (Domain (the (moduleTT m))))
 \<and> (newPairss \<subseteq>  (the (moduleTT m)))
-(*\<and> studentTT' = (s \<mapsto> (studentTT s) newPairs))*))
+\<and> studentTT' = studentTT(s \<mapsto> (the (studentTT s)) ++ newPairs ))
 \<and> (moduleTT' = moduleTT)"
 
 definition AddStudent :: 

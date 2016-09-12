@@ -52,14 +52,12 @@ assumes
  
 begin
 
-(*IS1*)
 definition SteamBoilerInit0 :: 
  "SteamBoiler0 \<Rightarrow> OnOff \<Rightarrow> SteamBoiler0 \<Rightarrow> State \<Rightarrow> OpenClosed => bool"
 where 
 "SteamBoilerInit0 steamboiler0 a' steamboiler0' z' v' == (a' = off) 
 \<and> (z' = init)"
 
-(*CS7*)
 definition SNormalStop0 :: 
 "SteamBoiler0 \<Rightarrow> OnOff \<Rightarrow> SteamBoiler0 \<Rightarrow> State \<Rightarrow> OpenClosed => bool"
 where 

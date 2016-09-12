@@ -527,12 +527,6 @@ Since the Autopilot specification has passed the \gls{zcga} and \gls{zdra} check
 
 \section{Analysing examples}
 
-% Any assumptions  made
-% What properties are extracted from the case study specifications
-
-%reflect on the amount and complexity of manual proof still needed, and in particular whether this should
-%be within grasp of a software/system designer, who is not necessarily an expert in Isabelle/HO
-
 In this section we analyse the examples we have successfully translated into Isabelle and proved the sanity of the specification. 
 
 
@@ -604,15 +598,160 @@ We can see that the complexity of the proof used for the \verb|RegForModule_L1| 
 
 The vending machine example has 3 state changing schemas (shown in table \ref{tab:speczdracount}) however since it does not have any labeled stateInvariants, \gls{zmath} can not automatically produce any properties to prove the consistency of the specification. If we refer back to figure \ref{fig:timeline} in chapter \ref{ch:design} it shows that the \gls{zmath} toolkit goes slightly past the point of `\emph{specification in isabelle with no proof}' however the automation of \gls{zmath} can only go past that point \textbf{if} there are changeschema's and stateInvariants labelled. Otherwise the \gls{zmath} toolkit can only translate the specification into isabelle syntax with no lemma's or properties to prove. Thus it is up to the user to carry on manually inputting their properties to obtain a fully proven specification.
 
+\subsection{Other examples}
+
+Each specification has a different amount of lemma's which the user needs to prove depending on how many `stateInvariants' and `changeSchema's' there are. If the specification does not have any stateInvariants then \gls{zmath} will not produce any lemmas to prove for the sanity of the specification.
+
+\begin{table}
+\begin{tabular}{|l | l | l |}
+\hline
+\textbf{Specification} & \textbf{Amount of} & \textbf{Total amount} \\
+& \textbf{generated lemmas} & \textbf{of tactics} \\
+\hline
+Steamboiler & 20 & 41 \\
+ProjectAlloc & 5 & 18 \\
+VideoShop & 3 & 3 \\
+TelephoneDirectory & 4 & 8 \\
+ClubState & 4 & 4 \\
+ZCGa & 6 & 6 \\
+GenDB & 4 & 13 \\
+Timetable & 4 & 4 \\
+BirthdayBook & 1 & 1\\
+AutoPilot & 0 & 0 \\
+ClubState2 & 3 & 4 \\
+Vending Machine & 0 & 0 \\
+ModuleReg & 2 & 18 \\
+\hline
+\end{tabular}
+\caption{A table to show the amount of automatically generated lemmas and total amount of tactics used for each specification. \label{tab:lemmatact}}
+\end{table}
+
+We show the amount of lemmas and total amount of tactics needed to prove the sanity of each specification in table \ref{tab:lemmatact}. Some lemma's need only one tactic to be proved whilst other need a few. There are various different ways to prove these lemmas and it all comes down to the personal preference of the user. We have mainly used Isabelles `\emph{sledgehammer}' tool to assist us with our proving.
+
+\subsubsection{SteamBoiler}
+
+The steamboiler has in total 20 lemmas to check the specifications sanity as it has 20 changing state schemas. The specification has 1 set of stateInvariants and we used 41 tactics to prove our lemmas.
+
+The steamboiler state invariants is shown in the expression part of the stateSchema. The state invariants for this specification is that the minimum water level (\verb|w_min|) must be smaller than the maximum water level (\verb|w_max|). Therefore, the state invariants are writter after `\texttt{assumes}' in the specification (\verb|w_min < w_max|). 
+
+When \gls{zmath} produces the proof obigations to check the sanity of the specification it must also check that the changeSchema does not conflict with the prime state invariants. Thus, the proof obligations to check for all changing state schema will check that the preconditions and postconditions of each changeSchema still imply that (\verb|w_min < w_max|) \textbf{and} (\verb|w_min' < w_max'|).
+
+For example to prove our first lemma \verb|SNormalStop0_L1|, we wish to make sure that the \verb|SNormalStop0| changeSchema does not conflict with the stateInvariants and the stateInvariants prime.
+
+\noindent \begin{tabular}{|l | l|}
+\hline
+\verb|lemma (in  thesteamboiler)| & {\color{red}begin} \\
+\verb|SNormalStop0_L1:|& {\color{red}Name of lemma} \\
+\verb|"(\<exists> steamboiler0 :: | & \\
+\verb|SteamBoiler0.|&  {\color{red}list of all} \\
+\verb|\<exists> a' :: OnOff.|&  {\color{red}variables and} \\
+\verb|\<exists> steamboiler0' :: | & {\color{red}types} \\
+\verb|SteamBoiler0.|&  \\
+\verb|\<exists> w_max' :: nat.|&  \\
+\verb|\<exists> w_min' :: nat.|&  \\
+\verb|\<exists> z' :: State.|&  \\
+\verb|\<exists> v' :: OpenClosed.|&  \\
+\verb|(z = norm)|&  {\color{red}preconditions \textbf{and}}\\
+\verb|\<and> (w < w_min ∨|& {\color{red}postconditions of} \\
+\verb|w > w_max)|& {\color{red}SNornalStop0 schema} \\
+\verb|\<and> (a' = off \<and>|&  \\
+\verb|z' = stop)|&  \\
+\verb|\<longrightarrow> (w_min < w_max|& {\color{red}\textbf{implies} stateInvariants} \\
+\verb|\<and> (w_min' < w_max')))"|& {\color{red}\textbf{and} stateInvariants prime} \\
+\verb|by (smt State.distinct(9))|&  \\
+\hline
+\end{tabular}
+
+Since there are 2 records in our steamboiler specification we have to manually write the line \verb|(in thesteamboiler)| which lets isabelle know that the changeSchema uses variables from the first record. The \verb|SNormalStop0_L1| lemma is proved using 2 tactics \verb|smt| and \verb|State.distinct(9)|. We remind the reader that although we have used these 2 tactics to prove our lemma there may be other ways in which to do so. 
+
+Our most complex proof is for the \verb|SNormalContinue1_L11| lemma in which we use 3 tactics to prove the property that the \verb|SNormalContinue1| changeSchema does not conflict with the state Invariants. The tactics we use here are \verb|smt|, \verb|OnOff.distinct(1)| and \verb|pswitch.simps(1)|.
+
+\subsubsection{ProjectAlloc}
+
+The projectAlloc specification has 5 changeSchema's and 1 set of stateInvariants therefore it has 5 lemmas which \gls{zmath} has automatically generated to check for the consistancy. To prove these lemmas we have in total used 18 tactics.
+
+The lemmas to check that the changeSchema's did not conflict with thestateInvariants with were as follows:
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+(((dom studInterests) \<inter> (dom lecInterests) = {})
+\<and> (dom allocation \<subseteq> dom studInterests)
+\<and> (ran allocation \<subseteq> dom lecInterests)
+\<and> (dom maxPlaces = dom lecInterests)
+\<and>  (\<forall> lec \<in> dom maxPlaces.
+(card ({l. the (allocation l) = lec})) \<leq> the (maxPlaces lec))
+\<and>  ((dom studInterests') \<inter> (dom lecInterests') = {})
+\<and> (dom allocation' \<subseteq> dom studInterests')
+\<and> (ran allocation' \<subseteq> dom lecInterests')
+\<and> (dom maxPlaces' = dom lecInterests')
+\<and>  (\<forall> lec \<in> dom maxPlaces'.
+(card ({l. the (allocation' l) = lec})) \<leq> the (maxPlaces' lec))))"
+\end{verbatim}
+
+Our most complex lemma to prove is the \verb|AddLecturer_L5| lemma which we used 9 tactics. The most simple lemma to prove was \verb|AddStudent_L3| and \verb|DeAllocate_L2| where we just used 1 tactic (\verb|fastforce| and \verb|auto| respectively).
+
+%\begin{tabular}{|l l |}
+%\hline
+%\verb|lemma AddLecturer_L5:| & \\
+%\verb|"(\<exists> projectalloc :: ProjectAlloc.| & \\
+%\verb|\<exists> projectalloc' :: ProjectAlloc.| & \\
+%\verb|\<exists> studInterests' :: (PERSON \<rightharpoonup> ((nat * TOPIC) set)).| & \\
+%\verb|\<exists> lecInterests' :: (PERSON \<rightharpoonup> ((nat * TOPIC) set)).| & \\
+%\verb|\<exists> allocation' :: (PERSON \<rightharpoonup> PERSON).| & \\
+%\verb|\<exists> maxPlaces' :: (PERSON \<rightharpoonup> nat).| & \\
+%\verb|\<exists> l :: PERSON.| & \\
+%\verb|\<exists> maxAlloc :: nat.| & \\
+%\verb|\<exists> ts :: ((nat * TOPIC) set).| & \\
+%\verb|(l \<notin> ((dom studInterests) \<union> (dom lecInterests)))| & \\
+%\verb|\<and> (lecInterests' = lecInterests(l \<mapsto> ts))| & \\
+%\verb|\<and> (maxPlaces' = maxPlaces(l \<mapsto> maxAlloc))| & \\
+%\verb|\<and> (studInterests' = studInterests)| & \\
+%\verb|\<and> (allocation' = allocation)| & \\
+%\verb|\<longrightarrow>(((dom studInterests) \<inter> (dom lecInterests) = {})| & \\
+%\verb|\<and>(dom allocation \<subseteq> dom studInterests)| & \\
+%\verb|\<and>(ran allocation \<subseteq> dom lecInterests)| & \\
+%\verb|\<and>(dom maxPlaces = dom lecInterests)| & \\
+%\verb|\<and> (\<forall> lec \<in> dom maxPlaces. (card ({l. the (allocation l) = lec})) \<leq> the (maxPlaces lec))| & \\
+%\verb|∧ ((dom studInterests') \<inter> (dom lecInterests') = {})| & \\
+%\verb|∧(dom allocation' \<subseteq> dom studInterests')| & \\
+%\verb|∧(ran allocation' \<subseteq> dom lecInterests')| & \\
+%\verb|∧(dom maxPlaces' = dom lecInterests')| & \\
+%\verb|∧ (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) = lec})) \<leq> the (maxPlaces' lec))))"| & \\
+%\verb|by (metis (full_types) dom_empty dom_empty dom_empty| & \\ \verb|dom_eq_singleton_conv dom_restrict inf.idem insert_not_empty)| & \\
+%\end{tabular}
+
+\subsubsection{VideoShop}
+
+\subsubsection{TelephoneDirectory}
+
+\subsubsection{ClubState}
+
+\subsubsection{ZCGa}
+
+\subsubsection{GenDB}
+
+\subsubsection{Timetable}
+
+\subsubsection{BirthdayBook}
+
+\subsubsection{ClubState2}
+
+\subsubsection{ModuleReg}
+
+\section{Reflection and Discussion}
+
+% Any assumptions  made
+
+%reflect on the amount and complexity of manual proof still needed, and in particular whether this should
+%be within grasp of a software/system designer, who is not necessarily an expert in Isabelle/HOL
+
 %Complexity of proofs
 % how far the user must go to finish the proof
 %refer back to diagram in design chapter
-
-\subsection{Other examples}
-
-\todo[inline]{gendb and projectalloc, lemmas to prove for consitancy}
-
-\section{Reflection and Discussion}
 
 \subsection{How far can ZMathLang toolkit take us and what is left.}
 
@@ -621,6 +760,8 @@ The vending machine example has 3 state changing schemas (shown in table \ref{ta
 Assumptions
 
 \begin{itemize}
+\item if 2 records (2 state schema). need to manually write the line to whichever the lemma needs
+
 \item Specification = 1 theory. Can't do more than 1 specification in 1 document.
 
 \item we assume the user wishes to check for consistancy. As stated in 2proofs, the properties to prove is down to stakeholders

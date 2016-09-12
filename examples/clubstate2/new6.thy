@@ -21,7 +21,7 @@ and onCourt :: "(STUDENT set)"
 assumes "maxPlayers = 20" 
  and "hall \<subseteq> badminton" 
  and "card hall \<le> maxPlayers" 
-(* and "[(sorted_list_of_set onCourt), ran waiting] partition hall"*)
+ (*and "[onCourt, (Range waiting)] partition [hall]"*)
 begin
 
 definition InitClubState2 :: 
@@ -39,7 +39,7 @@ onCourt = {}
 \<and> ((length waiting) < 4 \<longrightarrow> ((card onCourt' = 2) \<or> (card onCourt' = 3)))
 \<and> (hd waiting \<in> onCourt')
 \<and> (onCourt' \<subseteq> (set waiting))
-(*\<and> (waiting' = waiting \<restriction> ((Range waiting) - onCourt'))*)
+\<and> (set waiting' =  ((set waiting) - onCourt'))
 \<and> (hall' = hall)
 \<and> (badminton' = badminton)"
 
@@ -48,7 +48,7 @@ definition LeaveHall ::
 where 
 "LeaveHall badminton' hall' p onCourt' waiting' clubstate2' clubstate2 ==
 (p \<in> set waiting)
-(* \<and> (waiting' = squash(waiting \<unlhd> {(p)})) *)
+ \<and> (set waiting' = (set waiting) - {p})
 \<and> (hall' = hall - {(p)}) 
 \<and> (badminton' = badminton)"
 
@@ -78,7 +78,7 @@ onCourt = {}
 \<and> ((length waiting) < 4 \<longrightarrow> ((card onCourt' = 2) \<or> (card onCourt' = 3)))
 \<and> (hd waiting \<in> onCourt')
 \<and> (onCourt' \<subseteq> (set waiting))
-(*\<and> (waiting' = waiting \<restriction> ((Range waiting) - onCourt'))*)
+\<and> (set waiting' =  ((set waiting) - onCourt'))
 \<and> (hall' = hall)
 \<and> (badminton' = badminton)
 \<longrightarrow> ((hall \<subseteq> badminton)
@@ -96,10 +96,9 @@ lemma LeaveHall_L2:
 \<exists> clubstate2' :: ClubState2.
 \<exists> clubstate2 :: ClubState2.
 (p \<in> set waiting)
-(* \<and> (waiting' = squash(waiting \<unlhd> {(p)})) *)
+ \<and> (set waiting' = (set waiting) - {p})
 \<and> (hall' = hall - {(p)}) 
 \<and> (badminton' = badminton)
-\<and> (hall \<subseteq> badminton)
 \<longrightarrow> ((card hall \<le> maxPlayers)
 \<and> (hall' \<subseteq> badminton')
 \<and> (card hall' \<le> maxPlayers)))"

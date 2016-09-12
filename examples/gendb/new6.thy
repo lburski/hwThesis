@@ -1,4 +1,4 @@
-theory new5
+theory new6
 imports 
 Main 
 
@@ -42,15 +42,15 @@ where
 (*\<and> (let cosrel = (parent^(n + 1) semi (parent^-1)^(n+1+rem)) - (parent semi parent^1)
  in (cousins = cosrel \<lparr>{p}\<rparr> \<union> cosrel^-1 \<lparr>{p}\<rparr>))*)"
 
+(*{l. the (allocation l) = lec}*)
 definition ChangeName :: 
 "GenDB => GenDB => (PERSON * PERSON) set => (PERSON \<rightharpoonup> GENDER) => PERSON => PERSON => bool"
 where 
 "ChangeName gendb gendb' parent' sex' old new == (old \<in> dom sex) 
 \<and> (new \<notin> dom sex)
-\<and> (sex' = (**) sex(new \<mapsto> the (sex old)))
-(*\<and> parent' =\<and> (parent' = {\<exists> q. \<exists> t.  ({(q,t)})})
-\<and> ( ({p. (old, p) \<notin> parent})= parent' )
-\<union> {x.PERSON \<longrightarrow> x \<in> parent\<lparr>{old}\<rparr>}
+\<and> (sex' = (*{y. sex(old \<mapsto> y) \<notin> {sex}}*) sex(new \<mapsto> the (sex old)))
+\<and> (parent' = ({q. (old \<notin> Domain parent) \<and> (old \<notin> Range parent)})
+(*\<union> ({x::PERSON. (x \<in> (parent `` {(old)}))})*))(*
 \<union> {x.PERSON \<longrightarrow> x \<notin> parent^-1 \<lparr>{old}\<rparr>}*)"
 
 definition ChangeSex :: 
@@ -58,6 +58,7 @@ definition ChangeSex ::
 where 
 "ChangeSex gendb gendb' parent' sex' p ==
 (p \<in> dom sex)
+(*\<and> sex' = sex(({q::PERSON. {s::GENDER. q \<in> parent}}))*)
 (*\<and> sex' = sex \<oplus>
 ({q s. (q \<in> PERSON) \<and> s \<in> GENDER \<longleftrightarrow>}
 ((q \<in> (parent^-1 semi parent)^* \<lparr>{p?}\<rparr>)
@@ -92,9 +93,8 @@ lemma ChangeName_L1:
 (old \<in> dom sex)
 \<and> (new \<notin> dom sex)
 \<and> (sex' = (**) sex(new \<mapsto> the (sex old)))
-(*\<and> parent' =\<and> (parent' = {\<exists> q. \<exists> t.  ({(q,t)})})
-\<and> ( ({p. (old, p) \<notin> parent})= parent' )
-\<union> {x.PERSON \<longrightarrow> x \<in> parent\<lparr>{old}\<rparr>}
+\<and> (parent' = ({q. (old \<notin> Domain parent) \<and> (old \<notin> Range parent)}))
+(*\<union> {x.PERSON \<longrightarrow> x \<in> parent\<lparr>{old}\<rparr>}
 \<union> {x.PERSON \<longrightarrow> x \<notin> parent^-1 \<lparr>{old}\<rparr>}*)
 \<longrightarrow> (Domain parent \<union> Range parent \<subseteq> dom sex
 \<and> (\<forall>p :: PERSON. (p, p) \<notin> parent^*)
@@ -104,7 +104,7 @@ lemma ChangeName_L1:
 \<and> (\<forall>p :: PERSON. (p, p) \<notin> parent'^*)
 \<and> (\<forall>p :: PERSON. \<forall> q :: PERSON. \<forall> r :: PERSON. ({(p,q),(p,r)} \<subseteq> parent')
 \<and> q \<noteq> r \<longrightarrow> the (sex' q) \<noteq> the (sex' r))))"
-sorry
+by blast
 
 lemma ChangeSex_L2:
 "(\<exists> gendb :: GenDB.
@@ -126,7 +126,7 @@ lemma ChangeSex_L2:
 \<and> (\<forall>p :: PERSON. (p, p) \<notin> parent'^*)
 \<and> (\<forall>p :: PERSON. \<forall> q :: PERSON. \<forall> r :: PERSON. ({(p,q),(p,r)} \<subseteq> parent')
 \<and> q \<noteq> r \<longrightarrow> the (sex' q) \<noteq> the (sex' r))))"
-sorry
+by (metis (mono_tags, lifting) empty_iff rtrancl.rtrancl_refl)
 
 lemma AddPerson_L3:
 "(\<exists> gendb :: GenDB.
@@ -146,7 +146,7 @@ lemma AddPerson_L3:
 \<and> (\<forall>p :: PERSON. (p, p) \<notin> parent'^*)
 \<and> (\<forall>p :: PERSON. \<forall> q :: PERSON. \<forall> r :: PERSON. ({(p,q),(p,r)} \<subseteq> parent')
 \<and> q \<noteq> r \<longrightarrow> the (sex' q) \<noteq> the (sex' r))))"
-sorry
+by (metis (mono_tags, lifting) empty_iff rtrancl.rtrancl_refl)
 
 lemma AddRel_L4:
 "(\<exists> gendb :: GenDB.
@@ -170,7 +170,7 @@ lemma AddRel_L4:
 \<and> (\<forall>p :: PERSON. (p, p) \<notin> parent'^*)
 \<and> (\<forall>p :: PERSON. \<forall> q :: PERSON. \<forall> r :: PERSON. ({(p,q),(p,r)} \<subseteq> parent')
 \<and> q \<noteq> r \<longrightarrow> the (sex' q) \<noteq> the (sex' r))))"
-sorry
+by blast
 
 end
 end

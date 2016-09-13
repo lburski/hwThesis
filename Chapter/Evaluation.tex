@@ -692,7 +692,11 @@ PostConditions
 (card ({l. the (allocation' l) = lec})) \<leq> the (maxPlaces' lec))))"
 \end{verbatim}
 
-Our most complex lemma to prove is the \verb|AddLecturer_L5| lemma which we used 9 tactics. The most simple lemma to prove was \verb|AddStudent_L3| and \verb|DeAllocate_L2| where we just used 1 tactic (\verb|fastforce| and \verb|auto| respectively).
+Our most complex lemma to prove is the \verb|AddLecturer_L5| lemma which we used 9 tactics:
+
+(\verb|metis|, \verb|full_types|, \verb|dom_empty|, \verb|dom_empty|, \verb|dom_empty|, \verb|dom_eq_singleton_conv|, \verb|dom_restrict|, \verb|inf.idem| and \verb|insert_not_empty|).
+
+The most simple lemma to prove was \verb|AddStudent_L3| and \verb|DeAllocate_L2| where we just used 1 tactic (\verb|fastforce| and \verb|auto| respectively).
 
 %\begin{tabular}{|l l |}
 %\hline
@@ -726,13 +730,113 @@ Our most complex lemma to prove is the \verb|AddLecturer_L5| lemma which we used
 
 \subsubsection{VideoShop}
 
+The videoShop specification has 3 changeSchemas and 1 set of stateInvariants, therefore \gls{zmath} has generated 3 proof obligations to check that none of the changeSchemas conflict with the stateInvariants and stateInvariants prime.
+
+The structure of lemma's for the videoshop specification are as follows:
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+(Domain rented \<subseteq> members)
+\<and> (Range rented \<subseteq> dom stockLevel)
+\<and> (\<forall> t \<in> Range rented.
+ card ({p. (p, t) \<in> rented}) < (the (stockLevel t)))
+\<and> (Domain rented' \<subseteq> members')
+\<and> (Range rented' \<subseteq> dom stockLevel')
+\<and> (\<forall> t \<in> Range rented'.
+ card ({p. (p, t) \<in> rented'}) < (the (stockLevel' t))))"
+\end{verbatim}
+
+We are able to prove all 3 lemma's by the tactic \verb|blast|. 
+
 \subsubsection{TelephoneDirectory}
+
+The telephone directory has 1 set of stateInvariants and 4 changeSchema's. Therefore we have 4 lemma's which \gls{zmath} generated and which we need to prove. The structure for the lemmas to check the consistancy of the telephone directory specification are as follows:
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+((dom phoneNumbers = Domain persons)
+\<and> (dom phoneNumbers' = Domain persons')))"
+\end{verbatim}
+
+These sanity check make sure that when updated the telephone directory that the people listed in the domain of phoneNumbers is equal to the list in the domain of persons.
+
+To prove the first 2 lemmas \verb|AddPerson_L1| and \verb|RemoveNumber_L2| we only needed to use a single tactic (\verb|auto| and \verb|fastforce|) respectively. However the last 2 lemmas (\verb|RemovePerson_L3| and \verb|RemoveNumber_L4|) required 3 tactics each. For example to prove the \verb|RemovePerson_L3| lemma we needed to use \verb|smt|, \verb| Diff_insert_absorb| and \verb|mk_disjoint_insert|. In total we used 8 tactics to prove all 4 properties.
 
 \subsubsection{ClubState}
 
+The clubstate specification has 4 changing schemas and thus 4 properties to check the stateinvairants are not conflicted when the state has been changed. The stateinvariants for the clubstate specification is are as follows:
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+(hall \<subseteq> badminton) 
+\<and> (card hall \<leq> maxPlayers)
+\<and> (hall' \<subseteq> badminton') 
+\<and> (card hall' \<leq> maxPlayers))"
+\end{verbatim}
+
+Here we wish that all the people in the hall must be members of badminton and the number of players can not exceed the maximum amount both before the change and after the change in state. The first 2 lemma's in our clubstate specification (\verb|LeaveHall_L1| and \verb|AddMember_L2|) were proven by \verb|auto| and the last two properties (\verb|EnterHall_L3:| and \verb|RemoveMember_L4|) were proven by \verb|blast|.
+
 \subsubsection{ZCGa}
 
+In the specification representing the \gls{zcga} we have 6 properties to prove. The syntax for the properties which \gls{zmath} has generated are:
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+(TermDeclaration \<subseteq> declarations)
+\<and> (SetDeclaration \<subseteq> declarations)
+\<and> (dvars \<subset> sets \<union> terms)
+\<and> (sets \<inter> terms = {})
+\<and> (TermDeclaration' \<subseteq> declarations')
+\<and> (SetDeclaration' \<subseteq> declarations')
+\<and> (dvars' \<subset> sets' \<union> terms')
+\<and> (sets' \<inter> terms' = {}))"
+\end{verbatim}
+
+Since we have 6 changing schemas we need to check that none of the schemas conflict with the stateInvariants before and after the state has been changed. In this proof, we have proven 2 lemmas
+
+(\verb|CorrectExpression_L1| and \verb|CorrectConstantTerm_L5|) by \verb|smt| and the remaining 4 using \verb|blast|.
+
 \subsubsection{GenDB}
+
+GenDB has 4 consistancy checks we must prove against the stateInvariants. The syntax for the stateInvariants are as follows:
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+(Domain parent \<union> Range parent \<subseteq> dom sex
+\<and> (\<forall>p :: PERSON. (p, p) \<notin> parent^*)
+\<and> (\<forall>p :: PERSON. \<forall>q :: PERSON.
+\<forall>r :: PERSON. ({(p,q),(p,r)} \<subseteq> parent)
+\<and> q \<noteq> r \<longrightarrow>
+the (sex q) \<noteq> the (sex r)))
+\<and> (Domain parent' \<union> Range parent' \<subseteq> dom sex'
+\<and> (\<forall>p :: PERSON. (p, p) \<notin> parent'^*)
+\<and> (\<forall>p :: PERSON. \<forall>p :: PERSON.
+\<forall>r :: PERSON. ({(p,q),(p,r)} \<subseteq> parent')
+\<and> q \<noteq> r \<longrightarrow>
+the (sex' q) \<noteq> the (sex' r))))"
+\end{verbatim}
+
+Out of the 4 lemms we proved, 2 lemms can be proven by the tactic \verb|blast|. The other 2 lemms we proved by using 5 other tactics. For example, we proved the \verb|AddPerson_L3| property using the tactics \verb|metis|, \verb|mono_tags|, \verb|lifting|, \verb|empty_iff| and \verb|rtrancl.rtrancl_refl|. This made sure that when a person has been added to the genDB that the preconditions and postconditions satisfied the stateInvariants.
 
 \subsubsection{Timetable}
 

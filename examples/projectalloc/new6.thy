@@ -314,7 +314,8 @@ lemma AddLecturer_L5:
 \<and>(ran allocation' \<subseteq> dom lecInterests')
 \<and>(dom maxPlaces' = dom lecInterests')
 \<and> (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) = lec})) \<le> the (maxPlaces' lec))))"
-by (metis (full_types) dom_empty dom_empty dom_empty dom_eq_singleton_conv dom_restrict inf.idem insert_not_empty)
+by (metis (full_types) dom_empty dom_empty dom_empty dom_eq_singleton_conv 
+dom_restrict inf.idem insert_not_empty)
 
 
 end

@@ -57,7 +57,7 @@ lemma RegForModule_L1:
 \<and> (taking' = taking \<union> {(p, m)}) 
 \<and> (students' = students) 
 \<and> (degModules' = degModules))
-\<and> (Domain taking \<subseteq> students)
+\<longrightarrow> (Domain taking \<subseteq> students)
 \<and> (Range taking \<subseteq> degModules)
 \<and> (Domain taking' \<subseteq> students')
 \<and> (Range taking' \<subseteq> degModules'))"
@@ -78,7 +78,7 @@ lemma AddStudent_L2:
  (students' = students \<union> {(p)}) 
 \<and> (degModules' = degModules) 
 \<and> (taking' = taking))
-\<and> (Domain taking \<subseteq> students)
+\<longrightarrow> (Domain taking \<subseteq> students)
 \<and> (Range taking \<subseteq> degModules)
 \<and> (Domain taking' \<subseteq> students')
 \<and> (Range taking' \<subseteq> degModules')

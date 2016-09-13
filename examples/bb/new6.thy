@@ -74,12 +74,12 @@ lemma AddBirthday_L1:
 "(\<exists> known' :: (NAME set).
 \<exists> name :: NAME.
 \<exists> date :: DATE.
-\<exists> birthday' :: (NAME \<rightharpoonup> DATE).
-\<exists> birthday :: (NAME \<rightharpoonup> DATE).
+\<exists> birthdaybook' :: BirthdayBook.
+\<exists> birthdaybook :: BirthdayBook.
 \<exists> known :: (NAME set).
 (name \<notin> known)
 \<and> (birthday' = birthday (name \<mapsto> date ))
-\<and> (known = dom birthday)
+\<longrightarrow> (known = dom birthday)
 \<and>(known' = dom birthday'))"
 by auto
 

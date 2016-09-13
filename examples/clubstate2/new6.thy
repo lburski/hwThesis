@@ -83,8 +83,10 @@ onCourt = {}
 \<and> (badminton' = badminton)
 \<longrightarrow> ((hall \<subseteq> badminton)
 \<and> (card hall \<le> maxPlayers)
+(*\<and> [onCourt', (Range waiting')] partition [hall']*)
 \<and> (hall' \<subseteq> badminton')
-\<and> (card hall' \<le> maxPlayers)))"
+\<and> (card hall' \<le> maxPlayers)))
+(*\<and> [onCourt', (Range waiting')] partition [hall']*)"
 by auto
 
 lemma LeaveHall_L2:

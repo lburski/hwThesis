@@ -622,6 +622,8 @@ ClubState2 & 3 & 4 \\
 Vending Machine & 0 & 0 \\
 ModuleReg & 2 & 18 \\
 \hline
+\textbf{Total} & \textbf{56} & \textbf{120}\\
+\hline
 \end{tabular}
 \caption{A table to show the amount of automatically generated lemmas and total amount of tactics used for each specification. \label{tab:lemmatact}}
 \end{table}
@@ -863,11 +865,72 @@ There are 4 properties to prove in the timetable specification. We have been abl
 
 \subsubsection{BirthdayBook}
 
+Since we used the simplest form of the birthdaybook specification (there are many different forms) we only had 1 lemma to prove. The \verb|AddBirthday_L1| property was proven by \verb|auto| however we could have also solved it using \verb|smt|.
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+(known = dom birthday)
+\<and> (known' = dom birthday'))"
+\end{verbatim}
+
 \subsubsection{ClubState2}
+
+The clubstate2 specification is an extension of the original clubstate specification. Since the specification stemmed from the original clubstate we have to make sure that the changeState schemas do not conflict with the stateInvariants from the first stateSchema as well as the stateInvariants in the ClubState2 state schema. We have the following stateInvariants from the ClubState2 specification:
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+((hall \<subseteq> badminton)
+\<and> (card hall \<leq> maxPlayers)
+\<and> [onCourt, (Range waiting)] partition [hall]
+\<and> (hall' \<subseteq> badminton')
+\<and> (card hall' \<leq> maxPlayers)))
+\<and> [onCourt', (Range waiting')] partition [hall']"
+\end{verbatim}
+
+The stateInvairants taken from the ClubState2 state schema is
+
+ \verb|[onCourt, (Range waiting)] partition [hall]| however the ClubState2 state schema uses the ClubState schema. Therefore the original stateInvairants
+
+(\verb|((hall \<subseteq> badminton)| and \verb|(card hall \<leq> maxPlayers)|) must also be checked.
+
+The 3 lemmas which needed to be proved use a total of 4 tactics. The first and last lemmas are proven by \verb|auto| where as the second lemma (\verb|LeaveHall_L2|) is proven using 2 tactics (\verb|smt| and \verb|empty_iff|).
 
 \subsubsection{ModuleReg}
 
+The ModuleReg specification has 2 changeSchemas and 1 set of stateInvairants. therefore \gls{zmath} has produced 2 lemmas which we need to prove.
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+ (Domain taking \<subseteq> students)
+\<and> (Range taking \<subseteq> degModules)
+\<and> (Domain taking' \<subseteq> students')
+\<and> (Range taking' \<subseteq> degModules'))"
+\end{verbatim}
+
+The \verb|AddStudent_L2| property we managed to prove using a single tactic (\verb|blast|) however to prove the first lemma (\verb|RegForModule_L1|) we used 17 tactics, these were:
+
+\begin{verbatim}
+smt Domain_empty Domain_insert Range.intros Range_empty 
+Range_insert Un_empty Un_insert_right empty_iff empty_subsetI 
+empty_subsetI insert_mono insert_mono singletonI singletonI 
+singleton_insert_inj_eq' singleton_insert_inj_eq'
+\end{verbatim}
+
 \section{Reflection and Discussion}
+
+To check the consistancy of all our specification we had to prove 56 lemmas with a total of 120 tactics.
 
 % Any assumptions  made
 

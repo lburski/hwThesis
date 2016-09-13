@@ -840,6 +840,27 @@ Out of the 4 lemms we proved, 2 lemms can be proven by the tactic \verb|blast|. 
 
 \subsubsection{Timetable}
 
+The timetable specification has 4 schemas in which the original state has changed and 1 set of stateInvariants that must be obeyed throughout the specification. The stateInvariants for the timtable specification are as follows.
+
+\begin{verbatim}
+\<exists> variables and types.
+Preconditions
+\<and>
+PostConditions
+\<longrightarrow>
+(\<forall> s \<in> dom studentTT. \<forall> m \<in> dom moduleTT.
+(the (studentTT s) \<inter> the (moduleTT m) \<noteq> empty)
+\<longrightarrow>
+(dom (the (studentTT s))) moduleTT m = (dom (the (studentTT s)))))
+\<and> (\<forall> s \<in> dom studentTT'.
+ \<forall> m \<in> dom moduleTT'.
+(the (studentTT' s) \<inter> the (moduleTT' m) \<noteq> empty)
+\<longrightarrow>
+(dom (the (studentTT' s))) moduleTT' m = (dom (the (studentTT' s))))"
+\end{verbatim}
+
+There are 4 properties to prove in the timetable specification. We have been able to prove 3 properties (\verb|RegForModule_L1|, \verb|AddStudent_L2| and \verb|ScheduleModule_L4|) using \verb|smt| and 1 property \verb|DescheduleModule_L3| using \verb|blast|.
+
 \subsubsection{BirthdayBook}
 
 \subsubsection{ClubState2}

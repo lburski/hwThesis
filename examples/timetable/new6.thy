@@ -101,10 +101,12 @@ lemma RegForModule_L1:
 (*\<and> (newPairs  ((moduleTT m)))*)
 (*\<and> studentTT' = (s \<mapsto> (studentTT s) newPairs))*))
 \<and> (moduleTT' = moduleTT)
-\<longrightarrow>
-(\<forall> s \<in> dom studentTT. \<forall> m \<in> dom moduleTT.
-(the (studentTT s) (*\<inter> the (moduleTT m)*) \<noteq> empty))
-\<longrightarrow> (dom (the (studentTT s))) (*moduleTT m*) = (dom (the (studentTT s))))"
+\<longrightarrow> (\<forall> s \<in> dom studentTT. \<forall> m \<in> dom moduleTT.
+(the (studentTT s) (*\<inter> the (moduleTT m)*) \<noteq> empty)
+\<longrightarrow> (dom (the (studentTT s))) (*moduleTT m*) = (dom (the (studentTT s)))))
+\<and> (\<forall> s \<in> dom studentTT'. \<forall> m \<in> dom moduleTT'.
+(the (studentTT' s) (*\<inter> the (moduleTT' m)*) \<noteq> empty)
+\<longrightarrow> (dom (the (studentTT' s))) (*moduleTT' m*) = (dom (the (studentTT' s))))"
 by smt
 
 lemma AddStudent_L2:
@@ -116,8 +118,11 @@ lemma AddStudent_L2:
 \<and> (studentTT' = studentTT (s  \<mapsto> empty))
 \<and> (moduleTT' = moduleTT)
 \<longrightarrow> (\<forall> s \<in> dom studentTT. \<forall> m \<in> dom moduleTT.
-(the (studentTT s) (*\<inter> the (moduleTT m)*) \<noteq> empty))
-\<longrightarrow> (dom (the (studentTT s))) (*moduleTT m*) = (dom (the (studentTT s))))"
+(the (studentTT s) (*\<inter> the (moduleTT m)*) \<noteq> empty)
+\<longrightarrow> (dom (the (studentTT s))) (*moduleTT m*) = (dom (the (studentTT s)))))
+\<and> (\<forall> s \<in> dom studentTT'. \<forall> m \<in> dom moduleTT'.
+(the (studentTT' s) (*\<inter> the (moduleTT' m)*) \<noteq> empty)
+\<longrightarrow> (dom (the (studentTT' s))) (*moduleTT' m*) = (dom (the (studentTT' s))))"
 by smt
 
 lemma DescheduleModule_L3:
@@ -131,8 +136,11 @@ lemma DescheduleModule_L3:
 \<and> (moduleTT' = moduleTT (m \<mapsto> {}))
 (*\<and> (student TT' = \<Union> {s \<in> dom studentTT. {s \<mapsto> (studentTT s}})*)
 \<longrightarrow> (\<forall> s \<in> dom studentTT. \<forall> m \<in> dom moduleTT.
-(the (studentTT s) (*\<inter> the (moduleTT m)*) \<noteq> empty))
-\<longrightarrow> (dom (the (studentTT s))) (*moduleTT m*) = (dom (the (studentTT s))))"
+(the (studentTT s) (*\<inter> the (moduleTT m)*) \<noteq> empty)
+\<longrightarrow> (dom (the (studentTT s))) (*moduleTT m*) = (dom (the (studentTT s)))))
+\<and> (\<forall> s \<in> dom studentTT'. \<forall> m \<in> dom moduleTT'.
+(the (studentTT' s) (*\<inter> the (moduleTT' m)*) \<noteq> empty)
+\<longrightarrow> (dom (the (studentTT' s))) (*moduleTT' m*) = (dom (the (studentTT' s))))"
 by blast
 
 lemma ScheduleModule_L4:
@@ -148,8 +156,11 @@ lemma ScheduleModule_L4:
 \<and> moduleTT' = moduleTT (m \<mapsto> schedule))
 \<and> (studentTT' = studentTT)
 \<longrightarrow> (\<forall> s \<in> dom studentTT. \<forall> m \<in> dom moduleTT.
-(the (studentTT s) (*\<inter> the (moduleTT m)*) \<noteq> empty))
-\<longrightarrow> (dom (the (studentTT s))) (*moduleTT m*) = (dom (the (studentTT s))))"
+(the (studentTT s) (*\<inter> the (moduleTT m)*) \<noteq> empty)
+\<longrightarrow> (dom (the (studentTT s))) (*moduleTT m*) = (dom (the (studentTT s)))))
+\<and> (\<forall> s \<in> dom studentTT'. \<forall> m \<in> dom moduleTT'.
+(the (studentTT' s) (*\<inter> the (moduleTT' m)*) \<noteq> empty)
+\<longrightarrow> (dom (the (studentTT' s))) (*moduleTT' m*) = (dom (the (studentTT' s))))"
 by smt
 
 

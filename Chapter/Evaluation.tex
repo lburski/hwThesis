@@ -932,7 +932,7 @@ singleton_insert_inj_eq' singleton_insert_inj_eq'
 
 To check the consistancy of all our specification we had to prove 56 lemmas with a total of 120 tactics. In this section we discuss how far the \gls{zmath} toolkit can take us,how difficult it is for the user to get the full proof and what other proof is left.
 
-\subsection{How far can ZMathLang toolkit take us and what is left.}
+\subsection{How far can ZMathLang toolkit take us and what is left for the user to do manually.}
 
 Looking back at our examples described in the previous section. The proofs to check for the complexity depend on the complexity of the specification. The more complex the language of the specification (whether it uses terms and set or just terms), the more complex the proofs and syntax of the proofs are. The vending machine has no stateinvariants therefore \gls{zmath} does not generate any lemmas to be proven. The steamboiler specification, which is our longest example, uses only terms but has 2 stateSchemas and therefore 2 records. We were able to prove all the lemmas using 2 different automatic isabelle tools (blast and sledgehammer).
 
@@ -955,18 +955,23 @@ The third case is a compromise between the first two scenarios, it will require 
 The third case would be most beneficial as an Isabelle expert may not be required if the stakeholders only want to check the system for consistancy and the syntax of the specification is reletively easy where automated tools can be used to prove the specification. However, depending on the complexity of the specification, an Isabelle expert may be needed sometimes if the system designer can not prove the entire specification with just the automated tools and/or if the stakeholders require a more rigourous proof.
 
 \subsection{Assumptions and limitations of the ZMathLang toolkit}
-Assumptions
+
+The recommendations made in this thesis are based on several assumptions and limitations as to what may be done to translate a Z specification into Isabelle using our \gls{zmath} toolkit.
+
+The assumptions are as follows:
 
 \begin{itemize}
-\item if 2 records (2 state schema). need to manually write the line to whichever the lemma needs
+\item Firstly, we like to point out that the \gls{zmath} can only translate specifications with syntax used in our examples. Since the language of mathematical notation is vast we can not incoporate the entire syntax of mathematics in the \gls{zmath} within the scope of this thesis. More explanation is given on this topic in the next chapter.
 
-\item Specification = 1 theory. Can't do more than 1 specification in 1 document.
+\item One of the assumptions the toolkit makes is that if the specification holds 1 state schema (and thus 1 record) then all the lemma's produced are under that record. Thus, if the specification holds 2 or more records then the lemmas produced will need to define which record they belong to. For example in the SteamBoiler specification we manually input `\verb|(in thesteamboiler)|' after the word `\verb|lemma|'. This does not have to be done to specification which only hold one state schema.
 
-\item we assume the user wishes to check for consistancy. As stated in 2proofs, the properties to prove is down to stakeholders
+\item Another assumtion the \gls{zmath} toolkit makes is that the document it is checking contains a single specification. Although the \gls{zcga} can check multiple specification in a single document, the rest of the tools assume that it is checking 1 system. Thus, when producing the dependency and goto graphs and the specification isn't linked, it will assume that the instances are under one specification. Also when the \gls{zdra} translates the specification into Isabelle it will do so in a single theorem document. More discussion on this is in the `Future work' section in the next chapter.
+
+\item We also assume that the user actually wishes to check the specification for consistancy. As Stepney discussed in \cite{stepney1998tale} there are many properties to prove in a system. It is down to the stakeholders and clients of the project. For example a high integrity system may have some universal guidlines or codes of conduct it must obey. Proving properties to check for consistancy is highly valuable, however other properties such as if preconditions hold, or relationship between two specification may also be wanted by the project stakeholders. These other properties may be added at the end of stage 6 and if the consistancy checks are not needed, they can be deleted from the Isabelle file manually.
 
 \end{itemize}
 
-Limitations
+We like to highlight the limitations of the \gls{zmath} toolkit. They are as follows:
 
 \begin{itemize}
 \item If we totalise preconditions e.g \verb|\totalises{TS#}{PRE#}| and all preconditions have been totalised then no warning. If we totalise schemas with preconditions within them e.g. \verb|\totalises{TS#}{CS#}| then the \gls{zdra} checker doesnt pick up on it.

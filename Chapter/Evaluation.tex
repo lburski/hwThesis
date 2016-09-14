@@ -954,6 +954,8 @@ The third case is a compromise between the first two scenarios, it will require 
 
 The third case would be most beneficial as an Isabelle expert may not be required if the stakeholders only want to check the system for consistancy and the syntax of the specification is reletively easy where automated tools can be used to prove the specification. However, depending on the complexity of the specification, an Isabelle expert may be needed sometimes if the system designer can not prove the entire specification with just the automated tools and/or if the stakeholders require a more rigourous proof.
 
+Automation on both sides are constantly being redeveloped and revisted. One can automate a specification into Isabelle covering formal methods and perhaps one day, informal specification could be translated. On the other end, there are many \gls{smt} solvers being develop to cover more and more existing lemmas and theorems. However, due to the variations in systems, syntax and properties the user may wish to prove, it is difficult to cover everything. The more complex the system, the less automation available to assist in the users proofs. For a simple system, there exists automation on both sides to cover the proofs. However, once the user wishes to build a more complex system, the user will then need to learn more about their chosen theorem in order to check for complete correctness.
+
 \subsection{Assumptions and limitations of the ZMathLang toolkit}
 
 The recommendations made in this thesis are based on several assumptions and limitations as to what may be done to translate a Z specification into Isabelle using our \gls{zmath} toolkit.
@@ -962,6 +964,16 @@ The assumptions are as follows:
 
 \begin{itemize}
 \item Firstly, we like to point out that the \gls{zmath} can only translate specifications with syntax used in our examples. Since the language of mathematical notation is vast we can not incoporate the entire syntax of mathematics in the \gls{zmath} within the scope of this thesis. More explanation is given on this topic in the next chapter.
+
+\item The \gls{zmath} toolkit is implemented in \verb|python 2.7| and uses the following packages:
+\begin{itemize}
+\item \textbf{re:} To read the users annotations from \gls{zcga} and \gls{zdra}.
+\item \textbf{networkx:} To implemented the instances and relationships into a graph form.
+\item \textbf{matplotlib:} To produce the goto and dependency graphs.
+\item \textbf{Tkinter:} To run the user interface.
+\end{itemize}
+
+We assume that a user wanting to use the \gls{zmath} toolkit has installed the correct packages.
 
 \item One of the assumptions the toolkit makes is that if the specification holds 1 state schema (and thus 1 record) then all the lemma's produced are under that record. Thus, if the specification holds 2 or more records then the lemmas produced will need to define which record they belong to. For example in the SteamBoiler specification we manually input `\verb|(in thesteamboiler)|' after the word `\verb|lemma|'. This does not have to be done to specification which only hold one state schema.
 
@@ -974,11 +986,13 @@ The assumptions are as follows:
 We like to highlight the limitations of the \gls{zmath} toolkit. They are as follows:
 
 \begin{itemize}
-\item If we totalise preconditions e.g \verb|\totalises{TS#}{PRE#}| and all preconditions have been totalised then no warning. If we totalise schemas with preconditions within them e.g. \verb|\totalises{TS#}{CS#}| then the \gls{zdra} checker doesnt pick up on it.
+\item One of the limitations of the \gls{zmath} toolkit is in the way the \gls{zdra} checks if the specification is correctly totalised. Althought an incorrectly totalised specification can still be translated into Isabelle a warning message comes up for incorrectly totalised specifications. If the users totalises preconditions e.g \verb|\totalises{TS#}{PRE#}| and all preconditions have been totalised then no warning appears. However, if the user totalises schemas which hold preconditions within them e.g. \verb|\totalises{TS#}{CS#}| then the \gls{zdra} checker doesnt pick up on it and would say the specification is incorrectly totalised.
 
-\item when viewing goto and dep graph if there are a lot of nodes they are all bundled together. Would be better if spaced out more.
+\item Another limitation is in the way the dependency and goto graphs are presented. If the specification is reletively small, with not a lot of instances and connections then the graphs a presented quite clearly. On the other hand, when a specification is more complex with many instances the graph presents the nodes bundled together. Visually this becomes difficult to see the relationship between the nodes, it would be better if the nodes were represented with larger spaces between them.
 \end{itemize}
 
 \section{Conclusion}
 
-\todo[inline]{Complete Evaluation and discussion chapter}
+The \gls{zmath} toolkit has been tried and tested on various examples of Z specifications. We have translated specifications with syntax using set and terms and specifications using terms only. It seems that the grammatical types do not affect the ease of translation, but the amount of instances and the notations of mathematics do. The Steamboiler specification was our most complex example and we had to manually input extra parts to the lemmas in order to prove them. The amount of changeSchema's and stateInvariants affect how many properties the toolkit will produce. The complexity of the mathematical notation will determine how difficult the properites are to prove, whether they can be proven with the assistance of automatic tools or whether they need more Isabelle expertise to prove. 
+
+We have outlined some of the assumptions and limitation of the \gls{zmath} toolkit and we disucss the achievments of the system and future work in the next chapter.

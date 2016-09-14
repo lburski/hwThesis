@@ -930,19 +930,29 @@ singleton_insert_inj_eq' singleton_insert_inj_eq'
 
 \section{Reflection and Discussion}
 
-To check the consistancy of all our specification we had to prove 56 lemmas with a total of 120 tactics.
-
-% Any assumptions  made
-
-%reflect on the amount and complexity of manual proof still needed, and in particular whether this should
-%be within grasp of a software/system designer, who is not necessarily an expert in Isabelle/HOL
-
-%Complexity of proofs
-% how far the user must go to finish the proof
-%refer back to diagram in design chapter
+To check the consistancy of all our specification we had to prove 56 lemmas with a total of 120 tactics. In this section we discuss how far the \gls{zmath} toolkit can take us,how difficult it is for the user to get the full proof and what other proof is left.
 
 \subsection{How far can ZMathLang toolkit take us and what is left.}
 
+Looking back at our examples described in the previous section. The proofs to check for the complexity depend on the complexity of the specification. The more complex the language of the specification (whether it uses terms and set or just terms), the more complex the proofs and syntax of the proofs are. The vending machine has no stateinvariants therefore \gls{zmath} does not generate any lemmas to be proven. The steamboiler specification, which is our longest example, uses only terms but has 2 stateSchemas and therefore 2 records. We were able to prove all the lemmas using 2 different automatic isabelle tools (blast and sledgehammer).
+
+We remind the reader of figure \ref{fig:timeline} in chapter \ref{ch:design}, \verb|sledgehammer| and \verb|blast| are the two tools which have the most automated proving power. With the manual proof to complete the theorem the user should have some basic knowledge of how to prove lemmas in Isabelle, at least have some basic knowledge of the Isabelle tools available to assist them in proving the lemmas. If the software/system designer is not an Isabelle expert and has got up to step 5 in the \gls{zmath} steps then they would have the three following options:
+
+\begin{enumerate}
+\item Learn no Isabelle at all and pass on the proofs to be completed by an Isabelle expert.
+
+\item Learn Isabelle in depth until they gain enough knowledge to prove their specification and add more proofs if needed.
+
+\item Learn the basic automated proving tools (highlighted in figure \ref{fig:timeline}) to prove all (if not then some) of the lemmas, then hand the rest to an Isabelle expert to finish off.
+\end{enumerate}
+
+In the first case we will need 2 people to complete the proof. Since the system designer has already translated the specification into Isabelle syntax automatically so a lot of the work has been done. The theory file has been set up and properties have been written, the expert will just need to prove them. Thefore a big chunk of work has been done. The advantage with this approach goes to the system designer as they do not need to learn anything beyond their existing knowledge. However, the disadvantage to this approach is that there needs to be an Isabelle expert ready to complete the proofs and depending on the syntax of the specification this may be difficult to prove. There also might be other properties which the stakeholders of the project may wish to be proven. Again, To add these extra properties, a little bit more Isabelle knowledge is needed.
+
+In the second scenario we will need only 1 person to complete the proof (the system designer). Using the \gls{zmath} toolkit will assist the designer translating the specification into Isabelle syntax, however the user will then need to learn more Isabelle to finish of the proof for their specification. Since the \gls{zmath} has already produced an Isabelle file the user can then learn the Isabelle syntax by example as well as reading through the various Isabelle documentations online. The advantage of this scenario is that since there is only one person doing the entire proof, there is less cost in finding another Isabelle expert and paying them to complete the proof. The disadvantage in this case is that the system engineer has to spend more time on learning Isabelle syntax and proving in Isabelle which may become long and tedious. The stakeholders may also want other properties proven about the specification which again is down to the system designer to learn.
+
+The third case is a compromise between the first two scenarios, it will require the system designer and on some occasions, an Isabelle expert. The system designer translates the specification into Isabelle using the \gls{zmath} toolkit to assist them. They then learn the very basic automated proving tools, to assist them in proving the lemmas to check for consistency. By doing this the system engineer may be able to prove the entire specification for consistancy using the automated tool. However some lemmas if they are more complex may require more Isabelle skills then just the automated Isabelle tools to prove. Therefore the system engineer will be required to prove as much as they can and if there are some parts which can not be proved with automation, they can pass this along to an Isabelle expert. The Isabelle expert will then have less work to prove the remainer of the proof. If the stakeholders require more properties proved then the Isabelle expert can do this as well.
+
+The third case would be most beneficial as an Isabelle expert may not be required if the stakeholders only want to check the system for consistancy and the syntax of the specification is reletively easy where automated tools can be used to prove the specification. However, depending on the complexity of the specification, an Isabelle expert may be needed sometimes if the system designer can not prove the entire specification with just the automated tools and/or if the stakeholders require a more rigourous proof.
 
 \subsection{Assumptions and limitations of the ZMathLang toolkit}
 Assumptions
@@ -953,6 +963,7 @@ Assumptions
 \item Specification = 1 theory. Can't do more than 1 specification in 1 document.
 
 \item we assume the user wishes to check for consistancy. As stated in 2proofs, the properties to prove is down to stakeholders
+
 \end{itemize}
 
 Limitations

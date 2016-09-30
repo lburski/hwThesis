@@ -1,31 +1,30 @@
 \chapter{Background}
 \label{ch:background}
 
-Introduction stating formal methods are a type of mathematics. Explanation of where formal languages came from in mathematics etc
+Formal methods are a specific type of mathematical notation which is based on the techniques of the specification, verification and development of software and hardware systems \cite{whatareformalmethods}. Since our thesis presents \gls{zmath} we go right to the beginning of the framework, to describe how mathematical notation came about. Then we describe the original MathLang framework (the framework which \gls{zmath} is an adaptation of) and then give the reader an idea of other formal methods and languages. In the next section we wish to describe what is the language of Z and give more details of it's syntax and semantics. We then highlight other proving techniques which have been done for maths, formal methods and Z.
 
 \section{Mathematical Notations}
 
-Intro....
+Computer science (and thus computer systems) have evolved from basic mathematics. We can say that formal specification writers are practicing mathematicians as they write system specifications in a formal manner. Therefore we must start right at the beginning at the foundation of mathematical notation.
 
 \subsection{Right from the begininning}
 
-\begin{itemize}
-\item logic and aristotle
+The relationship between mathematical reasoning and practicing mathematicians started out early on during the ancient Greeks where logic was already being studied. Reasoning in logic was used for just about anything not just mathematics such as law, medicine and farming. This very early form of mathematics made very famous discoveries such as Aristotles logic \cite{aristotle}, Euclid's geometry \cite{euclid} and Leibniz Calculus \cite{leibniz}.
 
-\item Frege Grundgesetze + Cantor + Russel discovered paradoxes
+Further on in the 1800's, Frege wrote \emph{Die Grundlagen der Arithmetik} \cite{frege} and other works where he noted that mathematics is a branch of logic. In this works, he began building a solid foundation for mathematics. This early foundation along with Cantors set theory \cite{cantor} was argued to be incosistant and thus Russel found a pardox in this work.
 
-\item Russel inventing type theory
+In the late 19th century and beginning of 20th century, Russell \& Whitehead \cite{whitehead1912principia} started to form a basis for mathematical notation. Their three volume work describes a set of rules from which all mathematical truths could be proven. In these early stages the authors try to dervive all maths from logic. This ambitious project was the first stepping stone in collaborating all mathematics under one notation.
 
-\item Zermelo added axiomisation
+Further to Russell \& Whitehead's work, Bourbanki\footnote{A name given to a collective of mathematicians} wrote a series of books beginning n the 1935's with the aim of grounding mathematics. Their main works is included in the Elements of Mathematics series \cite{opac-b1128208} which does not need any special of knowledge of mathematics. It describes mathematics from the very beginning and goes through core mathematical concepts such as set theory, algebra, function etc and gives complete proofs for these concepts.
 
-\item Fraenkel + skolem extended to ZF set theory (which Z is based on)
-
-\end{itemize}
+Adding to Russell's work, Zermelo introduced an axiomatisation of set teory which was later extended by Frankel and Skolem to form ZF set theory \cite{zfc}. This new theory is what we will later see the Z notation is based on and the notation this thesis checks the correctness of.
 
 \subsection{Computerisation of Maths and Proof Systems}
 
+In the 21st century, a great area of research is how use, store and support this mathematical knowledge. Since automation has become more and more used, mathematicians have looked into ways in which they can use computers to reason about and provide services to mathematics. This would include all areas of mathematics, such as logic, mechanics and software specifications. Mathematical knowedge can be represent in lots of different ways including the following:
+
 \begin{itemize}
-\item typesetting systems like \LaTeX{}
+\item Typesetting systems like \LaTeX{}
 
 \item proof assistants and automated theorem provers
 

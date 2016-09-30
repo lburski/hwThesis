@@ -1,11 +1,11 @@
 \chapter{Z Core Grammatical aspect}
 \label{ch:zcga}
 
-The \gls{zcga} is a weak type checker, which checks for grammatical correctness in fully formal Z specifications and partially formalised Z specification. It is not the same as pure Z type checkers as it only checks the grammar on a sentence level and not the logical correctness. The \gls{zcga} has it's roots in weak type theory for mathematics \cite{wtt} and has changed for Z specifications. Core grammatical correctness for Z has also adapted the rules from the \gls{cga} for mathematics (see section \ref{sec:mathlangbackground} in chapter \ref{ch:background}).
+The \gls{zcga} is a weak type checker, which checks for grammatical correctness in formal Z specifications and partially formalised Z specifications. It is not the same as pure Z type checkers as it only checks the grammar on a sentence level and not the logical correctness. The \gls{zcga} has it's roots in weak type theory for mathematics \cite{wtt}. Core grammatical correctness for Z has also adapted the rules from the \gls{cga} for mathematics (see section \ref{sec:mathlangbackground} in chapter \ref{ch:background}).
 
-This chapter focuses on the first step in the \gls{zmath} approach to translating formal specifcations into theorem provers. The user can check for grammatical correctness with the aim to translate the specification fully into a theorem prover or they can use this step on it's own to check their specification for some sort of correctness.
+This chapter focuses on the first step of the \gls{zmath} toolset. The user can check for grammatical correctness with the aim to translate the specification fully into a theorem prover or they can use this step on it's own to check their specification for some level of rigor.
 
-The first part of this chapter explains the design of the \gls{zcga} and how the rules and categories have been changed. It gives some examples of each of the categories and how they are used in Z. We then explain the rules in which the categories must follow in order to be \gls{zcga} correct. The next section hgihlights some properties we can show about the \gls{zcga}. Then we explain how the categories of the \gls{zcga} syntax are adapted into weak types and check Z specification for correctness.
+The first part of this chapter explains the design of the \gls{zcga} and how the rules and categories have been adapted from \cite{wtt}. It gives some examples of each of the categories and how they are used in Z. We then explain the rules in which the categories must follow in order to be \gls{zcga} correct. The next section highlights some properties we can show about the \gls{zcga}. Then we explain how the categories of the \gls{zcga} syntax are converted into weak types and check Z specifications for grammatical correctness.
 
 The final section demonstrates the implementation of the \gls{zcga} and gives examples of certain errors one can get when checking a specification for grammatical correctness.
 
@@ -55,7 +55,7 @@ $\overrightarrow{\mathcal{E}}$ is a list of 1 or more $\mathcal{E}'s$, $\overrig
 \caption{Categories of ZCGa syntax.} \label{tab:zcga1}
 \end{table}
 
-These categories are adapted from the weak types in \cite{wtt}. In particular \emph{book} becomes \emph{specification}, \emph{lines} become \emph{paragraphs}, \emph{context} becomes \emph{schematext} and \emph{statements} become \emph{expressions}. We eliminate \emph{nouns}, \emph{adjectives} and only have one syntax for \emph{definition}.
+We use some of the weak types in \cite{wtt} in our weak types for Z. In particular \emph{book} becomes \emph{specification}, \emph{lines} become \emph{paragraphs}, \emph{context} becomes \emph{schematext} and \emph{statements} become \emph{expressions}. We eliminate \emph{nouns}, \emph{adjectives} and only have one syntax for \emph{definition}.
 
 \subsection{Examples of specifications and weak types}
 Everything within a Z specification can be labelled using the categories found in table \ref{tab:zcga1}.
@@ -85,9 +85,9 @@ The set of variables $V$ is divided into two subsets $V^{\mathcal{T}}\text{ and 
 The set of constants range over constants giving terms $C^{\mathcal{T}}$, constants giving sets $C^{\mathbb{S}}$ and constants giving expressions $C^{\mathcal{E}}$.
 
 \begin{itemize} 
-\item $C^{\mathcal{T}}$. An example of a constant giving an expression would be `$0$' in figure \ref{fig:toy}.
+\item $C^{\mathcal{T}}$. An example of a constant giving a term would be `$0$' in figure \ref{fig:toy}.
 
-\item $C^{\mathbb{S}}$. An example of a constant giving an expression would be `$\{\}$' in figure \ref{fig:toy}.
+\item $C^{\mathbb{S}}$. An example of a constant giving a set would be `$\{\}$' in figure \ref{fig:toy}.
 
 \item $C^{\mathcal{E}}$. An example of a constant giving an expression would be `$m' = 0$' where the constants is `$=$' from figure \ref{fig:toy}.
 \end{itemize}
@@ -103,12 +103,12 @@ There are two subsets of binders in the categories for Z specifications. Binders
 \noindent `$\exists schedule:TIMESLOT \leftrightarrow ROOM \bullet (allPairs moduleTT \cap schedule = \emptyset
 \land moduleTT = moduleTT \oplus {m? \mapsto schedule})$'
 \newline
-\noindent taken from Timetable specification in appendix \ref{app:timetable}.
+\noindent taken from Timetable specification in \cite{mathlangexamples}.
 
 \item $B^{\mathcal{E}}$. An example of a binder giving a set is
 \newline
 \noindent `$\bigcup \{s:\dom studentTT \bullet \{s \mapsto (studentTT~s \setminus moduleTT~m?)\}$' \newline
-\noindent taken from Timetable specification in appendix \ref{app:timetable}.
+\noindent taken from Timetable specification in \cite{mathlangexamples}.
 \end{itemize}
 
 \paragraph{terms}

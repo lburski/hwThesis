@@ -119,12 +119,27 @@ show step by step translation of mathematical text into isabelle from laamars ph
 \section{Formal Methods and Languages}
 \label{sec:formalmethodsandformallanguages}
 
-\begin{itemize}
-\item definitions of `formal language', `formal method' and `formal specification'
+Formal methods are usually used to assist in formalising in a variety of texts including systems, software and even language itself.
 
-\item the first formal language is thought to be used by Frege in his Begriffsschift (1879), Begriffschift meaning `concept of writing' described as `formal language of pure thoguht'
+\begin{defin}[Formal Language]
+A language designed for use in situations in which natural language is unsuitable, as for example in mathematics, logic, or computer programming.\footnote{www.dictionary.com/browse/formal-language}
+\end{defin}
 
-\item broad histroy of formal methods 
+\begin{defin}[Formal Specification]
+The specification of a program's properties in a language defined by a mathematical logic.\footnote{www.wiki.c2.com/?FormalSpecification}
+\end{defin}
+
+\begin{defin}
+Formal methods are mathematical approaches to software and system development which support the rigorous specification, design and verification of computer systems.\footnote{www.fmeurope.org/?page\_id=2}
+\end{defin}
+
+Formal methods are mathematical approaches to software and system development which support the rigorous specification, design and verification of computer systems \cite{fmeurope}. Specifications are a collection of statements describing how a proposed system should act and function. Formal specifications use notations with defined mathematical meanings to describe systems with precision and no ambiguity. The properties of these specifications can then be worked out with more confidence and can be described to the customers and other stakeholders. This can uncover bugs in the stated requirements which may not have found in a natural language specification. With this, a more complete requirements validation can take place earlier in the development life-cycle and thus save costs and time of the overall project. The rigor using formal methods eliminates design errors earlier and results in substantially redecued time \cite{benefitsofform}. 
+
+\subsection{A brief history of formal methods}
+
+The first known formal language is thought to be used by Frege in his Begriffsschift (1879), Begriffschift meaning `concept of writing' described as `formal language of pure thoguht'. Frege formalised propositional logic as an axiomatic system.
+
+Formal methods then grew in the following:
 
 \begin{itemize}
 \item 1940's, Alan Turing annotated the properties of program states to simplify the logical analysus of sequential programs
@@ -134,9 +149,10 @@ show step by step translation of mathematical text into isabelle from laamars ph
 \item 1970's Dijkstra used formal caluculus to aid development of non-deterinist programs
 \end{itemize}
 
-\item Formal methods today
+Formal methods are used today are just as important as when they were used before. Formal methods have a large presence in academia and have also made their way into various industries to prevent design flaws in high integrity systems. Previous desing errors have been found in systems such as the Therac-25 machine, which was used for radiation therapy produced by Atomic Energy of Canada Limited in 1982. It was involved in multiple incidents in which patients were give massive overdoses of radiation \cite{baase2003gift}. Another major fault which led to disastrous results was NASA’s Checkout Launch and Control System (CLCS) cancelled 9/2002 \footnote{www.spaceref.com/news/viewnews.html?id=475}.
 
-\item why use formal methods in industry (design errors like Therac-25 1985, NASA’s Checkout Launch and Control System (CLCS) cancelled 9/2002, , added level of rigor)
+\subsection{Types of formal methods}
+\begin{itemize}
 
 \item types of formal methods (Z, B method, ABS)
 

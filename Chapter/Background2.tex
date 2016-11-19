@@ -129,8 +129,8 @@ A language designed for use in situations in which natural language is unsuitabl
 The specification of a program's properties in a language defined by a mathematical logic.\footnote{www.wiki.c2.com/?FormalSpecification}
 \end{defin}
 
-\begin{defin}
-Formal methods are mathematical approaches to software and system development which support the rigorous specification, design and verification of computer systems.\footnote{www.fmeurope.org/?page\_id=2}
+\begin{defin}[Formal methods]
+Mathematical approaches to software and system development which support the rigorous specification, design and verification of computer systems.\footnote{www.fmeurope.org/?page\_id=2}
 \end{defin}
 
 Formal methods are mathematical approaches to software and system development which support the rigorous specification, design and verification of computer systems \cite{fmeurope}. Specifications are a collection of statements describing how a proposed system should act and function. Formal specifications use notations with defined mathematical meanings to describe systems with precision and no ambiguity. The properties of these specifications can then be worked out with more confidence and can be described to the customers and other stakeholders. This can uncover bugs in the stated requirements which may not have found in a natural language specification. With this, a more complete requirements validation can take place earlier in the development life-cycle and thus save costs and time of the overall project. The rigor using formal methods eliminates design errors earlier and results in substantially redecued time \cite{benefitsofform}. 
@@ -154,7 +154,12 @@ Formal methods are used today are just as important as when they were used befor
 \subsection{Types of formal methods}
 \begin{itemize}
 
-\item types of formal methods (Z, B method, ABS)
+Today there are many different types of formal methods used both in industry and academia. Specification languages are expressive languages with general proof methods, such as VDM, Z, B. Another type of formal method could be program correctness proofs which associates logical inference rules with programming syntax, e.g. Hoare triples and Gries Methodolgy.There may also be model based approaches to formal methods, which are domain specific languages with precise algorithms for correctness proofs, e.g. Temporal logic \cite{uwa}, Fuzzy logic.  
+
+Formal methods are used to precisley communicate specifications and the function of programs. They are also used to ensure the correctness of systems particularly safety critical systems.
+
+Formal methods have been a success in a variety of projects. For example, in the Sholis project \cite{sholis}, using a formal specification was most effective for fault finding, therefore if the specifications are correct, then the program implemented should then in turn contain less errors if it follows the correct specification.
+King, Hammond, Chapman and Pryor's paper \cite{sholis} was based on the SHOLIS defence system. It highlighted the importance of having a formal specification on a system to check for errors. It was found that the Z proof was the most cost effective for fault finding. The Z specification found 75\% of the total faults for the system. Since Z specifications are important for finding faults in SIL4 systems (based on the sholis project), then checking the correctness of the Z specification is itself very important. Note that the specifications found 75\% of errors and not 100\%. As human error can still occur in formal specifications, using the ZMathLang approach may increase the percentage of errors found.
 
 \item Success of formal methods (B27 Traffic Control System, SHOLIS project, Data Acquisition, Monitoring and Commanding of Space Equipment)
 

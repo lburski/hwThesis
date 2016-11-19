@@ -8,6 +8,7 @@ Formal methods are a specific type of mathematical notation which is based on th
 Computer science (and thus computer systems) have evolved from basic mathematics. We can say that formal specification writers are practising mathematicians as they write system specifications in a formal manner. Therefore we must start right at the beginning at the foundation of mathematical notation.
 
 \subsection{Right from the beginning}
+\label{subsec:rftb}
 
 The relationship between mathematical reasoning and practising mathematicians started out early on during the ancient Greeks where logic was already being studied. Reasoning in logic was used for just about anything not just mathematics such as law, medicine and farming. This very early form of mathematics made very famous discoveries such as Aristotles logic \cite{aristotle}, Euclid's geometry \cite{euclid} and Leibniz Calculus \cite{leibniz}.
 
@@ -169,6 +170,8 @@ King, Hammond, Chapman and Pryor's paper \cite{sholis} was based on the SHOLIS d
 Another case study where formal methods have been used in industry is the NASA’s Mars Science Laboratory Mission (MSL) \cite{DBLP:journals/corr/abs-1003-1682}. This system relied on various different mechanisms to command the spacecraft from earth and to understand the behaviour of the rover and spacecraft itself. The paper suggested that "\textit{test engineers cannot “eyeball”
 the hundreds of thousands of events generated in even short tests of such a complex system}". Therefore runtime verification using formal specification offered a solution to this problem.
 
+A paper reflecting on industry experience with proving properties in SPARK \ref{DBLP:conf/itp/ChapmanS14}, describes a programming language and verification system that will offer sound verification for programs. It states that SPARK and the use of proof tools remain a challange (published in 2014) as the `adoption hurdle' is percieved too high. Customers and regulators have taken a variety of stances on static analys and theorem provers. Where some places in industry have adopted the idea others remain sceptical. Hopefully this thesis will present an idea on how formal analysys could be simplified and broken up into smaller more understandable steps and thus would allow more users to take on the idea.
+
 Despite these advantages some managers sometimes argue the cost of producing a system using formal methods do not cover the costs. However the rigour using formal methods eliminates design errors earlier and results in substantially reduced time. Investing more effort in specifying, verifying and testing will benefit software projects by reducing maintenance costs, higher software reliability and more user-responsive software \cite{chantatub}.
 
 So far we have seen what are the different types of formal methods, where formal methods have been used, and why some people are still relluctant to use them. So what needs to be done to make “formal methods” industrial strength? Nirmal Pandey \cite{formalmethodslides} suggests the following: 
@@ -192,32 +195,189 @@ In this section we have identified the differeces between formal methods, formal
 \section{Z Syntax and semantics}
 \label{sec:theznotation}
 
-\subsection{Why Z would work with MathLang}
-
-Bridges formal method and discrete mathematical notation.
 
 \subsection{Introduction to Z}
 
-Z is based on predicate Calculus, Zermelo-Frankel set theory...
 
-Ivented by j-R Abriel, ISO standard.+ Spivey standard
+Z is based on predicate Calculus, Zermelo-Frankel set theory as we introduced at the beginning of this chapter in section \ref{subsec:rftb}.
+
+It is a particular formal method which was developed to specify the new Customer Information Control System (CICS) functionality \cite{cics}. The set theory includes standard set operators, set comprehensions, cartesian products and power sets. Z also has other aspects such as schemas which are used to group mathematical objects and their properties. The schema language can be used to describe the state of a system and ways in which that state may change \cite{Woodcock:1996:UZS:235337}.
 
 \subsection{Propositional and predicate logic}
 
-\subsection{Sets and Types}
+Z specifications are built using predicate and propositional logic.
 
-\subsection{Definitions}
+\subsubsection{Propositional logic}
 
+Propositional logic works with statements which must be either true or false but can not be both. The following are propositional statements:
 \begin{itemize}
-\item AxDef
-\item Freetypes
-\item Schema (declarations and expressions)
+\item A tree is gree
+
+\item A tree has leaves
+
+\item All plants have flowers
 \end{itemize}
 
-\subsection{A full example in Z}
+Propositions can be connected in a variety of ways. Figure \ref{tab:logcon} shows a table of logical connectors in order of operator precedence.
 
+\begin{table}[H]
+\centering
+\begin{tabular}{| c | c | c |}
+\hline
+$\neg$ & negation & \textbf{not} \\
+\hline
+$\land$ & conjunction & \textbf{and} \\
+\hline
+$\lor$ & disjunction & \textbf{or} \\
+\hline
+$\implies$ & implication & \textbf{implies} \\
+\hline
+$\Leftrightarrow$ & equivalence & \textbf{if and only if} \\
+\hline
+\end{tabular}
+\caption{Logical connectors giving the symbol, its name and pronounciation. \label{tab:logcon}}
+\end{table}
+
+We can now build compound propositions, which are propositional statements joined together using these connectors, e.g.
+
+\begin{itemize}
+\item the glass is full $\land$ the glass is clear
+
+\item the phone isn't working $\lor$ the phone battery has died
+
+\item the sun is shining $\implies$ I don't need a raincoat
+\end{itemize}
+
+\subsubsection{Predicate logic}
+
+Predicate logic allow us to make statements which describe properties that must be satisfied by every, some or no objects in some universe of discourse. Examples are:
+
+\begin{itemize}
+\item Every plane can fall out of the sky.
+
+\item At least one cloud has a silver lining.
+
+\item Jake knows all rugby players in the Scottish team.
+\end{itemize}
+
+To formalise such statements we require a language of predicate calculus. A predicate is a statement with a place for an object. A predicate can turn into a proposition once we put an object in it, therefore we can not say whether it is true or false once the predicate has filled in mission information. For example we can say `$x > 5$' is a predicate but not a proposition until we know what `$x$' is. We can make a proposition out of `$x > 5$' by putting a \textit{quantifier} with it. So we can say, `there is an $x$ which is larger than 5'. This is written formally as `$\exists x > 5$'. This statement can now be written in our Z syntax.
+
+We can now formalise one of our previous predicate statements:
+\newline
+$\exists c: CLOUD @ c\ has\ silver\ lining$
+This statement says that there exists $c$ which is a cloud and $c$ has a silver lining.
+
+\subsection{Sets and Types}
+
+A \textit{set} is a collection of distinct objects called \textit{elements}. For example the set of all people. Every expression in a Z specification belongs to a set called its \textit{type} and whenever we introduce a variable we must declare its type \cite{essenceofz}. For example:
+
+\begin{zed}
+[HUMAN]\ the\ set\ of\ all\ humans \\
+\nat\ the\ set\ of\ all\ natural\ numbers
+\end{zed}
+
+Another way of introducing types is using a \textit{free type definition}, where once enumerates the names of the elements in that type, for example:
+
+\begin{zed}
+SHAPES ::= square | circle | triangle \\
+PLANTS ::= tree | shrub | herb \\
+\end{zed}
+
+In Z specification, we introduce variables before they are used in the expressions (predicates) by a means of writing a \textit{declaration}. A declaration can introduce either one or multiple variables. For example:
+
+\begin{zed}
+ralph: HUMAN \\
+a, b, c: \nat
+\end{zed}
+
+\subsection{Structure of a Z specification}
+
+In the Z notation there are two languages: the mathmatical language and the schema language. The mathematical language is used to describe various aspects of a design: object, and the relationships between them. The schema language is used to structure and compose descriptions: collecting pieces of information and naming them for re-use. A schema consists of two parts: a \emph{declaration part} and a \emph{predicate part}. The \emph{declaration part} consists of declared variables and the \emph{predicate part} describes the variable values. We can write a schema either horizontally (figure \ref{fig:horizontalschema}) or vertically (figure \ref{fig:verticalschema}).
+
+\begin{figure}[H]
+\vspace{-0.2in}
+\centering
+\begin{minipage}{0.45\textwidth}
+\begin{zed}
+\noindent Schema\ Name \defs [declarations | predicates]
+\end{zed}
+\vspace{-0.18in}
+\caption{An example of a schema written horizontally.\label{fig:horizontalschema}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\begin{schema}{Schema\ Name}
+declarations
+\where
+predicates
+\end{schema}
+\vspace{-0.2in}
+\caption{An example of a schema written vertically. \label{fig:verticalschema}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
+If we wanted a property of some system which consists of two variables $x$ and $y$ and state that $x$ must be smaller than $y$ then we can write:
+
+\begin{schema}{xLessThany}
+x: \nat \\
+y: \nat
+\where
+x < y
+\end{schema}
+
+We can also introduce global variables by means of an \textit{axiomatic description} in Z. These global variables may be refered to throughout the specification. An example this Z construct is as follows:
+
+\begin{axdef}
+k: \nat \\
+\where
+k = 100
+\end{axdef}
+
+With this axiomatic description in place within the Z specification means that whenever the global variable $k$ is refered to, it will always represent the natural number 100.
+
+The full language of Z can be explored in \cite{spiveyreferencemanual}, \cite{essenceofz} and \cite{Woodcock:1996:UZS:235337}.
+
+\subsection{A full example in Z}
+Here is a small schema which tells a story about a child called Ralph and his mum. We declare the types $OBJECT$ which is a type containing all objects. We also declare the type $EMOTION$ which consists of 3 emotions: $happy$, $sad$ and $angry$
+
+\begin{zed}
+[OBJECT] \\
+EMOTION::= happy | sad | angry
+\end{zed}
+
+In this first schema we declare the state variables which is ralph and mum who are of type human, colourIn which maps a human to an object (representing that particular human is colouring in that object) and feeling which maps a human to an emotion (representing that human is feeling that emotion).
+
+In the state we say that ralph is always feeling happy
+\begin{schema}{ColouringIn}
+ralph, mum:HUMAN \\
+colourIn:(HUMAN \pfun OBJECT) \\
+feeling:(HUMAN \pfun EMOTION)
+\where
+feeling(ralph \mapsto happy)
+\end{schema}
+
+In this schema we say that when ralph is colouring in a picture, mum is feeling happy. We use a $\Delta$ to signify this schema changes the current state.
+\begin{schema}{ColourPicture}
+\Delta ColouringIn \\
+picture: OBJECT 
+\where
+colourIn(ralph \mapsto picture) \\
+feeling(mum \mapsto happy)
+\end{schema}
+
+However in this schema, we say we say when ralph is coloring the wall, then mum is angry.
+\begin{schema}{ColourWall}
+\Delta ColouringIn
+wall: OBJECT \\
+\where
+colour(ralph \mapsto picture) \\
+feeling(mum \mapsto angry)
+\end{schema}
 
 \subsection{Conclusion}
+
+In this section we gave a brief introduction to Z what it is made up of. We give a short overview of propositional and predicate logic as well as defining the structure of a Z specification. We give a full example of a Z specification and explain each part and what it means. In the next section we identify various proving systems which currently exist for mathematics, other formal methods and Z.
 
 \section{Proving systems for Z}
 

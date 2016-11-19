@@ -157,7 +157,7 @@ Formal methods then grew in the following:
 Formal methods are used today are just as important as when they were used before. Formal methods have a large presence in academia and have also made their way into various industries to prevent design flaws in high integrity systems. Previous desing errors have been found in systems such as the Therac-25 machine, which was used for radiation therapy produced by Atomic Energy of Canada Limited in 1982. It was involved in multiple incidents in which patients were give massive overdoses of radiation \cite{baase2003gift}. Another major fault which led to disastrous results was NASA’s Checkout Launch and Control System (CLCS) cancelled 9/2002 \footnote{www.spaceref.com/news/viewnews.html?id=475}.
 
 \subsection{Types of formal methods}
-\begin{itemize}
+
 
 Today there are many different types of formal methods used both in industry and academia. Specification languages are expressive languages with general proof methods, such as VDM, Z, B. Another type of formal method could be program correctness proofs which associates logical inference rules with programming syntax, e.g. Hoare triples and Gries Methodolgy.There may also be model based approaches to formal methods, which are domain specific languages with precise algorithms for correctness proofs, e.g. Temporal logic \cite{uwa}, Fuzzy logic.  
 
@@ -166,14 +166,13 @@ Formal methods are used to precisley communicate specifications and the function
 Formal methods have been a success in a variety of projects. For example, in the Sholis project \cite{sholis}, using a formal specification was most effective for fault finding, therefore if the specifications are correct, then the program implemented should then in turn contain less errors if it follows the correct specification.
 King, Hammond, Chapman and Pryor's paper \cite{sholis} was based on the SHOLIS defence system. It highlighted the importance of having a formal specification on a system to check for errors. It was found that the Z proof was the most cost effective for fault finding. The Z specification found 75\% of the total faults for the system. Since Z specifications are important for finding faults in SIL4 systems (based on the sholis project), then checking the correctness of the Z specification is itself very important. Note that the specifications found 75\% of errors and not 100\%. As human error can still occur in formal specifications, using the ZMathLang approach may increase the percentage of errors found.
 
-\begin{itemize}
+Another case study where formal methods have been used in industry is the NASA’s Mars Science Laboratory Mission (MSL) \cite{DBLP:journals/corr/abs-1003-1682}. This system relied on various different mechanisms to command the spacecraft from earth and to understand the behaviour of the rover and spacecraft itself. The paper suggested that "\textit{test engineers cannot “eyeball”
+the hundreds of thousands of events generated in even short tests of such a complex system}". Therefore runtime verification using formal specification offered a solution to this problem.
 
-\item Success of formal methods (B27 Traffic Control System, SHOLIS project, Data Acquisition, Monitoring and Commanding of Space Equipment)
+Despite these advantages some managers sometimes argue the cost of producing a system using formal methods do not cover the costs. However the rigour using formal methods eliminates design errors earlier and results in substantially reduced time. Investing more effort in specifying, verifying and testing will benefit software projects by reducing maintenance costs, higher software reliability and more user-responsive software \cite{chantatub}.
 
-\item Weakness of formal methods (Low-level ontologies, Limited Scope,Cost,Poor tool feedback)
+So far we have seen what are the different types of formal methods, where formal methods have been used, and why some people are still relluctant to use them. So what needs to be done to make “formal methods” industrial strength? Nirmal Pandey \cite{formalmethodslides} suggests the following: 
 
-\item What needs to be done to make “formal methods” industrial strength? 
-\end{itemize}
 \begin{itemize}
 \item Bridge gap between real world and mathematics
 \item Mapping from formal specifications to code (preferably automated)
@@ -184,9 +183,11 @@ King, Hammond, Chapman and Pryor's paper \cite{sholis} was based on the SHOLIS d
 \item Certain activities not yet ‘formulizable’ methods
 \item No one model has been identified which should be used for software)
 \end{itemize}
-\end{itemize}
+
 
 \subsection{Conclusion}
+
+In this section we have identified the differeces between formal methods, formal languages and formal specification. We have seen how formal methods originated from mathematics and how it grew over time to become what it is today. We see a connection with Frege's work on mathematical notation and identified it as the first formal notation found in history. We identified there are a variety of formal methods and new methods are even being eveloped today to comply with the systems in questions. For example MSL had it's own specification language developed for the system in order for the system to be verified. Despite all the advantages, some managers are still reluctant to use formal methods in their system development and thus as Pandey suggested there still needs to be some work done on making formal methods industrial strength. One of his suggestions was that tools are needed to hide complexity of formalisms and to provide visulization of specifications, which this thesis addresses.
 
 \section{Z Syntax and semantics}
 \label{sec:theznotation}

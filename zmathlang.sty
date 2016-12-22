@@ -21,6 +21,14 @@
 \definecolor{boxcolor}{HTML}{000000}
 \definecolor{defin}{HTML}{9999FF}
 
+% % % % % % % % % % % % % % %5
+\definecolor{cganoun}{HTML}{FF9900}
+
+\definecolor{cgaadjective}{HTML}{CC9900}
+
+\definecolor{cgastep}{HTML}{996600}
+
+
 %Creating boxes to go around the schema's for the DRa
 
 \newcommand\draschema[2]{%
@@ -134,5 +142,17 @@
 \end{tcolorbox}
 }
 
+%%%%%%%%%%%%%%For thesis%%%%%%%%%%
+\newcommand\cganoun[1]{
+\fcolorbox{Black}{cganoun}{$#1$}
+}
+
+\newcommand\cgaadjective[1]{
+\fcolorbox{Black}{cgaadjective}{$#1$}
+}
+
+\newcommand\cgastep[1]{
+\fcolorbox{Black}{cgastep}{$#1$}
+}
 
 \endinput

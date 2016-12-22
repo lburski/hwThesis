@@ -69,8 +69,77 @@ Figure \ref{fig:mathlang} shows the overall situation of work in the current Mat
 The labelled arrows show the computerisation paths from the common mathematical language to any proof system. 
 The width of the arrow representing each path segment increases according to the expertise required. The level of expertise needed to computerise a CML text straight into a complete proof is very high, however the level of expertise is much smaller by using the \gls{math} framework to help form a formal skeleton and then into a complete proof. The dashed arrows illustrate further computerisation that one can envision.
 
+The initial design of MathLang was based on ideas from \gls{wtt} \cite{wtt} which then inspired de Bruijns Mathematical Vernacular \cite{mv}.
+\Gls{wtt} defines terminology to describe a \emph{book} which is a sequence of \emph{lines}, each of which is a pair of a \emph{sentence} (a \emph{statement} or a \emph{definition}) and a \emph{context} of
+facts (\emph{declarations} or \emph{statements}) assumed in the \emph{sentence}. A \emph{definition} can introduce a name whose scope is associated with a meaning throughout the rest of the book. A \emph{declaration} in the \emph{context} can introduce a name whose scope is the current line.
+The \emph{preface} gives names which can be reference throughout the entire document. Within \emph{declarations}, \emph{definitions} and \emph{statements} are \emph{phrases} which can be built from the basic elements; \emph{terms}, \emph{sets}, \emph{adjectives} and \emph{nouns}.
+\Gls{wtt} uses a weak type system using the following types \texttt{noun}, \texttt{set}, \texttt{adjective}, \texttt{statement}, \texttt{definition}, \texttt{context} and \texttt{book} to check basic well-formedness conditions.
+The idea's of \gls{wtt} are useful in some instances however it does not deal with proofs or logical correctness of the documents. There is no way to group statements together and indentify their roles within the document such as what is a theorem, what is a section, what is a chapter etc. It also doesn't provide a way to use some concepts used in a document within another.
 
-\subsection{Detailed information on CGa}
+We use the following standard metasymbols for the categories mentioned above:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|c|c|}
+\hline
+level & category & symbol & representative \\
+\hline
+atomic level & \emph{variables} & \texttt{V} & \emph{x} \\
+& \emph{constants} &  \texttt{C} & \emph{c} \\
+& \emph{binders} &  \texttt{B} & \emph{b} \\
+\hline
+phrase level & \emph{terms} & \texttt{t} & \emph{t} \\
+& \emph{sets} & $\sigma$ & \emph{s} \\
+& \emph{nouns} & $\mathcal{V}$ & \emph{n} \\
+& \emph{adjectives} & $\alpha$ & \emph{a} \\
+\hline
+sentence level & \emph{statements} & $\mathcal{S}$ & \emph{S} \\
+& \emph{definitions} & $\mathcal{D}$ & \emph{D} \\
+\hline
+discourse level & \emph{contexts} & $\mathbf{\Gamma}$ & $\Gamma$ \\
+& \emph{lines} & \textbf{l} & \emph{l} \\
+& \emph{books} & \textbf{B} & \emph{B} \\
+\hline
+\end{tabular}
+
+\begin{tabular}{|l|c|c|}
+\hline
+category & symbol & representative \\
+\hline
+\emph{expressions} & $\mathcal{E}$ & E \\
+\hline
+\emph{parameters} & $\mathcal{P}$ & P \\
+\hline
+\emph{typings} & $\mathcal{T}$ & T \\
+\emph{declarations} & $\mathcal{Z}$ & Z \\
+\hline
+\end{tabular}
+\end{table}
+
+\emph{Variables} can range of terms, sets or statements.
+
+Parameters $\mathcal{P}$ are either terms, sets or statements. A \emph{constant} is always followed by a parameter list and constants can be either for terms, nouns, statements, sets or adjectives. For example:
+
+
+\noindent The constant `$+$' takes 2 terms as parameters and gives back a term, therefore we can have:
+
+\begin{center}
+$+(3, 2)$
+\end{center}
+
+meaning the constant $+$ takes the parameters $3$ and $2$ and in this case would give back $5$.
+
+\emph{Binders} can be giving terms, adjectives, nouns, sets or statements. For example a binder giving a set would be the symbol `$\bigcup$' or a binder giving a statement would be the symbol `$\forall$'.
+
+ A \emph{definition} introduces new constants. We can have phrase definitions and statement definitions.
+ 
+ A \emph{context} is a list of declarations and statements. A declaration in a context introduces variables which are then used in expressions. A context can be empty or non empty.
+
+ \emph{Lines} contain either a statement or a definition which is relative to a context. A \emph{book} is a list of lines. A simple book could be empty and not contain any lines or it can contain 1 or more lines.
+ 
+A detailed explanation on each of the categories along with examples can be found in \cite{wtt}.
+
+\subsection{CGa}
 \label{subsec:cga}
 The current \gls{cga} in MathLang uses a finite set of grammatical \textit{categories} to identify the 
 structure and common concepts used in mathematical texts. The aims of the \gls{cga} is to make explicit 
@@ -78,50 +147,337 @@ the grammatical role played by the elements of mathematical texts and to allow t
 structure within the \gls{cga} encoding in a mathematical text. The \gls{cga} checks for grammatical correctness and finds errors like 
 an identifier being used without and prior introduction or the wrong number of arguments being given to a function \cite{krzysztofphd}.
 
-\todo[inline]{more detail on dra and cga}
-------------------------------------------
+The \gls{cga} for mathematical documents is a formal language originally created by ideas by \gls{wtt} and Mathematical Vernicular \cite{mv} and then adapted to suit mathematical texts by various PhD, Master and Dissertation students.
 
-\begin{itemize}
-\item Reference Zenglars quote
+The smallest constructs of \gls{cga} are \emph{step} and \emph{expression}. Tasks handled by books, prefaces, lines, declarations, defintions, and statements are represented as steps in \gls{cga}. A step can be a \emph{block} which is a sequence of steps. A step can also be a definition, declaration or expression.
 
-\item Weak type theory into CGa
+For example:
 
-\end{itemize}
+\begin{center}
+`Given that $\mathfrak{M}$ is a set, $y$ and $x$ are natural numbers, and $x$ belongs to $\mathfrak{M}$, it holds that $x+ y=y+x$'.
+\end{center}
 
-\subsection{Detailed information on DRa}
+This statement encoded in \gls{cga} would be the following:
+
+\begin{center}
+$\{M : set; y : natural number; x : natural number; \in(x, M)\}$\\
+$\rhd =(+(x, y), +(y, x)) $
+\end{center}
+
+\Gls{cga} uses grammatical \emph{categories} (also called \emph{types}) to make explicit the grammatical role played by the elements of a mathematical text in a document.
+All these described categories and the rules for the grammar typing can be found in \cite{wtt}. \Gls{cga} also uses colour coding for these categories. They are:
+
+\begin{center}
+\term{term}, \set{set}, \cganoun{noun}, \cgaadjective{adjective}, \expression{expression}, \definition{definition}, \declaration{declaration}, \cgastep{step} and \cgatext{context}
+\end{center}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.35]{Figures/Background/cgaannotatedtext.png}
+\end{center}
+\caption{Example of CGa encoding of CML text, taken from \cite{KAMAREDDINE20085}. \label{fig:cgannotated}}
+\end{figure}
+
+\Gls{cga} types are powerful does not allow higher order types, to work around this weakness \gls{cga} annotation often gives entitied the type term instead of a more precide type. The goal of the \gls{cga} type is system is not to endure full correctness but to check whether the reasoning parts of the document are coherent and built sensibly. 
+
+The design of the \gls{cga} is credited to Kamareddine, Maarek and Wells  \cite{oomathlang}. The implementation of CGa is due to Maarek \cite{manuelphd}.
+
+\subsection{DRa}
 \label{subsec:dra}
 
 The Document Rhetorical aspects checks that the correctness of the reasoning in the mathematical document is correct and that there are no loops. The \gls{dra} mark-up system is simple and more concentrated on the narrative structure of the mathematical documents whereas other previous systems (such as DocBook \footnote{http://www.docbook.org}, Text Encoding Initiative \footnote{http://www.tei-c.org/index.xml}, OMDoc \footnote{http://www.omdoc.org}) were more concentrated on  the subtleties of the documents. It is used to describe and annotate chunks of texts according to their narrative role played within the document \cite{krzysztofphd}. Using the \gls{dra} annotation system we can capture the role that a chunk of text imposes on the rest of the document or on another chunk of text. This leads to generating dependency graphs which play an important role on mathematical knowledge representation. With these graphs, the reader can easily find their own way while reading the original text without the need to understand all of its subtleties. Processing \gls{dra} annotations can flag problems such as circular reasoning and poorly-supported theorems.
---------------------------------------------------------
 
-\begin{itemize}
-\item relations
+The annotation process for the \gls{dra} can be done before, after or with the annotations for \gls{cga} and \gls{tsa}. Table \ref{tab:drarolesandrelations} shows the roles and relations which can be used in annotating a document with \gls{dra}.
 
-\item instances
+\begin{table}[H]
+\centering
+\begin{tabular}{|l||l|}
+\hline
+\textbf{Roles} & \textbf{Relations} \\
+\hline
+lemma & justifies \\
+proof & uses \\
+corollary & subpartOf \\
+definition &  \\
+claim & \\
+case & \\
+\hline
+\end{tabular}
+\caption{A table showing \gls{dra} roles and relations. \label{tab:drarolesandrelations}}
+\end{table}
 
-\item Dependency and goto graph
-\end{itemize}
+Annotations in \gls{dra} follow three steps:
 
-\subsection{Detailed information on skeletons}
+\begin{enumerate}
+\item The user wraps chunks of text with boxed. Each box is assigned a unique name, this avoids any confusion when stating relations between the boxes.
 
-\begin{itemize}
-\item General Proof Skeleton
+\item To each unique box, the user then assigns a structural or mathematical rhetorical role which this box may play. He uses RDF triplets to assign a role to each box.
 
-\item Half baked proof
+\item The user then describes the relations between each of the chunks of text he annotated before.
+\end{enumerate}
 
-\item Filled in skeleton
-\end{itemize}
+RDF triples \cite{Candan:2001:RDF:507533.507536} are used to represents the relationships between the annotated boxes. The triples are represented as \emph{subject-predicate-object} triple, where \emph{predicate} denotes the relationship. The order of \emph{subject} and \emph{object} is important as it denotes how the dependency graph is formed. An example of RDF triples for the \gls{zdra} is:
 
-\subsection{information on TSa}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Assigned Rhetorical Roles} & \textbf{Relations} \\ 
+\hline
+(A, hasMathematicalRole, lemma) & (B, justifies, A) \\
+\hline
+\end{tabular}
+\end{table}
+
+The \gls{dra} performs three basic checks:
+
+\begin{enumerate}
+\item Check if each of the mathematical and rhetorical roles and relations which are used have been defined.
+
+\item Check that each name of a node is unique.
+
+\item Check that each relation source and target are valid \gls{dra} names.
+\end{enumerate}
+
+The \gls{dra} also automatically produces a dependency graph.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{Figures/Background/dranotation.png}
+\end{center}
+\caption{Wrapping/naming chunks of text and marking relationships in DRa \cite{zengfirstyear}. \label{fig:draannotate}}
+\end{figure}
+
+\subsubsection{Dependency Graph}
+
+The dependency graph is a directed label graph which contains all annotated DRa nodes of a mathematical text and all the relations. The names of the instances become the nodes of the graph and the relations become the named directed vertices of the graph \cite{zengfirstyear}.
+
+Since each \gls{dra} annotation itself is a step, \gls{dra} annotations can be nested. 
+
+An example of a dependency graph is shown in figure \ref{fig:pydepgraph}:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.45]{Figures/Background/pythdepgraph.png}
+\end{center}
+\caption{The Dependency Graph for the Pythagoras example, taken from \cite{zengfirstyear}. \label{fig:pydepgraph}}
+\end{figure}
+
+\subsubsection{GoTo Graph}
+
+The textual order between two nodes within a tree can be used to examine the structure of the \gls{dra}. The textual order is a modification of the logical precedence presented in the dependency graph. The textual order expresses the dependencies between parts of the text and is necessary for the generation of a proof skeleton. For example if a node A uses node B than logically B should be written before A. The GoTo graph is the same as the dependency graph but rearranged to follow the correct textual order of the nodes and vertices. The GoTo graph is produced for the following reasons:
+
+\begin{enumerate}
+\item The automatic checking of the GoTo can reveal errors in the document such as loops in structure of the document.
+
+\item The GoTo is used to produce a proof skeleton for a certain prover.
+\end{enumerate}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.45]{Figures/Background/pygograph.png}
+\end{center}
+\caption{Example of the GoTO of a document, taken from \cite{zengfirstyear}. \label{fig:pygograph}}
+\end{figure}
+
+\subsection{Mathamatical skeletons}
+
+There has been some work on computerising mathematical texts without fully formalising or proof checking them. The computerisations are no detailed to check for full total correctness but are used as \emph{skeletons} in the full formalisation \cite{Wiedijk02formalproof}.
+However, in order to produce these skeletons the user still  needs to be an expert in the theorem proving language they wish to check their mathematical document with.
+Once a document has been annotated with \gls{math}, the proof skeleton for a theorem prover could be generated from the annotations. A formal proof sketch is a document written in the syntax of a certain theorem prover, with the allowance that it may be checked by the system with errors however they should only be justification errors.
+
+Retel \cite{krzysztofphd} describes a Mizar document skeleton which has been generated from a MathLang document. The skeleton uses the annotations from \gls{dra} and inputs the document in Mizar syntax along the names used in \gls{dra}. The original context of the mathematical document has not yet been input into the Mizar formal proof skeleton.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.35]{Figures/Background/mizarskel.png}
+\end{center}
+\caption{The Mizar formam proof document skeleton transformed from the MathLang computerised document
+\cite{krzysztofphd}. \label{fig:mizarfps}}
+\end{figure}
+
+The next part is to fill in the skeleton using all information and context of the original mathematical document, this may include the names of the theorems, statements, definitions etc. which were in the original mathematical text.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.4]{Figures/Background/mizarskelfill.png}
+\end{center}
+\caption{The Mizar FPS environment built for the example from Figure \ref{fig:mizarfps}. The Mizar system responds with only one error stating that the theorem is not sufficiently proved, taken from \cite{krzysztofphd}. \label{fig:mizarfpsfill}}
+\end{figure}
+
+Figure \ref{fig:mizarfpsfill} still shows that there is still some work to do as the `\emph{inference is not accepted}'. The user would then need to finish off the proof manually (shown in figure \ref{fig:mizarfpsfinished}), however a big chunk of the work has already been done within the theorem prover.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7]{Figures/Background/mizarskelfinished.png}
+\end{center}
+\caption{A filled in Mizar proof built from Figure \ref{fig:mizarfpsfill} taken from \cite{krzysztofphd}. \label{fig:mizarfpsfinished}}
+\end{figure}
+
+\subsection{TSa}
 \label{subsec:tsa}
 
 The \gls{tsa} builds the bridge between a mathematical text and its grammatical interpretation. The \gls{tsa} is a way of rewriting parts of the text so they have the same meaning. For example some mathematicians may prefer to write "a=b and b=c and c=d", others may prefer "a=b, b=c, c=d" and some others may prefer "a=b=c=d". As you can see all these methods of writing have the same meaning however some symbols are different. The \gls{tsa} annotates each expression in the text with a string of words or symbols which aim to act as the mathematical representation of which this expression is. This allows everything in the text to be uniform.
 
-\subsection{A full worked examples in mathlang}
+We do not describe the TSa in detail since we do not use the TSa in this thesis but it is important to know that it exists.
 
-show step by step translation of mathematical text into isabelle from laamars phd thesis.
+\subsection{A fully worked example in Mathlang}
+
+This section describes a fully worked example of translating a mathamtical text into the theorem prover Isabelle using the \gls{math} framework, taken from \cite{lamarphd}.
+
+\subsubsection{The original text}
+
+This text was taken from an undergraduate textbook \cite{joseph2002contemporary}, chapter 12, entitled `Introduction to Rings'.
+
+\begin{tcolorbox}
+
+\begin{defin}
+(Ring). A ring R is a non-empty set with two binary operations, addition (denoted by a + b) and multiplication(denoted by ab), suchthat for all a, b, c in R:
+\begin{enumerate}
+\item a + b = b + a.
+\item (a + b) + c = a + (b + c).
+\item There is an additive identity 0. That is, there is an element 0 in R such that a + 0 = a for all a in R.
+\item There is an element −a in R such that a + (−a) = 0.
+\item a(bc) = (ab)c.
+\item a(b + c) = ab + ac and (b + c)a = ba + ca.
+content...
+\end{enumerate}
+Our first theorem shows how the operations of addition and
+multiplication intertwine.
+\end{defin}
+
+\begin{thm}
+(Rules of Multiplication). Let a, b, and c belong to a
+ring R. Then
+\begin{enumerate}
+\item a0 = 0a = 0.
+\item a(−b) = (−a)b = −(ab).
+\end{enumerate}
+\end{thm}
+
+\begin{proof}
+Consider rule 1. Clearly,
+
+\begin{center}
+0 + a0 = a0 = a(0 + 0) = a0 + a0.
+\end{center}
+So, by cancellation, 0=a0. Similarly, 0a=0.
+To prove rule 2, we observe that a(−b) + ab = a(−b + b) = a0 =
+0. So, adding −(ab) to both sides yields a(−b) = −(ab). The
+remainder of rule 2 is done analogously.
+\end{proof}
+\end{tcolorbox}
+
+\subsubsection{CGa annotated text}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.4]{Figures/Background/texmacs.png}
+\end{center}
+\caption{Typing the beginning of a document into TexMacs. \label{fig:texmacs}}
+\end{figure}
+
+The user then annotate this text using `\emph{TeXMacs} shown in figure \ref{fig:texmacs}. These annotates would be made at sentence level and it is common for single words and individual variables to be annotated.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{Figures/Background/ringtheorycga.png}
+\end{center}
+\caption{Completed CGa annotation of ring theory text. \label{fig:ringcga}}
+\end{figure}
+
+\subsubsection{DRa annotated text}
+
+The text is annotated with DRa relationships and instances which can find errors  such as loops within the reasoning and poorly-supported theorems. Figure x shows the original ring theory text (left) and the ring theory text annotated with \gls{dra} (right).
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.75]{Figures/Background/draforrings.png}
+\end{center}
+\caption{Comparison of original common mathematical language text with a dependency graph.
+ \label{fig:ringdra}}
+\end{figure}
+
+The dependency graphs and goto graphs are automatically generated from the \gls{dra} annotated document shown in figure \ref{fig:ringdra}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{Figures/Background/depandgoto.png}
+\end{center}
+\caption{{Two graphs automatically generated from DRa annotations:
+The dependency graph (DG) and the graph of logical precedence (GoTo)}.
+ \label{fig:depandgoto}}
+\end{figure}
+
+\subsubsection{Translating CGa and DRa into Isabelle syntax}
+
+This section shows the \gls{cga} and \gls{dra} annotated document translated into Isabelle syntax. In this thesis we refer to this part as the filled in Isabelle skeleton or \gls{half}. This document is now legal Isabelle syntax, but is not formally correct. There still may be gaps in the reasoning or particular proofs which need completing. However, this file may now be worked on by an Isabelle expert to finish off the final proof. The Isar command sorry tells Isabelle to skip a proof-in-progress and treat the goal under consideration to be proved.
+
+Note: Translating just the \gls{dra} annotations gives the Isabelle Proof Skeleton and translating the \gls{cga} \textbf{and} \gls{dra} annotations gives the \gls{half}.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.45]{Figures/Background/ringskel1.png}
+\includegraphics[scale=0.45]{Figures/Background/ringskel2.png}
+\includegraphics[scale=0.45]{Figures/Background/ringskel3.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.45]{Figures/Background/ringskel4.png}
+\end{center}
+\caption{Automatically generated Isabelle skeleton using zgls{cga} and \gls{dra} annotations. \label{fig:ringskel}}
+\end{figure}
+
+\subsubsection{Finishing of the halfbaked proof}
+
+The \gls{half} still needs some extra bits of information to finish the final proof. This section removes the `\texttt{sorry}' commands and completes the proofs through the document so that it is fully parseable by Isabelle. This final step is done entirly by hand and there is no automation to help the user finish this last step.
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.45]{Figures/Background/ringskel1.png}
+\includegraphics[scale=0.45]{Figures/Background/ringskel2.png}
+\includegraphics[scale=0.45]{Figures/Background/ringskel3.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{Figures/Background/ringfull1.png}
+\includegraphics[scale=0.6]{Figures/Background/ringfull2.png}
+\includegraphics[scale=0.6]{Figures/Background/ringfull3.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{Figures/Background/ringfull4.png}
+\includegraphics[scale=0.6]{Figures/Background/ringfull5.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.6]{Figures/Background/ringfull6.png}
+\includegraphics[scale=0.6]{Figures/Background/ringfull7.png}
+\end{center}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+6\includegraphics[scale=0.6]{Figures/Background/ringfull8.png}
+\end{center}
+\caption{Manually finished Isabelle proof. \label{fig:ringfull}}
+\end{figure}
 
 \subsection{Conclusion}
+
+This section provides detailed information on the framework this thesis will be based on. We have described a brief history of where the original \gls{math} framework stemmed from and an overview of the methodology. We describe the \gls{cga}, \gls{dra} in detail and give a brief view of the TSa which has been used to formalise the common mathematical text which is what mathematical documents are usually written in. We have shown examples of the documents produced in each step whether they were produced automatically or manually. A full worked example was shown from the original text into a fully parseable and checked Isabelle proof.
+
+We will use the same steps to check the correctness of a software specification albeit each step in the \gls{math} framework will be adapted, changed and implemented to suit the software specification syntax.
+
 
 \section{Formal Methods and Languages}
 \label{sec:formalmethodsandformallanguages}

@@ -43,7 +43,7 @@ practically worthwhile when the cost of making mistakes is extremely high
 \cite{encyclopedia}.
 
 The jump from Level 1 rigour to Level 3 rigour is very difficult, but in many
-cases worthwhile. The purpose of this thesis is to introduce an toolset where
+cases worthwhile. The purpose of this thesis is to introduce an tool- set where
 the large jump is broken up into multiple smaller jumps, allowing the level 3 of
 rigour to be more accessible and thus more widely used. 
 
@@ -52,14 +52,14 @@ rigour to be more accessible and thus more widely used.
 %Mathematics is an ancient concept dating back to ancient Egypt and Babylonia
 %times. Early mathematics was the study of measurements and quantity which
 %influenced every day lives. As mathematics developed through logical reasoning,
-%theoretical and applied mathematics it became more elabourate and complex.
+%theoretical and applied mathematics it became more elaborate and complex.
 %However no uniform notations ever became established.
 %
 %In the late 19th century and beginning of 20th century, Russell \& Whitehead
 %\cite{whitehead1912principia} started to form a basis for mathematical
 %notation. Their three volume work describes a set of rules from which all
 %mathematical truths could be proven. In these early stages the authors try to
-%dervive all maths from logic. This ambitious project was the first stepping
+%derive all maths from logic. This ambitious project was the first stepping
 %stone in collaborating all mathematics under one notation.
 %
 %Further to Russell \& Whitehead's work, Bourbanki\footnote{A name given to a
@@ -70,12 +70,12 @@ rigour to be more accessible and thus more widely used.
 %beginning and goes through core mathematical concepts such as set theory,
 %algebra, function etc and gives complete proofs for these concepts.
 %
-%With many advances in performing digitalised calculations the computer was
+%With many advances in performing digitalized calculations the computer was
 %born, in which enabled automatic proofs. With these new automatic proofs, there
 %was an incredible need for consistent notations of mathematics. De Bruijn had
 %this exact thought it mind when he worked on the AutoMath \cite{mv} project.
 %AutoMath (automating mathematics) was the first attempt to digitize and
-%formally prove mathematics which was assited by a computer. AutoMath is
+%formally prove mathematics which was assisted by a computer. AutoMath is
 %described as a language for formalising mathematical texts and for automating
 %the validation of mathematics. The AutoMath project is what brought uniform
 %notations and automated proof together.
@@ -101,11 +101,11 @@ The focus of this thesis presents \gls{zmath}, which is an adaptation of the
 MathLang framework \cite{newmathlang}, \cite{wtt}. Z is a formal notation to
 describe the functions and layout of a system (more details found in section
 \ref{sec:theznotation} of this thesis). \Gls{zmath} is a collection of tools
-which assist the user in checking the correctnes of formal specifications, and
-also assist users by partially automating the translation of the specfication
+which assist the user in checking the correctness of formal specifications, and
+also assist users by partially automating the translation of the specification
 into a theorem prover. There are aspects of formalisations and proofs
 contributed in this thesis however they are smaller parts which come from the
-tool support built to translate specifcation into Isabelle. We summarise the
+tool support built to translate specification into Isabelle. We summaries the
 contributions of this thesis in the following list:
 
 \begin{enumerate}
@@ -125,7 +125,7 @@ Translating specifications into theorem provers has been shown to be a great
 difficult task \cite{johnharrisonslides}. Not everyone on the software project
 team will know how to computerise specifications. The main contribution this
 thesis presents a tool support to assist in the translating formal
-specifications into theorem provers. The \gls{zmath} toolset has been designed
+specifications into theorem provers. The \gls{zmath} tool-set has been designed
 for individuals who have no or little expertise in the chosen theorem prover. It
 is broken up so that each step in the path checks for some form of correctness
 of the specification. The checks become more and more rigorous the further one
@@ -148,7 +148,7 @@ correctness of this document can be checked (see \gls{zcga} chapter
 rhetorical correctness (see \gls{zdra} chapter \ref{ch:zdra}) can also be
 checked without the need for the document to be fully formal. \Gls{zmath} is one
 framework made up of many smaller tools to deliver it's main aim, which is to
-computerise a system specification. The \gls{zmath} framwork has stemmed from
+computerise a system specification. The \gls{zmath} framework has stemmed from
 the \gls{math} framework \cite{mathintomizar} and has been adapted to work for Z
 specifications.
 
@@ -171,7 +171,7 @@ are listed below:
 \end{itemize}
 
 The first tool to check's the grammar of the document. To do this the user first
-annotates the specfication with grammatical labels and then uses the automatic
+annotates the specification with grammatical labels and then uses the automatic
 grammar checker to check the labels. These labels are known as
 `\emph{categories}' and describe the elements found in formal specifications
 such as `\emph{terms}', `\emph{sets}' and `\emph{expressions}'. 
@@ -215,7 +215,7 @@ in section \ref{subsec:propertiestoprove}.
 %\cite{zengfirstyear}, we develop our own formalisation of the document
 %rhetorical checking program as well as the products it automatically produces. 
 %
-%We give a formal view on the dependecy and goto graphs using various
+%We give a formal view on the dependency and goto graphs using various
 %definitions to describe the relations between nodes and edges. We also give
 %examples of the nodes and edges of an annotated text and describe its
 %equivalent nodes and edges in the dependency and goto graphs. The formal
@@ -271,7 +271,7 @@ each specification.
 
 Figure \ref{fig:timeline} shows a diagram showing how far one can automate a
 specification using automated \gls{zmath} and Isabelle tools. \Gls{zmath} is a
-toolset which assists the user in translating and proving a specification (going
+tool-set which assists the user in translating and proving a specification (going
 from left to right). There are also other automating tools within Isabelle which
 also assist the user with proving specifications (going from right to left) in
 the diagram.
@@ -295,7 +295,7 @@ up to step 6 is automated.
 The black line shows the path going from a raw specification to a fully proven
 specification with a milestone in the middle, which signifies when a
 specification has been translated into Isabelle syntax but has no properties or
-proof. \Gls{zmath} takes the user a little past this milestone as the toolset
+proof. \Gls{zmath} takes the user a little past this milestone as the tool-set
 also generates properties to check the specification for consistency (see
 section \ref{sec:proofobl}). These properties are added to the specification
 during step 3 and continued throughout the translation. It is important to note
@@ -321,7 +321,7 @@ documentation advises to call `\emph{auto}' or `\emph{safe}' followed by
 ones proof, these sometimes may prove the users properties on their own, other
 times it may not and the user will still need to invoke sledgehammer to reach
 their goal. Sledgehammer itself is a tool that applies \gls{smt} solvers on the
-current goal e.g. Vampire\cite{vampire}, SPASS \cite{spass} and E \cite{e}. We
+current goal e.g. Vampire\cite{vampire}, SPASS \cite{fmintrol} and E \cite{e}. We
 use sledghammer as a collective, to describe all the \gls{smt} solvers it covers
 \cite{sledgehammer}.
 
@@ -385,7 +385,7 @@ automatically generated if the specification is \gls{zdra} correct. A detail
 explanation of how a general proof skeleton can be created from the GoTo graph
 is given along with the algorithm which creates it. 
 
-Chapter \ref{chap:gpsa2isa} summerises the path of how the general proof sketch
+Chapter \ref{chap:gpsa2isa} summarises the path of how the general proof sketch
 can be used to generate an Isabelle skeleton of the specification. Details of
 how the Isabelle skeleton can be filled in using the \gls{zcga} annotated
 specification is also shown in this chapter. A demonstration of how we can use

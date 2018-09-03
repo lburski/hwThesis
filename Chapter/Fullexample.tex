@@ -1,10 +1,17 @@
 \chapter{From raw specification to fully proven spec: A full example}
 \label{ch:fullexample}
 
-In this chapter we take a system specification through all the steps of \gls{zmath} to demonstrate how we can get from a raw specification to a full proof. We have added commentary throughout so the reader can understand how we can get from one step to another. We have added figures and screenshots of each step of the \gls{zmath} framework.
+In this chapter we take a system specification through all the steps of
+\gls{zmath} to demonstrate how we can get from a raw specification to a full
+proof. We have added commentary throughout so the reader can understand how we
+can get from one step to another. We have added figures and screenshots of each
+step of the \gls{zmath} framework.
 
 \section{Step 0\\Raw Specification}
-We take a raw specification ModuleReg \cite{essenceofz}, which displays students taking modules in a school environment (shown in figure \ref{fig:rawschema}) The output for the specification can be seen in figure \ref{fig:rawschemaout}. The full input for this can be found in appendx \ref{app:vmspec}.
+We take a raw specification ModuleReg \cite{essenceofz}, which displays students
+taking modules in a school environment (shown in figure \ref{fig:rawschema}) The
+output for the specification can be seen in figure \ref{fig:rawschemaout}. The
+full input for this can be found in appendix \ref{app:vmspec}.
 
 \begin{figure}[H]
 \vspace{-0.2in}
@@ -73,7 +80,11 @@ degModules' = degModules
 
 \section{Step 1\\ZCGa}
 
-The user then goes to label the raw specification with the \gls{zcga} labels. The labelled specification can be seen in figure \ref{fig:zcgaschema}. The words highlighted in {\color{red}red} are the \gls{zcga} annotations done by the user and the black text is the existing specification. Figure \ref{fig:zcgaschema} outputting result can be seen in figure \ref{fig:zcgaschemaout}.
+The user then goes to label the raw specification with the \gls{zcga} labels.
+The labelled specification can be seen in figure \ref{fig:zcgaschema}. The words
+highlighted in {\color{red}red} are the \gls{zcga} annotations done by the user
+and the black text is the existing specification. Figure \ref{fig:zcgaschema}
+outputting result can be seen in figure \ref{fig:zcgaschemaout}.
 
 \begin{figure}[H]
 \centering
@@ -90,38 +101,56 @@ The user then goes to label the raw specification with the \gls{zcga} labels. Th
 \end{zed}
 
 \begin{schema}{ModuleReg}
-[+color[red]\text{\declaration{\set{]students[+color[red]}]:[+color[red]\expression{]\power PERSON[+color[red]}}}]\\
-[+color[red]\text{\declaration{\set{]degModules[+color[red]}]:[+color[red]\expression{]\power MODULE[+color[red]}}}]\\
-[+color[red]\text{\declaration{\set{]taking[+color[red]}]:[+color[red]\expression{]PERSON \rel MODULE[+color[red]}}}]
+[+color[red]\text{\declaration{\set{]students[+color[red]}]:[+color[red]\expression{]\power
+PERSON[+color[red]}}}]\\
+[+color[red]\text{\declaration{\set{]degModules[+color[red]}]:[+color[red]\expression{]\power
+MODULE[+color[red]}}}]\\
+[+color[red]\text{\declaration{\set{]taking[+color[red]}]:[+color[red]\expression{]PERSON
+\rel MODULE[+color[red]}}}]
 \where
-[+color[red]\text{\expression{\set{]\dom [+color[red]\set{]taking[+color[red]}}] \subseteq [+color[red]\set{]students[+color[red]}}}]\\
-[+color[red]\text{\expression{\set{]\ran [+color[red]\set{]taking[+color[red]}}] \subseteq [+color[red]\set{]degModules[+color[red]}}}]
+[+color[red]\text{\expression{\set{]\dom [+color[red]\set{]taking[+color[red]}}]
+\subseteq [+color[red]\set{]students[+color[red]}}}]\\
+[+color[red]\text{\expression{\set{]\ran [+color[red]\set{]taking[+color[red]}}]
+\subseteq [+color[red]\set{]degModules[+color[red]}}}]
 \end{schema}
 
 \begin{schema}{AddStudent}
 [+color[red]\text{]\Delta ModuleReg[+color[red]}]\\
 [+color[red]\text{\declaration{\term{]p?[+color[red]}]:[+color[red]\expression{]PERSON[+color[red]}}}]\\
 \where
-[+color[red]\text{\expression{\term{]p?[+color[red]}] \notin [+color[red]\set{]students[+color[red]}}}]\\
-[+color[red]\text{\expression{\set{]students'[+color[red]}] = [+color[red]\set{\set{]students[+color[red]}] \cup
+[+color[red]\text{\expression{\term{]p?[+color[red]}] \notin
+[+color[red]\set{]students[+color[red]}}}]\\
+[+color[red]\text{\expression{\set{]students'[+color[red]}] =
+[+color[red]\set{\set{]students[+color[red]}] \cup
 [+color[red]\set{]\{[+color[red]\term{]p?[+color[red]}]\}[+color[red]}}}}]\\
-[+color[red]\text{\expression{\set{]degModules'[+color[red]}] = [+color[red]\set{]degModules[+color[red]}}}]\\
-[+color[red]\text{\expression{\set{]taking'[+color[red]}] = [+color[red]\set{]taking[+color[red]}}}]
+[+color[red]\text{\expression{\set{]degModules'[+color[red]}] =
+[+color[red]\set{]degModules[+color[red]}}}]\\
+[+color[red]\text{\expression{\set{]taking'[+color[red]}] =
+[+color[red]\set{]taking[+color[red]}}}]
 \end{schema}
 
 \begin{schema}{RegForModule}
 [+color[red]\text{]\Delta ModuleReg[+color[red]}]\\
-[+color[red]\text{\declaration{\term{]p?[+color[red]}]: [+color[red]\expression{]PERSON[+color[red]}}}]\\
-[+color[red]\text{\declaration{\term{]m?[+color[red]}]: [+color[red]\expression{]MODULE[+color[red]}}}]
+[+color[red]\text{\declaration{\term{]p?[+color[red]}]:
+[+color[red]\expression{]PERSON[+color[red]}}}]\\
+[+color[red]\text{\declaration{\term{]m?[+color[red]}]:
+[+color[red]\expression{]MODULE[+color[red]}}}]
 \where
-[+color[red]\text{\expression{\term{]p?[+color[red]}] \in [+color[red]\set{]students[+color[red]}}}]\\
-[+color[red]\text{\expression{\term{]m?[+color[red]}] \in [+color[red]\set{]degModules[+color[red]}}}]\\
-[+color[red]\text{\expression{\term{\term{]p?[+color[red]}] \mapsto [+color[red]\term{]m?[+color[red]}}]
-\notin [+color[red]\set{]taking[+color[red]}}}]\\
-[+color[red]\text{\expression{\set{]taking'[+color[red]}] = [+color[red]\set{\set{]taking[+color[red]}] \cup
-[+color[red]\set{]\{[+color[red]\term{\term{]p?[+color[red]}] \mapsto [+color[red]\term{]m?[+color[red]}}]\}[+color[red]}}}}]\\
-[+color[red]\text{\expression{\set{]students'[+color[red]}] = [+color[red]\set{]students[+color[red]}}}]\\
-[+color[red]\text{\expression{\set{]degModules'[+color[red]}] = [+color[red]\set{]degModules[+color[red]}}}]
+[+color[red]\text{\expression{\term{]p?[+color[red]}] \in
+[+color[red]\set{]students[+color[red]}}}]\\
+[+color[red]\text{\expression{\term{]m?[+color[red]}] \in
+[+color[red]\set{]degModules[+color[red]}}}]\\
+[+color[red]\text{\expression{\term{\term{]p?[+color[red]}] \mapsto
+[+color[red]\term{]m?[+color[red]}}] \notin
+[+color[red]\set{]taking[+color[red]}}}]\\
+[+color[red]\text{\expression{\set{]taking'[+color[red]}] =
+[+color[red]\set{\set{]taking[+color[red]}] \cup
+[+color[red]\set{]\{[+color[red]\term{\term{]p?[+color[red]}] \mapsto
+[+color[red]\term{]m?[+color[red]}}]\}[+color[red]}}}}]\\
+[+color[red]\text{\expression{\set{]students'[+color[red]}] =
+[+color[red]\set{]students[+color[red]}}}]\\
+[+color[red]\text{\expression{\set{]degModules'[+color[red]}] =
+[+color[red]\set{]degModules[+color[red]}}}]
 \end{schema}
 \end{document}
 \end{BVerbatim}
@@ -133,15 +162,17 @@ The user then goes to label the raw specification with the \gls{zcga} labels. Th
 \begin{minipage}{0.45\textwidth}
 \centering
 \centering
-\includegraphics[clip, trim=5.5cm 8cm 9.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/1.jpg}
-\includegraphics[clip, trim=5.5cm 13cm 8.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/2.jpg}
+\includegraphics[scale=0.8, clip, trim=5.5cm 8cm 9.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/1.jpg}
+\includegraphics[scale=0.8, clip, trim=5.5cm 13cm 8.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/2.jpg}
 %\includegraphics[scale=0.4]{Figures/fullexample/zcga.png}
-\vspace{-0.2in}
+\vspace{-0.3in}
 \caption{Part of a ZCGa labelled specification output. \label{fig:zcgaschemaout}}
 \end{minipage}
 \end{figure}
 
-After annotating we run it through the \gls{zcga} correctness checker. Figure \ref{fig:zcgacorrect} shows the message which appears when the annotated specification has been checked. 
+After annotating we run it through the \gls{zcga} correctness checker. Figure
+\ref{fig:zcgacorrect} shows the message which appears when the annotated
+specification has been checked. 
 
 \begin{figure}[H]
 \centering
@@ -151,7 +182,11 @@ After annotating we run it through the \gls{zcga} correctness checker. Figure \r
 
 \section{Step 2\\ZDRa}
 
-Next the user can add \gls{zdra} relations to chuk parts of the specification together and add relations to them. Figure \ref{fig:zdrazcgaAno} shows our example labelled in \gls{zdra} annotations (in blue), the \gls{zcga} annotations are in grey and existing specification in black. Figure \ref{fig:zdrazcgaout} shows the compiled result.
+Next the user can add \gls{zdra} relations to chunk parts of the specification
+together and add relations to them. Figure \ref{fig:zdrazcgaAno} shows our
+example labelled in \gls{zdra} annotations (in blue), the \gls{zcga} annotations
+are in grey and existing specification in black. Figure \ref{fig:zdrazcgaout}
+shows the compiled result.
 
 \begin{figure}[H]
 \vspace{-0.2in}
@@ -166,18 +201,25 @@ Next the user can add \gls{zdra} relations to chuk parts of the specification to
 
 [+color[blue]\dratheory{T1}{0.5}{]
 \begin{zed}
-[+color[gray]\set{]PERSON[+color[gray]}], [+color[gray]\set{]MODULE[+color[gray]}]
+[+color[gray]\set{]PERSON[+color[gray]}],
+[+color[gray]\set{]MODULE[+color[gray]}]
 \end{zed}
 
 [+color[blue]\draschema{SS1}{]
 \begin{schema}{ModuleReg}
-[+color[gray]\text{\declaration{\set{]students[+color[gray]}]:[+color[gray]\expression{]\power PERSON[+color[gray]}}}]\\
-[+color[gray]\text{\declaration{\set{]degModules[+color[gray]}]:[+color[gray]\expression{]\power MODULE[+color[gray]}}}]\\
-[+color[gray]\text{\declaration{\set{]taking[+color[gray]}]:[+color[gray]\expression{]PERSON \rel MODULE[+color[gray]}}}]
+[+color[gray]\text{\declaration{\set{]students[+color[gray]}]:[+color[gray]\expression{]\power
+PERSON[+color[gray]}}}]\\
+[+color[gray]\text{\declaration{\set{]degModules[+color[gray]}]:[+color[gray]\expression{]\power
+MODULE[+color[gray]}}}]\\
+[+color[gray]\text{\declaration{\set{]taking[+color[gray]}]:[+color[gray]\expression{]PERSON
+\rel MODULE[+color[gray]}}}]
 \where
-[+color[blue]\draline{SI1}{]
-[+color[gray]\text{\expression{\set{]\dom [+color[gray]\set{]taking[+color[gray]}}] \subseteq [+color[gray]\set{]students[+color[gray]}}}]\\
-[+color[gray]\text{\expression{\set{]\ran [+color[gray]\set{]taking[+color[gray]}}] \subseteq [+color[gray]\set{]degModules[+color[gray]}}}][+color[blue]}]
+[+color[blue]\draline{SI1}{] [+color[gray]\text{\expression{\set{]\dom
+[+color[gray]\set{]taking[+color[gray]}}] \subseteq
+[+color[gray]\set{]students[+color[gray]}}}]\\
+[+color[gray]\text{\expression{\set{]\ran
+[+color[gray]\set{]taking[+color[gray]}}] \subseteq
+[+color[gray]\set{]degModules[+color[gray]}}}][+color[blue]}]
 \end{schema}[+color[blue]}]
 
 [+color[blue]\requires{SS1}{SI1}]
@@ -188,36 +230,37 @@ Next the user can add \gls{zdra} relations to chuk parts of the specification to
 [+color[gray]\text{\declaration{\term{]p?[+color[gray]}]:[+color[gray]\expression{]PERSON[+color[gray]}}}]\\
 \where
 [+color[blue]\draline{PRE1}{]
-[+color[gray]\text{\expression{\term{]p?[+color[gray]}] \notin [+color[gray]\set{]students[+color[gray]}}}][+color[blue]}]\\
+[+color[gray]\text{\expression{\term{]p?[+color[gray]}] \notin
+[+color[gray]\set{]students[+color[gray]}}}][+color[blue]}]\\
 [+color[blue]\draline{PO1}{]
-[+color[gray]\text{\expression{\set{]students'[+color[gray]}] = [+color[gray]\set{\set{]students[+color[gray]}] \cup
+[+color[gray]\text{\expression{\set{]students'[+color[gray]}] =
+[+color[gray]\set{\set{]students[+color[gray]}] \cup
 [+color[gray]\set{]\{[+color[gray]\term{]p?[+color[gray]}]\}[+color[gray]}}}}]\\
-[+color[gray]\text{\expression{\set{]degModules'[+color[gray]}] = [+color[gray]\set{]degModules[+color[gray]}}}]\\
-[+color[gray]\text{\expression{\set{]taking'[+color[gray]}] = [+color[gray]\set{]taking[+color[gray]}}}][+color[blue]}]
+[+color[gray]\text{\expression{\set{]degModules'[+color[gray]}] =
+[+color[gray]\set{]degModules[+color[gray]}}}]\\
+[+color[gray]\text{\expression{\set{]taking'[+color[gray]}] =
+[+color[gray]\set{]taking[+color[gray]}}}][+color[blue]}]
 \end{schema}[+color[blue]}]
 
-[+color[blue]\requires{CS1}{PRE1}]
-[+color[blue]\allows{PRE1}{PO1}]
+[+color[blue]\requires{CS1}{PRE1}] [+color[blue]\allows{PRE1}{PO1}]
 [+color[blue]\uses{CS1}{SS1}]
 
 [+color[blue]\draschema{CS2}{]
 \begin{schema}{RegForModule}
 [+color[gray]\text{]\Delta ModuleReg[+color[gray]}]\\
-[+color[gray]\text{\declaration{\term{]p?[+color[gray]}]: [+color[gray]\expression{]PERSON[+color[gray]}}}]\\
-[+color[gray]\text{\declaration{\term{]m?[+color[gray]}]: [+color[gray]\expression{]MODULE[+color[gray]}}}]
+[+color[gray]\text{\declaration{\term{]p?[+color[gray]}]:
+[+color[gray]\expression{]PERSON[+color[gray]}}}]\\
+[+color[gray]\text{\declaration{\term{]m?[+color[gray]}]:
+[+color[gray]\expression{]MODULE[+color[gray]}}}]
 \where
 [+color[blue]\draline{PRE2}{]
-[+color[gray]\text{\expression{\term{]p?[+color[gray]}] \in [+color[gray]\set{]students[+color[gray]}}}]\\
-[+color[gray]\text{\expression{\term{]m?[+color[gray]}] \in [+color[gray]\set{]degModules[+color[gray]}}}]\\
-[+color[gray]\text{\expression{\term{\term{]p?[+color[gray]}] \mapsto [+color[gray]\term{]m?[+color[gray]}}]
-\notin [+color[gray]\set{]taking[+color[gray]}}}][+color[blue]}]\\
-[+color[blue]\draline{PO2}{]
-[+color[gray]\text{\expression{\set{]taking'[+color[gray]}] = [+color[gray]\set{\set{]taking[+color[gray]}] \cup
-[+color[gray]\set{]\{[+color[gray]\term{\term{]p?[+color[gray]}] \mapsto [+color[gray]\term{]m?[+color[gray]}}]\}[+color[gray]}}}}]\\
-[+color[gray]\text{\expression{\set{]students'[+color[gray]}] = [+color[gray]\set{]students[+color[gray]}}}]\\
-[+color[gray]\text{\expression{\set{]degModules'[+color[gray]}] = [+color[gray]\set{]degModules[+color[gray]}}}][+color[blue]}]
-\end{schema}[+color[blue]}]
-[+color[blue]}]
+[+color[gray]\text{\expression{\term{]p?[+color[gray]}] \in
+[+color[gray]\set{]students[+color[gray]}}}]\\
+[+color[gray]\text{\expression{\term{]m?[+color[gray]}] \in
+[+color[gray]\set{]degModules[+color[gray]}}}]\\
+[+color[gray]\text{\expression{\term{\term{]p?[+color[gray]}] \mapsto
+[+color[gray]\term{]m?[+color[gray]}}] \notin
+[+color[gray]\set{]taking[+color[gray]}}}][+color[blue]}]\\
 \end{document}
 \end{BVerbatim}
 \end{tiny}
@@ -227,14 +270,32 @@ Next the user can add \gls{zdra} relations to chuk parts of the specification to
 \end{minipage}\hfill
 \begin{minipage}{0.45\textwidth}
 \centering
-\includegraphics[scale=0.55]{Figures/fullexample/zdra.png}
+\begin{tiny}
+\begin{BVerbatim}[commandchars=+\[\]]
+[+color[blue]\draline{PO2}{]
+[+color[gray]\text{\expression{\set{]taking'[+color[gray]}] =
+[+color[gray]\set{\set{]taking[+color[gray]}] \cup
+[+color[gray]\set{]\{[+color[gray]\term{\term{]p?[+color[gray]}] \mapsto
+[+color[gray]\term{]m?[+color[gray]}}]\}[+color[gray]}}}}]\\
+[+color[gray]\text{\expression{\set{]students'[+color[gray]}] =
+[+color[gray]\set{]students[+color[gray]}}}]\\
+[+color[gray]\text{\expression{\set{]degModules'[+color[gray]}] =
+[+color[gray]\set{]degModules[+color[gray]}}}][+color[blue]}]
+\end{schema}[+color[blue]}] [+color[blue]}]
+
+
+\end{BVerbatim}
+\end{tiny}
+\includegraphics[scale=0.5]{Figures/fullexample/zdra.png}
 \vspace{-0.18in}
 \caption{An example of a specification output labelled in \gls{zcga} and \gls{zdra}.).\label{fig:zdrazcgaout}}
 \vspace{-0.2in}
 \end{minipage}
 \end{figure}
 
-After annotating our example in \gls{zdra} labels we can then run our specification through the \gls{zdra} checker. Figure \ref{fig:zdracorrect} shows the message which appears after we check our example with \gls{zdra}.
+After annotating our example in \gls{zdra} labels we can then run our
+specification through the \gls{zdra} checker. Figure \ref{fig:zdracorrect} shows
+the message which appears after we check our example with \gls{zdra}.
 
 \begin{figure}[H]
 \centering
@@ -244,7 +305,9 @@ After annotating our example in \gls{zdra} labels we can then run our specificat
 
 \section{Step 2.5\\Graphs}
 
-Since the example is \gls{zdra} correct the two graphs shown in figures \ref{fig:depexample} and \ref{fig:gotoexample} are automatically produced and saved on the users computer.
+Since the example is \gls{zdra} correct the two graphs shown in figures
+\ref{fig:depexample} and \ref{fig:gotoexample} are automatically produced and
+saved on the users computer.
 
 \begin{figure}[H]
 \centering
@@ -260,11 +323,16 @@ Since the example is \gls{zdra} correct the two graphs shown in figures \ref{fig
 
 \section{Skeletons}
 
-The skeletons are automatically generated if the specification passes the \gls{zcga} and \gls{zdra} check.
+The skeletons are automatically generated if the specification passes the
+\gls{zcga} and \gls{zdra} check.
 
 \subsection{Step 3\\General Proof Skeleton}
 
-We can generate a general proof skeleton which prints out the \gls{zdra} name and the instances they should be converted to when inputting into any theorem prover. If the specification is \gls{zdra}] correct we can then generate the \gls{gpsa} by clicking on the \gls{gpsa} menu in the interface (figure \ref{fig:gpsabutton}).
+We can generate a general proof skeleton which prints out the \gls{zdra} name
+and the instances they should be converted to when inputting into any theorem
+prover. If the specification is \gls{zdra}] correct we can then generate the
+\gls{gpsa} by clicking on the \gls{gpsa} menu in the interface (figure
+\ref{fig:gpsabutton}).
 
 \begin{figure}[H]
 \centering
@@ -272,22 +340,19 @@ We can generate a general proof skeleton which prints out the \gls{zdra} name an
 \caption{The GPSa button the interface which allows the user to generate the general proof skeleton. \label{fig:gpsabutton}}
 \end{figure}
 
-Figure \ref{fig:gpsaFullexample} shows the general proof skeleton which was generated for our example. Note all instances but the last 2 are actual instances labelled by the user. Since thre are 2 instances where there could be a change in state (CS1 and CS2) then there are 2 proof obligations added to the \gls{gpsa} (L1\_CS2 and L2\_CS1).
+Figure \ref{fig:gpsaFullexample} shows the general proof skeleton which was
+generated for our example. Note all instances but the last 2 are actual
+instances labelled by the user. Since there are 2 instances where there could be
+a change in state (CS1 and CS2) then there are 2 proof obligations added to the
+\gls{gpsa} (L1\_CS2 and L2\_CS1).
 
 \begin{figure}[H]
 \centering
 \begin{scriptsize}
 \begin{BVerbatim}
-stateSchema SS1 
-stateInvarients SI1 
-changeSchema CS2 
-precondition PRE2 
-changeSchema CS1 
-precondition PRE1 
-postcondition PO2 
-postcondition PO1 
-lemma L1_(CS2) 
-lemma L2_(CS1) 
+stateSchema SS1 stateInvariants SI1 changeSchema CS2 precondition PRE2
+changeSchema CS1 precondition PRE1 postcondition PO2 postcondition PO1 lemma
+L1_(CS2) lemma L2_(CS1) 
 \end{BVerbatim}
 \end{scriptsize}
 \caption{General proof skeleton. \label{fig:gpsaFullexample}}
@@ -295,7 +360,10 @@ lemma L2_(CS1)
 
 \subsection{Step 4\\Isabelle Skeleton}
 
-From \gls{gpsa}, the ZMathLang program can automatically generate an Isabelle Skeleton. The user can do this by clicking on the \gls{gpsa} menu on the interface then clicking `\texttt{Isabelle Skeleton}' shown in figure \ref{fig:isabutton}.
+From \gls{gpsa}, the ZMathLang program can automatically generate an Isabelle
+Skeleton. The user can do this by clicking on the \gls{gpsa} menu on the
+interface then clicking `\texttt{Isabelle Skeleton}' shown in figure
+\ref{fig:isabutton}.
 
 \begin{figure}[H]
 \centering
@@ -303,7 +371,12 @@ From \gls{gpsa}, the ZMathLang program can automatically generate an Isabelle Sk
 \caption{The Isabelle skeleton button the interface which allows the user to generate an Isabelle skeleton of their specification. \label{fig:isabutton}}
 \end{figure}
 
- The Isabelle skeleton consists of the information generated in the general proof skeleton along with the environment to begin an Isabelle theory. It contains comments inbetween \verb|(* .. *)| paranthesis to show the parts which need to be filled in either by using the \gls{zcga} document or by the user. Figure \ref{fig:isaFullexample} shows the automatically generated Isabelle skeleton for our \texttt{modulereg} example.
+ The Isabelle skeleton consists of the information generated in the general
+ proof skeleton along with the environment to begin an Isabelle theory. It
+ contains comments in between \verb|(* .. *)| parenthesis to show the parts which
+ need to be filled in either by using the \gls{zcga} document or by the user.
+ Figure \ref{fig:isaFullexample} shows the automatically generated Isabelle
+ skeleton for our \texttt{modulereg} example.
 
 \begin{figure}[H]
 \centering
@@ -311,28 +384,10 @@ From \gls{gpsa}, the ZMathLang program can automatically generate an Isabelle Sk
 \centering
 \begin{scriptsize}
 \begin{BVerbatim}
-theory gpsa1n2
-imports 
-Main 
-begin 
-(*DATATYPES*)
-record SS1 = 
-(*DECLARATIONS*)
-locale 1n2 = 
-fixes (*GLOBAL DECLARATIONS*) 
-assumes SI1
-begin
-definition CS2 :: 
-"(*CS2_TYPES*) => bool"
-where 
-"CS2 (*CS2_VARIABLES*) ==
- (PRE2)
-\<and> (PO2)"
-definition CS1 :: 
-"(*CS1_TYPES*) => bool"
-where 
-"CS1 (*CS1_VARIABLES*) ==
- (PRE1)
+theory gpsa1n2 imports Main begin (*DATATYPES*) record SS1 = (*DECLARATIONS*)
+locale 1n2 = fixes (*GLOBAL DECLARATIONS*) assumes SI1 begin definition CS2 ::
+"(*CS2_TYPES*) => bool" where "CS2 (*CS2_VARIABLES*) == (PRE2) \<and> (PO2)"
+definition CS1 :: "(*CS1_TYPES*) => bool" where "CS1 (*CS1_VARIABLES*) == (PRE1)
 \<and> (PO1)"
 \end{BVerbatim}
 \end{scriptsize}
@@ -340,22 +395,9 @@ where
 \begin{minipage}{0.45\textwidth}
 \begin{scriptsize}
 \begin{BVerbatim}
-lemma CS2_L1:
-"(\<exists> (*CS2_VARIABLESANDTYPES*).
-(PRE2)
-\<and> (PO2)
-\<and> (SI1)
-\<and> (SI1'))"
-sorry
-lemma CS1_L2:
-"(\<exists> (*CS1_VARIABLESANDTYPES*).
-(PRE1)
-\<and> (PO1)
-\<longrightarrow> ((SI1)
-\<and> (SI1')))"
-sorry
-end
-end
+lemma CS2_L1: "(\<exists> (*CS2_VARIABLESANDTYPES*). (PRE2) \<and> (PO2) \<and>
+(SI1) \<and> (SI1'))" sorry lemma CS1_L2: "(\<exists> (*CS1_VARIABLESANDTYPES*).
+(PRE1) \<and> (PO1) \<longrightarrow> ((SI1) \<and> (SI1')))" sorry end end
 \end{BVerbatim}
 \end{scriptsize}
 \end{minipage}
@@ -364,7 +406,13 @@ end
 
 \subsection{Step 5\\Isabelle Skeleton Filled in}
 
-Using the \gls{zcga} annotated document and the Isabelle skeleton described in the previous section. The user can then automatically fill in the missing information which is needed between the comment parenthesis \verb|(* ...*)|. This is the final step which is automated by the program and the user can click on the \gls{gpsa} button on the main menu bar in the inerface and then click on `\texttt{FillInIsa Skeleton}' in the sub menu (shown in figure \ref{fig:fillinisa}).
+Using the \gls{zcga} annotated document and the Isabelle skeleton described in
+the previous section. The user can then automatically fill in the missing
+information which is needed between the comment parenthesis \verb|(* ...*)|.
+This is the final step which is automated by the program and the user can click
+on the \gls{gpsa} button on the main menu bar in the interface and then click on
+`\texttt{FillInIsa Skeleton}' in the sub menu (shown in figure
+\ref{fig:fillinisa}).
 
 \begin{figure}[H]
 \centering
@@ -372,7 +420,9 @@ Using the \gls{zcga} annotated document and the Isabelle skeleton described in t
 \caption{The Fill in Isabelle Skeleton button the interface which allows the user to fill in the skeleton they previously created. \label{fig:fillinisa}}
 \end{figure}
 
-Figure \ref{fig:fillinFullexample} shows our example with a filled in Isabelle skeleton. It is important to note that the program also changes some of the syntax from \LaTeX{} to Isabelle so that it is fully parsable by Isabelle.
+Figure \ref{fig:fillinFullexample} shows our example with a filled in Isabelle
+skeleton. It is important to note that the program also changes some of the
+syntax from \LaTeX{} to Isabelle so that it is fully parsable by Isabelle.
 
 \begin{figure}[H]
 \centering
@@ -380,170 +430,159 @@ Figure \ref{fig:fillinFullexample} shows our example with a filled in Isabelle s
 \centering
 \begin{scriptsize}
 \begin{BVerbatim}
-theory new5
-imports 
-Main 
+theory new5 imports Main 
 
-begin 
-typedecl PERSON 
-typedecl MODULE
+begin typedecl PERSON typedecl MODULE
 
-record ModuleReg = 
-STUDENTS :: " PERSON set"
-DEGMODULES :: " MODULE set"
-TAKING :: "(PERSON * MODULE) set"
+record ModuleReg = STUDENTS :: " PERSON set"
+DEGMODULES :: " MODULE set" TAKING
+:: "(PERSON * MODULE) set"
 
-locale gpsaModuleReg = 
-fixes students :: " PERSON set"
-and degModules :: " MODULE set"
-and taking :: "(PERSON * MODULE) set"
-assumes "Domain taking \<subseteq> students" 
- and "Range taking \<subseteq> degModules"
-begin
+locale gpsaModuleReg = fixes students :: 
+" PERSON set" and degModules :: "
+MODULE set" and taking :: "(PERSON * MODULE) set"
+ assumes "Domain taking
+\<subseteq> students" and 
+"Range taking \<subseteq> degModules" begin
 
 definition RegForModule :: 
 "ModuleReg \<Rightarrow> ModuleReg \<Rightarrow>
-PERSON \<Rightarrow> MODULE => MODULE set
-\<Rightarrow> PERSON set \<Rightarrow> 
-(PERSON * MODULE) set \<Rightarrow> bool"
-where 
-"RegForModule modulereg modulereg' p m
-degModules' students' taking' ==
-(p \<in> students) 
-\<and> (m \<in> degModules) 
-\<and> ((p, m) \<notin> taking)
-\<and> (taking' = taking \<union> {(p, m)}) 
-\<and> (students' = students) 
-\<and> (degModules' = degModules)"
+PERSON \<Rightarrow> MODULE => MODULE set 
+\<Rightarrow> PERSON set \<Rightarrow>
+(PERSON * MODULE) set \<Rightarrow> bool" where 
+"RegForModule modulereg
+modulereg' p m degModules' students' taking' == 
+(p \<in> students) \<and> (m
+\<in> degModules) \<and> ((p, m) \<notin> taking) 
+\<and> (taking' = taking\<union> {(p, m)}) \<and> (students' = students) 
+\<and> (degModules' =degModules)"
 
-definition AddStudent :: 
-"ModuleReg \<Rightarrow> ModuleReg => PERSON
-\<Rightarrow>  MODULE set \<Rightarrow>
-PERSON set \<Rightarrow> (PERSON * MODULE) set
-\<Rightarrow> bool"
-where 
-"AddStudent modulereg modulereg' p degModules'
-students' taking' ==
- ((p \<notin> students)
-\<and> (students' = students \<union> {(p)}) 
+definition AddStudent :: "ModuleReg \<Rightarrow> 
+ModuleReg => PERSON
+\<Rightarrow>  MODULE set \<Rightarrow> PERSON set 
+\<Rightarrow> (PERSON *
+MODULE) set \<Rightarrow> bool" where "AddStudent 
+modulereg modulereg' p
+degModules' students' taking' == ((p \<notin> students) \<and> (students' =
+students \<union> {(p)}) 
 \end{BVerbatim}
 \end{scriptsize}
 \end{minipage}\hfill
 \begin{minipage}{0.45\textwidth}
 \begin{scriptsize}
 \begin{BVerbatim}
-\<and> (degModules' = degModules) 
-\<and> (taking' = taking))"
+\<and> (degModules' = degModules) \<and> 
+(taking' = taking))"
 
-lemma RegForModule_L1:
-"(\<exists> degModules:: MODULE set.
-\<exists> students :: PERSON set.
-\<exists> taking :: (PERSON * MODULE) set.
-\<exists> p :: PERSON.
-\<exists> degModules':: MODULE set.
-\<exists> students' :: PERSON set.
-\<exists> taking' :: (PERSON * MODULE) set.
-\<exists> m :: MODULE.
-((p \<in> students) 
-\<and> (m \<in> degModules) 
-\<and> ((p, m) \<notin> taking)
-\<and> (taking' = taking \<union> {(p, m)}) 
-\<and> (students' = students) 
-\<and> (degModules' = degModules))
-\<longrightarrow>
-((Domain taking \<subseteq> students)
-\<and> (Range taking \<subseteq> degModules)
-\<and> (Domain taking' \<subseteq> students')
-\<and> (Range taking' \<subseteq> degModules')))"
-sorry
+lemma RegForModule_L1: 
+"(\<exists> degModules:: MODULE set. \<exists> students
+:: PERSON set. \<exists> taking :: 
+(PERSON * MODULE) set. \<exists> p :: PERSON.
+\<exists> degModules':: MODULE set. 
+\<exists> students' :: PERSON set. \<exists>
+taking' :: (PERSON * MODULE) set. 
+\<exists> m :: MODULE. ((p \<in> students)
+\<and> (m \<in> degModules) \<and> ((p, m) 
+\<notin> taking) \<and> (taking' =
+taking \<union> {(p, m)}) \<and> (students' = students) 
+\<and> (degModules' =
+degModules)) \<longrightarrow> ((Domain taking 
+\<subseteq> students) \<and>
+(Range taking \<subseteq> degModules) \<and> 
+(Domain taking' \<subseteq>
+students') \<and> (Range taking' 
+\<subseteq> degModules')))" sorry
 
-lemma AddStudent_L2:
-"(\<exists> degModules:: MODULE set.
-\<exists> students :: PERSON set.
-\<exists> taking :: (PERSON * MODULE) set.
+lemma AddStudent_L2: 
+"(\<exists> degModules:: MODULE set. 
+\<exists> students ::
+PERSON set. \<exists> taking :: (PERSON * MODULE) set. 
 \<exists> p :: PERSON.
-\<exists> degModules':: MODULE set.
-\<exists> students' :: PERSON set.
-\<exists> taking' :: (PERSON * MODULE) set.
- ( (students' = students \<union> {(p)}) 
-\<and> (degModules' = degModules) 
-\<and> (taking' = taking))
-\<longrightarrow
-((Domain taking \<subseteq> students)
-\<and> (Range taking \<subseteq> degModules)
-\<and> (Domain taking' \<subseteq> students')
-\<and> (Range taking' \<subseteq> degModules')))"
-sorry
-end
-end
+\<exists> degModules':: MODULE set. 
+\<exists> students' :: PERSON set. \<exists>
+taking' :: (PERSON * MODULE) set. 
+( (students' = students \<union> {(p)}) \<and>
+(degModules' = degModules) \<and> (taking' = taking)) 
+\<longrightarrow ((Domain
+taking \<subseteq> students) \<and> 
+(Range taking \<subseteq> degModules) \<and>
+(Domain taking' \<subseteq> students') 
+\<and> (Range taking' \<subseteq>
+degModules')))" sorry end end
 \end{BVerbatim}
 \end{scriptsize}
 \end{minipage}
 \caption{Filled In proof skeleton. \label{fig:fillinFullexample}}
 \end{figure}
 
-Figure \ref{fig:fillinFullexample} shows the original specification we started with in step 0 in Isabelle syntax. It is important to the reader to note that we have come this far without the user knowing any Isabelle at all. In our example we have 2 existing lemma's to prove to check the consitancy of the specification. That is the state before \texttt{RegForModule} (PRE2), \emph{and} the state after \texttt{RegforModule} (PO2), \emph{implies} \texttt{stateInvariants} (SI1), \emph{and} the \texttt{stateInvariants'} (SI1') is true. So the precondition and postcondition imply that the stateInvariants and stateInvariants prime hold. The same goes for the \texttt{AddStudent} operation. When the skeleton is Filled in the \gls{zmath} is unable to prove the lemma's automatically and it is up to the user to do this (explanied in the next section). However at this stage \gls{zmath} puts the Isar command `\texttt{sorry}' as to ignore the lemma and act as if it was proven.
+Figure \ref{fig:fillinFullexample} shows the original specification we started
+with in step 0 in Isabelle syntax. It is important to the reader to note that we
+have come this far without the user knowing any Isabelle at all. In our example
+we have 2 existing lemma's to prove to check the consistency of the
+specification. That is the state before \texttt{RegForModule} (PRE2), \emph{and}
+the state after \texttt{RegforModule} (PO2), \emph{implies}
+\texttt{stateInvariants} (SI1), \emph{and} the \texttt{stateInvariants'} (SI1')
+is true. So the precondition and postcondition imply that the stateInvariants
+and stateInvariants prime hold. The same goes for the \texttt{AddStudent}
+operation. When the skeleton is Filled in the \gls{zmath} is unable to prove the
+lemma's automatically and it is up to the user to do this (explained in the next
+section). However at this stage \gls{zmath} puts the Isar command
+`\texttt{sorry}' as to ignore the lemma and act as if it was proven.
 
 \section{Step 6\\Full Proof}
 
-The next part is to prove any existing lemmas from the filled in Isabelle Skelton or add new lemma's to prove safety properties about the specification. However, this final stage is difficult to automate with \gls{zmath} as everyone has different properties they wish to prove and all specification are different themselves. So the final step will need some theorem prover knowledge, but not as much as translating the specification and proving it in one step as the specification is already put into the theorem prover syntax. In this case the user may wish to use theorem prover tools which already exist such as Sledgehammer \cite{sledgehammer} to help them prove the properties. An example is shown in figure \ref{fig:propertyproof} the proof obligations being proven by hand for the \texttt{modulereg} specification.
+The next part is to prove any existing lemmas from the filled in Isabelle
+Skeleton or add new lemma's to prove safety properties about the specification.
+However, this final stage is difficult to automate with \gls{zmath} as everyone
+has different properties they wish to prove and all specification are different
+themselves. So the final step will need some theorem prover knowledge, but not
+as much as translating the specification and proving it in one step as the
+specification is already put into the theorem prover syntax. In this case the
+user may wish to use theorem prover tools which already exist such as
+Sledgehammer \cite{sledgehammer} to help them prove the properties. An example
+is shown in figure \ref{fig:propertyproof} the proof obligations being proven by
+hand for the \texttt{modulereg} specification.
 
 \begin{figure}[H]
 \centering
 \begin{minipage}{0.45\textwidth}
 \centering
 \begin{scriptsize}
-\begin{BVerbatim}[commandchars=+\[\]]
-lemma RegForModule_L1:
-"(\<exists> degModules:: MODULE set.
-\<exists> students :: PERSON set.
-\<exists> taking :: (PERSON * MODULE) set.
-\<exists> p :: PERSON.
-\<exists> degModules':: MODULE set.
-\<exists> students' :: PERSON set.
-\<exists> taking' :: (PERSON * MODULE) set.
-\<exists> m :: MODULE.
-((p \<in> students) 
-\<and> (m \<in> degModules) 
-\<and> ((p, m) \<notin> taking)
-\<and> (taking' = taking \<union> {(p, m)}) 
-\<and> (students' = students) 
-\<and> (degModules' = degModules))
-\<longrightarrow>
-((Domain taking \<subseteq> students)
-\<and> (Range taking \<subseteq> degModules)
-\<and> (Domain taking' \<subseteq> students')
-\<and> (Range taking' \<subseteq> degModules')))"
+ 
 
-[+color[red]by (smt Domain_empty Domain_insert]
-[+color[red]Range.intros Range_empty Range_insert]
+\begin{BVerbatim}[commandchars=+\[\]] 
+lemma RegForModule_L1: "(\<exists>
+degModules:: MODULE set. \<exists> students :: PERSON set. \<exists> taking ::
+(PERSON * MODULE) set. \<exists> p :: PERSON. \<exists> degModules':: MODULE
+set. \<exists> students' :: PERSON set. \<exists> taking' :: (PERSON * MODULE)
+set. \<exists> m :: MODULE. ((p \<in> students) \<and> (m \<in> degModules)
+\<and> ((p, m) \<notin> taking) \<and> (taking' = taking \<union> {(p, m)})
+\<and> (students' = students) \<and> (degModules' = degModules))
+\<longrightarrow> ((Domain taking \<subseteq> students) \<and> (Range taking
+\<subseteq> degModules) \<and> (Domain taking' \<subseteq> students') \<and>
+(Range taking' \<subseteq> degModules')))"
+
+[+color[red]by (smt Domain_empty Domain_insert] [+color[red]Range.intros
+Range_empty Range_insert]
 \end{BVerbatim}
 \end{scriptsize}
 \end{minipage}\hfill
 \begin{minipage}{0.45\textwidth}
 \begin{scriptsize}
 \begin{BVerbatim}[commandchars=+\[\]]
-[+color[red]Un_empty Un_insert_right empty_iff]
-[+color[red]empty_subsetI empty_subsetI insert_mono]
+[+color[red]Un_empty Un_insert_right
+empty_iff] [+color[red]empty_subsetI empty_subsetI insert_mono]
 [+color[red]insert_mono singletonI singletonI ]
 [+color[red]singleton_insert_inj_eq' singleton_insert_inj_eq')]
 
-lemma AddStudent_L2:
-"(\<exists> degModules:: MODULE set.
-\<exists> students :: PERSON set.
-\<exists> taking :: (PERSON * MODULE) set.
-\<exists> p :: PERSON.
-\<exists> degModules':: MODULE set.
-\<exists> students' :: PERSON set.
-\<exists> taking' :: (PERSON * MODULE) set.
-((students' = students \<union> {(p)}) 
-\<and> (degModules' = degModules) 
-\<and> (taking' = taking))
-\<longrightarrow>
-((Domain taking \<subseteq> students)
-\<and> (Range taking \<subseteq> degModules)
-\<and> (Domain taking' \<subseteq> students')
-\<and> (Range taking' \<subseteq> degModules')))"
+lemma AddStudent_L2: "(\<exists> degModules:: MODULE set. \<exists> students ::
+PERSON set. \<exists> taking :: (PERSON * MODULE) set. \<exists> p :: PERSON.
+\<exists> degModules':: MODULE set. \<exists> students' :: PERSON set. \<exists>
+taking' :: (PERSON * MODULE) set. ((students' = students \<union> {(p)}) \<and>
+(degModules' = degModules) \<and> (taking' = taking)) \<longrightarrow> ((Domain
+taking \<subseteq> students) \<and> (Range taking \<subseteq> degModules) \<and>
+(Domain taking' \<subseteq> students') \<and> (Range taking' \<subseteq>
+degModules')))"
 
 [+color[red]by blast]
 \end{BVerbatim}
@@ -552,9 +591,28 @@ lemma AddStudent_L2:
 \caption{An example of a property and it's proof for the Vending Machine example. \label{fig:propertyproof}}
 \end{figure}
 
-Figure \ref{fig:propertyproof} shows an the lemmas automatically generated from the \gls{zdra} annotated specification (black) and the user input needed to prove this lemma (red). Notice that the user has deleted the word "\texttt{sorry}" which would have automatically come after the lemma. More information on proving these lemmas can be found in the Isabelle Manual \cite{isabelle} and is beyond the scope of this thesis.
+Figure \ref{fig:propertyproof} shows how the lemmas automatically generated from
+the \gls{zdra} annotated specification (black) and the user input needed to
+prove this lemma (red). Notice that the user has deleted the word
+"\texttt{sorry}" which would have automatically come after the lemma. More
+information on proving these lemmas can be found in the Isabelle Manual
+\cite{isabelle} and is beyond the scope of this thesis.
 
 \section{Conclusion}
-In this chapter we have taken a single specification and shown the entire path from the raw specification to it's translation in Isabelle. We have shown the \LaTeX{} code and the compiled output for the raw specification, \gls{zcga} annotated specification and \gls{zdra} annotated specification. We have shown screenshots of the interface to demonstrate of how to check for each step of correctness. The dependency and goto graphs where automatically demonstrated and displayed. Then the general proof skeleton, (which shows the order the instances must be in to input into a theorem prover) was displayed. We then generated an Isabelle proof skeleton for the vending machine and automatically filled it in using the \gls{zmath} program. In the final section we explained that it would be difficult to automate a proof due to the fact that the lemma's which need to be proved for a specification will vary due to the nature of the specification and the user who wishes to prove them. 
+In this chapter we have taken a single specification and shown the entire path
+from the raw specification to it's translation in Isabelle. We have shown the
+\LaTeX{} code and the compiled output for the raw specification, \gls{zcga}
+annotated specification and \gls{zdra} annotated specification. We have shown
+screenshots of the interface to demonstrate of how to check for each step of
+correctness. The dependency and goto graphs where automatically demonstrated and
+displayed. Then the general proof skeleton, (which shows the order the instances
+must be in to input into a theorem prover) was displayed. We then generated an
+Isabelle proof skeleton for the vending machine and automatically filled it in
+using the \gls{zmath} program. In the final section we explained that it would
+be difficult to automate a proof due to the fact that the lemma's which need to
+be proved for a specification will vary due to the nature of the specification
+and the user who wishes to prove them. 
 
-In the next chapter we analyse the differences between translating a specification in one step and translating a specification using the \gls{zmath} method.
+In the next chapter we analyse the differences between translating a
+specification in one step and translating a specification using the \gls{zmath}
+method.

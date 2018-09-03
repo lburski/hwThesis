@@ -1,11 +1,16 @@
 \chapter{General Proof Sketch aspect and beyond}
 \label{chap:gpsa2isa}
 
-When translating from the \gls{zdra} annotated specification to the Isabelle skeleton, the syntax needed to be changed in order for the specification to parse through Isabelle. In this section we outline how the Z specification is translated into Isabelle.
+When translating from the \gls{zdra} annotated specification to the Isabelle
+skeleton, the syntax needed to be changed in order for the specification to
+parse through Isabelle. In this section we outline how the Z specification is
+translated into Isabelle.
 
-If the user has labelled a theory in the specification (T\#) then that will begin writing an Isabelle skeleton.
+If the user has labelled a theory in the specification (T\#) then that will
+begin writing an Isabelle skeleton.
 
-For example if we had an empty specification and named it a then the program will create an empty Isabelle skeleton such as:
+For example if we had an empty specification and named it a then the program
+will create an empty Isabelle skeleton such as:
 
 \begin{verbatim}
 theory gpsa_a
@@ -15,7 +20,10 @@ begin
 end
 \end{verbatim}
 
-If the user labels a schema `\texttt{SS1}' meaning the stateSchema of the specification then that in Isabelle becomes a `\texttt{record}' and a `\texttt{locale}' is created. Using our example of specifcation named `\texttt{a}' we get the following (after the premuable descibed before):
+If the user labels a schema `\texttt{SS1}' meaning the stateSchema of the
+specification then that in Isabelle becomes a `\texttt{record}' and a
+`\texttt{locale}' is created. Using our example of specifcation named
+`\texttt{a}' we get the following (after the premuable descibed before):
 \begin{verbatim}
 record SS1 =
 (*DECLARATIONS*)
@@ -27,10 +35,13 @@ end
 end
 \end{verbatim}
 
-If there are no state invarients in the state schema at this point then there is no `\texttt{assumes SI\#}') line.
+If there are no state invarients in the state schema at this point then there is
+no `\texttt{assumes SI\#}') line.
 
-All other schemas including changeSchemas, outputSchemas, preconditions that are schemas, post conditions that are schemas and all other state schema become definitions in the Isabelle skeleton.
-So for example if we have the following schema writte in \gls{zdra}
+All other schemas including changeSchemas, outputSchemas, preconditions that are
+schemas, post conditions that are schemas and all other state schema become
+definitions in the Isabelle skeleton. So for example if we have the following
+schema writte in \gls{zdra}
 \begin{verbatim}
 \draschema{CS1}{
 \begin{schema}{b}
@@ -48,9 +59,13 @@ where
 "CS1 (*CS1_VARIABLES*) == PO1"
 \end{verbatim}
 
-At this stage it doesn't matter what the declarations and expressions are as they get filled in at the next stage. The Isabelle skeleton only uses the \gls{zdra} labels to be created.
+At this stage it doesn't matter what the declarations and expressions are as
+they get filled in at the next stage. The Isabelle skeleton only uses the
+\gls{zdra} labels to be created.
 
-Totalising schemas, written either horizontally or vertically in a specification become definitions when translating into the Isabelle skeleton. For example if we have the following totalisingSchema:
+Totalising schemas, written either horizontally or vertically in a specification
+become definitions when translating into the Isabelle skeleton. For example if
+we have the following totalisingSchema:
 
 \verb|\draline{TS1}{someSchema == someExpression}|
 
@@ -63,17 +78,25 @@ where
 "TS1 (*TS1_VARIABLES*) == (*TS1_EXPRESSION*)"
 \end{verbatim}
 
-Again, at this stage it doesn't matter what the expression is. As it gets filled in at the next stage.
+Again, at this stage it doesn't matter what the expression is. As it gets filled
+in at the next stage.
 
 \section{Proof Obligations in Isabelle Syntax}
 
-Lemmas which are proof obligations. That is instances with the a \gls{zdra} name \texttt{L\#\_CS\#} where `\texttt{\#}' is a number become \texttt{lemma's} in Isabelle syntax. The translation from the \gls{gpsa} into Isabelle syntax depends if the changeSchema in question has a precondition, postcondition or both. We use definition \ref{defa} in aid with the translation.
+Lemmas which are proof obligations. That is instances with the a \gls{zdra} name
+\texttt{L\#\_CS\#} where `\texttt{\#}' is a number become \texttt{lemma's} in
+Isabelle syntax. The translation from the \gls{gpsa} into Isabelle syntax
+depends if the changeSchema in question has a precondition, postcondition or
+both. We use definition \ref{defa} in aid with the translation.
 
 \subsection{Proof Obligation translation where the schema has a precondition}
 
-If the changeSchema in which the proof obligation is about has a precondition as well as a postcondition then the translation will be as follows. 
+If the changeSchema in which the proof obligation is about has a precondition as
+well as a postcondition then the translation will be as follows. 
 
-If an instance has the \gls{zdra} name `\texttt{L1\_CS1}' and we have the relations (CS1, requires, PRE1), (PRE1, allows, PO2) and (CS1, uses, IS1) then the Isabelle skeleton syntax would be as follows:
+If an instance has the \gls{zdra} name `\texttt{L1\_CS1}' and we have the
+relations (CS1, requires, PRE1), (PRE1, allows, PO2) and (CS1, uses, IS1) then
+the Isabelle skeleton syntax would be as follows:
 
 \begin{verbatim}
 lemma L1_CS1:
@@ -85,7 +108,10 @@ lemma L1_CS1:
 sorry
 \end{verbatim}
 
-If the instance in the \gls{gpsa} was `\texttt{L1\_CS1}' and the relationship only had a precondition and no post condition ie (CS1, requires, PRE1) and (CS1, uses, IS1) but not the allows relationship the syntax in the Isabelle skeleton would be 
+If the instance in the \gls{gpsa} was `\texttt{L1\_CS1}' and the relationship
+only had a precondition and no post condition ie (CS1, requires, PRE1) and (CS1,
+uses, IS1) but not the allows relationship the syntax in the Isabelle skeleton
+would be 
 
 \begin{verbatim}
 lemma L1_CS1:
@@ -96,11 +122,15 @@ lemma L1_CS1:
 sorry
 \end{verbatim}
 
-Where SI1 is the stateInvariants used in the stateSchema and SI1' is the stateInvariants prime.
+Where SI1 is the stateInvariants used in the stateSchema and SI1' is the
+stateInvariants prime.
 
 \subsection{Proof Obligation translation where the changeSchema has only postcondition}
 
-If the instance in the \gls{gpsa} was L1\_CS1 and CS1 only required a postcondition with no precondition that is had the relation (CS1, requires, PO2) and (CS1, uses, IS1) then the syntax in the Isabelle skeleton would be as follows:
+If the instance in the \gls{gpsa} was L1\_CS1 and CS1 only required a
+postcondition with no precondition that is had the relation (CS1, requires, PO2)
+and (CS1, uses, IS1) then the syntax in the Isabelle skeleton would be as
+follows:
 
 \begin{verbatim}
 lemma L1_CS1:
@@ -111,32 +141,57 @@ lemma L1_CS1:
 sorry
 \end{verbatim}
 
-Where PO2 is the postcondition the changeSchema requires, SI1 is the stateInvariants in the stateSchema and SI1' is the stateInvariants prime. 
+Where PO2 is the postcondition the changeSchema requires, SI1 is the
+stateInvariants in the stateSchema and SI1' is the stateInvariants prime. 
 
-We use the Isabelle word `\texttt{sorry}' to tell the theorem prover to skip a proof-in-progress and to treat the goal under consideration to be proved. This then causes the Isabelle skeleton to be an incorrect document but is a goal the user may prove at a later stage after the skeleton has been filled in.
+We use the Isabelle word `\texttt{sorry}' to tell the theorem prover to skip a
+proof-in-progress and to treat the goal under consideration to be proved. This
+then causes the Isabelle skeleton to be an incorrect document but is a goal the
+user may prove at a later stage after the skeleton has been filled in.
 
 \section{Benefits}
 
-The Isabelle skeleton allows for incomplete specifications to also be automated into a half-baked proof. This way the user can have a general outline for their specification and fill in the missing information directly into the Isabelle skeleton at a later stage. For this reason it is good to have an Isabelle skeleton before the full filled in half-baked proof. The user then has an outline if they wish to add to the specification directly as they will have an example of how the instances should be translated. An example of a semi formal specification which has been translated to step 5 (the half baked proof) is shown in appendix \ref{app:semiform}. Although this specification is not fully formal its grammatical correctness and rhetorical correctness can be checked. It can also start being translated into Isabelle syntax. The dependencies are shown between the current instances and the user can see what other information needs to be added for the specification to be complete.
+The Isabelle skeleton allows for incomplete specifications to also be automated
+into a half-baked proof. This way the user can have a general outline for their
+specification and fill in the missing information directly into the Isabelle
+skeleton at a later stage. For this reason it is good to have an Isabelle
+skeleton before the full filled in half-baked proof. The user then has an
+outline if they wish to add to the specification directly as they will have an
+example of how the instances should be translated. An example of a semi formal
+specification which has been translated to step 5 (the half baked proof) is
+shown in appendix \ref{app:semiform}. Although this specification is not fully
+formal its grammatical correctness and rhetorical correctness can be checked. It
+can also start being translated into Isabelle syntax. The dependencies are shown
+between the current instances and the user can see what other information needs
+to be added for the specification to be complete.
 
 \section{ZCGa specification to Fill in the Isabelle Skeleton}
 \label{sec:zcga2fillin}
 
-Since translating using ZMathLang to translate Z specifications into an Isabelle skeleton can even been done on incomplete specifications, it is important to note that if some missing information is missing e.g. a declaration, expression etc then the comments of where these should go will not be changed. 
-For example if we have the line \verb|"(*CS1_TYPES*) => bool"| in the skeleton and the schema CS1 has no declarations yet then the line will not be changed, and it is up to the user to input the variables and the types of that definition.
+Since translating using ZMathLang to translate Z specifications into an Isabelle
+skeleton can even been done on incomplete specifications, it is important to
+note that if some missing information is missing e.g. a declaration, expression
+etc then the comments of where these should go will not be changed. For example
+if we have the line \verb|"(*CS1_TYPES*) => bool"| in the skeleton and the
+schema CS1 has no declarations yet then the line will not be changed, and it is
+up to the user to input the variables and the types of that definition.
 
-It is important to note that all the \gls{zcga} annotations at this stage disappear as the labelled information is automatically put into Isabelle syntax.
+It is important to note that all the \gls{zcga} annotations at this stage
+disappear as the labelled information is automatically put into Isabelle syntax.
 
 \subsection{Z Types and FreeTypes}
 
-The program which fills in the Isabelle skeleton goes through the entire specification and adds any Z declared types and freetypes before the record. For example, if a specification has the following:
+The program which fills in the Isabelle skeleton goes through the entire
+specification and adds any Z declared types and freetypes before the record. For
+example, if a specification has the following:
 \begin{verbatim}
 \begin{zed}
 [STUDENT]
 \end{zed}
 \end{verbatim}
 
-Then the line \verb|typedecl STUDENT| will be added after the first begin in the skeleton.
+Then the line \verb|typedecl STUDENT| will be added after the first begin in the
+skeleton.
 
 If the specification had the following freetype:
 \begin{verbatim}
@@ -153,7 +208,8 @@ is added to the skeleton.
 
 \subsection{Declarations}
 
-In Isabelle the types and variables are added speratly. For insance if we had the following schema:
+In Isabelle the types and variables are added speratly. For insance if we had
+the following schema:
 
 \begin{verbatim}
 \draschema{OS1}{
@@ -174,7 +230,8 @@ where
 "OS1 (*OS1_VARIABLES*) == (PO1)"
 \end{verbatim}
 
-Since we have two declarations, the filling in program would change the definition in the skeleton as follows:
+Since we have two declarations, the filling in program would change the
+definition in the skeleton as follows:
 
 \begin{verbatim}
 definition ab ::
@@ -183,18 +240,28 @@ where
 "ab d c == (c \<in> d)"
 \end{verbatim}
 
-Therefore, from the declarations, the types replace the line \verb|(*OS1_TYPES*)| and the variables replace the line \verb|(*OS1_VARIABLES*)|.
+Therefore, from the declarations, the types replace the line
+\verb|(*OS1_TYPES*)| and the variables replace the line
+\verb|(*OS1_VARIABLES*)|.
 
 \subsection{Expressions}
 
-Since the majority of the syntax for expressions is very similar to the syntax in Isabelle, the expressions are put in directly with minor changes. The expressions replace the \gls{zdra} labellings.
+Since the majority of the syntax for expressions is very similar to the syntax
+in Isabelle, the expressions are put in directly with minor changes. The
+expressions replace the \gls{zdra} labellings.
 
-Using our previous example shown in the last section, we have the schema `\texttt{ab}', in the skeleton we have a label `\texttt{PO1}' which is then replaced by the expression \verb|c \<in> d|. Note this expression is very similar to the expression in \LaTeX{} \verb|c \in d| apart from the symbol \verb|\in| becomes \verb|\<in>|. Table \ref{tab:latextoisabelle} shows the rest of these automatic changes of the syntax made from \LaTeX{} to Isabelle.
+Using our previous example shown in the last section, we have the schema
+`\texttt{ab}', in the skeleton we have a label `\texttt{PO1}' which is then
+replaced by the expression \verb|c \<in> d|. Note this expression is very
+similar to the expression in \LaTeX{} \verb|c \in d| apart from the symbol
+\verb|\in| becomes \verb|\<in>|. Table \ref{tab:latextoisabelle} shows the rest
+of these automatic changes of the syntax made from \LaTeX{} to Isabelle.
 
 {\def\arraystretch{0.5}\tabcolsep=0.5pt
 \begin{longtable}[H]{|c | c | c |}
 \hline
-\textbf{Syntax in Z} & \textbf{Syntax in \LaTeX} & \textbf{Syntax in Isabelle} \\
+\textbf{Syntax in Z} & \textbf{Syntax in \LaTeX} & \textbf{Syntax in Isabelle}
+\\
 \hline
 \hline
 $\{...\}$ & \verb|\{...\}| & \verb|{...}|\\
@@ -290,27 +357,57 @@ $R^{k}$ & \verb|R^{k}| & \verb|\<R^k>| \\
 \end{longtable}
 }
 
-Some symbols in the Z toolkit are the same regardless of whether they are a sequence/list/set or total function/partial function. However the syntax sometimes varies in Isabelle on these ocassions.
+Some symbols in the Z toolkit are the same regardless of whether they are a
+sequence/list/set or total function/partial function. However the syntax
+sometimes varies in Isabelle on these ocassions.
 
-One part of the Z mathematical toolkit which we need to rewrite are the use of partial functions. In Isabelle/HOL all functions are total but there are ways to do certain proofs about partial functions \cite{Krauss08definingrecursive}. We translate total functions as a set of pairs \verb|(A * B) set|, we use the \verb|\<rightharpoonup>| symbol to describe partial funcations. Any proofs to check for partial functions if needed can be done by the user in step 6 shown in figure \ref{fig:steps} but the details of these proofs are beyond the scope of this thesis.
+One part of the Z mathematical toolkit which we need to rewrite are the use of
+partial functions. In Isabelle/HOL all functions are total but there are ways to
+do certain proofs about partial functions \cite{Krauss08definingrecursive}. We
+translate total functions as a set of pairs \verb|(A * B) set|, we use the
+\verb|\<rightharpoonup>| symbol to describe partial funcations. Any proofs to
+check for partial functions if needed can be done by the user in step 6 shown in
+figure \ref{fig:steps} but the details of these proofs are beyond the scope of
+this thesis.
 
 Other parts which differ are the following:
 
 \begin{itemize}
-\item `\verb|\#|' is a symbol which takes a set or list \footnote{by list we mean an ordered set} as a parameter and returns the number of elements within that set or list. In Z, `\verb|\#|' can be used for both set and list, however in Isabelle we must translate `\verb|\#|' into `\verb|card|' if the parameter is a set or `\verb|length|' if the parameter is a list.
+\item `\verb|\#|' is a symbol which takes a set or list \footnote{by list we
+mean an ordered set} as a parameter and returns the number of elements within
+that set or list. In Z, `\verb|\#|' can be used for both set and list, however
+in Isabelle we must translate `\verb|\#|' into `\verb|card|' if the parameter is
+a set or `\verb|length|' if the parameter is a list.
 
-\item `\verb|\mapsto|' is a symbol which takes two terms and returns a term. If we have a set `\verb|funset|', which has type `\verb|A \fun B|' and $f \mapsto s \in funset$ then in Isabelle the term `\verb|f \mapsto s|' will be translated as `\verb|(f,s)|'. However if `\verb|funset|' had the type `\verb|A \pfun B|' then the Isabelle translation of `\verb|f \mapsto s|' would be `\verb|f s|'.
+\item `\verb|\mapsto|' is a symbol which takes two terms and returns a term. If
+we have a set `\verb|funset|', which has type `\verb|A \fun B|' and $f \mapsto s
+\in funset$ then in Isabelle the term `\verb|f \mapsto s|' will be translated as
+`\verb|(f,s)|'. However if `\verb|funset|' had the type `\verb|A \pfun B|' then
+the Isabelle translation of `\verb|f \mapsto s|' would be `\verb|f s|'.
 
-\item `\verb|\dom|' and `\verb|\ran|' in Z are the same regardless whether it is being applied to an element in a partial function or a total function. However in Isabelle the syntax varies between the two types of functions. If the `\verb|dom|' being applied to an element `\verb|k|', with type `\verb|(A * B) set|' then the Isabelle translation would be `\verb|Domain k|' whereas if `\verb|k|' has type `\verb|A \<rightharpoonup B|' then the `\verb|domain|' of `\verb|k|' in Isabelle would be translated as `\verb|dom k|'. Similarly we would have `\verb|Range k|' and `\verb|ran k|' for total and partial functions of `\verb|k|' respectively.
+\item `\verb|\dom|' and `\verb|\ran|' in Z are the same regardless whether it is
+being applied to an element in a partial function or a total function. However
+in Isabelle the syntax varies between the two types of functions. If the
+`\verb|dom|' being applied to an element `\verb|k|', with type
+`\verb|(A * B)set|' then the Isabelle translation would be `\verb|Domain k|' whereas if
+`\verb|k|' has type `\verb|A \<rightharpoonup B|' then the `\verb|domain|' of
+`\verb|k|' in Isabelle would be translated as `\verb|dom k|'. Similarly we would
+have `\verb|Range k|' and `\verb|ran k|' for total and partial functions of
+`\verb|k|' respectively.
 \end{itemize}
 
 \subsection{Schema Names}
 
-The Names of the Schema are added to the skeleton by using the \gls{zdra} name. For example if the specification had the line \verb|\draschema{TS1}{\begin{schema}{ab}{..| then anywhere `\texttt{TS1}' is listed in the skeleton it will be converted to `\texttt{ab}'. This is done throughout the entire skeleton.
+The Names of the Schema are added to the skeleton by using the \gls{zdra} name.
+For example if the specification had the line
+\verb|\draschema{TS1}{\begin{schema}{ab}{..| then anywhere `\texttt{TS1}' is
+listed in the skeleton it will be converted to `\texttt{ab}'. This is done
+throughout the entire skeleton.
 
 \subsection{Proof Obligations}
 
-Using the birthdaybook specification an example we can see that we have the following schema:
+Using the birthdaybook specification an example we can see that we have the
+following schema:
 
 \begin{verbatim}
 \draschema{CS1}{
@@ -338,7 +435,9 @@ where
 \<and> (birthday' = birthday \<union> (name,date))"
 \end{verbatim}
 
-Then the proof obligation which checks that the before state and after state of this changeSchema complies with the stateInvariants in represented as the following in the Isabelle Skeleton:
+Then the proof obligation which checks that the before state and after state of
+this changeSchema complies with the stateInvariants in represented as the
+following in the Isabelle Skeleton:
 
 \begin{verbatim}
 lemma CS1_L1:
@@ -369,31 +468,42 @@ lemma AddBirthday_L1:
 \section{Filled in Isabelle Skeleton to a Full Proof}
 \label{sec:isa2ful}
 
-The final step to get from a half-baked proof into a full proof is labelled as step 6 in Figure \ref{fig:steps}, this is also named fill in 2. Technically the specification the user automatically generates in fill in 1 is fully formalised in Isabelle if there are no other properties to be proved. If the specification is not fully formalised, using the half-baked proof generated in step 5, the user then adds any safety properties about the specification they wish to prove in the form of \emph{lemmas}. As the properties will be specific to the user and/or specification it is difficult to automate this step. Therefore some theorem prover knowledge may be required for step 6. Some of the automated theorem prover tools such as Sledgehammer \cite{sledgehammer} may be useful when proving the properties.
+The final step to get from a half-baked proof into a full proof is labelled as
+step 6 in Figure \ref{fig:steps}, this is also named fill in 2. Technically the
+specification the user automatically generates in fill in 1 is fully formalised
+in Isabelle if there are no other properties to be proved. If the specification
+is not fully formalised, using the half-baked proof generated in step 5, the
+user then adds any safety properties about the specification they wish to prove
+in the form of \emph{lemmas}. As the properties will be specific to the user
+and/or specification it is difficult to automate this step. Therefore some
+theorem prover knowledge may be required for step 6. Some of the automated
+theorem prover tools such as Sledgehammer \cite{sledgehammer} may be useful when
+proving the properties.
 
-Figure \ref{fig:exampleproof} shows an example of a proof obligations generated by \gls{zmath} proved in Isabelle. Again we have highlighted the user input in {\color{red}red}. To help prove these properties wed have used sledgehammer \cite{sledgehammer} which is part of the Isabelle/Hol package. The full proof of this specification can be found in appendix \ref{app:moduleregfullproof}. At this point, proving properties in a theorem prover may require some expertise in the field. Proving tools such as \gls{smt} solvers \cite{DeMoura:2011:SMT:1995376.1995394} such as sledgehammer are an interesting area of research on it's own however these such details are out with the scope of this thesis.
+Figure \ref{fig:exampleproof} shows an example of a proof obligations generated
+by \gls{zmath} proved in Isabelle. Again we have highlighted the user input in
+{\color{red}red}. To help prove these properties wed have used sledgehammer
+\cite{sledgehammer} which is part of the Isabelle/Hol package. The full proof of
+this specification can be found in appendix \ref{app:moduleregfullproof}. At
+this point, proving properties in a theorem prover may require some expertise in
+the field. Proving tools such as \gls{smt} solvers
+\cite{DeMoura:2011:SMT:1995376.1995394} such as sledgehammer are an interesting
+area of research on it's own however these such details are out with the scope
+of this thesis.
 
 \begin{center}
 \begin{figure}[H]
 \centering
 \begin{footnotesize}
-\begin{BVerbatim}[commandchars=+\[\]]
-lemma AddStudent_L2:
-"(\<exists> degModules:: MODULE set.
-\<exists> students :: PERSON set.
-\<exists> taking :: (PERSON * MODULE) set.
-\<exists> p :: PERSON.
-\<exists> degModules':: MODULE set.
-\<exists> students' :: PERSON set.
-\<exists> taking' :: (PERSON * MODULE) set.
-((students' = students \<union> {(p)}) 
-\<and> (degModules' = degModules) 
-\<and> (taking' = taking))
-\<longrightarrow>
-((Domain taking \<subseteq> students)
-\<and> (Range taking \<subseteq> degModules)
-\<and> (Domain taking' \<subseteq> students')
-\<and> (Range taking' \<subseteq> degModules')))"
+\begin{BVerbatim}
+    [commandchars=+\[\]] lemma AddStudent_L2: "(\<exists>
+degModules:: MODULE set. \<exists> students :: PERSON set. \<exists> taking ::
+(PERSON * MODULE) set. \<exists> p :: PERSON. \<exists> degModules':: MODULE
+set. \<exists> students' :: PERSON set. \<exists> taking' :: (PERSON * MODULE)
+set. ((students' = students \<union> {(p)}) \<and> (degModules' = degModules)
+\<and> (taking' = taking)) \<longrightarrow> ((Domain taking \<subseteq>
+students) \<and> (Range taking \<subseteq> degModules) \<and> (Domain taking'
+\<subseteq> students') \<and> (Range taking' \<subseteq> degModules')))"
 [+color[red]by blast]
 \end{BVerbatim}
 \end{footnotesize}
@@ -403,6 +513,16 @@ lemma AddStudent_L2:
 
 \section{Conclusion}
 
-This chapter described the final steps in computerising a formal specification into full proof. It demonstrates how the program uses the automatically generated general skeleton to  create an Isabelle skeleton. From the Isabelle skeleton the user can then automatically fill in the skeleton using the \gls{zcga} annoatated specification giving a \gls{half}. The last step would be to fill in any mising proofs in the \gls{half}, this is still a difficult step and may require some theorem prover knowledge however this part is difficult to automate as different system specifications have different properties users wish to prove, therefore tools such as sledgehammer \cite{sledgehammer} may be useful at this point.
+This chapter described the final steps in computerising a formal specification
+into full proof. It demonstrates how the program uses the automatically
+generated general skeleton to  create an Isabelle skeleton. From the Isabelle
+skeleton the user can then automatically fill in the skeleton using the
+\gls{zcga} annoatated specification giving a \gls{half}. The last step would be
+to fill in any mising proofs in the \gls{half}, this is still a difficult step
+and may require some theorem prover knowledge however this part is difficult to
+automate as different system specifications have different properties users wish
+to prove, therefore tools such as sledgehammer \cite{sledgehammer} may be useful
+at this point.
 
-In the next chapeter we demonstrate a full example of a specification being taken through all the steps of the ZMathLang framework.
+In the next chapeter we demonstrate a full example of a specification being
+taken through all the steps of the ZMathLang framework.

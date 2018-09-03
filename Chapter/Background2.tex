@@ -1,62 +1,173 @@
 \chapter{Background}
 \label{ch:background}
 
-Formal methods are a specific type of mathematical notation which is based on the techniques of the specification, verification and development of software and hardware systems \cite{whatareformalmethods}. Since our thesis presents \gls{zmath} we go right to the beginning of the framework, to describe how mathematical notation came about. Then we describe the original MathLang framework (the framework which \gls{zmath} is an adaptation of) and then give the reader an idea of other formal methods and languages. In the next section we wish to describe what is the language of Z and give more details of it's syntax and semantics. We then highlight other proving techniques which have been done for maths, formal methods and Z.
+Formal methods are a specific type of mathematical notation which is based on
+the techniques of the specification, verification and development of software
+and hardware systems \cite{whatareformalmethods}. Since our thesis presents
+\gls{zmath} we go right to the beginning of the framework, to describe how
+mathematical notation came about. Then we describe the original MathLang
+framework (the framework which \gls{zmath} is an adaptation of) and then give
+the reader an idea of other formal methods and languages. In the next section we
+wish to describe what is the language of Z and give more details of it's syntax
+and semantics. We then highlight other proving techniques which have been done
+for maths, formal methods and Z.
 
 \section{Mathematical Notations}
 
-Computer science (and thus computer systems) have evolved from basic mathematics. We can say that formal specification writers are practising mathematicians as they write system specifications in a formal manner. Therefore we must start right at the beginning at the foundation of mathematical notation.
+Computer science (and thus computer systems) have evolved from basic
+mathematics. We can say that formal specification writers are practising
+mathematicians as they write system specifications in a formal manner. Therefore
+we must start right at the beginning at the foundation of mathematical notation.
 
 \subsection{Right from the beginning}
 \label{subsec:rftb}
 
-The relationship between mathematical reasoning and practising mathematicians started out early on during the ancient Greeks where logic was already being studied. Reasoning in logic was used for just about anything not just mathematics such as law, medicine and farming. This very early form of mathematics made very famous discoveries such as Aristotles logic \cite{aristotle}, Euclid's geometry \cite{euclid} and Leibniz Calculus \cite{leibniz}.
+The relationship between mathematical reasoning and practising mathematicians
+started out early on during the ancient Greeks where logic was already being
+studied. Reasoning in logic was used for just about anything not just
+mathematics such as law, medicine and farming. This very early form of
+mathematics made very famous discoveries such as Aristotles logic
+\cite{aristotle}, Euclid's geometry \cite{euclid} and Leibniz Calculus
+\cite{leibniz}.
 
-Further on in the 1800's, Frege wrote \emph{Die Grundlagen der Arithmetik} \cite{frege} and other works where he noted that mathematics is a branch of logic. In this works, he began building a solid foundation for mathematics. This early foundation along with Cantors set theory \cite{cantor} was argued to be inconstant and thus Russel found a paradox in this work.
+Further on in the 1800's, Frege wrote \emph{Die Grundlagen der Arithmetik}
+\cite{frege} and other works where he noted that mathematics is a branch of
+logic. In this works, he began building a solid foundation for mathematics. This
+early foundation along with Cantors set theory \cite{cantor} was argued to be
+inconstant and thus Russel found a paradox in this work.
 
-In the late 19th century and beginning of 20th century, Russell \& Whitehead \cite{whitehead1912principia} started to form a basis for mathematical notation. Their three volume work describes a set of rules from which all mathematical truths could be proven. In these early stages the authors try to derive all maths from logic. This ambitious project was the first stepping stone in collaborating all mathematics under one notation.
+In the late 19th century and beginning of 20th century, Russell \& Whitehead
+\cite{whitehead1912principia} started to form a basis for mathematical notation.
+Their three volume work describes a set of rules from which all mathematical
+truths could be proven. In these early stages the authors try to derive all
+maths from logic. This ambitious project was the first stepping stone in
+collaborating all mathematics under one notation.
 
-Further to Russell \& Whitehead's work, Bourbanki \footnote{A name given to a collective of mathematicians} wrote a series of books beginning n the 1935's with the aim of grounding mathematics. Their main works is included in the Elements of Mathematics series \cite{opac-b1128208} which does not need any special of knowledge of mathematics. It describes mathematics from the very beginning and goes through core mathematical concepts such as set theory, algebra, function etc. and gives complete proofs for these concepts.
+Further to Russell \& Whitehead's work, Bourbanki \footnote{A name given to a
+collective of mathematicians} wrote a series of books beginning n the 1935's
+with the aim of grounding mathematics. Their main works is included in the
+Elements of Mathematics series \cite{opac-b1128208} which does not need any
+special of knowledge of mathematics. It describes mathematics from the very
+beginning and goes through core mathematical concepts such as set theory,
+algebra, function etc. and gives complete proofs for these concepts.
 
-Adding to Russell's work, Zermelo introduced an acclimatisation of set theory which was later extended by Frankel and Skolem to form ZF set theory \cite{zfc}. This new theory is what we will later see the Z notation is based on and the notation this thesis checks the correctness of.
+Adding to Russell's work, Zermelo introduced an acclimatisation of set theory
+which was later extended by Frankel and Skolem to form ZF set theory \cite{zfc}.
+This new theory is what we will later see the Z notation is based on and the
+notation this thesis checks the correctness of.
 
 \subsection{Computerisation of Maths and Proof Systems}
 
-In the 21st century, a great area of research is how use, store and support this mathematical knowledge. Since automation has become more and more used, mathematicians have looked into ways in which they can use computers to reason about and provide services to mathematics. This would include all areas of mathematics, such as logic, mechanics and software specifications. Mathematical knowedge can be represent in lots of different ways including the following:
+In the 21st century, a great area of research is how use, store and support this
+mathematical knowledge. Since automation has become more and more used,
+mathematicians have looked into ways in which they can use computers to reason
+about and provide services to mathematics. This would include all areas of
+mathematics, such as logic, mechanics and software specifications. Mathematical
+knowedge can be represent in lots of different ways including the following:
 
 \begin{itemize}
-\item One can typeset mathematics into a computer using a system such as \LaTeX{} \cite{latex} . These systems can edit and format mathematical knowledge so that it can be stored or printed. These systems provide good visual appearance and thus can be used for storing and archiving ones documents. Even Z specification, have their own package for \LaTeX{} and thus the structure of the specification can be represented both formally and informally. However, it is difficult to represent the logical structure of mathematical formulas and the logical structure of mathematics is embedded in natural language. Therefore, there isn't a lot of support for checking the correctness of general mathematics represented in the system (Z specifications on their own can be checked but this is discussed further in section \ref{subsec:provingSystemsForZ}).
+\item One can typeset mathematics into a computer using a system such as
+\LaTeX{} \cite{latex} . These systems can edit and format mathematical knowledge
+so that it can be stored or printed. These systems provide good visual
+appearance and thus can be used for storing and archiving ones documents. Even Z
+specification, have their own package for \LaTeX{} and thus the structure of the
+specification can be represented both formally and informally. However, it is
+difficult to represent the logical structure of mathematical formulas and the
+logical structure of mathematics is embedded in natural language. Therefore,
+there isn't a lot of support for checking the correctness of general mathematics
+represented in the system (Z specifications on their own can be checked but this
+is discussed further in section \ref{subsec:provingSystemsForZ}).
 
-\item Systems such as proof assistants (e.g. Isabelle \cite{isabelle}, Coq \cite{coq} and ProofPower-Z \cite{pp}) and automated theorem provers (e.g. Boyer-Moore, Otter) and jointly called proof systems. Proof systems each provide a formal language for writing mathematics. Early work on proof systems was done by De Bruijn when he worked on the AutoMath \cite{selectedautomath} project. AutoMath (automating mathematics) was the first attempt to digitize and formally prove mathematics which was assisted by a computer. AutoMath is described as a language for formalising mathematical texts and for automating the validation of mathematics. The AutoMath project is what brought uniform notations and automated proof together.
+\item Systems such as proof assistants (e.g. Isabelle \cite{isabelle}, Coq
+\cite{coq} and ProofPower-Z \cite{pp}) and automated theorem provers (e.g.
+Boyer-Moore, Otter) and jointly called proof systems. Proof systems each provide
+a formal language for writing mathematics. Early work on proof systems was done
+by De Bruijn when he worked on the AutoMath \cite{selectedautomath} project.
+AutoMath (automating mathematics) was the first attempt to digitize and formally
+prove mathematics which was assisted by a computer. AutoMath is described as a
+language for formalising mathematical texts and for automating the validation of
+mathematics. The AutoMath project is what brought uniform notations and
+automated proof together.
 
-Further to this work, there has been many other proof systems implemented to implement and check mathematics for total correctness. It is possible to access the semantics of mathematics in these systems. However, with these proof systems, a user must choose a specific proof system and one of these have their advantages and disadvantages. Also, each of these proof systems also take quite some time to learn. There is much documentation on some of these systems (e.g. Isabelle) and some are very well supported. But this in turn can be a downfall, as there is so much documentation, it is difficult to know how much one must learn and where to start. The best way of learning one of these system is from someone who already is an expert in the chosen proof system. A lot of the proof systems use proof tactics to constructs proofs and make them smaller, however to prove certain properties in a proof system, one can use various tactics to get to the same goal and may sometimes be difficult to find which tactic is best to use.
+Further to this work, there has been many other proof systems implemented to
+implement and check mathematics for total correctness. It is possible to access
+the semantics of mathematics in these systems. However, with these proof
+systems, a user must choose a specific proof system and one of these have their
+advantages and disadvantages. Also, each of these proof systems also take quite
+some time to learn. There is much documentation on some of these systems (e.g.
+Isabelle) and some are very well supported. But this in turn can be a downfall,
+as there is so much documentation, it is difficult to know how much one must
+learn and where to start. The best way of learning one of these system is from
+someone who already is an expert in the chosen proof system. A lot of the proof
+systems use proof tactics to constructs proofs and make them smaller, however to
+prove certain properties in a proof system, one can use various tactics to get
+to the same goal and may sometimes be difficult to find which tactic is best to
+use.
 
-With these disadvantages many academic and industrial mathematicians do not generally use the mathematics written in the language of the proof system and usually are not willing to spend the time to check the correctness of their own work in this system.
+With these disadvantages many academic and industrial mathematicians do not
+generally use the mathematics written in the language of the proof system and
+usually are not willing to spend the time to check the correctness of their own
+work in this system.
 
-\item There also exists semantical oriented document representations like OpenMath \cite{openmath} and OMDoc \cite{omdoc}. These systems are better than the typesetting systems such as \LaTeX{} to produce readable and printable version of the mathematical knowledge written. Some aspects of the semantics of the mathematics can be represented in these type systems. However, when using these systems it is difficult to control the presentation and therefore a typesetting system is more likely to be used. Like the typesetting system, systems like OMDoc also have difficult reading the logical structure of mathematics embedded in the natural language of the text. Systems like OMDoc can associate symbolic formulas with chunks of natural language text, however these chunks can not be seen by the computer and thus can not be checked if it is correct.
+\item There also exists semantical oriented document representations like
+OpenMath \cite{openmath} and OMDoc \cite{omdoc}. These systems are better than
+the typesetting systems such as \LaTeX{} to produce readable and printable
+version of the mathematical knowledge written. Some aspects of the semantics of
+the mathematics can be represented in these type systems. However, when using
+these systems it is difficult to control the presentation and therefore a
+typesetting system is more likely to be used. Like the typesetting system,
+systems like OMDoc also have difficult reading the logical structure of
+mathematics embedded in the natural language of the text. Systems like OMDoc can
+associate symbolic formulas with chunks of natural language text, however these
+chunks can not be seen by the computer and thus can not be checked if it is
+correct.
 
-Another disadvantage is that although there is support for the semantics of the mathematics, these systems can not support the semantics in terms of logical foundations for mathematics (unlike proof systems).
+Another disadvantage is that although there is support for the semantics of the
+mathematics, these systems can not support the semantics in terms of logical
+foundations for mathematics (unlike proof systems).
 \end{itemize}
 
 
 \subsection{Conclusion}
 
-In summary the \gls{math} framework has been developed to be used as a bridge between the categories mentioned above as a way to represent and automatically check mathematical knowledge. Since the Z notation has stemmed from the origins of mathematics and industry is starting to use formal methods in there system development we have chosen to adapt the \gls{math} framework to accommodate Z specification and have developed a set of tools to do so.
+In summary the \gls{math} framework has been developed to be used as a bridge
+between the categories mentioned above as a way to represent and automatically
+check mathematical knowledge. Since the Z notation has stemmed from the origins
+of mathematics and industry is starting to use formal methods in there system
+development we have chosen to adapt the \gls{math} framework to accommodate Z
+specification and have developed a set of tools to do so.
 
 \section{MathLang for mathematics}
 \label{sec:mathlangbackground}
 
-\Gls{math} originally started in 2000. It's original goals was to allow gradual \gls{computerise} and \gls{formalise} of mathematical texts.
+\Gls{math} originally started in 2000. It's original goals was to allow gradual
+\gls{computerise} and \gls{formalise} of mathematical texts.
 
-MathLang is not a system for proof verification but a framework to computerise and translate information (such as mathematical text) into a form on which proof checkers can operate.
+MathLang is not a system for proof verification but a framework to computerise
+and translate information (such as mathematical text) into a form on which proof
+checkers can operate.
 
-The MathLang framework provides extra features supporting more rigour to translation of the common mathematical language. One can define further levels of translations into more semantically and logically complete versions. This gradual computerisation method should be more accessible than direct formalisation, because a number of first levels do nor require any particular expertise in formalisation.
+The MathLang framework provides extra features supporting more rigour to
+translation of the common mathematical language. One can define further levels
+of translations into more semantically and logically complete versions. This
+gradual computerisation method should be more accessible than direct
+formalisation, because a number of first levels do nor require any particular
+expertise in formalisation.
 
-So far Mathlang has given alternative and complete paths which transform mathematical texts into new computerised and formalised versions. Dividing the formalisation of mathematical texts into a number of different stages was first proposed by N.G. de Bruijn to relate common mathematical language to his Mathematical Vernacular \cite{mv} and his proof checking system Automath.
+So far Mathlang has given alternative and complete paths which transform
+mathematical texts into new computerised and formalised versions. Dividing the
+formalisation of mathematical texts into a number of different stages was first
+proposed by N.G. de Bruijn to relate common mathematical language to his
+Mathematical Vernacular \cite{mv} and his proof checking system Automath.
 
 \subsection{Overview and Goals}
 
-The MathLang Framework instructs the computerisation process to be broken up into a number of levels called \textbf{aspects}. Each aspect can be worked out independently, simultaneously or sequentially without prior knowledge of another aspect. The current MathLang Framework contains three well-developed aspects, the \gls{cga}, the \gls{tsa} and the \gls{dra}, and has further aspects such as the Formal Proof Sketch.
+The MathLang Framework instructs the computerisation process to be broken up
+into a number of levels called \textbf{aspects}. Each aspect can be worked out
+independently, simultaneously or sequentially without prior knowledge of another
+aspect. The current MathLang Framework contains three well-developed aspects,
+the \gls{cga}, the \gls{tsa} and the \gls{dra}, and has further aspects such as
+the Formal Proof Sketch.
 
 \begin{figure}[H]
 \begin{center}
@@ -65,16 +176,36 @@ The MathLang Framework instructs the computerisation process to be broken up int
 \caption{The MathLang approach to computerisation/formalisation \cite{mathintomizar}\label{fig:mathlang}}
 \end{figure}
 
-Figure \ref{fig:mathlang} shows the overall situation of work in the current MathLang Framework.
-The labelled arrows show the computerisation paths from the common mathematical language to any proof system. 
-The width of the arrow representing each path segment increases according to the expertise required. The level of expertise needed to computerise a CML text straight into a complete proof is very high, however the level of expertise is much smaller by using the \gls{math} framework to help form a formal skeleton and then into a complete proof. The dashed arrows illustrate further computerisation that one can envision.
+Figure \ref{fig:mathlang} shows the overall situation of work in the current
+MathLang Framework. The labelled arrows show the computerisation paths from the
+common mathematical language to any proof system. The width of the arrow
+representing each path segment increases according to the expertise required.
+The level of expertise needed to computerise a CML text straight into a complete
+proof is very high, however the level of expertise is much smaller by using the
+\gls{math} framework to help form a formal skeleton and then into a complete
+proof. The dashed arrows illustrate further computerisation that one can
+envision.
 
-The initial design of MathLang was based on ideas from \gls{wtt} \cite{wtt} which then inspired de Bruijns Mathematical Vernacular \cite{mv}.
-\Gls{wtt} defines terminology to describe a \emph{book} which is a sequence of \emph{lines}, each of which is a pair of a \emph{sentence} (a \emph{statement} or a \emph{definition}) and a \emph{context} of
-facts (\emph{declarations} or \emph{statements}) assumed in the \emph{sentence}. A \emph{definition} can introduce a name whose scope is associated with a meaning throughout the rest of the book. A \emph{declaration} in the \emph{context} can introduce a name whose scope is the current line.
-The \emph{preface} gives names which can be reference throughout the entire document. Within \emph{declarations}, \emph{definitions} and \emph{statements} are \emph{phrases} which can be built from the basic elements; \emph{terms}, \emph{sets}, \emph{adjectives} and \emph{nouns}.
-\Gls{wtt} uses a weak type system using the following types \texttt{noun}, \texttt{set}, \texttt{adjective}, \texttt{statement}, \texttt{definition}, \texttt{context} and \texttt{book} to check basic well-formedness conditions.
-The idea's of \gls{wtt} are useful in some instances however it does not deal with proofs or logical correctness of the documents. There is no way to group statements together and indentify their roles within the document such as what is a theorem, what is a section, what is a chapter etc. It also doesn't provide a way to use some concepts used in a document within another.
+The initial design of MathLang was based on ideas from \gls{wtt} \cite{wtt}
+which then inspired de Bruijns Mathematical Vernacular \cite{mv}. \Gls{wtt}
+defines terminology to describe a \emph{book} which is a sequence of
+\emph{lines}, each of which is a pair of a \emph{sentence} (a \emph{statement}
+or a \emph{definition}) and a \emph{context} of facts (\emph{declarations} or
+\emph{statements}) assumed in the \emph{sentence}. A \emph{definition} can
+introduce a name whose scope is associated with a meaning throughout the rest of
+the book. A \emph{declaration} in the \emph{context} can introduce a name whose
+scope is the current line. The \emph{preface} gives names which can be reference
+throughout the entire document. Within \emph{declarations}, \emph{definitions}
+and \emph{statements} are \emph{phrases} which can be built from the basic
+elements; \emph{terms}, \emph{sets}, \emph{adjectives} and \emph{nouns}.
+\Gls{wtt} uses a weak type system using the following types \texttt{noun},
+\texttt{set}, \texttt{adjective}, \texttt{statement}, \texttt{definition},
+\texttt{context} and \texttt{book} to check basic well-formedness conditions.
+The idea's of \gls{wtt} are useful in some instances however it does not deal
+with proofs or logical correctness of the documents. There is no way to group
+statements together and indentify their roles within the document such as what
+is a theorem, what is a section, what is a chapter etc. It also doesn't provide
+a way to use some concepts used in a document within another.
 
 We use the following standard metasymbols for the categories mentioned above:
 
@@ -118,43 +249,66 @@ category & symbol & representative \\
 
 \emph{Variables} can range of terms, sets or statements.
 
-Parameters $\mathcal{P}$ are either terms, sets or statements. A \emph{constant} is always followed by a parameter list and constants can be either for terms, nouns, statements, sets or adjectives. For example:
+Parameters $\mathcal{P}$ are either terms, sets or statements. A \emph{constant}
+is always followed by a parameter list and constants can be either for terms,
+nouns, statements, sets or adjectives. For example:
 
 
-\noindent The constant `$+$' takes 2 terms as parameters and gives back a term, therefore we can have:
+\noindent The constant `$+$' takes 2 terms as parameters and gives back a term,
+therefore we can have:
 
 \begin{center}
 $+(3, 2)$
 \end{center}
 
-meaning the constant $+$ takes the parameters $3$ and $2$ and in this case would give back $5$.
+meaning the constant $+$ takes the parameters $3$ and $2$ and in this case would
+give back $5$.
 
-\emph{Binders} can be giving terms, adjectives, nouns, sets or statements. For example a binder giving a set would be the symbol `$\bigcup$' or a binder giving a statement would be the symbol `$\forall$'.
+\emph{Binders} can be giving terms, adjectives, nouns, sets or statements. For
+example a binder giving a set would be the symbol `$\bigcup$' or a binder giving
+a statement would be the symbol `$\forall$'.
 
- A \emph{definition} introduces new constants. We can have phrase definitions and statement definitions.
+ A \emph{definition} introduces new constants. We can have phrase definitions
+ and statement definitions.
  
- A \emph{context} is a list of declarations and statements. A declaration in a context introduces variables which are then used in expressions. A context can be empty or non empty.
+ A \emph{context} is a list of declarations and statements. A declaration in a
+ context introduces variables which are then used in expressions. A context can
+ be empty or non empty.
 
- \emph{Lines} contain either a statement or a definition which is relative to a context. A \emph{book} is a list of lines. A simple book could be empty and not contain any lines or it can contain 1 or more lines.
+ \emph{Lines} contain either a statement or a definition which is relative to a
+ context. A \emph{book} is a list of lines. A simple book could be empty and not
+ contain any lines or it can contain 1 or more lines.
  
-A detailed explanation on each of the categories along with examples can be found in \cite{wtt}.
+A detailed explanation on each of the categories along with examples can be
+found in \cite{wtt}.
 
 \subsection{CGa}
 \label{subsec:cga}
-The current \gls{cga} in MathLang uses a finite set of grammatical \textit{categories} to identify the 
-structure and common concepts used in mathematical texts. The aims of the \gls{cga} is to make explicit 
-the grammatical role played by the elements of mathematical texts and to allow the validation of the grammatical and reasoning 
-structure within the \gls{cga} encoding in a mathematical text. The \gls{cga} checks for grammatical correctness and finds errors like 
-an identifier being used without and prior introduction or the wrong number of arguments being given to a function \cite{krzysztofphd}.
+The current \gls{cga} in MathLang uses a finite set of grammatical
+\textit{categories} to identify the structure and common concepts used in
+mathematical texts. The aims of the \gls{cga} is to make explicit the
+grammatical role played by the elements of mathematical texts and to allow the
+validation of the grammatical and reasoning structure within the \gls{cga}
+encoding in a mathematical text. The \gls{cga} checks for grammatical
+correctness and finds errors like an identifier being used without and prior
+introduction or the wrong number of arguments being given to a function
+\cite{krzysztofphd}.
 
-The \gls{cga} for mathematical documents is a formal language originally created by ideas by \gls{wtt} and Mathematical Vernicular \cite{mv} and then adapted to suit mathematical texts by various PhD, Master and Dissertation students.
+The \gls{cga} for mathematical documents is a formal language originally created
+by ideas by \gls{wtt} and Mathematical Vernicular \cite{mv} and then adapted to
+suit mathematical texts by various PhD, Master and Dissertation students.
 
-The smallest constructs of \gls{cga} are \emph{step} and \emph{expression}. Tasks handled by books, prefaces, lines, declarations, defintions, and statements are represented as steps in \gls{cga}. A step can be a \emph{block} which is a sequence of steps. A step can also be a definition, declaration or expression.
+The smallest constructs of \gls{cga} are \emph{step} and \emph{expression}.
+Tasks handled by books, prefaces, lines, declarations, defintions, and
+statements are represented as steps in \gls{cga}. A step can be a \emph{block}
+which is a sequence of steps. A step can also be a definition, declaration or
+expression.
 
 For example:
 
 \begin{center}
-`Given that $\mathfrak{M}$ is a set, $y$ and $x$ are natural numbers, and $x$ belongs to $\mathfrak{M}$, it holds that $x+ y=y+x$'.
+`Given that $\mathfrak{M}$ is a set, $y$ and $x$ are natural numbers, and $x$
+belongs to $\mathfrak{M}$, it holds that $x+ y=y+x$'.
 \end{center}
 
 This statement encoded in \gls{cga} would be the following:
@@ -164,8 +318,11 @@ $\{M : set; y : natural number; x : natural number; \in(x, M)\}$\\
 $\rhd =(+(x, y), +(y, x)) $
 \end{center}
 
-\Gls{cga} uses grammatical \emph{categories} (also called \emph{types}) to make explicit the grammatical role played by the elements of a mathematical text in a document.
-All these described categories and the rules for the grammar typing can be found in \cite{wtt}. \Gls{cga} also uses colour coding for these categories. They are:
+\Gls{cga} uses grammatical \emph{categories} (also called \emph{types}) to make
+explicit the grammatical role played by the elements of a mathematical text in a
+document. All these described categories and the rules for the grammar typing
+can be found in \cite{wtt}. \Gls{cga} also uses colour coding for these
+categories. They are:
 
 \begin{center}
 \term{term}, \set{set}, \cganoun{noun}, \cgaadjective{adjective}, \expression{expression}, \definition{definition}, \declaration{declaration}, \cgastep{step} and \cgatext{context}
@@ -178,16 +335,39 @@ All these described categories and the rules for the grammar typing can be found
 \caption{Example of CGa encoding of CML text, taken from \cite{KAMAREDDINE20085}. \label{fig:cgannotated}}
 \end{figure}
 
-\Gls{cga} types are powerful does not allow higher order types, to work around this weakness \gls{cga} annotation often gives entitied the type term instead of a more precide type. The goal of the \gls{cga} type is system is not to endure full correctness but to check whether the reasoning parts of the document are coherent and built sensibly. 
+\Gls{cga} types are powerful does not allow higher order types, to work around
+this weakness \gls{cga} annotation often gives entitied the type term instead of
+a more precide type. The goal of the \gls{cga} type is system is not to endure
+full correctness but to check whether the reasoning parts of the document are
+coherent and built sensibly. 
 
-The design of the \gls{cga} is credited to Kamareddine, Maarek and Wells  \cite{oomathlang}. The implementation of CGa is due to Maarek \cite{manuelphd}.
+The design of the \gls{cga} is credited to Kamareddine, Maarek and Wells
+\cite{oomathlang}. The implementation of CGa is due to Maarek \cite{manuelphd}.
 
 \subsection{DRa}
 \label{subsec:dra}
 
-The Document Rhetorical aspects checks that the correctness of the reasoning in the mathematical document is correct and that there are no loops. The \gls{dra} mark-up system is simple and more concentrated on the narrative structure of the mathematical documents whereas other previous systems (such as DocBook \footnote{http://www.docbook.org}, Text Encoding Initiative \footnote{http://www.tei-c.org/index.xml}, OMDoc \footnote{http://www.omdoc.org}) were more concentrated on  the subtleties of the documents. It is used to describe and annotate chunks of texts according to their narrative role played within the document \cite{krzysztofphd}. Using the \gls{dra} annotation system we can capture the role that a chunk of text imposes on the rest of the document or on another chunk of text. This leads to generating dependency graphs which play an important role on mathematical knowledge representation. With these graphs, the reader can easily find their own way while reading the original text without the need to understand all of its subtleties. Processing \gls{dra} annotations can flag problems such as circular reasoning and poorly-supported theorems.
+The Document Rhetorical aspects checks that the correctness of the reasoning in
+the mathematical document is correct and that there are no loops. The \gls{dra}
+mark-up system is simple and more concentrated on the narrative structure of the
+mathematical documents whereas other previous systems (such as DocBook
+\footnote{http://www.docbook.org}, Text Encoding Initiative
+\footnote{http://www.tei-c.org/index.xml}, OMDoc
+\footnote{http://www.omdoc.org}) were more concentrated on  the subtleties of
+the documents. It is used to describe and annotate chunks of texts according to
+their narrative role played within the document \cite{krzysztofphd}. Using the
+\gls{dra} annotation system we can capture the role that a chunk of text imposes
+on the rest of the document or on another chunk of text. This leads to
+generating dependency graphs which play an important role on mathematical
+knowledge representation. With these graphs, the reader can easily find their
+own way while reading the original text without the need to understand all of
+its subtleties. Processing \gls{dra} annotations can flag problems such as
+circular reasoning and poorly-supported theorems.
 
-The annotation process for the \gls{dra} can be done before, after or with the annotations for \gls{cga} and \gls{tsa}. Table \ref{tab:drarolesandrelations} shows the roles and relations which can be used in annotating a document with \gls{dra}.
+The annotation process for the \gls{dra} can be done before, after or with the
+annotations for \gls{cga} and \gls{tsa}. Table \ref{tab:drarolesandrelations}
+shows the roles and relations which can be used in annotating a document with
+\gls{dra}.
 
 \begin{table}[H]
 \centering
@@ -209,14 +389,23 @@ case & \\
 Annotations in \gls{dra} follow three steps:
 
 \begin{enumerate}
-\item The user wraps chunks of text with boxed. Each box is assigned a unique name, this avoids any confusion when stating relations between the boxes.
+\item The user wraps chunks of text with boxed. Each box is assigned a unique
+name, this avoids any confusion when stating relations between the boxes.
 
-\item To each unique box, the user then assigns a structural or mathematical rhetorical role which this box may play. He uses RDF triplets to assign a role to each box.
+\item To each unique box, the user then assigns a structural or mathematical
+rhetorical role which this box may play. He uses RDF triplets to assign a role
+to each box.
 
-\item The user then describes the relations between each of the chunks of text he annotated before.
+\item The user then describes the relations between each of the chunks of text
+he annotated before.
 \end{enumerate}
 
-RDF triples \cite{Candan:2001:RDF:507533.507536} are used to represents the relationships between the annotated boxes. The triples are represented as \emph{subject-predicate-object} triple, where \emph{predicate} denotes the relationship. The order of \emph{subject} and \emph{object} is important as it denotes how the dependency graph is formed. An example of RDF triples for the \gls{zdra} is:
+RDF triples \cite{Candan:2001:RDF:507533.507536} are used to represents the
+relationships between the annotated boxes. The triples are represented as
+\emph{subject-predicate-object} triple, where \emph{predicate} denotes the
+relationship. The order of \emph{subject} and \emph{object} is important as it
+denotes how the dependency graph is formed. An example of RDF triples for the
+\gls{zdra} is:
 
 \begin{table}[H]
 \centering
@@ -232,7 +421,8 @@ RDF triples \cite{Candan:2001:RDF:507533.507536} are used to represents the rela
 The \gls{dra} performs three basic checks:
 
 \begin{enumerate}
-\item Check if each of the mathematical and rhetorical roles and relations which are used have been defined.
+\item Check if each of the mathematical and rhetorical roles and relations which
+are used have been defined.
 
 \item Check that each name of a node is unique.
 
@@ -250,9 +440,13 @@ The \gls{dra} also automatically produces a dependency graph.
 
 \subsubsection{Dependency Graph}
 
-The dependency graph is a directed label graph which contains all annotated DRa nodes of a mathematical text and all the relations. The names of the instances become the nodes of the graph and the relations become the named directed vertices of the graph \cite{zengfirstyear}.
+The dependency graph is a directed label graph which contains all annotated DRa
+nodes of a mathematical text and all the relations. The names of the instances
+become the nodes of the graph and the relations become the named directed
+vertices of the graph \cite{zengfirstyear}.
 
-Since each \gls{dra} annotation itself is a step, \gls{dra} annotations can be nested. 
+Since each \gls{dra} annotation itself is a step, \gls{dra} annotations can be
+nested. 
 
 An example of a dependency graph is shown in figure \ref{fig:pydepgraph}:
 
@@ -265,10 +459,18 @@ An example of a dependency graph is shown in figure \ref{fig:pydepgraph}:
 
 \subsubsection{GoTo Graph}
 
-The textual order between two nodes within a tree can be used to examine the structure of the \gls{dra}. The textual order is a modification of the logical precedence presented in the dependency graph. The textual order expresses the dependencies between parts of the text and is necessary for the generation of a proof skeleton. For example if a node A uses node B than logically B should be written before A. The GoTo graph is the same as the dependency graph but rearranged to follow the correct textual order of the nodes and vertices. The GoTo graph is produced for the following reasons:
+The textual order between two nodes within a tree can be used to examine the
+structure of the \gls{dra}. The textual order is a modification of the logical
+precedence presented in the dependency graph. The textual order expresses the
+dependencies between parts of the text and is necessary for the generation of a
+proof skeleton. For example if a node A uses node B than logically B should be
+written before A. The GoTo graph is the same as the dependency graph but
+rearranged to follow the correct textual order of the nodes and vertices. The
+GoTo graph is produced for the following reasons:
 
 \begin{enumerate}
-\item The automatic checking of the GoTo can reveal errors in the document such as loops in structure of the document.
+\item The automatic checking of the GoTo can reveal errors in the document such
+as loops in structure of the document.
 
 \item The GoTo is used to produce a proof skeleton for a certain prover.
 \end{enumerate}
@@ -282,21 +484,36 @@ The textual order between two nodes within a tree can be used to examine the str
 
 \subsection{Mathamatical skeletons}
 
-There has been some work on computerising mathematical texts without fully formalising or proof checking them. The computerisations are no detailed to check for full total correctness but are used as \emph{skeletons} in the full formalisation \cite{Wiedijk02formalproof}.
-However, in order to produce these skeletons the user still  needs to be an expert in the theorem proving language they wish to check their mathematical document with.
-Once a document has been annotated with \gls{math}, the proof skeleton for a theorem prover could be generated from the annotations. A formal proof sketch is a document written in the syntax of a certain theorem prover, with the allowance that it may be checked by the system with errors however they should only be justification errors.
+There has been some work on computerising mathematical texts without fully
+formalising or proof checking them. The computerisations are no detailed to
+check for full total correctness but are used as \emph{skeletons} in the full
+formalisation \cite{Wiedijk02formalproof}. However, in order to produce these
+skeletons the user still  needs to be an expert in the theorem proving language
+they wish to check their mathematical document with. Once a document has been
+annotated with \gls{math}, the proof skeleton for a theorem prover could be
+generated from the annotations. A formal proof sketch is a document written in
+the syntax of a certain theorem prover, with the allowance that it may be
+checked by the system with errors however they should only be justification
+errors.
 
-Retel \cite{krzysztofphd} describes a Mizar document skeleton which has been generated from a MathLang document. The skeleton uses the annotations from \gls{dra} and inputs the document in Mizar syntax along the names used in \gls{dra}. The original context of the mathematical document has not yet been input into the Mizar formal proof skeleton.
+Retel \cite{krzysztofphd} describes a Mizar document skeleton which has been
+generated from a MathLang document. The skeleton uses the annotations from
+\gls{dra} and inputs the document in Mizar syntax along the names used in
+\gls{dra}. The original context of the mathematical document has not yet been
+input into the Mizar formal proof skeleton.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.35]{Figures/Background/mizarskel.png}
 \end{center}
-\caption{The Mizar formam proof document skeleton transformed from the MathLang computerised document
+\caption{The Mizar formam proof document skeleton transformed from the MathLang
+computerised document
 \cite{krzysztofphd}. \label{fig:mizarfps}}
 \end{figure}
 
-The next part is to fill in the skeleton using all information and context of the original mathematical document, this may include the names of the theorems, statements, definitions etc. which were in the original mathematical text.
+The next part is to fill in the skeleton using all information and context of
+the original mathematical document, this may include the names of the theorems,
+statements, definitions etc. which were in the original mathematical text.
 
 \begin{figure}[H]
 \begin{center}
@@ -305,7 +522,10 @@ The next part is to fill in the skeleton using all information and context of th
 \caption{The Mizar FPS environment built for the example from Figure \ref{fig:mizarfps}. The Mizar system responds with only one error stating that the theorem is not sufficiently proved, taken from \cite{krzysztofphd}. \label{fig:mizarfpsfill}}
 \end{figure}
 
-Figure \ref{fig:mizarfpsfill} still shows that there is still some work to do as the `\emph{inference is not accepted}'. The user would then need to finish off the proof manually (shown in figure \ref{fig:mizarfpsfinished}), however a big chunk of the work has already been done within the theorem prover.
+Figure \ref{fig:mizarfpsfill} still shows that there is still some work to do as
+the `\emph{inference is not accepted}'. The user would then need to finish off
+the proof manually (shown in figure \ref{fig:mizarfpsfinished}), however a big
+chunk of the work has already been done within the theorem prover.
 
 \begin{figure}[H]
 \begin{center}
@@ -317,38 +537,51 @@ Figure \ref{fig:mizarfpsfill} still shows that there is still some work to do as
 \subsection{TSa}
 \label{subsec:tsa}
 
-The \gls{tsa} builds the bridge between a mathematical text and its grammatical interpretation. The \gls{tsa} is a way of rewriting parts of the text so they have the same meaning. For example some mathematicians may prefer to write "a=b and b=c and c=d", others may prefer "a=b, b=c, c=d" and some others may prefer "a=b=c=d". As you can see all these methods of writing have the same meaning however some symbols are different. The \gls{tsa} annotates each expression in the text with a string of words or symbols which aim to act as the mathematical representation of which this expression is. This allows everything in the text to be uniform.
+The \gls{tsa} builds the bridge between a mathematical text and its grammatical
+interpretation. The \gls{tsa} is a way of rewriting parts of the text so they
+have the same meaning. For example some mathematicians may prefer to write "a=b
+and b=c and c=d", others may prefer "a=b, b=c, c=d" and some others may prefer
+"a=b=c=d". As you can see all these methods of writing have the same meaning
+however some symbols are different. The \gls{tsa} annotates each expression in
+the text with a string of words or symbols which aim to act as the mathematical
+representation of which this expression is. This allows everything in the text
+to be uniform.
 
-We do not describe the TSa in detail since we do not use the TSa in this thesis but it is important to know that it exists.
+We do not describe the TSa in detail since we do not use the TSa in this thesis
+but it is important to know that it exists.
 
 \subsection{A fully worked example in Mathlang}
 
-This section describes a fully worked example of translating a mathamtical text into the theorem prover Isabelle using the \gls{math} framework, taken from \cite{lamarphd}.
+This section describes a fully worked example of translating a mathamtical text
+into the theorem prover Isabelle using the \gls{math} framework, taken from
+\cite{lamarphd}.
 
 \subsubsection{The original text}
 
-This text was taken from an undergraduate textbook \cite{joseph2002contemporary}, chapter 12, entitled `Introduction to Rings'.
+This text was taken from an undergraduate textbook
+\cite{joseph2002contemporary}, chapter 12, entitled `Introduction to Rings'.
 
 \begin{tcolorbox}
 
 \begin{defin}
-(Ring). A ring R is a non-empty set with two binary operations, addition (denoted by a + b) and multiplication(denoted by ab), such that for all a, b, c in R:
+(Ring). A ring R is a non-empty set with two binary operations, addition
+(denoted by a + b) and multiplication(denoted by ab), such that for all a, b, c
+in R:
 \begin{enumerate}
 \item a + b = b + a.
 \item (a + b) + c = a + (b + c).
-\item There is an additive identity 0. That is, there is an element 0 in R such that a + 0 = a for all a in R.
+\item There is an additive identity 0. That is, there is an element 0 in R such
+that a + 0 = a for all a in R.
 \item There is an element −a in R such that a + (−a) = 0.
 \item a(bc) = (ab)c.
-\item a(b + c) = ab + ac and (b + c)a = ba + ca.
-content...
+\item a(b + c) = ab + ac and (b + c)a = ba + ca. content...
 \end{enumerate}
-Our first theorem shows how the operations of addition and
-multiplication intertwine.
+Our first theorem shows how the operations of addition and multiplication
+intertwine.
 \end{defin}
 
 \begin{thm}
-(Rules of Multiplication). Let a, b, and c belong to a
-ring R. Then
+(Rules of Multiplication). Let a, b, and c belong to a ring R. Then
 \begin{enumerate}
 \item a0 = 0a = 0.
 \item a(−b) = (−a)b = −(ab).
@@ -361,10 +594,9 @@ Consider rule 1. Clearly,
 \begin{center}
 0 + a0 = a0 = a(0 + 0) = a0 + a0.
 \end{center}
-So, by cancellation, 0=a0. Similarly, 0a=0.
-To prove rule 2, we observe that a(−b) + ab = a(−b + b) = a0 =
-0. So, adding −(ab) to both sides yields a(−b) = −(ab). The
-remainder of rule 2 is done analogously.
+So, by cancellation, 0=a0. Similarly, 0a=0. To prove rule 2, we observe that
+a(−b) + ab = a(−b + b) = a0 = 0. So, adding −(ab) to both sides yields a(−b) =
+−(ab). The remainder of rule 2 is done analogously.
 \end{proof}
 \end{tcolorbox}
 
@@ -377,7 +609,9 @@ remainder of rule 2 is done analogously.
 \caption{Typing the beginning of a document into TexMacs. \label{fig:texmacs}}
 \end{figure}
 
-The user then annotate this text using `\emph{TeXMacs} shown in figure \ref{fig:texmacs}. These annotates would be made at sentence level and it is common for single words and individual variables to be annotated.
+The user then annotate this text using `\emph{TeXMacs} shown in figure
+\ref{fig:texmacs}. These annotates would be made at sentence level and it is
+common for single words and individual variables to be annotated.
 
 \begin{figure}[H]
 \begin{center}
@@ -388,32 +622,46 @@ The user then annotate this text using `\emph{TeXMacs} shown in figure \ref{fig:
 
 \subsubsection{DRa annotated text}
 
-The text is annotated with DRa relationships and instances which can find errors  such as loops within the reasoning and poorly-supported theorems. Figure x shows the original ring theory text (left) and the ring theory text annotated with \gls{dra} (right).
+The text is annotated with DRa relationships and instances which can find errors
+such as loops within the reasoning and poorly-supported theorems. Figure x shows
+the original ring theory text (left) and the ring theory text annotated with
+\gls{dra} (right).
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.75]{Figures/Background/draforrings.png}
 \end{center}
-\caption{Comparison of original common mathematical language text with a dependency graph.
+\caption{Comparison of original common mathematical language text with a
+dependency graph.
  \label{fig:ringdra}}
 \end{figure}
 
-The dependency graphs and goto graphs are automatically generated from the \gls{dra} annotated document shown in figure \ref{fig:ringdra}.
+The dependency graphs and goto graphs are automatically generated from the
+\gls{dra} annotated document shown in figure \ref{fig:ringdra}.
 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.6]{Figures/Background/depandgoto.png}
 \end{center}
-\caption{{Two graphs automatically generated from DRa annotations:
-The dependency graph (DG) and the graph of logical precedence (GoTo)}.
+\caption{{Two graphs automatically generated from DRa annotations: The
+dependency graph (DG) and the graph of logical precedence (GoTo)}.
  \label{fig:depandgoto}}
 \end{figure}
 
 \subsubsection{Translating CGa and DRa into Isabelle syntax}
 
-This section shows the \gls{cga} and \gls{dra} annotated document translated into Isabelle syntax. In this thesis we refer to this part as the filled in Isabelle skeleton or \gls{half}. This document is now legal Isabelle syntax, but is not formally correct. There still may be gaps in the reasoning or particular proofs which need completing. However, this file may now be worked on by an Isabelle expert to finish off the final proof. The Isar command sorry tells Isabelle to skip a proof-in-progress and treat the goal under consideration to be proved.
+This section shows the \gls{cga} and \gls{dra} annotated document translated
+into Isabelle syntax. In this thesis we refer to this part as the filled in
+Isabelle skeleton or \gls{half}. This document is now legal Isabelle syntax, but
+is not formally correct. There still may be gaps in the reasoning or particular
+proofs which need completing. However, this file may now be worked on by an
+Isabelle expert to finish off the final proof. The Isar command sorry tells
+Isabelle to skip a proof-in-progress and treat the goal under consideration to
+be proved.
 
-Note: Translating just the \gls{dra} annotations gives the Isabelle Proof Skeleton and translating the \gls{cga} \textbf{and} \gls{dra} annotations gives the \gls{half}.
+Note: Translating just the \gls{dra} annotations gives the Isabelle Proof
+Skeleton and translating the \gls{cga} \textbf{and} \gls{dra} annotations gives
+the \gls{half}.
 
 \begin{figure}[H]
 \begin{center}
@@ -432,7 +680,11 @@ Note: Translating just the \gls{dra} annotations gives the Isabelle Proof Skelet
 
 \subsubsection{Finishing of the halfbaked proof}
 
-The \gls{half} still needs some extra bits of information to finish the final proof. This section removes the `\texttt{sorry}' commands and completes the proofs through the document so that it is fully parseable by Isabelle. This final step is done entirly by hand and there is no automation to help the user finish this last step.
+The \gls{half} still needs some extra bits of information to finish the final
+proof. This section removes the `\texttt{sorry}' commands and completes the
+proofs through the document so that it is fully parseable by Isabelle. This
+final step is done entirly by hand and there is no automation to help the user
+finish this last step.
 
 
 \begin{figure}[H]
@@ -474,64 +726,149 @@ The \gls{half} still needs some extra bits of information to finish the final pr
 
 \subsection{Conclusion}
 
-This section provides detailed information on the framework this thesis will be based on. We have described a brief history of where the original \gls{math} framework stemmed from and an overview of the methodology. We describe the \gls{cga}, \gls{dra} in detail and give a brief view of the TSa which has been used to formalise the common mathematical text which is what mathematical documents are usually written in. We have shown examples of the documents produced in each step whether they were produced automatically or manually. A full worked example was shown from the original text into a fully parseable and checked Isabelle proof.
+This section provides detailed information on the framework this thesis will be
+based on. We have described a brief history of where the original \gls{math}
+framework stemmed from and an overview of the methodology. We describe the
+\gls{cga}, \gls{dra} in detail and give a brief view of the TSa which has been
+used to formalise the common mathematical text which is what mathematical
+documents are usually written in. We have shown examples of the documents
+produced in each step whether they were produced automatically or manually. A
+full worked example was shown from the original text into a fully parseable and
+checked Isabelle proof.
 
-We will use the same steps to check the correctness of a software specification albeit each step in the \gls{math} framework will be adapted, changed and implemented to suit the software specification syntax.
+We will use the same steps to check the correctness of a software specification
+albeit each step in the \gls{math} framework will be adapted, changed and
+implemented to suit the software specification syntax.
 
 
 \section{Formal Methods and Languages}
 \label{sec:formalmethodsandformallanguages}
 
-Formal methods are usually used to assist in formalising in a variety of texts including systems, software and even language itself.
+Formal methods are usually used to assist in formalising in a variety of texts
+including systems, software and even language itself.
 
-\begin{defin}[Formal Language]
-A language designed for use in situations in which natural language is unsuitable, as for example in mathematics, logic, or computer programming.\footnote{www.dictionary.com/browse/formal-language}
+\begin{defin}[Formal Language] A language designed for use in situations in
+which natural language is unsuitable, as for example in mathematics, logic, or
+computer programming.\footnote{www.dictionary.com/browse/formal-language}
 \end{defin}
 
-\begin{defin}[Formal Specification]
-The specification of a program's properties in a language defined by a mathematical logic.\footnote{www.wiki.c2.com/?FormalSpecification}
+\begin{defin}[Formal Specification] The specification of a program's properties
+in a language defined by a mathematical
+logic.\footnote{www.wiki.c2.com/?FormalSpecification}
 \end{defin}
 
-\begin{defin}[Formal methods]
-Mathematical approaches to software and system development which support the rigorous specification, design and verification of computer systems.\footnote{www.fmeurope.org/?page\_id=2}
+\begin{defin}[Formal methods] Mathematical approaches to software and system
+development which support the rigorous specification, design and verification of
+computer systems.\footnote{www.fmeurope.org/?page\_id=2}
 \end{defin}
 
-Formal methods are mathematical approaches to software and system development which support the rigorous specification, design and verification of computer systems \cite{fmeurope}. Specifications are a collection of statements describing how a proposed system should act and function. Formal specifications use notations with defined mathematical meanings to describe systems with precision and no ambiguity. The properties of these specifications can then be worked out with more confidence and can be described to the customers and other stakeholders. This can uncover bugs in the stated requirements which may not have found in a natural language specification. With this, a more complete requirements validation can take place earlier in the development life-cycle and thus save costs and time of the overall project. The rigour using formal methods eliminates design errors earlier and results in substantially reduced time \cite{benefitsofform}. 
+Formal methods are mathematical approaches to software and system development
+which support the rigorous specification, design and verification of computer
+systems \cite{fmeurope}. Specifications are a collection of statements
+describing how a proposed system should act and function. Formal specifications
+use notations with defined mathematical meanings to describe systems with
+precision and no ambiguity. The properties of these specifications can then be
+worked out with more confidence and can be described to the customers and other
+stakeholders. This can uncover bugs in the stated requirements which may not
+have found in a natural language specification. With this, a more complete
+requirements validation can take place earlier in the development life-cycle and
+thus save costs and time of the overall project. The rigour using formal methods
+eliminates design errors earlier and results in substantially reduced time
+\cite{benefitsofform}. 
 
 \subsection{A brief history of formal methods}
 
-The first known formal language is thought to be used by Frege in his Begriffsschift (1879), Begriffschift meaning `concept of writing' described as `formal language of pure thought'. Frege formalised propositional logic as an axiomatic system.
+The first known formal language is thought to be used by Frege in his
+Begriffsschift (1879), Begriffschift meaning `concept of writing' described as
+`formal language of pure thought'. Frege formalised propositional logic as an
+axiomatic system.
 
 Formal methods then grew in the following:
 
 \begin{itemize}
-\item 1940's, Alan Turing annotated the properties of program states to simplify the logical analysis of sequential programs
+\item 1940's, Alan Turing annotated the properties of program states to simplify
+the logical analysis of sequential programs
 
-\item 1960's Floyd, Hoare and Naur recommended using axiomatic techniques to prove programs meet their specification.
+\item 1960's Floyd, Hoare and Naur recommended using axiomatic techniques to
+prove programs meet their specification.
 
-\item 1970's Dijkstra used formal calculus to aid development of non-deterministic programs
+\item 1970's Dijkstra used formal calculus to aid development of
+non-deterministic programs
 \end{itemize}
 
-Formal methods are used today are just as important as when they were used before. Formal methods have a large presence in academia and have also made their way into various industries to prevent design flaws in high integrity systems. Previous design errors have been found in systems such as the Therac-25 machine, which was used for radiation therapy produced by Atomic Energy of Canada Limited in 1982. It was involved in multiple incidents in which patients were give massive overdoses of radiation \cite{baase2003gift}. Another major fault which led to disastrous results was NASA’s Checkout Launch and Control System (CLCS) cancelled 9/2002 \footnote{www.spaceref.com/news/viewnews.html?id=475}.
+Formal methods are used today are just as important as when they were used
+before. Formal methods have a large presence in academia and have also made
+their way into various industries to prevent design flaws in high integrity
+systems. Previous design errors have been found in systems such as the Therac-25
+machine, which was used for radiation therapy produced by Atomic Energy of
+Canada Limited in 1982. It was involved in multiple incidents in which patients
+were give massive overdoses of radiation \cite{baase2003gift}. Another major
+fault which led to disastrous results was NASA’s Checkout Launch and Control
+System (CLCS) cancelled 9/2002
+\footnote{www.spaceref.com/news/viewnews.html?id=475}.
 
 \subsection{Types of formal methods}
 
 
-Today there are many different types of formal methods used both in industry and academia. Specification languages are expressive languages with general proof methods, such as VDM, Z, B. Another type of formal method could be program correctness proofs which associates logical inference rules with programming syntax, e.g. Hoare triples and Gries Methodology.There may also be model based approaches to formal methods, which are domain specific languages with precise algorithms for correctness proofs, e.g. Temporal logic \cite{uwa}, Fuzzy logic.  
+Today there are many different types of formal methods used both in industry and
+academia. Specification languages are expressive languages with general proof
+methods, such as VDM, Z, B. Another type of formal method could be program
+correctness proofs which associates logical inference rules with programming
+syntax, e.g. Hoare triples and Gries Methodology.There may also be model based
+approaches to formal methods, which are domain specific languages with precise
+algorithms for correctness proofs, e.g. Temporal logic \cite{uwa}, Fuzzy logic.
 
-Formal methods are used to precisely communicate specifications and the function of programs. They are also used to ensure the correctness of systems particularly safety critical systems.
 
-Formal methods have been a success in a variety of projects. For example, in the Sholis project \cite{sholis}, using a formal specification was most effective for fault finding, therefore if the specifications are correct, then the program implemented should then in turn contain less errors if it follows the correct specification.
-King, Hammond, Chapman and Pryor's paper \cite{sholis} was based on the SHOLIS defence system. It highlighted the importance of having a formal specification on a system to check for errors. It was found that the Z proof was the most cost effective for fault finding. The Z specification found 75\% of the total faults for the system. Since Z specifications are important for finding faults in SIL4 systems (based on the Sholis project), then checking the correctness of the Z specification is itself very important. Note that the specifications found 75\% of errors and not 100\%. As human error can still occur in formal specifications, using the ZMathLang approach may increase the percentage of errors found.
+Formal methods are used to precisely communicate specifications and the function
+of programs. They are also used to ensure the correctness of systems
+particularly safety critical systems.
 
-Another case study where formal methods have been used in industry is the NASA’s Mars Science Laboratory Mission (MSL) \cite{DBLP:journals/corr/abs-1003-1682}. This system relied on various different mechanisms to command the spacecraft from earth and to understand the behaviour of the rover and spacecraft itself. The paper suggested that "\textit{test engineers cannot “eyeball”
-the hundreds of thousands of events generated in even short tests of such a complex system}". Therefore runtime verification using formal specification offered a solution to this problem.
+Formal methods have been a success in a variety of projects. For example, in the
+Sholis project \cite{sholis}, using a formal specification was most effective
+for fault finding, therefore if the specifications are correct, then the program
+implemented should then in turn contain less errors if it follows the correct
+specification. King, Hammond, Chapman and Pryor's paper \cite{sholis} was based
+on the SHOLIS defence system. It highlighted the importance of having a formal
+specification on a system to check for errors. It was found that the Z proof was
+the most cost effective for fault finding. The Z specification found 75\% of the
+total faults for the system. Since Z specifications are important for finding
+faults in SIL4 systems (based on the Sholis project), then checking the
+correctness of the Z specification is itself very important. Note that the
+specifications found 75\% of errors and not 100\%. As human error can still
+occur in formal specifications, using the ZMathLang approach may increase the
+percentage of errors found.
 
-A paper reflecting on industry experience with proving properties in SPARK \ref{DBLP:conf/itp/ChapmanS14}, describes a programming language and verification system that will offer sound verification for programs. It states that SPARK and the use of proof tools remain a challenge (published in 2014) as the `adoption hurdle' is perceived too high. Customers and regulators have taken a variety of stances on static analysis and theorem provers. Where some places in industry have adopted the idea others remain sceptical. Hopefully this thesis will present an idea on how formal analysis could be simplified and broken up into smaller more understandable steps and thus would allow more users to take on the idea.
+Another case study where formal methods have been used in industry is the NASA’s
+Mars Science Laboratory Mission (MSL) \cite{DBLP:journals/corr/abs-1003-1682}.
+This system relied on various different mechanisms to command the spacecraft
+from earth and to understand the behaviour of the rover and spacecraft itself.
+The paper suggested that "\textit{test engineers cannot “eyeball”the hundreds of
+thousands of events generated in even short tests of such a complex system}".
+Therefore runtime verification using formal specification offered a solution to
+this problem.
 
-Despite these advantages some managers sometimes argue the cost of producing a system using formal methods do not cover the costs. However the rigour using formal methods eliminates design errors earlier and results in substantially reduced time. Investing more effort in specifying, verifying and testing will benefit software projects by reducing maintenance costs, higher software reliability and more user-responsive software \cite{chantatub}.
+A paper reflecting on industry experience with proving properties in SPARK
+\ref{DBLP:conf/itp/ChapmanS14}, describes a programming language and
+verification system that will offer sound verification for programs. It states
+that SPARK and the use of proof tools remain a challenge (published in 2014) as
+the `adoption hurdle' is perceived too high. Customers and regulators have taken
+a variety of stances on static analysis and theorem provers. Where some places
+in industry have adopted the idea others remain sceptical. Hopefully this thesis
+will present an idea on how formal analysis could be simplified and broken up
+into smaller more understandable steps and thus would allow more users to take
+on the idea.
 
-So far we have seen what are the different types of formal methods, where formal methods have been used, and why some people are still reluctant to use them. So what needs to be done to make “formal methods” industrial strength? Nirmal Pandey \cite{formalmethodslides} suggests the following: 
+Despite these advantages some managers sometimes argue the cost of producing a
+system using formal methods do not cover the costs. However the rigour using
+formal methods eliminates design errors earlier and results in substantially
+reduced time. Investing more effort in specifying, verifying and testing will
+benefit software projects by reducing maintenance costs, higher software
+reliability and more user-responsive software \cite{chantatub}.
+
+So far we have seen what are the different types of formal methods, where formal
+methods have been used, and why some people are still reluctant to use them. So
+what needs to be done to make “formal methods” industrial strength? Nirmal
+Pandey \cite{formalmethodslides} suggests the following: 
 
 \begin{table}[H]
 \begin{tabular}{|ll|}
@@ -553,19 +890,41 @@ So far we have seen what are the different types of formal methods, where formal
 
 \subsection{Conclusion}
 
-In this section we have identified the differences between formal methods, formal languages and formal specification. We have seen how formal methods originated from mathematics and how it grew over time to become what it is today. We see a connection with Frege's work on mathematical notation and identified it as the first formal notation found in history. We identified there are a variety of formal methods and new methods are even being developed today to comply with the systems in questions. For example MSL had it's own specification language developed for the system in order for the system to be verified. Despite all the advantages, some managers are still reluctant to use formal methods in their system development and thus as Pandey suggested there still needs to be some work done on making formal methods industrial strength. One of his suggestions was that tools are needed to hide complexity of formalisms and to provide visualization of specifications, which this thesis addresses.
+In this section we have identified the differences between formal methods,
+formal languages and formal specification. We have seen how formal methods
+originated from mathematics and how it grew over time to become what it is
+today. We see a connection with Frege's work on mathematical notation and
+identified it as the first formal notation found in history. We identified there
+are a variety of formal methods and new methods are even being developed today
+to comply with the systems in questions. For example MSL had it's own
+specification language developed for the system in order for the system to be
+verified. Despite all the advantages, some managers are still reluctant to use
+formal methods in their system development and thus as Pandey suggested there
+still needs to be some work done on making formal methods industrial strength.
+One of his suggestions was that tools are needed to hide complexity of
+formalisms and to provide visualization of specifications, which this thesis
+addresses.
 
 \section{Z Syntax and semantics}
 \label{sec:theznotation}
 
-In this section we give a brief overview on the core fundamentals of the Z formal language. We outline a basis of propositional and predicate logic and describe how Z syntax is formed to specify a system.
+In this section we give a brief overview on the core fundamentals of the Z
+formal language. We outline a basis of propositional and predicate logic and
+describe how Z syntax is formed to specify a system.
 
 \subsection{Introduction to Z}
 
 
-Z is based on predicate Calculus, Zermelo-Frankel set theory as we introduced at the beginning of this chapter in section \ref{subsec:rftb}.
+Z is based on predicate Calculus, Zermelo-Frankel set theory as we introduced at
+the beginning of this chapter in section \ref{subsec:rftb}.
 
-It is a particular formal method which was developed to specify the new Customer Information Control System (CICS) functionality \cite{cics}. The set theory includes standard set operators, set comprehensions, Cartesian products and power sets. Z also has other aspects such as schemas which are used to group mathematical objects and their properties. The schema language can be used to describe the state of a system and ways in which that state may change \cite{Woodcock:1996:UZS:235337}.
+It is a particular formal method which was developed to specify the new Customer
+Information Control System (CICS) functionality \cite{cics}. The set theory
+includes standard set operators, set comprehensions, Cartesian products and
+power sets. Z also has other aspects such as schemas which are used to group
+mathematical objects and their properties. The schema language can be used to
+describe the state of a system and ways in which that state may change
+\cite{Woodcock:1996:UZS:235337}.
 
 \subsection{Propositional and predicate logic}
 
@@ -573,7 +932,8 @@ Z specifications are built using predicate and propositional logic.
 
 \subsubsection{Propositional logic}
 
-Propositional logic works with statements which must be either true or false but can not be both. The following are propositional statements:
+Propositional logic works with statements which must be either true or false but
+can not be both. The following are propositional statements:
 \begin{itemize}
 \item A tree is green
 
@@ -582,7 +942,8 @@ Propositional logic works with statements which must be either true or false but
 \item All plants have flowers
 \end{itemize}
 
-Propositions can be connected in a variety of ways. Figure \ref{tab:logcon} shows a table of logical connectors in order of operator precedence.
+Propositions can be connected in a variety of ways. Figure \ref{tab:logcon}
+shows a table of logical connectors in order of operator precedence.
 
 \begin{table}[H]
 \centering
@@ -602,7 +963,8 @@ $\Leftrightarrow$ & equivalence & \textbf{if and only if} \\
 \caption{Logical connectors giving the symbol, its name and pronunciation. \label{tab:logcon}}
 \end{table}
 
-We can now build compound propositions, which are propositional statements joined together using these connectors, e.g.
+We can now build compound propositions, which are propositional statements
+joined together using these connectors, e.g.
 
 \begin{itemize}
 \item the glass is full $\land$ the glass is clear
@@ -614,7 +976,9 @@ We can now build compound propositions, which are propositional statements joine
 
 \subsubsection{Predicate logic}
 
-Predicate logic allow us to make statements which describe properties that must be satisfied by every, some or no objects in some universe of discourse. Examples are:
+Predicate logic allow us to make statements which describe properties that must
+be satisfied by every, some or no objects in some universe of discourse.
+Examples are:
 
 \begin{itemize}
 \item Every plane can fall out of the sky.
@@ -624,30 +988,44 @@ Predicate logic allow us to make statements which describe properties that must 
 \item Jake knows all rugby players in the Scottish team.
 \end{itemize}
 
-To formalise such statements we require a language of predicate calculus. A predicate is a statement with a place for an object. A predicate can turn into a proposition once we put an object in it, therefore we can not say whether it is true or false once the predicate has filled in mission information. For example we can say `$x > 5$' is a predicate but not a proposition until we know what `$x$' is. We can make a proposition out of `$x > 5$' by putting a \textit{quantifier} with it. So we can say, `there is an $x$ which is larger than 5'. This is written formally as `$\exists x > 5$'. This statement can now be written in our Z syntax.
+To formalise such statements we require a language of predicate calculus. A
+predicate is a statement with a place for an object. A predicate can turn into a
+proposition once we put an object in it, therefore we can not say whether it is
+true or false once the predicate has filled in mission information. For example
+we can say `$x > 5$' is a predicate but not a proposition until we know what
+`$x$' is. We can make a proposition out of `$x > 5$' by putting a
+\textit{quantifier} with it. So we can say, `there is an $x$ which is larger
+than 5'. This is written formally as `$\exists x > 5$'. This statement can now
+be written in our Z syntax.
 
 We can now formalise one of our previous predicate statements:
 \newline
-$\exists c: CLOUD @ c\ has\ silver\ lining$
-This statement says that there exists $c$ which is a cloud and $c$ has a silver lining.
+$\exists c: CLOUD @ c\ has\ silver\ lining$ This statement says that there
+exists $c$ which is a cloud and $c$ has a silver lining.
 
 \subsection{Sets and Types}
 
-A \textit{set} is a collection of distinct objects called \textit{elements}. For example the set of all people. Every expression in a Z specification belongs to a set called its \textit{type} and whenever we introduce a variable we must declare its type \cite{essenceofz}. For example:
+A \textit{set} is a collection of distinct objects called \textit{elements}. For
+example the set of all people. Every expression in a Z specification belongs to
+a set called its \textit{type} and whenever we introduce a variable we must
+declare its type \cite{essenceofz}. For example:
 
 \begin{zed}
 [HUMAN]\ the\ set\ of\ all\ humans \\
 \nat\ the\ set\ of\ all\ natural\ numbers
 \end{zed}
 
-Another way of introducing types is using a \textit{free type definition}, where once enumerates the names of the elements in that type, for example:
+Another way of introducing types is using a \textit{free type definition}, where
+once enumerates the names of the elements in that type, for example:
 
 \begin{zed}
 SHAPES ::= square | circle | triangle \\
 PLANTS ::= tree | shrub | herb \\
 \end{zed}
 
-In Z specification, we introduce variables before they are used in the expressions (predicates) by a means of writing a \textit{declaration}. A declaration can introduce either one or multiple variables. For example:
+In Z specification, we introduce variables before they are used in the
+expressions (predicates) by a means of writing a \textit{declaration}. A
+declaration can introduce either one or multiple variables. For example:
 
 \begin{zed}
 ralph: HUMAN \\
@@ -656,7 +1034,15 @@ a, b, c: \nat
 
 \subsection{Structure of a Z specification}
 
-In the Z notation there are two languages: the mathematical language and the schema language. The mathematical language is used to describe various aspects of a design: object, and the relationships between them. The schema language is used to structure and compose descriptions: collecting pieces of information and naming them for re-use. A schema consists of two parts: a \emph{declaration part} and a \emph{predicate part}. The \emph{declaration part} consists of declared variables and the \emph{predicate part} describes the variable values. We can write a schema either horizontally (figure \ref{fig:horizontalschema}) or vertically (figure \ref{fig:verticalschema}).
+In the Z notation there are two languages: the mathematical language and the
+schema language. The mathematical language is used to describe various aspects
+of a design: object, and the relationships between them. The schema language is
+used to structure and compose descriptions: collecting pieces of information and
+naming them for re-use. A schema consists of two parts: a \emph{declaration
+part} and a \emph{predicate part}. The \emph{declaration part} consists of
+declared variables and the \emph{predicate part} describes the variable values.
+We can write a schema either horizontally (figure \ref{fig:horizontalschema}) or
+vertically (figure \ref{fig:verticalschema}).
 
 \begin{figure}[H]
 \vspace{-0.2in}
@@ -681,7 +1067,8 @@ predicates
 \end{minipage}
 \end{figure}
 
-If we wanted a property of some system which consists of two variables $x$ and $y$ and state that $x$ must be smaller than $y$ then we can write:
+If we wanted a property of some system which consists of two variables $x$ and
+$y$ and state that $x$ must be smaller than $y$ then we can write:
 
 \begin{schema}{xLessThany}
 x: \nat \\
@@ -690,7 +1077,9 @@ y: \nat
 x < y
 \end{schema}
 
-We can also introduce global variables by means of an \textit{axiomatic description} in Z. These global variables may be referred to throughout the specification. An example this Z construct is as follows:
+We can also introduce global variables by means of an \textit{axiomatic
+description} in Z. These global variables may be referred to throughout the
+specification. An example this Z construct is as follows:
 
 \begin{axdef}
 k: \nat \\
@@ -698,19 +1087,28 @@ k: \nat \\
 k = 100
 \end{axdef}
 
-With this axiomatic description in place within the Z specification means that whenever the global variable $k$ is referred to, it will always represent the natural number 100.
+With this axiomatic description in place within the Z specification means that
+whenever the global variable $k$ is referred to, it will always represent the
+natural number 100.
 
-The full language of Z can be explored in \cite{spiveyreferencemanual}, \cite{essenceofz} and \cite{Woodcock:1996:UZS:235337}.
+The full language of Z can be explored in \cite{spiveyreferencemanual},
+\cite{essenceofz} and \cite{Woodcock:1996:UZS:235337}.
 
 \subsection{A full example in Z}
-Here is a small schema which tells a story about a child called Ralph and his mum. We declare the types $OBJECT$ which is a type containing all objects. We also declare the type $EMOTION$ which consists of 3 emotions: $happy$, $sad$ and $angry$
+Here is a small schema which tells a story about a child called Ralph and his
+mum. We declare the types $OBJECT$ which is a type containing all objects. We
+also declare the type $EMOTION$ which consists of 3 emotions: $happy$, $sad$ and
+$angry$
 
 \begin{zed}
 [OBJECT] \\
 EMOTION::= happy | sad | angry
 \end{zed}
 
-In this first schema we declare the state variables which is ralph and mum who are of type human, colourIn which maps a human to an object (representing that particular human is colouring in that object) and feeling which maps a human to an emotion (representing that human is feeling that emotion).
+In this first schema we declare the state variables which is ralph and mum who
+are of type human, colourIn which maps a human to an object (representing that
+particular human is colouring in that object) and feeling which maps a human to
+an emotion (representing that human is feeling that emotion).
 
 In the state we say that ralph is always feeling happy
 \begin{schema}{ColouringIn}
@@ -721,7 +1119,8 @@ feeling:(HUMAN \pfun EMOTION)
 feeling(ralph \mapsto happy)
 \end{schema}
 
-In this schema we say that when ralph is colouring in a picture, mum is feeling happy. We use a $\Delta$ to signify this schema changes the current state.
+In this schema we say that when ralph is colouring in a picture, mum is feeling
+happy. We use a $\Delta$ to signify this schema changes the current state.
 \begin{schema}{ColourPicture}
 \Delta ColouringIn \\
 picture: OBJECT 
@@ -730,10 +1129,10 @@ colourIn(ralph \mapsto picture) \\
 feeling(mum \mapsto happy)
 \end{schema}
 
-However in this schema, we say we say when ralph is colouring the wall, then mum is angry.
+However in this schema, we say we say when ralph is colouring the wall, then mum
+is angry.
 \begin{schema}{ColourWall}
-\Delta ColouringIn
-wall: OBJECT \\
+\Delta ColouringIn wall: OBJECT \\
 \where
 colour(ralph \mapsto picture) \\
 feeling(mum \mapsto angry)
@@ -741,40 +1140,81 @@ feeling(mum \mapsto angry)
 
 \subsection{Conclusion}
 
-In this section we gave a brief introduction to Z what it is made up of. We give a short overview of propositional and predicate logic as well as defining the structure of a Z specification. We give a full example of a Z specification and explain each part and what it means. In the next section we identify various proving systems which currently exist for mathematics, other formal methods and Z.
+In this section we gave a brief introduction to Z what it is made up of. We give
+a short overview of propositional and predicate logic as well as defining the
+structure of a Z specification. We give a full example of a Z specification and
+explain each part and what it means. In the next section we identify various
+proving systems which currently exist for mathematics, other formal methods and
+Z.
 
 \section{Proving systems}
 
-Before the day's of mechanical computers the only way to check a mathematical documents logic was correct was using hand written proofs. Then one can ask another mathematician such as a peer or an expert in the field to check over ones mathematics to prove it was correct. However even with more than one mathematician checking over the mathematical logic, one could not be 100/% certain it was correct due to human error. 
+Before the day's of mechanical computers the only way to check a mathematical
+documents logic was correct was using hand written proofs. Then one can ask
+another mathematician such as a peer or an expert in the field to check over
+ones mathematics to prove it was correct. However even with more than one
+mathematician checking over the mathematical logic, one could not be 100/%
+certain it was correct due to human error. 
 
-Once mechanical computers were developed, work started on proof assistants (or proof checkers) and automated theorem provers. Checking the correctness using automated theorem provers adds an extra level it also adds a level of certainty that the mathematics written is correct, thus it is a good idea to check the correctness of systems which are or high integrity.
+Once mechanical computers were developed, work started on proof assistants (or
+proof checkers) and automated theorem provers. Checking the correctness using
+automated theorem provers adds an extra level it also adds a level of certainty
+that the mathematics written is correct, thus it is a good idea to check the
+correctness of systems which are or high integrity.
 
 \subsection{Levels of Rigour}
 
-Depending on the integrity of the system being developed there are various formal techniques which could be used to mathematically verify the system design and implementation satisfy the functional and safety properties. These specifications and verifications may be done using various degrees of rigour such as:
+Depending on the integrity of the system being developed there are various
+formal techniques which could be used to mathematically verify the system design
+and implementation satisfy the functional and safety properties. These
+specifications and verifications may be done using various degrees of rigour
+such as:
 
 \begin{itemize}
 \item Level 1 represents the use of mathematical logic to specify the system.
 \item Level 2 uses pencil-and-paper proofs.
-\item Level 3 consists of formal proofs being checked by a mechanical theorem prover.
+\item Level 3 consists of formal proofs being checked by a mechanical theorem
+prover.
 \end{itemize}
 
-Level 1 can be done using various levels of abstract to describe the system. One abstract level would be to describe the abstract properties of the system and another abstract level could be to describe the implementation in an algorithmic way.
+Level 1 can be done using various levels of abstract to describe the system. One
+abstract level would be to describe the abstract properties of the system and
+another abstract level could be to describe the implementation in an algorithmic
+way.
 
-Level 2 goes beyond level 1 in that the pencil-and-paper proofs are used to describe that the lower level properties imply the abstract properties in level 1.
+Level 2 goes beyond level 1 in that the pencil-and-paper proofs are used to
+describe that the lower level properties imply the abstract properties in level
+1.
 
-Level 3 is the highest level of rigour one can do to check the proofs of a specification. It consists of using an autonomic theorem prover to confirm that all proofs are valid. The level 3 process of convincing a mechanical prover is really a process of developing an argument for an ultimate sceptic who must be shown every detail \cite{encyclopedia}.
+Level 3 is the highest level of rigour one can do to check the proofs of a
+specification. It consists of using an autonomic theorem prover to confirm that
+all proofs are valid. The level 3 process of convincing a mechanical prover is
+really a process of developing an argument for an ultimate sceptic who must be
+shown every detail \cite{encyclopedia}.
 
 \subsection{Proving systems for maths}
 
-In section \ref{subsec:rftb} we saw how mathematics has evolved and become the complex system it is today. Since the rise of computers the ability to check some of these old and new theories automatically has been possible.
+In section \ref{subsec:rftb} we saw how mathematics has evolved and become the
+complex system it is today. Since the rise of computers the ability to check
+some of these old and new theories automatically has been possible.
 
-Mizar \cite{mizar}, Isabelle \cite{isabelle} and Coq \cite{coq} are types of \textbf{Proof assistants} (or proof Checkers). Whilst PVS and Vampire are types of \textbf{theorem provers}. Both proof assistants and theorem provers can be classed as `proof systems'.
-Each proof system provides it's own formal language for writing mathematics based on some foundation of logic.
+Mizar \cite{mizar}, Isabelle \cite{isabelle} and Coq \cite{coq} are types of
+\textbf{Proof assistants} (or proof Checkers). Whilst PVS and Vampire are types
+of \textbf{theorem provers}. Both proof assistants and theorem provers can be
+classed as `proof systems'. Each proof system provides it's own formal language
+for writing mathematics based on some foundation of logic.
 
-The first project which used a `computer' for automated verification dates back to 1967. N.G. de Bruijn started the AutoMath Project (described in section \ref{subsec:rftb}). A few years Later Trybulec created his project Mizar \cite{mizar}, where he aimed to develop a computerised assistant to edit mathematical papers.
+The first project which used a `computer' for automated verification dates back
+to 1967. N.G. de Bruijn started the AutoMath Project (described in section
+\ref{subsec:rftb}). A few years Later Trybulec created his project Mizar
+\cite{mizar}, where he aimed to develop a computerised assistant to edit
+mathematical papers.
 
-From 1989 the works of the Mizar project worked on improving the Mizar system and developing the database for mathematics. The Mizar Language is a formal language which is derived from the mathematical vernacular. The author wanted to design a language readable for mathematics and rigorous enough to enable processing and verifying by computer software.
+From 1989 the works of the Mizar project worked on improving the Mizar system
+and developing the database for mathematics. The Mizar Language is a formal
+language which is derived from the mathematical vernacular. The author wanted to
+design a language readable for mathematics and rigorous enough to enable
+processing and verifying by computer software.
 
 \begin{figure}[H]
 \begin{center}
@@ -783,7 +1223,11 @@ From 1989 the works of the Mizar project worked on improving the Mizar system an
 \caption{Screenshot of the Mizar theorem prover \cite{mizar}. \label{fig:mizar}}
 \end{figure}
 
-Isabelle \cite{isabelle} is a generic proof assistant. It accepts a variety of mathematics into it's syntax and also has it's own formal language and provides tools for those formulas in a logical calculus. The main application if the formalization of mathematical proofs and formal verification which includes proving the correctness for computer hardware or software.
+Isabelle \cite{isabelle} is a generic proof assistant. It accepts a variety of
+mathematics into it's syntax and also has it's own formal language and provides
+tools for those formulas in a logical calculus. The main application if the
+formalization of mathematical proofs and formal verification which includes
+proving the correctness for computer hardware or software.
 
 \begin{figure}[H]
 \begin{center}
@@ -792,7 +1236,12 @@ Isabelle \cite{isabelle} is a generic proof assistant. It accepts a variety of m
 \caption{Screenshot of the Isabelle theorem prover \cite{isabelle}. \label{fig:isabelle}}
 \end{figure}
 
-A third proof assistant is Coq \cite{coq}, which also provides it's own formal language to write mathematical definitions, executable algorithms and theorems for semi-interactive development of machine checked proofs. Although it names itself a 'formal proof management system', like Isabelle and Mizar it is used to verify and check properties of software and hardware systems and the formalization of mathematics.
+A third proof assistant is Coq \cite{coq}, which also provides it's own formal
+language to write mathematical definitions, executable algorithms and theorems
+for semi-interactive development of machine checked proofs. Although it names
+itself a 'formal proof management system', like Isabelle and Mizar it is used to
+verify and check properties of software and hardware systems and the
+formalization of mathematics.
 
 \begin{figure}[H]
 \begin{center}
@@ -801,84 +1250,215 @@ A third proof assistant is Coq \cite{coq}, which also provides it's own formal l
 \caption{Screenshot of the Coq theorem prover \cite{coq}. \label{fig:coq}}
 \end{figure}
 
-There are many other proof assistants for general mathematics (Nuprl, Otter etc.) and generally they all support checking for correctness of mathematical theories. However, a disadvantage of using these systems is the enormous expense of formalisation in any proof system. 
+There are many other proof assistants for general mathematics (Nuprl, Otter
+etc.) and generally they all support checking for correctness of mathematical
+theories. However, a disadvantage of using these systems is the enormous expense
+of formalisation in any proof system. 
 
-A mathematician who wants to verify the logic of a document has to decide on a proof system to use. All proof systems have their own advantages and disadvantage as well as the mathematician then needs to learn and create a document with the syntax of his chosen proof system.
+A mathematician who wants to verify the logic of a document has to decide on a
+proof system to use. All proof systems have their own advantages and
+disadvantage as well as the mathematician then needs to learn and create a
+document with the syntax of his chosen proof system.
 
-Also, not all proof system have meaningful support for the common mathematical language or a generic formal specification language. There may be proof systems built for specific formal specification language but not one which supports all. The rigid structure and rules for formal documents created in proof systems are more closer to a computer programming language then to natural language. An exception of this is Mizar, however even natural language written in Mizar has to be structural and rigid.
+Also, not all proof system have meaningful support for the common mathematical
+language or a generic formal specification language. There may be proof systems
+built for specific formal specification language but not one which supports all.
+The rigid structure and rules for formal documents created in proof systems are
+more closer to a computer programming language then to natural language. An
+exception of this is Mizar, however even natural language written in Mizar has
+to be structural and rigid.
 
-In summary, computerising a any form of mathematical document using a proof system is similar to writing a computer program. Where the formal language of the proof system corresponds a programming language. Therefore, mathematicians require to have some form of computer programming knowledge. A proof system can check the logical correctness of a document if it detailed enough for the software to parse, therefore the computerisation of the mathematical document becomes labour intensive and tedious for the author to write.
+In summary, computerising a any form of mathematical document using a proof
+system is similar to writing a computer program. Where the formal language of
+the proof system corresponds a programming language. Therefore, mathematicians
+require to have some form of computer programming knowledge. A proof system can
+check the logical correctness of a document if it detailed enough for the
+software to parse, therefore the computerisation of the mathematical document
+becomes labour intensive and tedious for the author to write.
 
 \subsection{Proving systems for specific formal method}
 
 
-Dafny \cite{dafny} features modular verification, so that the separate verification of each part of the program implies the correctness of the whole program. This is similar to \gls{zmath}, where Dafny checks different parts of the text and thus confirms correctness of the full text, \gls{zmath} checks the correctness of the text through different levels of rigour to imply and fully correct specification.
+Dafny \cite{dafny} features modular verification, so that the separate
+verification of each part of the program implies the correctness of the whole
+program. This is similar to \gls{zmath}, where Dafny checks different parts of
+the text and thus confirms correctness of the full text, \gls{zmath} checks the
+correctness of the text through different levels of rigour to imply and fully
+correct specification.
 
-Dafny was able to do a proof for the Schorr-Waited Algorithm, however the writer states that the loop invariants are complicated because they are concrete. A refinement approach such as Jean-Raymond Abrials \cite{abrial} may be preferred in this case.  
+Dafny was able to do a proof for the Schorr-Waited Algorithm, however the writer
+states that the loop invariants are complicated because they are concrete. A
+refinement approach such as Jean-Raymond Abrials \cite{abrial} may be preferred
+in this case.  
 
-Another attempt at checking for correctness was written by Rex L.Page in Engineering Software Correctness \cite{engineeringsoftwarecorrectness}. A general theme within this paper, is that design and quality are important in engineering education. When teaching students how to create programs, it is not enough just to teach them how to develop software but to how develop good quality software. This paper describes experiments with the use of ACL2 (a subset of lisp), which is embedded on mechanical logic to focus on design and correctness. Using ACL2 emphasises the importance of software design and correctness. 
+Another attempt at checking for correctness was written by Rex L.Page in
+Engineering Software Correctness \cite{engineeringsoftwarecorrectness}. A
+general theme within this paper, is that design and quality are important in
+engineering education. When teaching students how to create programs, it is not
+enough just to teach them how to develop software but to how develop good
+quality software. This paper describes experiments with the use of ACL2 (a
+subset of lisp), which is embedded on mechanical logic to focus on design and
+correctness. Using ACL2 emphasises the importance of software design and
+correctness. 
 
-ALC2 is coded therefore users must know how to code software to formulate proofs. The intention of \gls{zmath} is to allow many people in the development team to be able to formulate proofs such as project managers, designers, engineers etc. Therefore no coding is necessary and no new programming language is needed.
+ALC2 is coded therefore users must know how to code software to formulate
+proofs. The intention of \gls{zmath} is to allow many people in the development
+team to be able to formulate proofs such as project managers, designers,
+engineers etc. Therefore no coding is necessary and no new programming language
+is needed.
 
-PVS (Prototype Verification System) \cite{pvs} is an environment for constructing specifications and developing proofs which have been mechanically verified. PVS has it's own specification language, which engineers would need to learn as well as using the environment for proofs. Type checking is undecideable for the PVS type system. The PVS also provides a language for defining high-level inference strategies.
+PVS (Prototype Verification System) \cite{pvs} is an environment for
+constructing specifications and developing proofs which have been mechanically
+verified. PVS has it's own specification language, which engineers would need to
+learn as well as using the environment for proofs. Type checking is undecideable
+for the PVS type system. The PVS also provides a language for defining
+high-level inference strategies.
 
 
 \subsection{Proving Systems specific for Z}
 \label{subsec:provingSystemsForZ}
 
-A tool which analysis the Z notation is Hol-Z \cite{hol-z}, which is also a proof environment for Z. Hol-Z is embedded in Isabelle/HOL therefore it provides a Z type checker, documentation facilities and refinement proofs with a theorem prover. The Z specification is implemented in \LaTeX{} then typed checked using an external plug in Zeta, it is then transformed into SML files to be added into the Hol-Z theorem prover environment. The user will need to have some good expertise in using the Hol-Z proof environment in order to fully prove the specification.
+A tool which analysis the Z notation is Hol-Z \cite{hol-z}, which is also a
+proof environment for Z. Hol-Z is embedded in Isabelle/HOL therefore it provides
+a Z type checker, documentation facilities and refinement proofs with a theorem
+prover. The Z specification is implemented in \LaTeX{} then typed checked using
+an external plug in Zeta, it is then transformed into SML files to be added into
+the Hol-Z theorem prover environment. The user will need to have some good
+expertise in using the Hol-Z proof environment in order to fully prove the
+specification.
 
-Fuzz \cite{spiveyfuzz} is another example of a type-checker for the Z language. It includes style files for \LaTeX{} and checks for the logical correctness and Z type correctness of Z specifications. This is different to the \gls{zcga} type checker as the weak types in \gls{zcga} check for the grammatical correctness and not the full logical correctness of Z. Therefore the grammatical correctness of partially formal specification can also be checked. The \gls{zmath} framework presented in this thesis uses the `zed' \LaTeX{} style package to typeset the Z specifications in the documents.
+Fuzz \cite{spiveyfuzz} is another example of a type-checker for the Z language.
+It includes style files for \LaTeX{} and checks for the logical correctness and
+Z type correctness of Z specifications. This is different to the \gls{zcga} type
+checker as the weak types in \gls{zcga} check for the grammatical correctness
+and not the full logical correctness of Z. Therefore the grammatical correctness
+of partially formal specification can also be checked. The \gls{zmath} framework
+presented in this thesis uses the `zed' \LaTeX{} style package to typeset the Z
+specifications in the documents.
 
-There are many other tools for Z which can be found on the Z Notation Wikia page \cite{zwikia}. For this thesis we will concentrate on translating Z specifications into theorem prover Isabelle \cite{isabelle}. Isabelle is a generic proof assistant which allows mathematical formulas to be expressed in a formal language and includes numerous contributions worldwide. It contains a large mathematical tool-kit (majority of Z can be represented in Isabelle) and has a lot of support in forms of documentation and online. It is distributed for free, easy to find, download and install and is regularly updated. The original \gls{math} has translated mathematical texts into Isabelle already (\cite{mathintoisa}) therefore we can use parts of that research to aid the research in this thesis.
+There are many other tools for Z which can be found on the Z Notation Wikia page
+\cite{zwikia}. For this thesis we will concentrate on translating Z
+specifications into theorem prover Isabelle \cite{isabelle}. Isabelle is a
+generic proof assistant which allows mathematical formulas to be expressed in a
+formal language and includes numerous contributions worldwide. It contains a
+large mathematical tool-kit (majority of Z can be represented in Isabelle) and
+has a lot of support in forms of documentation and online. It is distributed for
+free, easy to find, download and install and is regularly updated. The original
+\gls{math} has translated mathematical texts into Isabelle already
+(\cite{mathintoisa}) therefore we can use parts of that research to aid the
+research in this thesis.
 
 \subsection{Other properties to prove}
 \label{subsec:propertiestoprove}
 
 \begin{defin}
-A logical formula associated to a correctness claim for a given verification property. The formula is valid if and only if the property holds. The correctness of the property under verification is “delegated” to proving the correctness of the new formula \cite{handbookofembed}.
+A logical formula associated to a correctness claim for a given verification
+property. The formula is valid if and only if the property holds. The
+correctness of the property under verification is “delegated” to proving the
+correctness of the new formula \cite{handbookofembed}.
 \end{defin}
 
-Therefore a proof obligation is a logical formula which the specifier must show to be a consequence of the specification so that a specification can be taken to be acceptable. In a more pragmatic sense proof obligations may be viewed as what the developer of a specification is obliged to prove in order to confirm that development is consistent.
+Therefore a proof obligation is a logical formula which the specifier must show
+to be a consequence of the specification so that a specification can be taken to
+be acceptable. In a more pragmatic sense proof obligations may be viewed as what
+the developer of a specification is obliged to prove in order to confirm that
+development is consistent.
 
-Woodcock and Cavalcanti \cite{woodcock2004tutorial} use the alphabetised relational calculus to give denotational sematics to different constructs from programming patterns. This paper describes `\emph{healthiness conditions}' which identifies properties that characterise theories. Each one of these healthiness conditions represents a fact about the computational model for the programs being studied.
+Woodcock and Cavalcanti \cite{woodcock2004tutorial} use the alphabetised
+relational calculus to give denotational sematics to different constructs from
+programming patterns. This paper describes `\emph{healthiness conditions}' which
+identifies properties that characterise theories. Each one of these healthiness
+conditions represents a fact about the computational model for the programs
+being studied.
 
 \begin{exam}
-The variable `\emph{clock}' is an observation of the current time which is always moving onwards. The following predicate `B' specifies the clock variable:
+The variable `\emph{clock}' is an observation of the current time which is
+always moving onwards. The following predicate `B' specifies the clock variable:
 
 \begin{zed}
 B \defs clock \leq clock'
 \end{zed}
 \end{exam}
 
-The healthiness condition described in this paper are specific proof obligations for the concept of \gls{utp}. The semantic model of \gls{utp} is presented a Z specification. Therefore the healthiness conditions for the specification would in one way be checking for the correctness of the \gls{utp} model. In a similar way, it is important to add healthiness conditions or as we call them in this thesis, `safety properties' in order to check each individual specification for various types of correctness.
+The healthiness condition described in this paper are specific proof obligations
+for the concept of \gls{utp}. The semantic model of \gls{utp} is presented a Z
+specification. Therefore the healthiness conditions for the specification would
+in one way be checking for the correctness of the \gls{utp} model. In a similar
+way, it is important to add healthiness conditions or as we call them in this
+thesis, `safety properties' in order to check each individual specification for
+various types of correctness.
 
-Stepney describes two proof project written in Z in her paper a tale of two proofs \cite{stepney1998tale}. She explains how the proof process is deeply affected by \textbf{why} something is being proved, \textbf{what} is being proved and \textbf{how} the finished proof is to be presented. Stepney suggests that the proofs for specifications themselves do not have to be deep but the workings of what to proves can add to the labour. It is also important to keep in mind how deep the customer wants the proof and what level of assurance they need. She highlights 5 different points to prove:
+Stepney describes two proof project written in Z in her paper a tale of two
+proofs \cite{stepney1998tale}. She explains how the proof process is deeply
+affected by \textbf{why} something is being proved, \textbf{what} is being
+proved and \textbf{how} the finished proof is to be presented. Stepney suggests
+that the proofs for specifications themselves do not have to be deep but the
+workings of what to proves can add to the labour. It is also important to keep
+in mind how deep the customer wants the proof and what level of assurance they
+need. She highlights 5 different points to prove:
 
 \begin{figure}[H]
 \begin{enumerate}
-\item \textbf{Consistency checks}: Prove that your specification is consistent and that it has a model.
+\item \textbf{Consistency checks}: Prove that your specification is consistent
+and that it has a model.
 
-\item \textbf{Sanity Checks}: In a `state and operations' style specification, prove that the state invariants are satisfied throughout and that the precondition of each operation is not \emph{false}.
+\item \textbf{Sanity Checks}: In a `state and operations' style specification,
+prove that the state invariants are satisfied throughout and that the
+precondition of each operation is not \emph{false}.
 
-\item \textbf{Emergent properties of a single specification}: Make explicit as a theorem some desired or suspected property of the specification, then prove it holds.
+\item \textbf{Emergent properties of a single specification}: Make explicit as a
+theorem some desired or suspected property of the specification, then prove it
+holds.
 
-\item \textbf{Required properties of a single specification}: If some property is required to hold of the specification, and the specification has captured it implicitly, it needs to be made explicit and shown to hold.
+\item \textbf{Required properties of a single specification}: If some property
+is required to hold of the specification, and the specification has captured it
+implicitly, it needs to be made explicit and shown to hold.
 
-\item \textbf{Properties across specifications}: Prove that a certain relationship holds between two specification such as the refinement relationship.
+\item \textbf{Properties across specifications}: Prove that a certain
+relationship holds between two specification such as the refinement
+relationship.
 \end{enumerate}
 \caption{Different points to prove in a specification \cite{stepney1998tale}. \label{fig:ptp}}
 \end{figure}
 
-Some of the points in figure \ref{fig:ptp} would be fairly easy to automate such as `consistency checks' and `sanity checks' however the other 3 points would be difficult to automate as they would all depend on the specification in question and would perhaps need some \emph{extra information} to decipher these properties. For example if one wish to automate proof obligations from point 5 the user would need to implement another specification (such as a refinement specification) and then prove the relationship between the original specification and the new one. In this thesis, we will concentrate on properties described in point 1 which have been automated. 
+Some of the points in figure \ref{fig:ptp} would be fairly easy to automate such
+as `consistency checks' and `sanity checks' however the other 3 points would be
+difficult to automate as they would all depend on the specification in question
+and would perhaps need some \emph{extra information} to decipher these
+properties. For example if one wish to automate proof obligations from point 5
+the user would need to implement another specification (such as a refinement
+specification) and then prove the relationship between the original
+specification and the new one. In this thesis, we will concentrate on properties
+described in point 1 which have been automated. 
 
-Stepney also explains that if the development process is incremental, it would be worthwhile getting a good structure for a proof up front which you can add more details in later. \gls{zmath}  can automatically generate this first structure which could be added to if needed. It can produce a specification in Isabelle syntax where other properties and details could be added to by the user at a later stage.
+Stepney also explains that if the development process is incremental, it would
+be worthwhile getting a good structure for a proof up front which you can add
+more details in later. \gls{zmath}  can automatically generate this first
+structure which could be added to if needed. It can produce a specification in
+Isabelle syntax where other properties and details could be added to by the user
+at a later stage.
 
-Most recently Mark Adams \cite{JFR4576} describes that even formalisation itself can be prone to error and therefore even if we do get a fully proven specification, the proof will also need to be checked. He outlines the flyspeck project which assists with the checking of formalised proofs. Adam calls this `\emph{proof auditing}', which adds another step of rigour to the theorem. \gls{zmath} assists with translating the specification into a theorem prover along with consistency lemmas to prove. The user can then choose to prove these lemmas and the proof audit their theorem. However, even if proof auditing adds another level of rigour it is important to keep in mind who the user is doing the proofs for. As Stepney pointed out in \cite{stepney1998tale}, some clients wouldn't need that amount of rigour for their projects and only the proved safety properties may be enough.
+Most recently Mark Adams \cite{JFR4576} describes that even formalisation itself
+can be prone to error and therefore even if we do get a fully proven
+specification, the proof will also need to be checked. He outlines the flyspeck
+project which assists with the checking of formalised proofs. Adam calls this
+`\emph{proof auditing}', which adds another step of rigour to the theorem.
+\gls{zmath} assists with translating the specification into a theorem prover
+along with consistency lemmas to prove. The user can then choose to prove these
+lemmas and the proof audit their theorem. However, even if proof auditing adds
+another level of rigour it is important to keep in mind who the user is doing
+the proofs for. As Stepney pointed out in \cite{stepney1998tale}, some clients
+wouldn't need that amount of rigour for their projects and only the proved
+safety properties may be enough.
 
-Woodcock et al also describes that a specification can be developed in such a way that can lead to a suitable implementation called refinement \cite{Woodcock:1996:UZS:235337}. 
+Woodcock et al also describes that a specification can be developed in such a
+way that can lead to a suitable implementation called refinement
+\cite{Woodcock:1996:UZS:235337}. 
 
-To refine a formal specification, more data must be added e.g. how certain calculations should be carried out. He states an abstract specification may leave design choices unresolved and its up to the refinement specification to resolve some of these choices. An example of this is shown in the following:
+To refine a formal specification, more data must be added e.g. how certain
+calculations should be carried out. He states an abstract specification may
+leave design choices unresolved and its up to the refinement specification to
+resolve some of these choices. An example of this is shown in the following:
 
 \begin{exam}
 
@@ -898,9 +1478,12 @@ r! \in free \land free' = free \setminus \{r!\}
 \label{exam:allocate} 
 \end{exam}
 
-If there is more than one resource free in example \ref{exam:allocate} then this will class the specification as non deterministic.
+If there is more than one resource free in example \ref{exam:allocate} then this
+will class the specification as non deterministic.
 
-Example \ref{exam:allocate} can be refined in that if there is more than one resource free, the resource with the lowest number should be allocated. This is shown in the following example:
+Example \ref{exam:allocate} can be refined in that if there is more than one
+resource free, the resource with the lowest number should be allocated. This is
+shown in the following example:
 
 \begin{exam}
 
@@ -913,16 +1496,51 @@ r! \in min~free \land free' = free \setminus \{r!\}
 \label{exam:allocaterefine} 
 \end{exam}
 
-Refining an abstract specification which is described in \cite{Woodcock:1996:UZS:235337} and in \cite{spiveyreferencemanual} is exactly what Stepney points out in point 5 from figure \ref{fig:ptp}. To show that this property holds the user would need to produce another specification which refines their original one and then include properties of how they relate to each other. Since each individual specification is different then refinement specifications would be different to. Thus we wouldn't be able to automate this point. \gls{zmath} aims to assist the user in translating and proving their specification, the proof effort will be focused on properties which can be automated e.g. item 1 in figure \ref{fig:ptp}. Items 3, 4 and 5 would be to difficult to automate and therefore out of the scope of this thesis.
+Refining an abstract specification which is described in
+\cite{Woodcock:1996:UZS:235337} and in \cite{spiveyreferencemanual} is exactly
+what Stepney points out in point 5 from figure \ref{fig:ptp}. To show that this
+property holds the user would need to produce another specification which
+refines their original one and then include properties of how they relate to
+each other. Since each individual specification is different then refinement
+specifications would be different to. Thus we wouldn't be able to automate this
+point. \gls{zmath} aims to assist the user in translating and proving their
+specification, the proof effort will be focused on properties which can be
+automated e.g. item 1 in figure \ref{fig:ptp}. Items 3, 4 and 5 would be to
+difficult to automate and therefore out of the scope of this thesis.
 
-Fraser and Banach \cite{DBLP:conf/sefm/FraserB07} state that model based formal methods usually come in the form of many incompatible tools. Therefore they devised a system to combine different techniques called the frog toolkit.
+Fraser and Banach \cite{DBLP:conf/sefm/FraserB07} state that model based formal
+methods usually come in the form of many incompatible tools. Therefore they
+devised a system to combine different techniques called the frog toolkit.
 
-Many verification tools today tend to utilize a single technique and are unable to interact easily with other tools in other kits. A more dynamic approach such as RODIN \cite{Jones05j} and Overture \cite{overture} are perusing a more flexible approach. \gls{zmath} will need to follow in the footstep of these two tool-kits in order to be successful and not commit to a particular system until needed. This is why the steps 1-3 of the translation path (figure \ref{fig:steps}) are generic and can be used to translate the specification in any theorem prover. It is only at step 4 which is where we start committing to Isabelle.
+Many verification tools today tend to utilize a single technique and are unable
+to interact easily with other tools in other kits. A more dynamic approach such
+as RODIN \cite{Jones05j} and Overture \cite{overture} are perusing a more
+flexible approach. \gls{zmath} will need to follow in the footstep of these two
+tool-kits in order to be successful and not commit to a particular system until
+needed. This is why the steps 1-3 of the translation path (figure
+\ref{fig:steps}) are generic and can be used to translate the specification in
+any theorem prover. It is only at step 4 which is where we start committing to
+Isabelle.
 
-The main aim of the frog tool-kit was to support retrenchment, which is a formal technique used along side refinement. The new tool-kit was created which was able to use a variety of techniques in a single working environment. The frog tool-kit can prove the relationships between multiple specifications (which we see as point 5 in figure \ref{fig:ptp} from Stepney \cite{stepney1998tale}). To do this the user should have at least 2 specifications implemented to prove the relations (usually one is a refinement specification of the first one). These specifications where then written in frog-ccc, a meta language to use within the frog tool-kit. \gls{zmath}'s aim is to prove the properties described as point 1 in figure \ref{fig:ptp} therefore another specification to refine the abstract one is not needed.
+The main aim of the frog tool-kit was to support retrenchment, which is a formal
+technique used along side refinement. The new tool-kit was created which was
+able to use a variety of techniques in a single working environment. The frog
+tool-kit can prove the relationships between multiple specifications (which we
+see as point 5 in figure \ref{fig:ptp} from Stepney \cite{stepney1998tale}). To
+do this the user should have at least 2 specifications implemented to prove the
+relations (usually one is a refinement specification of the first one). These
+specifications where then written in frog-ccc, a meta language to use within the
+frog tool-kit. \gls{zmath}'s aim is to prove the properties described as point 1
+in figure \ref{fig:ptp} therefore another specification to refine the abstract
+one is not needed.
 
-Since formal specifications are not executable it is difficult to verify the consistency of the specification. Wen, Miao and Zeng \cite{DBLP:conf/icsea/WenMZ06} present and approach to generate proof obligations to check for consistency of object Z specifications. Checking for consistency of specifications is described in point 2 in figure \ref{fig:ptp}. In their paper, the authors explain two 
-types of proof obligations which check that a object Z specification is non conflictive. They are:
+Since formal specifications are not executable it is difficult to verify the
+consistency of the specification. Wen, Miao and Zeng
+\cite{DBLP:conf/icsea/WenMZ06} present and approach to generate proof
+obligations to check for consistency of object Z specifications. Checking for
+consistency of specifications is described in point 2 in figure \ref{fig:ptp}.
+In their paper, the authors explain two types of proof obligations which check
+that a object Z specification is non conflictive. They are:
 
 \begin{itemize}
 \item Existence of initial state
@@ -930,32 +1548,97 @@ types of proof obligations which check that a object Z specification is non conf
 \item Feasibility of an operation
 \end{itemize}
 
-The initial state is a state within the state space of the specification which should exist and satisfy the stateInvariants. In all specifications their should exist a state which initialised the beginning state of the specification.
+The initial state is a state within the state space of the specification which
+should exist and satisfy the stateInvariants. In all specifications their should
+exist a state which initialised the beginning state of the specification.
 
-An operation can transform one state to another. Therefore if the operation is feasible, the pre state (state before the state change) and post state (state after the state change) should always satisfy the state invariant. 
+An operation can transform one state to another. Therefore if the operation is
+feasible, the pre state (state before the state change) and post state (state
+after the state change) should always satisfy the state invariant. 
 
-We will use the definitions shown in \cite{DBLP:conf/icsea/WenMZ06} to automatically generate the proof obligations to check for the correctness of our Z specifications as the specifications we use in this thesis are all state based.
+We will use the definitions shown in \cite{DBLP:conf/icsea/WenMZ06} to
+automatically generate the proof obligations to check for the correctness of our
+Z specifications as the specifications we use in this thesis are all state
+based.
 
-In summary there are many different approaches to finding properties to prove about formal specifications. Some which can be easily automated, some which need some more information and some which will need to be written manually. Since we do not expect the users of \gls{zmath} to be experts in the fields of theorem proving we want to attempt to automate proof obligations which can be easily understood by the user. Then once the user gains some knowledge of their theorem prover, they can add other proof obligations manually. As explained in this section, it is important to note who the user is doing the proofs for, as the customer may not need or want complex proofs. Therefore we shall generate the proof obligations which can be automated and do not require any extra information to be automated.
+In summary there are many different approaches to finding properties to prove
+about formal specifications. Some which can be easily automated, some which need
+some more information and some which will need to be written manually. Since we
+do not expect the users of \gls{zmath} to be experts in the fields of theorem
+proving we want to attempt to automate proof obligations which can be easily
+understood by the user. Then once the user gains some knowledge of their theorem
+prover, they can add other proof obligations manually. As explained in this
+section, it is important to note who the user is doing the proofs for, as the
+customer may not need or want complex proofs. Therefore we shall generate the
+proof obligations which can be automated and do not require any extra
+information to be automated.
 
 
 \subsection{Conclusion}
 
-In this section we have highlighted the levels of rigour which describe systems and/or software used in industry. We also describe proving systems which have been used in the past to check over general mathematics. Other proving methods and assistants have been developed for specific languages such as Dafny and PVS which we give examples of. There have also been proving systems and tools implemented which are specific for Z which we have described in this section. We have also added what are the important properties we wish to find out from system specifications and how they can be checked for correctness.
+In this section we have highlighted the levels of rigour which describe systems
+and/or software used in industry. We also describe proving systems which have
+been used in the past to check over general mathematics. Other proving methods
+and assistants have been developed for specific languages such as Dafny and PVS
+which we give examples of. There have also been proving systems and tools
+implemented which are specific for Z which we have described in this section. We
+have also added what are the important properties we wish to find out from
+system specifications and how they can be checked for correctness.
 
 \section{Background Conclusion}
 
-This chapter starts from the very beginning of mathematics. The reason behind the research presented in this thesis has it's roots in the origins of mathematics and why it is important to so many people to verify and be confident in their own expertise whether it's mathematics, logic, science or systems. There has been many ways in which people have tried to prove the correctness of this work but it usually is labour intensive, hard work, and requires serious expertise not only in the subject of the work but also in the proving systems doing the checking. One of the ways to simplify the checking of mathematical correctness was the \gls{math} framework. This method has been described in this chapter and an entire example has been shown of how one could check the correctness of their mathematicals texts. Even in \cite{lamarphd} had stated that future work of \gls{math} is that the framework should be developed to cope with more mathematics, therefore adapting the framework for formal specifications would address this point.
+This chapter starts from the very beginning of mathematics. The reason behind
+the research presented in this thesis has it's roots in the origins of
+mathematics and why it is important to so many people to verify and be confident
+in their own expertise whether it's mathematics, logic, science or systems.
+There has been many ways in which people have tried to prove the correctness of
+this work but it usually is labour intensive, hard work, and requires serious
+expertise not only in the subject of the work but also in the proving systems
+doing the checking. One of the ways to simplify the checking of mathematical
+correctness was the \gls{math} framework. This method has been described in this
+chapter and an entire example has been shown of how one could check the
+correctness of their mathematicals texts. Even in \cite{lamarphd} had stated
+that future work of \gls{math} is that the framework should be developed to cope
+with more mathematics, therefore adapting the framework for formal
+specifications would address this point.
 
-So far \gls{math} checks for mathematical correctness, however there are many other texts and documents which checking for correctness would play a big part. The rapid growth in technology \footnote{http://bigthink.com/think-tank/big-idea-technology-grows-exponentially} has meant that checking the specifications of software and systems for correctness is important now more than ever. We describe other tools and techniques which have been implemented to address this in section \ref{sec:formalmethodsandformallanguages}.  We describe where formal methods began and different types of formal methods being used. By adapting an existing framework (\gls{math}) and changing some design and implementations so that it can be used for formal system/software specifications we can cover items 1, 3, 5, 6, and 7 from table \ref{tab:nimpand}.
+So far \gls{math} checks for mathematical correctness, however there are many
+other texts and documents which checking for correctness would play a big part.
+The rapid growth in technology
+\footnote{http://bigthink.com/think-tank/big-idea-technology-grows-exponentially}
+has meant that checking the specifications of software and systems for
+correctness is important now more than ever. We describe other tools and
+techniques which have been implemented to address this in section
+\ref{sec:formalmethodsandformallanguages}.  We describe where formal methods
+began and different types of formal methods being used. By adapting an existing
+framework (\gls{math}) and changing some design and implementations so that it
+can be used for formal system/software specifications we can cover items 1, 3,
+5, 6, and 7 from table \ref{tab:nimpand}.
 
-Section \ref{sec:theznotation} gives and overview of the Z formal specification language and describes what it is made from and how one can write a software specification in Z. We use the Z notation to base this thesis on as a lot of other formal notatinos (B-method, event B etc.) use Z as the basis for their syntax.
+Section \ref{sec:theznotation} gives and overview of the Z formal specification
+language and describes what it is made from and how one can write a software
+specification in Z. We use the Z notation to base this thesis on as a lot of
+other formal notatinos (B-method, event B etc.) use Z as the basis for their
+syntax.
 
-We have also described proving systems which have been used for mathematics, various formal methods and Z syntax. Each of these proving systems have their own advantages and disadvatages and it is always up to the user to choose the direction and prover they wish to use. Section \ref{subsec:propertiestoprove} described important properties users may wish to check about their system specification. Not all users wish to check the same thing, and since  systems all have various degrees of criticality they may have their own independent properties which may need to be checked in order to verify safety. Therefore this thesis will concentrate on sanity checks (item 2 in figure \ref{fig:ptp}) as these would be suitable for all systems.
+We have also described proving systems which have been used for mathematics,
+various formal methods and Z syntax. Each of these proving systems have their
+own advantages and disadvatages and it is always up to the user to choose the
+direction and prover they wish to use. Section \ref{subsec:propertiestoprove}
+described important properties users may wish to check about their system
+specification. Not all users wish to check the same thing, and since  systems
+all have various degrees of criticality they may have their own independent
+properties which may need to be checked in order to verify safety. Therefore
+this thesis will concentrate on sanity checks (item 2 in figure \ref{fig:ptp})
+as these would be suitable for all systems.
 
 \subsection{MathLang for Z}
 
-To address some of the points made by Stringfellow in \cite{fmpresetation} of how to make formal methods industrial strength, this thesis takes work made by Kammeradine et al \cite{newmathlang} and work on Z notation \cite{spiveyreferencemanual} and brings these two works together to creates a novel way of checking the correctness of formal system specifications.
+To address some of the points made by Stringfellow in \cite{fmpresetation} of
+how to make formal methods industrial strength, this thesis takes work made by
+Kammeradine et al \cite{newmathlang} and work on Z notation
+\cite{spiveyreferencemanual} and brings these two works together to creates a
+novel way of checking the correctness of formal system specifications.
 
 \begin{figure}[H]
 \begin{center}
@@ -964,6 +1647,20 @@ To address some of the points made by Stringfellow in \cite{fmpresetation} of ho
 \caption{Adapting the original \gls{math} to accomadate formal system specifications. \label{fig:zmathlang}}
 \end{figure}
 
-By adapting the original \gls{math} framework to accomadate Z specifications, each aspect in the original framework will need to be redesigned and reimplemented. Figure \ref{fig:zmathlang} shows the original design for \gls{math}, however we have replaced `\emph{common mathematical language}' with `\emph{formal specification}'. We removed the TSa as formal specifications are already written in a formal manner and may not need the TSa. We have also removed the arrow `\emph{b}' as there hasn't been any work as yet which formal specifications are translated first to a skeleton and then a full proof.
+By adapting the original \gls{math} framework to accomadate Z specifications,
+each aspect in the original framework will need to be redesigned and
+reimplemented. Figure \ref{fig:zmathlang} shows the original design for
+\gls{math}, however we have replaced `\emph{common mathematical language}' with
+`\emph{formal specification}'. We removed the TSa as formal specifications are
+already written in a formal manner and may not need the TSa. We have also
+removed the arrow `\emph{b}' as there hasn't been any work as yet which formal
+specifications are translated first to a skeleton and then a full proof.
 
-Formal specifications have previously been fully verified with theorem provers by users which have knowledge on the formal specification language and the targetted theorem prover. By adapting the \gls{math} framework it should be possible to check the properties of formal specifications by user who have little or no expertise in the taregt theorem prover. Although the step-by-step methodology of translating texts into theorem provers is not new, the idea to apply it to formal specifications and the design and implementations to accomadate Z is and this is where we begin our thesis.
+Formal specifications have previously been fully verified with theorem provers
+by users which have knowledge on the formal specification language and the
+targetted theorem prover. By adapting the \gls{math} framework it should be
+possible to check the properties of formal specifications by user who have
+little or no expertise in the taregt theorem prover. Although the step-by-step
+methodology of translating texts into theorem provers is not new, the idea to
+apply it to formal specifications and the design and implementations to
+accomadate Z is and this is where we begin our thesis.

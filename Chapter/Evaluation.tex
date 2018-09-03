@@ -1,7 +1,13 @@
 \chapter{Evaluation and Discussion}
 \label{ch:evaluation}
 
-In this chapter we go through a few case studies and discuss the difference between the specification translations if any. Table \ref{tab:specstranslated} shows the specifications we have translated into Isabelle using \gls{zmath}. We have classified these examples to show the different types of specifications which can be translated using the \gls{zmath} toolkit. In this chapter we take one example from each class and describe in more detail how the translation was done.
+In this chapter we go through a few case studies and discuss the difference
+between the specification translations if any. Table \ref{tab:specstranslated}
+shows the specifications we have translated into Isabelle using \gls{zmath}. We
+have classified these examples to show the different types of specifications
+which can be translated using the \gls{zmath} toolkit. In this chapter we take
+one example from each class and describe in more detail how the translation was
+done.
 
 \begin{table}[H]
 \begin{tabular}{|l|l|}
@@ -26,21 +32,35 @@ A specification which fails ZDRa & ProjectAlloc \\
 \caption{A table showing the specifications we have translated into Isabelle using \gls{zmath} \label{tab:specstranslated}}
 \end{table}
 
-We have categoriesed the specification into three groups; specifications which only use terms, specifications which use both terms and set and specifications which the translation is incomplete for a variety of reasons. All the specifications we have translated are `state based specifications', which means they operate within a state and to change the state their may become precondition and postconditions within the state. Some specifications are described differently such as functional specifications, however those type of specifications are out of the scope of this thesis.
+We have categoriesed the specification into three groups; specifications which
+only use terms, specifications which use both terms and set and specifications
+which the translation is incomplete for a variety of reasons. All the
+specifications we have translated are `state based specifications', which means
+they operate within a state and to change the state their may become
+precondition and postconditions within the state. Some specifications are
+described differently such as functional specifications, however those type of
+specifications are out of the scope of this thesis.
 
 \section{Complexity of specifications}
 
-This section we analyse the complexity of the specifications we have translate using \gls{zmath}. First we check the complexity of the raw \LaTeX{} specification file, without any annoatation. Then we discuss the complexity of the \gls{zcga} annotated specifications and \gls{zdra} annotated specifications and how this affects the translation into Isabelle.
+This section we analyse the complexity of the specifications we have translate
+using \gls{zmath}. First we check the complexity of the raw \LaTeX{}
+specification file, without any annoatation. Then we discuss the complexity of
+the \gls{zcga} annotated specifications and \gls{zdra} annotated specifications
+and how this affects the translation into Isabelle.
 
 \subsection{Raw Latex Count}
 
-Table \ref{ch:evaluation} how long each specification is by amount of lines of code and environments uses. We have listed the specifications in decreasing complexity of how many lines of \LaTeX{} the raw specification has.
+Table \ref{ch:evaluation} how long each specification is by amount of lines of
+code and environments uses. We have listed the specifications in decreasing
+complexity of how many lines of \LaTeX{} the raw specification has.
 
 \begin{table}[H]
 \centering
 \begin{tabular}{|l |l | l |l |l|| l|}
 \hline
-\textbf{Specification} & \multicolumn{4}{l||}{\textbf{Environment}} & \textbf{Lines of \LaTeX} \\
+\textbf{Specification} & \multicolumn{4}{l||}{\textbf{Environment}} &
+\textbf{Lines of \LaTeX} \\
 \cline{2-5}
 & Zed & Schema & Axdef & \textbf{Total} & \\
 \hline
@@ -62,7 +82,18 @@ ModuleReg & 1 & 3 & 0 & 4 & 43 \\
 \caption{How many zed, schema and axdef environments and lines of \LaTeX{} code makes up each specification \label{tab:numbersspec}}
 \end{table}
 
-We list information about how many different envronments and lines of \LaTeX{} make up each specification in table \ref{tab:numbersspec}. The environment numbers count how many different types of environments exist within the specification. That is how many `\verb|\begin{schema}...\end{schema}|' or `\verb|\begin{zed}|... etc. We add up the total amount of environments in the specification. From the table we can see that for most of the specifications the more lines of \LaTeX{} there is then the total amount of environments increse. However, there are three exceptions to this trend. The `\emph{BirthdayBook}' specification, `\emph{ClubState2}' specification and `\emph{Vendine Machine}' specification. Specifications for systems are can always be written in a variety of ways and still have the same meaning. Even formal specifications can be written different ways. For example one may have the following declarations:
+We list information about how many different envronments and lines of \LaTeX{}
+make up each specification in table \ref{tab:numbersspec}. The environment
+numbers count how many different types of environments exist within the
+specification. That is how many `\verb|\begin{schema}...\end{schema}|' or
+`\verb|\begin{zed}|... etc. We add up the total amount of environments in the
+specification. From the table we can see that for most of the specifications the
+more lines of \LaTeX{} there is then the total amount of environments increse.
+However, there are three exceptions to this trend. The `\emph{BirthdayBook}'
+specification, `\emph{ClubState2}' specification and `\emph{Vendine Machine}'
+specification. Specifications for systems are can always be written in a variety
+of ways and still have the same meaning. Even formal specifications can be
+written different ways. For example one may have the following declarations:
 
 \begin{zed}
 t:\nat \\
@@ -74,11 +105,16 @@ However, this declaration can also be written as the following:
 t,l: ;\nat
 \end{zed}
 
-Thus removing a line. Formal specifications can also include comments written in natural language which are not part of the formal script. These extra comments about the specification may have also added to the line count in table \ref{tab:numbersspec}.
+Thus removing a line. Formal specifications can also include comments written in
+natural language which are not part of the formal script. These extra comments
+about the specification may have also added to the line count in table
+\ref{tab:numbersspec}.
 
 \subsection{ZCGa Count}
 
-In this section, we evaluate the \gls{zcga} annotations on the specifications. We describe how many of each \gls{zcga} annotations occurs for each specification we have translated.
+In this section, we evaluate the \gls{zcga} annotations on the specifications.
+We describe how many of each \gls{zcga} annotations occurs for each
+specification we have translated.
 
 \begin{table}[H]
 \centering
@@ -86,7 +122,8 @@ In this section, we evaluate the \gls{zcga} annotations on the specifications. W
 \hline
 \textbf{Specification} & \multicolumn{6}{c|}{\textbf{ZCGa WeakTypes}}\\
 \cline{2-7}
- & \cgatext{} & \declaration{} & \expression{} & \term{} & \set{} & \definition{} \\
+ & \cgatext{} & \declaration{} & \expression{} & \term{} & \set{} &
+ \definition{} \\
 \hline
 Steamboiler & 297 & 26 & 282 & 595 & 4 & 0 \\
 ProjectAlloc & 98 & 43 & 113 & 154 & 165 & 0\\
@@ -106,9 +143,22 @@ ModuleReg & 20 & 6 & 18 & 13 & 31 & 0 \\
 \caption{How many of each grammatical category exists in each specification. \label{tab:specgram}}
 \end{table}
 
-The amount of times a \gls{zcga} weak type occurs in each specification is shown in table \ref{tab:specgram}. We remind the reader the colours corresponding to each grammatical type are: \cgatext{schematext}, \declaration{declaration}, \expression{expression}, \term{term}, \set{set} and \definition{definition}. In this instance we don't use \specification{specification} as we assume each document contains a single specification.
+The amount of times a \gls{zcga} weak type occurs in each specification is shown
+in table \ref{tab:specgram}. We remind the reader the colours corresponding to
+each grammatical type are: \cgatext{schematext}, \declaration{declaration},
+\expression{expression}, \term{term}, \set{set} and \definition{definition}. In
+this instance we don't use \specification{specification} as we assume each
+document contains a single specification.
 
-In our sample set we only have one specification (GenDB) with a `\texttt{definition}' annotation. This \texttt{definition} is locally defined within the specification. The `\emph{Vending Machine}' specification only uses \texttt{terms} and therefore there are no \gls{zcga} \texttt{term} annotations. However the `\emph{StemBoiler}' specification also only uses term yet there are 4 \texttt{set} \gls{zcga} annotations. This is because some of the \texttt{terms} used in the specification have to be intrduced by a \texttt{set}. For example in the \emph{SteamBoiler} specification we have the following annotation:
+In our sample set we only have one specification (GenDB) with a
+`\texttt{definition}' annotation. This \texttt{definition} is locally defined
+within the specification. The `\emph{Vending Machine}' specification only uses
+\texttt{terms} and therefore there are no \gls{zcga} \texttt{term} annotations.
+However the `\emph{StemBoiler}' specification also only uses term yet there are
+4 \texttt{set} \gls{zcga} annotations. This is because some of the
+\texttt{terms} used in the specification have to be intrduced by a \texttt{set}.
+For example in the \emph{SteamBoiler} specification we have the following
+annotation:
 
 \begin{verbatim}
 \begin{zed}
@@ -117,9 +167,20 @@ In our sample set we only have one specification (GenDB) with a `\texttt{definit
 \end{zed}
 \end{verbatim}
 
-Although the set \verb|State| is annotated as a set, it is not used in any of the schema's in the rest of the specification. It is only defined to present the terms \verb|init|, \verb|norm|, \verb|broken| and \verb|stop| which are used in the specification.
+Although the set \verb|State| is annotated as a set, it is not used in any of
+the schema's in the rest of the specification. It is only defined to present the
+terms \verb|init|, \verb|norm|, \verb|broken| and \verb|stop| which are used in
+the specification.
 
-We expect there to be more \texttt{schemaText}'s then \texttt{declarations} and \texttt{expressions} combined as \texttt{schemaText} contains all \texttt{declarations}, \texttt{expressions} and SchemaNames however, from the table we can see that this is not always the case. For example in the \emph{ProjectAlloc} example, there are 98 \texttt{schemaText}, 43 \texttt{declarations} and 113 \texttt{expressions}. The reason for this could be because a single \texttt{expression} can in itself contain many \texttt{expressions}. For example the following \texttt{schemaText} has been taken from the \emph{ProjectAlloc} specification:
+We expect there to be more \texttt{schemaText}'s then \texttt{declarations} and
+\texttt{expressions} combined as \texttt{schemaText} contains all
+\texttt{declarations}, \texttt{expressions} and SchemaNames however, from the
+table we can see that this is not always the case. For example in the
+\emph{ProjectAlloc} example, there are 98 \texttt{schemaText}, 43
+\texttt{declarations} and 113 \texttt{expressions}. The reason for this could be
+because a single \texttt{expression} can in itself contain many
+\texttt{expressions}. For example the following \texttt{schemaText} has been
+taken from the \emph{ProjectAlloc} specification:
 
 \begin{verbatim}
 \text{\expression{\forall 
@@ -128,20 +189,32 @@ We expect there to be more \texttt{schemaText}'s then \texttt{declarations} and 
 \rres \set{\{\term{lec}\}}})} \leq \term{\set{maxPlaces}~\term{lec}}}}}
 \end{verbatim}
 
-In this example we can see that there contains 1 annotated \texttt{schemaText} but 3 \texttt{expressions}.
-Another reason why there may be more \texttt{expressions} than \texttt{schemaText} is because when annotating a specification with \gls{zcga}, \texttt{declarations} also contain \texttt{expressions}. If we have the following example, again taken from the ProjectAlloc specification:
+In this example we can see that there contains 1 annotated \texttt{schemaText}
+but 3 \texttt{expressions}. Another reason why there may be more
+\texttt{expressions} than \texttt{schemaText} is because when annotating a
+specification with \gls{zcga}, \texttt{declarations} also contain
+\texttt{expressions}. If we have the following example, again taken from the
+ProjectAlloc specification:
 
 \begin{verbatim}
 \text{\declaration{\set{studInterests}, \set{lecInterests}:
 \expression{PERSON \pfun\iseq TOPIC}}}
 \end{verbatim}
 
-The \gls{zcga} text contains 1 annotation of \texttt{SchemaText}, 1 annotation of a \texttt{declaration}, 2 annotations of \texttt{sets} and 1 annotation of an \texttt{expression}. Since this is the case we expect to see more expressions than declarations in every specification, which is true according to table \ref{tab:specgram}.
+The \gls{zcga} text contains 1 annotation of \texttt{SchemaText}, 1 annotation
+of a \texttt{declaration}, 2 annotations of \texttt{sets} and 1 annotation of an
+\texttt{expression}. Since this is the case we expect to see more expressions
+than declarations in every specification, which is true according to table
+\ref{tab:specgram}.
 
 
 \subsection{ZDRa Count}
 
-In this section we analyse the amount of \gls{zdra} instances and relations are labeled for each of the specifications we translated. We give details of the amount of instances in table \ref{tab:speczdracount} and give details of the amount of relations in each specification in table \ref{tab:speczdrarelationscount}.
+In this section we analyse the amount of \gls{zdra} instances and relations are
+labeled for each of the specifications we translated. We give details of the
+amount of instances in table \ref{tab:speczdracount} and give details of the
+amount of relations in each specification in table
+\ref{tab:speczdrarelationscount}.
 
 \begin{table}[H]
 \centering
@@ -149,7 +222,8 @@ In this section we analyse the amount of \gls{zdra} instances and relations are 
 \hline
 \textbf{Specification} & \multicolumn{10}{c|}{\textbf{ZDRa Instances}}\\
 \cline{2-11}
- & \textbf{A} & \textbf{SS} & \textbf{IS} & \textbf{CS} & \textbf{OS} & \textbf{TS} & \textbf{PRE} & \textbf{PO} & \textbf{O} & \textbf{SI}  \\
+ & \textbf{A} & \textbf{SS} & \textbf{IS} & \textbf{CS} & \textbf{OS} &
+ \textbf{TS} & \textbf{PRE} & \textbf{PO} & \textbf{O} & \textbf{SI}  \\
 \hline
 Steamboiler & 6 & 2 & 2 & 21 & 6 & 6 & 21 & 23 & 12 & 1  \\
 ProjectAlloc & 0 & 1 & 1 & 5 & 11 & 0 & 11 & 6 & 22 & 1 \\
@@ -169,22 +243,33 @@ ModuleReg & 0 & 1 & 0 & 2 & 0 & 0 & 2 & 2 & 0 & 1 \\
 \caption{How many of each ZDRa instances exists in each specification. \label{tab:speczdracount}}
 \end{table}
 
-From table \ref{tab:speczdracount} we can see that all specifications have either 1 or 2 statesSchema's. For state base specification it should be the case that then specification has at least 1 state. Most state based specifications have stateInvariants that must be conformed to through all the changes of the specification. However this is not a must and some specification (even from our sample) do not have any stateInvariants. 
+From table \ref{tab:speczdracount} we can see that all specifications have
+either 1 or 2 statesSchema's. For state base specification it should be the case
+that then specification has at least 1 state. Most state based specifications
+have stateInvariants that must be conformed to through all the changes of the
+specification. However this is not a must and some specification (even from our
+sample) do not have any stateInvariants. 
 
-All precondition must have a corresponding postcondition or output, therefore we can say:
+All precondition must have a corresponding postcondition or output, therefore we
+can say:
 
 \begin{lemma}
 $precondition \longrightarrow postcondition \lor output$
 \end{lemma}
 
-The table supports this informatio as there are more combined postconditions and outputs then there are precondition. However not all postconditions and outputs need to have a precondition, they can be executed without one. Therefore the number of preconditions does not need to equal the total number of postcondition and outputs.
+The table supports this informatio as there are more combined postconditions and
+outputs then there are precondition. However not all postconditions and outputs
+need to have a precondition, they can be executed without one. Therefore the
+number of preconditions does not need to equal the total number of postcondition
+and outputs.
 
 \begin{table}[H]
 \begin{tabular}{|l |l | l |l | l| l |}
 \hline
 \textbf{Specification} & \multicolumn{5}{c|}{\textbf{ZDRa Relations}}\\
 \cline{2-6}
- & \textbf{initiaOf} & \textbf{requires} & \textbf{allows} & \textbf{totalises} & \textbf{uses} \\
+ & \textbf{initiaOf} & \textbf{requires} & \textbf{allows} & \textbf{totalises}
+ & \textbf{uses} \\
 \hline
 Steamboiler & 2 & 28 & 21 & 24 & 92  \\
 ProjectAlloc & 1 & 16 & 11 & 0 & 16  \\
@@ -204,9 +289,20 @@ ModuleReg & 0 & 3 & 2 & 0 & 2  \\
 \caption{How many of each ZDRa relations exists in each specification. \label{tab:speczdrarelationscount}}
 \end{table}
 
-We can cross reference the table showing the amount of instances (table \ref{tab:speczdracount}) with the table showing the relations (table \ref{tab:speczdrarelationscount}). For example, the relation \emph{initialOf} can only occur if the specification has an \emph{initialSchema}. Not all specifictions have an \emph{initialSchema} and therefore do not have an \emph{initialOf} relation.
+We can cross reference the table showing the amount of instances (table
+\ref{tab:speczdracount}) with the table showing the relations (table
+\ref{tab:speczdrarelationscount}). For example, the relation \emph{initialOf}
+can only occur if the specification has an \emph{initialSchema}. Not all
+specifictions have an \emph{initialSchema} and therefore do not have an
+\emph{initialOf} relation.
 
-There is also an equal amount of \emph{allows} relations as there is \emph{preconditions}. As was written previously, all preconditions must have a corresponding output or postcondition, therefore the relation `\emph{allows}' links each precondition to its corresponding postcondition or output. However, the vendingMachine specification is an exception to this as the preconditions are written as entire schema's. For example we have the following instance in the vending machine specification:
+There is also an equal amount of \emph{allows} relations as there is
+\emph{preconditions}. As was written previously, all preconditions must have a
+corresponding output or postcondition, therefore the relation `\emph{allows}'
+links each precondition to its corresponding postcondition or output. However,
+the vendingMachine specification is an exception to this as the preconditions
+are written as entire schema's. For example we have the following instance in
+the vending machine specification:
 
 \begin{verbatim}
 \draschema{PRE3}{
@@ -217,24 +313,50 @@ stock > 0
 \end{schema}}
 \end{verbatim}
 
-This chunk of specification describes an entire schema as a precondition. The totalising schema then joints the precondition to their corresponding output or postcondition. The specification is written in this way as it is a personal choice of writing the specification formally. All other specifications in our sample set are written in the style where the precondition and corresponding output or postcondition are written inside the same schema environment.
+This chunk of specification describes an entire schema as a precondition. The
+totalising schema then joints the precondition to their corresponding output or
+postcondition. The specification is written in this way as it is a personal
+choice of writing the specification formally. All other specifications in our
+sample set are written in the style where the precondition and corresponding
+output or postcondition are written inside the same schema environment.
 
-Obviously, the relation `\emph{totalises}' only occurs in specifications where totaliseSchema's are present. Therefore the `\emph{totalise}' relation is not necessary in all specifications.
+Obviously, the relation `\emph{totalises}' only occurs in specifications where
+totaliseSchema's are present. Therefore the `\emph{totalise}' relation is not
+necessary in all specifications.
 
-VideoShop specification is one of the largest specifications (in terms of lines of \LaTeX{}) in our sample set however it has quite a small amount of relations.
+VideoShop specification is one of the largest specifications (in terms of lines
+of \LaTeX{}) in our sample set however it has quite a small amount of relations.
 
 \section{Case Studies}
 
-This section describes a few specification case studies in which we have used the \gls{zmath} tool kit to translate and prove formal specifications into the Isabelle automated theorem prover. The first case study present a formal specification only using terms, the second is a formal specification where both sets and terms are used and therefore the syntax used in Isabelle is more complex. The final case study we present is a partial translation of a specification which is not fully formalised but on it's way to becoming fully formal.
+This section describes a few specification case studies in which we have used
+the \gls{zmath} tool kit to translate and prove formal specifications into the
+Isabelle automated theorem prover. The first case study present a formal
+specification only using terms, the second is a formal specification where both
+sets and terms are used and therefore the syntax used in Isabelle is more
+complex. The final case study we present is a partial translation of a
+specification which is not fully formalised but on it's way to becoming fully
+formal.
 
 \subsection{Case Study 1: A specification using only terms.}
 \label{subsec:casestudy1}
 
-The following case study is based on the \emph{Steamboiler} \cite{steamboilerslides} specification which has been translated and proved in Isabelle using the \gls{zmath} framework. This case study only uses variables which are terms. The steamboiler specification is the larges from our examples. It is made up of 507 lines of \LaTeX{} code, 10 zed environemnts, 34 schmes and 3 axiom definitions. When annotating with \gls{zcga} there were 297 schematext, 26 declarations, 282 expressions, 595 terms and 4 sets. When annotated with \gls{zdra} there were 6 axioms, 2 stateSchema's, 2 initialSchema's, 21 changeSchema's, 6 outputSchema's, 6 totaliseSchema's, 21 preconditions, 23 postconditions, 12 outputs and 1 set of stateInvariants.
+The following case study is based on the \emph{Steamboiler}
+\cite{steamboilerslides} specification which has been translated and proved in
+Isabelle using the \gls{zmath} framework. This case study only uses variables
+which are terms. The steamboiler specification is the larges from our examples.
+It is made up of 507 lines of \LaTeX{} code, 10 zed environemnts, 34 schmes and
+3 axiom definitions. When annotating with \gls{zcga} there were 297 schematext,
+26 declarations, 282 expressions, 595 terms and 4 sets. When annotated with
+\gls{zdra} there were 6 axioms, 2 stateSchema's, 2 initialSchema's, 21
+changeSchema's, 6 outputSchema's, 6 totaliseSchema's, 21 preconditions, 23
+postconditions, 12 outputs and 1 set of stateInvariants.
 
 \subsubsection{Natural Lanaguge Specification of the Steamboiler}
 
-The steam boiler itself is a water level and steam quantity measuring device, with four pumps and four pump controlers. There is a valve for emptying the boiler.
+The steam boiler itself is a water level and steam quantity measuring device,
+with four pumps and four pump controlers. There is a valve for emptying the
+boiler.
 
 \begin{figure}[H]
 \centering
@@ -242,7 +364,9 @@ The steam boiler itself is a water level and steam quantity measuring device, wi
 \caption{A diagram showing a theoretical Steamboiler. \label{fig:steamboiler}}
 \end{figure}
 
-An example of how the steamboiler could look is shown in figure \ref{fig:steamboiler}. The variables of the steamboiler are shown in table \ref{tab:steamboilervariables}.
+An example of how the steamboiler could look is shown in figure
+\ref{fig:steamboiler}. The variables of the steamboiler are shown in table
+\ref{tab:steamboilervariables}.
 
 \todo[inline]{find out what $l$ does}
 \begin{table}[H]
@@ -268,7 +392,9 @@ $z$ & state init/norm/broken/stop
 \caption{The variables of the steamboiler and their descriptions. \label{tab:steamboilervariables}}
 \end{table}
 
-The full formal specification for the steamboiler is 10 pages long which can be found in \cite{mathlangexamples}. Therefore we have given small examples taken from the full specification.
+The full formal specification for the steamboiler is 10 pages long which can be
+found in \cite{mathlangexamples}. Therefore we have given small examples taken
+from the full specification.
 
 \subsubsection{ZMathLang steps for the steamboiler case study.}
 
@@ -291,7 +417,9 @@ The full formal specification for the steamboiler is 10 pages long which can be 
 \end{minipage}
 \end{figure}
 
-We show the \LaTeX{} code for part of the raw steamboiler specification in figure \ref{fig:steamboiler0} and it's pdflatex counterpart in figure \ref{fig:steamboiler0comp}.
+We show the \LaTeX{} code for part of the raw steamboiler specification in
+figure \ref{fig:steamboiler0} and it's pdflatex counterpart in figure
+\ref{fig:steamboiler0comp}.
 
 We then annotate the specification using \gls{zcga} and \gls{zdra} labels.
 
@@ -315,7 +443,8 @@ We then annotate the specification using \gls{zcga} and \gls{zdra} labels.
 \end{minipage}
 \end{figure}
 
-Since we only have a warning and no errors when checking the steamboiler specification we can now generate a goto graph and dependency graphs for it.
+Since we only have a warning and no errors when checking the steamboiler
+specification we can now generate a goto graph and dependency graphs for it.
 
 \begin{figure}[H]
 \centering
@@ -336,16 +465,23 @@ Since we only have a warning and no errors when checking the steamboiler specifi
 \end{minipage}
 \end{figure}
 
-The dependecy and goto graphs are shown in figures \ref{fig:steamdepgrap} and \ref{fig:steamgotograph} respectively. Since there are a lot of \gls{zdra} instances and therefore a lot of nodes, both the dependecy graph and goto graph are cluttered. We will discuss this as a limitation in the next section.
+The dependecy and goto graphs are shown in figures \ref{fig:steamdepgrap} and
+\ref{fig:steamgotograph} respectively. Since there are a lot of \gls{zdra}
+instances and therefore a lot of nodes, both the dependecy graph and goto graph
+are cluttered. We will discuss this as a limitation in the next section.
 
-From the goto graph the \gls{zmath} tool kit automatically generates a general proof skeleton, which uses the order from the goto graph to order the instances in how they should appear in any theorem prover. Part of the skeleton for the steamboiler specification is shown in figure \ref{fig:steamgpsa}.
+From the goto graph the \gls{zmath} tool kit automatically generates a general
+proof skeleton, which uses the order from the goto graph to order the instances
+in how they should appear in any theorem prover. Part of the skeleton for the
+steamboiler specification is shown in figure \ref{fig:steamgpsa}.
 
 \begin{figure}[H]
 \includegraphics[scale=0.5]{Figures/Evaluation/steamboilergpsa.png}
 \caption{\Gls{gps} for the steamboiler specification. \label{fig:steamgpsa}}
 \end{figure}
 
-We can now translate the \gls{gps} into Isabelle syntax using the \gls{zmath} toolkit.
+We can now translate the \gls{gps} into Isabelle syntax using the \gls{zmath}
+toolkit.
 
 
 \begin{figure}[H]
@@ -367,7 +503,18 @@ We can now translate the \gls{gps} into Isabelle syntax using the \gls{zmath} to
 \caption{Part of the isabelle skeleton for the steamboiler specification.\label{fig:steamisaskel}}
 \end{figure}
 
-Part of the isabelle skeleton for the steamboiler specification is shown in figure \ref{fig:steamisaskel}. Since the steamboiler example has 2 stateSchema's the \gls{zmath} toolset creates 2 isabelle 	\texttt{records} in the theory file. The top left image shows the beginning part of the isabelle skeleton, where the first stateSchema (or record) sets the state of the theory. Midway down the theory file the first record \texttt{ends} and a new one is added with the line \verb|record SS2 = SS1 +|. Towards the end the isabelle skeleton there are lemma's to check the consistency for all state changing schema's (\texttt{CS}) in the format decribed in chapter \ref{ch:skeletons} section \ref{subsec:pob1}. Using the \gls{zcga} annotated specification and the steamboiler isabelle skeleton, the \gls{zmath} tool support can now fill in the isabelle skeleton the declarations, expressions, schemaNames etc.
+Part of the isabelle skeleton for the steamboiler specification is shown in
+figure \ref{fig:steamisaskel}. Since the steamboiler example has 2 stateSchema's
+the \gls{zmath} toolset creates 2 isabelle 	\texttt{records} in the theory file.
+The top left image shows the beginning part of the isabelle skeleton, where the
+first stateSchema (or record) sets the state of the theory. Midway down the
+theory file the first record \texttt{ends} and a new one is added with the line
+\verb|record SS2 = SS1 +|. Towards the end the isabelle skeleton there are
+lemma's to check the consistency for all state changing schema's (\texttt{CS})
+in the format decribed in chapter \ref{ch:skeletons} section \ref{subsec:pob1}.
+Using the \gls{zcga} annotated specification and the steamboiler isabelle
+skeleton, the \gls{zmath} tool support can now fill in the isabelle skeleton the
+declarations, expressions, schemaNames etc.
 
 
 \begin{figure}[H]
@@ -381,36 +528,75 @@ Part of the isabelle skeleton for the steamboiler specification is shown in figu
 \centering
 \includegraphics[scale=0.4]{Figures/Evaluation/5imagec.png}
 \end{minipage}\hfill\hfill
-%\begin{minipage}{0.7\textwidth}
-%[clip,l,b,r,t]
-%\centering
+%\begin{minipage}{0.7\textwidth} [clip,l,b,r,t] \centering
 \includegraphics[scale=0.4]{Figures/Evaluation/5imageb.png}
 %\end{minipage}
 \caption{Part of the filled in isabelle skeleton for the steamboiler specification.\label{fig:filledinsteamskeleton}}
 \end{figure}
 
-In figure \ref{fig:filledinsteamskeleton} we show 3 parts of the filled in isabelle skeleton (\gls{half}). The first part shows the beginning of the \gls{half} which initiates the beginning of the proof. Since $SS1$ in this case was the root of the tree in the goto graph it sets \verb|SteamBoiler0| as the first record. Middway through the theory file we see another record, \verb|SteamBoiler1| which was $SS2$ in \gls{zdra}. This is shown in the bottom picture in figure \ref{fig:filledinsteamskeleton}. $SS2$ introduced 2 new state variables, $S$ and $delta$ which are added to the new record. Towards the end of the \gls{half}, \gls{zmath} has filled in the lemma's to prove which are sanity checks for the specification. It fills in the lemma's with the correct syntax so that the user only needs to delete the word `\emph{sorry}' prove the properties in order to get a proof of their specification. 
+In figure \ref{fig:filledinsteamskeleton} we show 3 parts of the filled in
+isabelle skeleton (\gls{half}). The first part shows the beginning of the
+\gls{half} which initiates the beginning of the proof. Since $SS1$ in this case
+was the root of the tree in the goto graph it sets \verb|SteamBoiler0| as the
+first record. Middway through the theory file we see another record,
+\verb|SteamBoiler1| which was $SS2$ in \gls{zdra}. This is shown in the bottom
+picture in figure \ref{fig:filledinsteamskeleton}. $SS2$ introduced 2 new state
+variables, $S$ and $delta$ which are added to the new record. Towards the end of
+the \gls{half}, \gls{zmath} has filled in the lemma's to prove which are sanity
+checks for the specification. It fills in the lemma's with the correct syntax so
+that the user only needs to delete the word `\emph{sorry}' prove the properties
+in order to get a proof of their specification. 
 
 \begin{figure}[H]
 \includegraphics[scale=0.5]{Figures/Evaluation/6image.png}
 \caption{Manually proven lemma for the steamboiler specification. \label{fig:steamboilerproof}}
 \end{figure}
 
-Using the lemma's which have been generated in figure \ref{fig:filledinsteamskeleton} we have proved all of these lemmas for the steamboiler specification, part of which is shown in figure \ref{fig:steamboilerproof}. By doing so, we have now proven that non of the state changing schemas conflict with the state invariants of the specification. To do this we have manually deleted the `\emph{sorry}' command, used the Isar tool `\emph{sledgehammer}' which has indicated that to prove this particular lemma (shown in figure \ref{fig:steamboilerproof}) it can be proven by \verb|smt State.distinct(9)|. Therefore it is true that the `\texttt{SNormalStop0}' schema does not conflict with the state Invariants. We did this step manually for all remaining lemmas, the full proof of the steamboiler specification can be found in \cite{mathlangexamples}.
+Using the lemma's which have been generated in figure
+\ref{fig:filledinsteamskeleton} we have proved all of these lemmas for the
+steamboiler specification, part of which is shown in figure
+\ref{fig:steamboilerproof}. By doing so, we have now proven that non of the
+state changing schemas conflict with the state invariants of the specification.
+To do this we have manually deleted the `\emph{sorry}' command, used the Isar
+tool `\emph{sledgehammer}' which has indicated that to prove this particular
+lemma (shown in figure \ref{fig:steamboilerproof}) it can be proven by
+\verb|smt State.distinct(9)|.
+Therefore it is true that the `\texttt{SNormalStop0}' schema
+does not conflict with the state Invariants. We did this step manually for all
+remaining lemmas, the full proof of the steamboiler specification can be found
+in \cite{mathlangexamples}.
 
 \subsection{Case Study 2: A specification using both terms and sets.}
 
-This case study based is on the \emph{ModuleReg} specification which uses both terms and sets. The specification has been translated into Isabelle using the \gls{zmath} framework. The entire \gls{zmath} works for the ModuleReg example is shown in chapter \ref{ch:fullexample}.
+This case study based is on the \emph{ModuleReg} specification which uses both
+terms and sets. The specification has been translated into Isabelle using the
+\gls{zmath} framework. The entire \gls{zmath} works for the ModuleReg example is
+shown in chapter \ref{ch:fullexample}.
 
-The \emph{ModuleReg} specification is our smallest example with 43 lines of \LaTeX{} code, 1 \emph{zed} environment and 3 \emph{schema}'s. There are 20 labels of \emph{schemaText}, 6 \emph{declarations}, 18 \emph{expressions}, 13 \emph{terms}, and 31 \emph{sets}. Since there are \emph{stateInvariants} for the \emph{modulereg} specification, \gls{zmath} was able to generate lemma's to prove for the 2 \emph{changeSchemas}. There is also 1 \emph{stateSchema}, 2 \emph{preconditions} and 2 \emph{postconditions}. There are 3 \emph{requires} relations, 2 \emph{allows} and 2 \emph{uses}.
+The \emph{ModuleReg} specification is our smallest example with 43 lines of
+\LaTeX{} code, 1 \emph{zed} environment and 3 \emph{schema}'s. There are 20
+labels of \emph{schemaText}, 6 \emph{declarations}, 18 \emph{expressions}, 13
+\emph{terms}, and 31 \emph{sets}. Since there are \emph{stateInvariants} for the
+\emph{modulereg} specification, \gls{zmath} was able to generate lemma's to
+prove for the 2 \emph{changeSchemas}. There is also 1 \emph{stateSchema}, 2
+\emph{preconditions} and 2 \emph{postconditions}. There are 3 \emph{requires}
+relations, 2 \emph{allows} and 2 \emph{uses}.
 
-Since the \emph{modulereg} specification is quite small but did have stateInvariants which \gls{zmath} could prove are satisfied throughout the specification, we decided it would be a could example to show the full workings of. This is shown in chapter \ref{ch:fullexample}.
+Since the \emph{modulereg} specification is quite small but did have
+stateInvariants which \gls{zmath} could prove are satisfied throughout the
+specification, we decided it would be a could example to show the full workings
+of. This is shown in chapter \ref{ch:fullexample}.
 
 \subsection{Case Study 3: A semi formal specification.}
 
-In this case study we present the \emph{AutoPilot} specification. The specification is a semi formal specification and has been partially translated into Isabelle. The parts which have been translated are written formally and have been annotated accordingly. This gives an example of a specification which is written in natural language and is on it's way to being formalised.
+In this case study we present the \emph{AutoPilot} specification. The
+specification is a semi formal specification and has been partially translated
+into Isabelle. The parts which have been translated are written formally and
+have been annotated accordingly. This gives an example of a specification which
+is written in natural language and is on it's way to being formalised.
 
-We have taken the natural language specification for an autopilot system from \cite{Butler96} and started to formalise it.
+We have taken the natural language specification for an autopilot system from
+\cite{Butler96} and started to formalise it.
 
 \begin{figure}[H]
 \centering
@@ -433,9 +619,16 @@ We have taken the natural language specification for an autopilot system from \c
 
 \subsubsection{ZMathLang steps for the autopilot case study.}
 
-We give the informal specification in figure \ref{fig:originalautopilot} and one which we are beginning to formalised in figure \ref{fig:semiformautopilot}. We have highlighted in {\color{set}red} the parts which we have formalised in figure \ref{fig:semiformautopilot}. The formalised parts of the semi formal specification are taken from the text in the informal specification.
+We give the informal specification in figure \ref{fig:originalautopilot} and one
+which we are beginning to formalised in figure \ref{fig:semiformautopilot}. We
+have highlighted in {\color{set}red} the parts which we have formalised in
+figure \ref{fig:semiformautopilot}. The formalised parts of the semi formal
+specification are taken from the text in the informal specification.
 
-We then annotate the partial formal specification in \gls{zcga} annotations and \gls{zdra} annotations taken from chapters \ref{ch:zcga} and \ref{ch:zdra} respectively. Once annotated we can check the annotated document for \gls{zcga} and \gls{zdra} errors. 
+We then annotate the partial formal specification in \gls{zcga} annotations and
+\gls{zdra} annotations taken from chapters \ref{ch:zcga} and \ref{ch:zdra}
+respectively. Once annotated we can check the annotated document for \gls{zcga}
+and \gls{zdra} errors. 
 
 \begin{figure}[H]
 \centering
@@ -457,9 +650,17 @@ We then annotate the partial formal specification in \gls{zcga} annotations and 
 \end{minipage}
 \end{figure}
 
-Even though the specification is not fully formalised we can still annotate it with \gls{zcga} and \gls{zdra} and check for the correctness of the parts which have been annotated (shown in figures \ref{fig:autopilot1n2} and \ref{fig:autopilotcorrect}). When checking with \gls{zdra} we have a warning message telling the user that the specification is not correctlty totalised. That is there is a precondition outstand with not postcondition counter part. This does not matter for now as we can still carry on with the tranlation.
+Even though the specification is not fully formalised we can still annotate it
+with \gls{zcga} and \gls{zdra} and check for the correctness of the parts which
+have been annotated (shown in figures \ref{fig:autopilot1n2} and
+\ref{fig:autopilotcorrect}). When checking with \gls{zdra} we have a warning
+message telling the user that the specification is not correctlty totalised.
+That is there is a precondition outstand with not postcondition counter part.
+This does not matter for now as we can still carry on with the tranlation.
 
-When checking the specification for \gls{zdra}, \gls{zmath} has also produced a dependecy graph and goto graphs (shown in figures \ref{fig:autodepgraph} and \ref{fig:autogotograph}):
+When checking the specification for \gls{zdra}, \gls{zmath} has also produced a
+dependecy graph and goto graphs (shown in figures \ref{fig:autodepgraph} and
+\ref{fig:autogotograph}):
 
 \begin{figure}[H]
 \centering
@@ -480,11 +681,28 @@ When checking the specification for \gls{zdra}, \gls{zmath} has also produced a 
 \end{minipage}
 \end{figure}
 
-With the dependency graph (figure \ref{fig:autodepgraph}) we can say that $SS2$ uses $SS1$, $CS1$ uses $SS2$, $PRE1$ requires $CS1$ and allows $PO1$. Which makes up the main tree dependencies. $OS1$ and $O1$ are seperate as they do not have any relations which any parts of the main tree, the only dependency they have is on eachother where $O1$ requires $OS1$.
+With the dependency graph (figure \ref{fig:autodepgraph}) we can say that $SS2$
+uses $SS1$, $CS1$ uses $SS2$, $PRE1$ requires $CS1$ and allows $PO1$. Which
+makes up the main tree dependencies. $OS1$ and $O1$ are seperate as they do not
+have any relations which any parts of the main tree, the only dependency they
+have is on eachother where $O1$ requires $OS1$.
 
-We can say that the dependecy graph \emph{describes} the relation between instances and the goto graph (figure \ref{fig:autogotograph}) \emph{orders} the instances in a way as to parse through a theorem prover.
+We can say that the dependecy graph \emph{describes} the relation between
+instances and the goto graph (figure \ref{fig:autogotograph}) \emph{orders} the
+instances in a way as to parse through a theorem prover.
 
-We can now generate a general proof skeleton for the Autopilot specification even though it is not fully formalised (shown in figure \ref{fig:autopilotgps}). We can clearly see that the arrow has changed direction for the $OS1$ and $O1$ relationship from the dependency graph. Again since these two instances are not dependency on any part of the main tree they are seperate. However in the dependency graph described the relation that $O1\ requires\ OS1$ ($O1$ root and $OS1$ child) the goto graph flips this relationship as in a theorem prover we woud need $OS1$ to appear before $O1$ since $O1$ requires $OS1$ to exist. We can also say that $SS2$ uses $SS1$ therefore $SS2$ needs $SS1$ to exist for itself to exist. Then $CS1$ uses $SS2$ therefore $CS1$ needs $SS2$ to exist for itself to exit. We can say that $PRE1$ requires $CS1$ and allows $PO1$. Thefore $PO1$ needs $PRE1$ to exist before it is allowed to exist itself.
+We can now generate a general proof skeleton for the Autopilot specification
+even though it is not fully formalised (shown in figure \ref{fig:autopilotgps}).
+We can clearly see that the arrow has changed direction for the $OS1$ and $O1$
+relationship from the dependency graph. Again since these two instances are not
+dependency on any part of the main tree they are seperate. However in the
+dependency graph described the relation that $O1\ requires\ OS1$ ($O1$ root and
+$OS1$ child) the goto graph flips this relationship as in a theorem prover we
+woud need $OS1$ to appear before $O1$ since $O1$ requires $OS1$ to exist. We can
+also say that $SS2$ uses $SS1$ therefore $SS2$ needs $SS1$ to exist for itself
+to exist. Then $CS1$ uses $SS2$ therefore $CS1$ needs $SS2$ to exist for itself
+to exit. We can say that $PRE1$ requires $CS1$ and allows $PO1$. Thefore $PO1$
+needs $PRE1$ to exist before it is allowed to exist itself.
 
 \begin{figure}[H]
 \centering
@@ -502,7 +720,14 @@ postcondition PO1
 \caption{\Gls{gps} for the Autopilot specification. \label{fig:autopilotgps}}
 \end{figure}
 
-Since the Autopilot specification has passed the \gls{zcga} and \gls{zdra} checks we can then generate a \gls{gps} for the specification using the goto graph produced in the previous stage. The way this is done is described in section \ref{sec:zdra2gen}. Note that even though there is a $changeSchema$ instance, there are no $stateInvariants$ in the specification (as yet). Therefore \gls{zmath} does not generate any lemma's to prove in this case since \gls{zmath} only checks for consistancy accross the specification and thus need state invariants to be present.
+Since the Autopilot specification has passed the \gls{zcga} and \gls{zdra}
+checks we can then generate a \gls{gps} for the specification using the goto
+graph produced in the previous stage. The way this is done is described in
+section \ref{sec:zdra2gen}. Note that even though there is a $changeSchema$
+instance, there are no $stateInvariants$ in the specification (as yet).
+Therefore \gls{zmath} does not generate any lemma's to prove in this case since
+\gls{zmath} only checks for consistancy accross the specification and thus need
+state invariants to be present.
 
 \begin{figure}[H]
 \centering
@@ -523,20 +748,46 @@ Since the Autopilot specification has passed the \gls{zcga} and \gls{zdra} check
 \end{minipage}
 \end{figure}
 
-\Gls{zmath} can automatically translate the \gls{gps} into Isabelle syntax (figure \ref{fig:autoisskel}), this is now an Isabelle skeleton. The Isabelle skeleton has not yet taken the \gls{zcga} information as one can get to this step with just the \gls{zdra} annotated document. Once the Isabelle is filled in (figure \ref{fig:autoisa}) we have the annotated specification in Isabelle form. This can now give the user an idea of how to input their specifiation into Isabelle syntax, without them having prior knowledge of Isabelle. It is important to note that this is as far as the \gls{zmath} translation goes. Since there are no state Invariants with this case study no lemma's to check for consistancy have been generated. The user can add the state Invariants in their raw \LaTeX{} specification, or fully formalise their specification. Another way to fully prove their specification is to add other properties to the Isabelle document.
+\Gls{zmath} can automatically translate the \gls{gps} into Isabelle syntax
+(figure \ref{fig:autoisskel}), this is now an Isabelle skeleton. The Isabelle
+skeleton has not yet taken the \gls{zcga} information as one can get to this
+step with just the \gls{zdra} annotated document. Once the Isabelle is filled in
+(figure \ref{fig:autoisa}) we have the annotated specification in Isabelle form.
+This can now give the user an idea of how to input their specifiation into
+Isabelle syntax, without them having prior knowledge of Isabelle. It is
+important to note that this is as far as the \gls{zmath} translation goes. Since
+there are no state Invariants with this case study no lemma's to check for
+consistancy have been generated. The user can add the state Invariants in their
+raw \LaTeX{} specification, or fully formalise their specification. Another way
+to fully prove their specification is to add other properties to the Isabelle
+document.
 
 \section{Analysing examples}
 
-In this section we analyse the examples we have successfully translated into Isabelle and proved the sanity of the specification. 
+In this section we analyse the examples we have successfully translated into
+Isabelle and proved the sanity of the specification. 
 
 
-We remind the reader of figure \ref{fig:timeline} in chapter \ref{ch:design}. \Gls{zmath} is able assit the user with the translation of specification up to the point where sanity properties are produced but not proven. In our largest case study (section \ref{subsec:casestudy1}) the user did not have to look through all the state changing schema's and write the sanity checks for all of them. The properties were already generated for each changeSchema however, the user did have to go through each property and prove it. In total, there were 21 changeSchema's and 1 set of stateInvariants, therefore there was 21 properties which the user had to prove manually.
+We remind the reader of figure \ref{fig:timeline} in chapter \ref{ch:design}.
+\Gls{zmath} is able assit the user with the translation of specification up to
+the point where sanity properties are produced but not proven. In our largest
+case study (section \ref{subsec:casestudy1}) the user did not have to look
+through all the state changing schema's and write the sanity checks for all of
+them. The properties were already generated for each changeSchema however, the
+user did have to go through each property and prove it. In total, there were 21
+changeSchema's and 1 set of stateInvariants, therefore there was 21 properties
+which the user had to prove manually.
 
 \subsection{SteamBoiler}
 
-In our largest example there were 21 changeSchema's and 1 set of stateInvariants, therefore there was 21 properties which the user had to prove manually.
+In our largest example there were 21 changeSchema's and 1 set of
+stateInvariants, therefore there was 21 properties which the user had to prove
+manually.
 
-To prove the sanity of the steamboiler specification, we went through the consistency lemmas (automatically generated) one by one and manually prove them. We started of with unproven lemma's with the command `\emph{sorry}' at the end such as the lemma shown in figure \ref{fig:steamboilerL1lemma}.
+To prove the sanity of the steamboiler specification, we went through the
+consistency lemmas (automatically generated) one by one and manually prove them.
+We started of with unproven lemma's with the command `\emph{sorry}' at the end
+such as the lemma shown in figure \ref{fig:steamboilerL1lemma}.
 
 \begin{figure}[H]
 \centering
@@ -544,7 +795,11 @@ To prove the sanity of the steamboiler specification, we went through the consis
 \caption{The `\texttt{SNormalStop0}' lemma taken from the steamboiler \gls{half}. \label{fig:steamboilerL1lemma}}
 \end{figure}
 
-We then delete the `\emph{sorry}' command and if sledgehammer is set up to be automatic, the user can sometimes leave their cursor at the end of the lemma and `\emph{auto sledgehammer}' finds a proof which is displayed in the output terminal. In our case, this has happened for the `\texttt{SNormalStop0}' lemma which is displayed in figure \ref{fig:autosolvelemma}.
+We then delete the `\emph{sorry}' command and if sledgehammer is set up to be
+automatic, the user can sometimes leave their cursor at the end of the lemma and
+`\emph{auto sledgehammer}' finds a proof which is displayed in the output
+terminal. In our case, this has happened for the `\texttt{SNormalStop0}' lemma
+which is displayed in figure \ref{fig:autosolvelemma}.
 
 \begin{figure}[H]
 \centering
@@ -552,7 +807,12 @@ We then delete the `\emph{sorry}' command and if sledgehammer is set up to be au
 \caption{Auto sledgehammer finding a proof for one of the lemma's in the steamboiler specification using the \gls{smt} solver `\emph{cvc4}'. \label{fig:autosolvelemma}}
 \end{figure}
 
-In this particular lemma we are proving the property that the \verb|SNormal_Stop)| schema does not conflict with the state invariants of the specification either before or after the state has been changed. Some other lemma's in the steamboiler example (such as the \verb|SInitNormal1_L9| lemma) could be proven by the isabelle command `\texttt{blast}' as shown in figure \ref{fig:blastprovenlemma}. 
+In this particular lemma we are proving the property that the
+\verb|SNormal_Stop)| schema does not conflict with the state invariants of the
+specification either before or after the state has been changed. Some other
+lemma's in the steamboiler example (such as the \verb|SInitNormal1_L9| lemma)
+could be proven by the isabelle command `\texttt{blast}' as shown in figure
+\ref{fig:blastprovenlemma}. 
 
 \begin{figure}[H]
 \centering
@@ -560,13 +820,28 @@ In this particular lemma we are proving the property that the \verb|SNormal_Stop
 \caption{An example of a lemma in the steamboiler specification being proved by blast. \label{fig:blastprovenlemma}}
 \end{figure}
 
-Proving by `\emph{blast}' is obviously less complex then the proof needed for lemma \verb|SNormalStop0_L1| in figure \ref{fig:steamboilerL1lemma}, however if we look back to figure \ref{fig:timeline} in chapter \ref{ch:design} we can see that `\emph{blast}' covers less properties then `\emph{sledgehammer}'. Therefore for the lemma's in the steamboiler specification we have proved 2 lemma's by blast and 19 using sledgehammer. 
+Proving by `\emph{blast}' is obviously less complex then the proof needed for
+lemma \verb|SNormalStop0_L1| in figure \ref{fig:steamboilerL1lemma}, however if
+we look back to figure \ref{fig:timeline} in chapter \ref{ch:design} we can see
+that `\emph{blast}' covers less properties then `\emph{sledgehammer}'. Therefore
+for the lemma's in the steamboiler specification we have proved 2 lemma's by
+blast and 19 using sledgehammer. 
 
-It is important to note that a single lemma can be proven in a variety of ways, so even thoguh we have chosen to prove our specification in certain ways other users may choose to use other tools to prove their theorems and lemmas. Even though we have proved 19 lemmas by sledgehammer in the steamboiler specification, we might have been able to prove all the lemmas by sledgehammer but chosen to prove 2 by blast to show variety.
+It is important to note that a single lemma can be proven in a variety of ways,
+so even thoguh we have chosen to prove our specification in certain ways other
+users may choose to use other tools to prove their theorems and lemmas. Even
+though we have proved 19 lemmas by sledgehammer in the steamboiler
+specification, we might have been able to prove all the lemmas by sledgehammer
+but chosen to prove 2 by blast to show variety.
 
 \subsection{ModuleReg}
 
-The modulereg is one of our smallest examples, however with 1 set of stateinvariants and 2 changeSchemas, \gls{zmath} automatcally produces 2 lemma's to check the sanity of the specification. An example of one of these lemmas is shown in figure \ref{fig:modulereglemma1}. This is one of the lemma's automatically generated and thus we have the `\emph{sorry}' command at the end to show that it needs manual input from the user to complete the proof.
+The modulereg is one of our smallest examples, however with 1 set of
+stateinvariants and 2 changeSchemas, \gls{zmath} automatcally produces 2 lemma's
+to check the sanity of the specification. An example of one of these lemmas is
+shown in figure \ref{fig:modulereglemma1}. This is one of the lemma's
+automatically generated and thus we have the `\emph{sorry}' command at the end
+to show that it needs manual input from the user to complete the proof.
 
 \begin{figure}[H]
 \centering
@@ -574,7 +849,13 @@ The modulereg is one of our smallest examples, however with 1 set of stateinvari
 \caption{An example of one of the lemma's to check for consistency in the modulereg specification. \label{fig:modulereglemma1}}
 \end{figure}
 
-To prove this lemma we remove the `\emph{sorry}' command or put our curser at the end of the lemma ready to input our methods to start the proof. In this case `\emph{Auto sledgehammer}' again found a proof using the `\texttt{cvc4}' \gls{smt} solver (shown in figure \ref{fig:autosolvermodulereg}). With this lemma we are aiming to prove the sanity of the specification where the changeSchema \verb|RegForModule| does not conflict with the stateInvariants either before or after the state has been changed.
+To prove this lemma we remove the `\emph{sorry}' command or put our curser at
+the end of the lemma ready to input our methods to start the proof. In this case
+`\emph{Auto sledgehammer}' again found a proof using the `\texttt{cvc4}'
+\gls{smt} solver (shown in figure \ref{fig:autosolvermodulereg}). With this
+lemma we are aiming to prove the sanity of the specification where the
+changeSchema \verb|RegForModule| does not conflict with the stateInvariants
+either before or after the state has been changed.
 
 \begin{figure}[H]
 \centering
@@ -582,7 +863,9 @@ To prove this lemma we remove the `\emph{sorry}' command or put our curser at th
 \caption{Output shown when proving the lemma `\texttt{RegForModule} shown in figure \ref{fig:modulereglemma1} . \label{fig:autosolvermodulereg}}
 \end{figure}
 
-By clicking on the auto solving method shown in figure \ref{fig:autosolvermodulereg} we can now complete the proof for the \verb|RegForModule_L1| lemma. This is shown 
+By clicking on the auto solving method shown in figure
+\ref{fig:autosolvermodulereg} we can now complete the proof for the
+\verb|RegForModule_L1| lemma. This is shown 
 
 \begin{figure}[H]
 \centering
@@ -590,19 +873,46 @@ By clicking on the auto solving method shown in figure \ref{fig:autosolvermodule
 \caption{The `\texttt{RegForModule}' lemma proved using Auto sledgehammer methods. \label{fig:solvedmodulelemma}}
 \end{figure}
 
-The second lemma in the moduleReg specification we managed to prove using `\emph{blast}' thus having a complete proof for the complexity of the modulereg specification.
+The second lemma in the moduleReg specification we managed to prove using
+`\emph{blast}' thus having a complete proof for the complexity of the modulereg
+specification.
 
-We can see that the complexity of the proof used for the \verb|RegForModule_L1| lemma in the modulereg specification is larger than the complexity of the proof for the \verb|SNormalStop0_L1| in the steamboiler specification. Although we used `\emph{Auto sledgehammer}' to assist proving the lemma's there are 16 methods used in proving the \verb|RegForModule_L1| lemma (\verb|Domain_empty|, \verb|Range_empty| etc.) compared with 1 method used in proving the \verb|SNormalStop0_L1| lemma (\verb|State.distinct(9)|). Again we can say that there might of been an alternate way to prove these particular lemma's however we have chosen to prove them in this way to show variation. Since there are more state changing schema's in the steamboiler specification there are also more lemma's to prove with the steamboiler then there is in the modulereg specification to obtain a fully proven specification which checks the complexity of the system.
+We can see that the complexity of the proof used for the \verb|RegForModule_L1|
+lemma in the modulereg specification is larger than the complexity of the proof
+for the \verb|SNormalStop0_L1| in the steamboiler specification. Although we
+used `\emph{Auto sledgehammer}' to assist proving the lemma's there are 16
+methods used in proving the \verb|RegForModule_L1| lemma (\verb|Domain_empty|,
+\verb|Range_empty| etc.) compared with 1 method used in proving the
+\verb|SNormalStop0_L1| lemma (\verb|State.distinct(9)|). Again we can say that
+there might of been an alternate way to prove these particular lemma's however
+we have chosen to prove them in this way to show variation. Since there are more
+state changing schema's in the steamboiler specification there are also more
+lemma's to prove with the steamboiler then there is in the modulereg
+specification to obtain a fully proven specification which checks the complexity
+of the system.
 
 \subsection{Vending Machine}
 
-The vending machine example has 3 state changing schemas (shown in table \ref{tab:speczdracount}) however since it does not have any labeled stateInvariants, \gls{zmath} can not automatically produce any properties to prove the consistency of the specification. If we refer back to figure \ref{fig:timeline} in chapter \ref{ch:design} it shows that the \gls{zmath} toolkit goes slightly past the point of `\emph{specification in isabelle with no proof}' however the automation of \gls{zmath} can only go past that point \textbf{if} there are changeschema's and stateInvariants labelled. Otherwise the \gls{zmath} toolkit can only translate the specification into isabelle syntax with no lemma's or properties to prove. Thus it is up to the user to carry on manually inputting their properties to obtain a fully proven specification.
+The vending machine example has 3 state changing schemas (shown in table
+\ref{tab:speczdracount}) however since it does not have any labeled
+stateInvariants, \gls{zmath} can not automatically produce any properties to
+prove the consistency of the specification. If we refer back to figure
+\ref{fig:timeline} in chapter \ref{ch:design} it shows that the \gls{zmath}
+toolkit goes slightly past the point of `\emph{specification in isabelle with no
+proof}' however the automation of \gls{zmath} can only go past that point
+\textbf{if} there are changeschema's and stateInvariants labelled. Otherwise the
+\gls{zmath} toolkit can only translate the specification into isabelle syntax
+with no lemma's or properties to prove. Thus it is up to the user to carry on
+manually inputting their properties to obtain a fully proven specification.
 
 \subsection{Other examples}
 
-Each specification has a different amount of lemma's which the user needs to prove depending on how many `stateInvariants' and `changeSchema's' there are. If the specification does not have any stateInvariants then \gls{zmath} will not produce any lemmas to prove for the sanity of the specification.
+Each specification has a different amount of lemma's which the user needs to
+prove depending on how many `stateInvariants' and `changeSchema's' there are. If
+the specification does not have any stateInvariants then \gls{zmath} will not
+produce any lemmas to prove for the sanity of the specification.
 
-\begin{table}
+\begin{table}[H]
 \begin{tabular}{|l | l | l |}
 \hline
 \textbf{Specification} & \textbf{Amount of} & \textbf{Total amount} \\
@@ -628,17 +938,35 @@ ModuleReg & 2 & 18 \\
 \caption{A table to show the amount of automatically generated lemmas and total amount of tactics used for each specification. \label{tab:lemmatact}}
 \end{table}
 
-We show the amount of lemmas and total amount of tactics needed to prove the sanity of each specification in table \ref{tab:lemmatact}. Some lemma's need only one tactic to be proved whilst other need a few. There are various different ways to prove these lemmas and it all comes down to the personal preference of the user. We have mainly used Isabelles `\emph{sledgehammer}' tool to assist us with our proving.
+We show the amount of lemmas and total amount of tactics needed to prove the
+sanity of each specification in table \ref{tab:lemmatact}. Some lemma's need
+only one tactic to be proved whilst other need a few. There are various
+different ways to prove these lemmas and it all comes down to the personal
+preference of the user. We have mainly used Isabelles `\emph{sledgehammer}' tool
+to assist us with our proving.
 
 \subsubsection{SteamBoiler}
 
-The steamboiler has in total 20 lemmas to check the specifications sanity as it has 20 changing state schemas. The specification has 1 set of stateInvariants and we used 41 tactics to prove our lemmas.
+The steamboiler has in total 20 lemmas to check the specifications sanity as it
+has 20 changing state schemas. The specification has 1 set of stateInvariants
+and we used 41 tactics to prove our lemmas.
 
-The steamboiler state invariants is shown in the expression part of the stateSchema. The state invariants for this specification is that the minimum water level (\verb|w_min|) must be smaller than the maximum water level (\verb|w_max|). Therefore, the state invariants are writter after `\texttt{assumes}' in the specification (\verb|w_min < w_max|). 
+The steamboiler state invariants is shown in the expression part of the
+stateSchema. The state invariants for this specification is that the minimum
+water level (\verb|w_min|) must be smaller than the maximum water level
+(\verb|w_max|). Therefore, the state invariants are writter after
+`\texttt{assumes}' in the specification (\verb|w_min < w_max|). 
 
-When \gls{zmath} produces the proof obigations to check the sanity of the specification it must also check that the changeSchema does not conflict with the prime state invariants. Thus, the proof obligations to check for all changing state schema will check that the preconditions and postconditions of each changeSchema still imply that (\verb|w_min < w_max|) \textbf{and} (\verb|w_min' < w_max'|).
+When \gls{zmath} produces the proof obigations to check the sanity of the
+specification it must also check that the changeSchema does not conflict with
+the prime state invariants. Thus, the proof obligations to check for all
+changing state schema will check that the preconditions and postconditions of
+each changeSchema still imply that (\verb|w_min < w_max|) \textbf{and}
+(\verb|w_min' < w_max'|).
 
-For example to prove our first lemma \verb|SNormalStop0_L1|, we wish to make sure that the \verb|SNormalStop0| changeSchema does not conflict with the stateInvariants and the stateInvariants prime.
+For example to prove our first lemma \verb|SNormalStop0_L1|, we wish to make
+sure that the \verb|SNormalStop0| changeSchema does not conflict with the
+stateInvariants and the stateInvariants prime.
 
 \noindent \begin{tabular}{|l | l|}
 \hline
@@ -658,21 +986,34 @@ For example to prove our first lemma \verb|SNormalStop0_L1|, we wish to make sur
 \verb|w > w_max)|& {\color{red}SNornalStop0 schema} \\
 \verb|\<and> (a' = off \<and>|&  \\
 \verb|z' = stop)|&  \\
-\verb|\<longrightarrow> (w_min < w_max|& {\color{red}\textbf{implies} stateInvariants} \\
-\verb|\<and> (w_min' < w_max')))"|& {\color{red}\textbf{and} stateInvariants prime} \\
+\verb|\<longrightarrow> (w_min < w_max|& {\color{red}\textbf{implies}
+stateInvariants} \\
+\verb|\<and> (w_min' < w_max')))"|& {\color{red}\textbf{and} stateInvariants
+prime} \\
 \verb|by (smt State.distinct(9))|&  \\
 \hline
 \end{tabular}
 
-Since there are 2 records in our steamboiler specification we have to manually write the line \verb|(in thesteamboiler)| which lets isabelle know that the changeSchema uses variables from the first record. The \verb|SNormalStop0_L1| lemma is proved using 2 tactics \verb|smt| and \verb|State.distinct(9)|. We remind the reader that although we have used these 2 tactics to prove our lemma there may be other ways in which to do so. 
+Since there are 2 records in our steamboiler specification we have to manually
+write the line \verb|(in thesteamboiler)| which lets isabelle know that the
+changeSchema uses variables from the first record. The \verb|SNormalStop0_L1|
+lemma is proved using 2 tactics \verb|smt| and \verb|State.distinct(9)|. We
+remind the reader that although we have used these 2 tactics to prove our lemma
+there may be other ways in which to do so. 
 
-Our most complex proof is for the \verb|SNormalContinue1_L11| lemma in which we use 3 tactics to prove the property that the \verb|SNormalContinue1| changeSchema does not conflict with the state Invariants. The tactics we use here are \verb|smt|, \verb|OnOff.distinct(1)| and \verb|pswitch.simps(1)|.
+Our most complex proof is for the \verb|SNormalContinue1_L11| lemma in which we
+use 3 tactics to prove the property that the \verb|SNormalContinue1|
+changeSchema does not conflict with the state Invariants. The tactics we use
+here are \verb|smt|, \verb|OnOff.distinct(1)| and \verb|pswitch.simps(1)|.
 
 \subsubsection{ProjectAlloc}
 
-The projectAlloc specification has 5 changeSchema's and 1 set of stateInvariants therefore it has 5 lemmas which \gls{zmath} has automatically generated to check for the consistancy. To prove these lemmas we have in total used 18 tactics.
+The projectAlloc specification has 5 changeSchema's and 1 set of stateInvariants
+therefore it has 5 lemmas which \gls{zmath} has automatically generated to check
+for the consistancy. To prove these lemmas we have in total used 18 tactics.
 
-The lemmas to check that the changeSchema's did not conflict with thestateInvariants with were as follows:
+The lemmas to check that the changeSchema's did not conflict with
+thestateInvariants with were as follows:
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -694,19 +1035,23 @@ PostConditions
 (card ({l. the (allocation' l) = lec})) \<leq> the (maxPlaces' lec))))"
 \end{verbatim}
 
-Our most complex lemma to prove is the \verb|AddLecturer_L5| lemma which we used 9 tactics:
+Our most complex lemma to prove is the \verb|AddLecturer_L5| lemma which we used
+9 tactics:
 
-(\verb|metis|, \verb|full_types|, \verb|dom_empty|, \verb|dom_empty|, \verb|dom_empty|, \verb|dom_eq_singleton_conv|, \verb|dom_restrict|, \verb|inf.idem| and \verb|insert_not_empty|).
+(\verb|metis|, \verb|full_types|, \verb|dom_empty|, \verb|dom_empty|,
+\verb|dom_empty|, \verb|dom_eq_singleton_conv|, \verb|dom_restrict|,
+\verb|inf.idem| and \verb|insert_not_empty|).
 
-The most simple lemma to prove was \verb|AddStudent_L3| and \verb|DeAllocate_L2| where we just used 1 tactic (\verb|fastforce| and \verb|auto| respectively).
+The most simple lemma to prove was \verb|AddStudent_L3| and \verb|DeAllocate_L2|
+where we just used 1 tactic (\verb|fastforce| and \verb|auto| respectively).
 
-%\begin{tabular}{|l l |}
-%\hline
-%\verb|lemma AddLecturer_L5:| & \\
+%\begin{tabular}{|l l |} \hline \verb|lemma AddLecturer_L5:| & \\
 %\verb|"(\<exists> projectalloc :: ProjectAlloc.| & \\
 %\verb|\<exists> projectalloc' :: ProjectAlloc.| & \\
-%\verb|\<exists> studInterests' :: (PERSON \<rightharpoonup> ((nat * TOPIC) set)).| & \\
-%\verb|\<exists> lecInterests' :: (PERSON \<rightharpoonup> ((nat * TOPIC) set)).| & \\
+%\verb|\<exists> studInterests' :: (PERSON \<rightharpoonup> ((nat * TOPIC)
+%set)).| & \\
+%\verb|\<exists> lecInterests' :: (PERSON \<rightharpoonup> ((nat * TOPIC)
+%set)).| & \\
 %\verb|\<exists> allocation' :: (PERSON \<rightharpoonup> PERSON).| & \\
 %\verb|\<exists> maxPlaces' :: (PERSON \<rightharpoonup> nat).| & \\
 %\verb|\<exists> l :: PERSON.| & \\
@@ -717,22 +1062,28 @@ The most simple lemma to prove was \verb|AddStudent_L3| and \verb|DeAllocate_L2|
 %\verb|\<and> (maxPlaces' = maxPlaces(l \<mapsto> maxAlloc))| & \\
 %\verb|\<and> (studInterests' = studInterests)| & \\
 %\verb|\<and> (allocation' = allocation)| & \\
-%\verb|\<longrightarrow>(((dom studInterests) \<inter> (dom lecInterests) = {})| & \\
+%\verb|\<longrightarrow>(((dom studInterests) \<inter> (dom lecInterests) = {})|
+%& \\
 %\verb|\<and>(dom allocation \<subseteq> dom studInterests)| & \\
 %\verb|\<and>(ran allocation \<subseteq> dom lecInterests)| & \\
 %\verb|\<and>(dom maxPlaces = dom lecInterests)| & \\
-%\verb|\<and> (\<forall> lec \<in> dom maxPlaces. (card ({l. the (allocation l) = lec})) \<leq> the (maxPlaces lec))| & \\
+%\verb|\<and> (\<forall> lec \<in> dom maxPlaces. (card ({l. the (allocation l)
+%= lec})) \<leq> the (maxPlaces lec))| & \\
 %\verb|∧ ((dom studInterests') \<inter> (dom lecInterests') = {})| & \\
 %\verb|∧(dom allocation' \<subseteq> dom studInterests')| & \\
 %\verb|∧(ran allocation' \<subseteq> dom lecInterests')| & \\
 %\verb|∧(dom maxPlaces' = dom lecInterests')| & \\
-%\verb|∧ (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) = lec})) \<leq> the (maxPlaces' lec))))"| & \\
-%\verb|by (metis (full_types) dom_empty dom_empty dom_empty| & \\ \verb|dom_eq_singleton_conv dom_restrict inf.idem insert_not_empty)| & \\
+%\verb|∧ (\<forall> lec \<in> dom maxPlaces'. (card ({l. the (allocation' l) =
+%lec})) \<leq> the (maxPlaces' lec))))"| & \\
+%\verb|by (metis (full_types) dom_empty dom_empty dom_empty| & \\
+%\verb|dom_eq_singleton_conv dom_restrict inf.idem insert_not_empty)| & \\
 %\end{tabular}
 
 \subsubsection{VideoShop}
 
-The videoShop specification has 3 changeSchemas and 1 set of stateInvariants, therefore \gls{zmath} has generated 3 proof obligations to check that none of the changeSchemas conflict with the stateInvariants and stateInvariants prime.
+The videoShop specification has 3 changeSchemas and 1 set of stateInvariants,
+therefore \gls{zmath} has generated 3 proof obligations to check that none of
+the changeSchemas conflict with the stateInvariants and stateInvariants prime.
 
 The structure of lemma's for the videoshop specification are as follows:
 
@@ -756,7 +1107,10 @@ We are able to prove all 3 lemma's by the tactic \verb|blast|.
 
 \subsubsection{TelephoneDirectory}
 
-The telephone directory has 1 set of stateInvariants and 4 changeSchema's. Therefore we have 4 lemma's which \gls{zmath} generated and which we need to prove. The structure for the lemmas to check the consistancy of the telephone directory specification are as follows:
+The telephone directory has 1 set of stateInvariants and 4 changeSchema's.
+Therefore we have 4 lemma's which \gls{zmath} generated and which we need to
+prove. The structure for the lemmas to check the consistancy of the telephone
+directory specification are as follows:
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -768,13 +1122,23 @@ PostConditions
 \<and> (dom phoneNumbers' = Domain persons')))"
 \end{verbatim}
 
-These sanity check make sure that when updated the telephone directory that the people listed in the domain of phoneNumbers is equal to the list in the domain of persons.
+These sanity check make sure that when updated the telephone directory that the
+people listed in the domain of phoneNumbers is equal to the list in the domain
+of persons.
 
-To prove the first 2 lemmas \verb|AddPerson_L1| and \verb|RemoveNumber_L2| we only needed to use a single tactic (\verb|auto| and \verb|fastforce|) respectively. However the last 2 lemmas (\verb|RemovePerson_L3| and \verb|RemoveNumber_L4|) required 3 tactics each. For example to prove the \verb|RemovePerson_L3| lemma we needed to use \verb|smt|, \verb| Diff_insert_absorb| and \verb|mk_disjoint_insert|. In total we used 8 tactics to prove all 4 properties.
+To prove the first 2 lemmas \verb|AddPerson_L1| and \verb|RemoveNumber_L2| we
+only needed to use a single tactic (\verb|auto| and \verb|fastforce|)
+respectively. However the last 2 lemmas (\verb|RemovePerson_L3| and
+\verb|RemoveNumber_L4|) required 3 tactics each. For example to prove the
+\verb|RemovePerson_L3| lemma we needed to use \verb|smt|,
+\verb|Diff_insert_absorb| and \verb|mk_disjoint_insert|. In total we used 8
+tactics to prove all 4 properties.
 
 \subsubsection{ClubState}
 
-The clubstate specification has 4 changing schemas and thus 4 properties to check the stateinvairants are not conflicted when the state has been changed. The stateinvariants for the clubstate specification is are as follows:
+The clubstate specification has 4 changing schemas and thus 4 properties to
+check the stateinvairants are not conflicted when the state has been changed.
+The stateinvariants for the clubstate specification is are as follows:
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -788,11 +1152,17 @@ PostConditions
 \<and> (card hall' \<leq> maxPlayers))"
 \end{verbatim}
 
-Here we wish that all the people in the hall must be members of badminton and the number of players can not exceed the maximum amount both before the change and after the change in state. The first 2 lemma's in our clubstate specification (\verb|LeaveHall_L1| and \verb|AddMember_L2|) were proven by \verb|auto| and the last two properties (\verb|EnterHall_L3:| and \verb|RemoveMember_L4|) were proven by \verb|blast|.
+Here we wish that all the people in the hall must be members of badminton and
+the number of players can not exceed the maximum amount both before the change
+and after the change in state. The first 2 lemma's in our clubstate
+specification (\verb|LeaveHall_L1| and \verb|AddMember_L2|) were proven by
+\verb|auto| and the last two properties (\verb|EnterHall_L3:| and
+\verb|RemoveMember_L4|) were proven by \verb|blast|.
 
 \subsubsection{ZCGa}
 
-In the specification representing the \gls{zcga} we have 6 properties to prove. The syntax for the properties which \gls{zmath} has generated are:
+In the specification representing the \gls{zcga} we have 6 properties to prove.
+The syntax for the properties which \gls{zmath} has generated are:
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -810,13 +1180,17 @@ PostConditions
 \<and> (sets' \<inter> terms' = {}))"
 \end{verbatim}
 
-Since we have 6 changing schemas we need to check that none of the schemas conflict with the stateInvariants before and after the state has been changed. In this proof, we have proven 2 lemmas
+Since we have 6 changing schemas we need to check that none of the schemas
+conflict with the stateInvariants before and after the state has been changed.
+In this proof, we have proven 2 lemmas
 
-(\verb|CorrectExpression_L1| and \verb|CorrectConstantTerm_L5|) by \verb|smt| and the remaining 4 using \verb|blast|.
+(\verb|CorrectExpression_L1| and \verb|CorrectConstantTerm_L5|) by \verb|smt|
+and the remaining 4 using \verb|blast|.
 
 \subsubsection{GenDB}
 
-GenDB has 4 consistancy checks we must prove against the stateInvariants. The syntax for the stateInvariants are as follows:
+GenDB has 4 consistancy checks we must prove against the stateInvariants. The
+syntax for the stateInvariants are as follows:
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -838,11 +1212,19 @@ the (sex q) \<noteq> the (sex r)))
 the (sex' q) \<noteq> the (sex' r))))"
 \end{verbatim}
 
-Out of the 4 lemms we proved, 2 lemms can be proven by the tactic \verb|blast|. The other 2 lemms we proved by using 5 other tactics. For example, we proved the \verb|AddPerson_L3| property using the tactics \verb|metis|, \verb|mono_tags|, \verb|lifting|, \verb|empty_iff| and \verb|rtrancl.rtrancl_refl|. This made sure that when a person has been added to the genDB that the preconditions and postconditions satisfied the stateInvariants.
+Out of the 4 lemms we proved, 2 lemms can be proven by the tactic \verb|blast|.
+The other 2 lemms we proved by using 5 other tactics. For example, we proved the
+\verb|AddPerson_L3| property using the tactics \verb|metis|, \verb|mono_tags|,
+\verb|lifting|, \verb|empty_iff| and \verb|rtrancl.rtrancl_refl|. This made sure
+that when a person has been added to the genDB that the preconditions and
+postconditions satisfied the stateInvariants.
 
 \subsubsection{Timetable}
 
-The timetable specification has 4 schemas in which the original state has changed and 1 set of stateInvariants that must be obeyed throughout the specification. The stateInvariants for the timtable specification are as follows.
+The timetable specification has 4 schemas in which the original state has
+changed and 1 set of stateInvariants that must be obeyed throughout the
+specification. The stateInvariants for the timtable specification are as
+follows.
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -861,11 +1243,17 @@ PostConditions
 (dom (the (studentTT' s))) moduleTT' m = (dom (the (studentTT' s))))"
 \end{verbatim}
 
-There are 4 properties to prove in the timetable specification. We have been able to prove 3 properties (\verb|RegForModule_L1|, \verb|AddStudent_L2| and \verb|ScheduleModule_L4|) using \verb|smt| and 1 property \verb|DescheduleModule_L3| using \verb|blast|.
+There are 4 properties to prove in the timetable specification. We have been
+able to prove 3 properties (\verb|RegForModule_L1|, \verb|AddStudent_L2| and
+\verb|ScheduleModule_L4|) using \verb|smt| and 1 property
+\verb|DescheduleModule_L3| using \verb|blast|.
 
 \subsubsection{BirthdayBook}
 
-Since we used the simplest form of the birthdaybook specification (there are many different forms) we only had 1 lemma to prove. The \verb|AddBirthday_L1| property was proven by \verb|auto| however we could have also solved it using \verb|smt|.
+Since we used the simplest form of the birthdaybook specification (there are
+many different forms) we only had 1 lemma to prove. The \verb|AddBirthday_L1|
+property was proven by \verb|auto| however we could have also solved it using
+\verb|smt|.
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -879,7 +1267,12 @@ PostConditions
 
 \subsubsection{ClubState2}
 
-The clubstate2 specification is an extension of the original clubstate specification. Since the specification stemmed from the original clubstate we have to make sure that the changeState schemas do not conflict with the stateInvariants from the first stateSchema as well as the stateInvariants in the ClubState2 state schema. We have the following stateInvariants from the ClubState2 specification:
+The clubstate2 specification is an extension of the original clubstate
+specification. Since the specification stemmed from the original clubstate we
+have to make sure that the changeState schemas do not conflict with the
+stateInvariants from the first stateSchema as well as the stateInvariants in the
+ClubState2 state schema. We have the following stateInvariants from the
+ClubState2 specification:
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -897,15 +1290,21 @@ PostConditions
 
 The stateInvairants taken from the ClubState2 state schema is
 
- \verb|[onCourt, (Range waiting)] partition [hall]| however the ClubState2 state schema uses the ClubState schema. Therefore the original stateInvairants
+ \verb|[onCourt, (Range waiting)] partition [hall]| however the ClubState2 state
+ schema uses the ClubState schema. Therefore the original stateInvairants
 
-(\verb|((hall \<subseteq> badminton)| and \verb|(card hall \<leq> maxPlayers)|) must also be checked.
+(\verb|((hall \<subseteq> badminton)| and \verb|(card hall \<leq> maxPlayers)|)
+must also be checked.
 
-The 3 lemmas which needed to be proved use a total of 4 tactics. The first and last lemmas are proven by \verb|auto| where as the second lemma (\verb|LeaveHall_L2|) is proven using 2 tactics (\verb|smt| and \verb|empty_iff|).
+The 3 lemmas which needed to be proved use a total of 4 tactics. The first and
+last lemmas are proven by \verb|auto| where as the second lemma
+(\verb|LeaveHall_L2|) is proven using 2 tactics (\verb|smt| and
+\verb|empty_iff|).
 
 \subsubsection{ModuleReg}
 
-The ModuleReg specification has 2 changeSchemas and 1 set of stateInvairants. therefore \gls{zmath} has produced 2 lemmas which we need to prove.
+The ModuleReg specification has 2 changeSchemas and 1 set of stateInvairants.
+therefore \gls{zmath} has produced 2 lemmas which we need to prove.
 
 \begin{verbatim}
 \<exists> variables and types.
@@ -919,7 +1318,9 @@ PostConditions
 \<and> (Range taking' \<subseteq> degModules'))"
 \end{verbatim}
 
-The \verb|AddStudent_L2| property we managed to prove using a single tactic (\verb|blast|) however to prove the first lemma (\verb|RegForModule_L1|) we used 17 tactics, these were:
+The \verb|AddStudent_L2| property we managed to prove using a single tactic
+(\verb|blast|) however to prove the first lemma (\verb|RegForModule_L1|) we used
+17 tactics, these were:
 
 \begin{verbatim}
 smt Domain_empty Domain_insert Range.intros Range_empty 
@@ -930,69 +1331,200 @@ singleton_insert_inj_eq' singleton_insert_inj_eq'
 
 \section{Reflection and Discussion}
 
-To check the consistancy of all our specification we had to prove 56 lemmas with a total of 120 tactics. In this section we discuss how far the \gls{zmath} toolkit can take us,how difficult it is for the user to get the full proof and what other proof is left.
+To check the consistancy of all our specification we had to prove 56 lemmas with
+a total of 120 tactics. In this section we discuss how far the \gls{zmath}
+toolkit can take us,how difficult it is for the user to get the full proof and
+what other proof is left.
 
 \subsection{How far can ZMathLang toolkit take us and what is left for the user to do manually.}
 
-Looking back at our examples described in the previous section. The proofs to check for the complexity depend on the complexity of the specification. The more complex the language of the specification (whether it uses terms and set or just terms), the more complex the proofs and syntax of the proofs are. The vending machine has no stateinvariants therefore \gls{zmath} does not generate any lemmas to be proven. The steamboiler specification, which is our longest example, uses only terms but has 2 stateSchemas and therefore 2 records. We were able to prove all the lemmas using 2 different automatic isabelle tools (blast and sledgehammer).
+Looking back at our examples described in the previous section. The proofs to
+check for the complexity depend on the complexity of the specification. The more
+complex the language of the specification (whether it uses terms and set or just
+terms), the more complex the proofs and syntax of the proofs are. The vending
+machine has no stateinvariants therefore \gls{zmath} does not generate any
+lemmas to be proven. The steamboiler specification, which is our longest
+example, uses only terms but has 2 stateSchemas and therefore 2 records. We were
+able to prove all the lemmas using 2 different automatic isabelle tools (blast
+and sledgehammer).
 
-We remind the reader of figure \ref{fig:timeline} in chapter \ref{ch:design}, \verb|sledgehammer| and \verb|blast| are the two tools which have the most automated proving power. With the manual proof to complete the theorem the user should have some basic knowledge of how to prove lemmas in Isabelle, at least have some basic knowledge of the Isabelle tools available to assist them in proving the lemmas. If the software/system designer is not an Isabelle expert and has got up to step 5 in the \gls{zmath} steps then they would have the three following options:
+We remind the reader of figure \ref{fig:timeline} in chapter \ref{ch:design},
+\verb|sledgehammer| and \verb|blast| are the two tools which have the most
+automated proving power. With the manual proof to complete the theorem the user
+should have some basic knowledge of how to prove lemmas in Isabelle, at least
+have some basic knowledge of the Isabelle tools available to assist them in
+proving the lemmas. If the software/system designer is not an Isabelle expert
+and has got up to step 5 in the \gls{zmath} steps then they would have the three
+following options:
 
 \begin{enumerate}
-\item Learn no Isabelle at all and pass on the proofs to be completed by an Isabelle expert.
+\item Learn no Isabelle at all and pass on the proofs to be completed by an
+Isabelle expert.
 
-\item Learn Isabelle in depth until they gain enough knowledge to prove their specification and add more proofs if needed.
+\item Learn Isabelle in depth until they gain enough knowledge to prove their
+specification and add more proofs if needed.
 
-\item Learn the basic automated proving tools (highlighted in figure \ref{fig:timeline}) to prove all (if not then some) of the lemmas, then hand the rest to an Isabelle expert to finish off.
+\item Learn the basic automated proving tools (highlighted in figure
+\ref{fig:timeline}) to prove all (if not then some) of the lemmas, then hand the
+rest to an Isabelle expert to finish off.
 \end{enumerate}
 
-In the first case we will need 2 people to complete the proof. Since the system designer has already translated the specification into Isabelle syntax automatically so a lot of the work has been done. The theory file has been set up and properties have been written, the expert will just need to prove them. Thefore a big chunk of work has been done. The advantage with this approach goes to the system designer as they do not need to learn anything beyond their existing knowledge. However, the disadvantage to this approach is that there needs to be an Isabelle expert ready to complete the proofs and depending on the syntax of the specification this may be difficult to prove. There also might be other properties which the stakeholders of the project may wish to be proven. Again, To add these extra properties, a little bit more Isabelle knowledge is needed.
+In the first case we will need 2 people to complete the proof. Since the system
+designer has already translated the specification into Isabelle syntax
+automatically so a lot of the work has been done. The theory file has been set
+up and properties have been written, the expert will just need to prove them.
+Thefore a big chunk of work has been done. The advantage with this approach goes
+to the system designer as they do not need to learn anything beyond their
+existing knowledge. However, the disadvantage to this approach is that there
+needs to be an Isabelle expert ready to complete the proofs and depending on the
+syntax of the specification this may be difficult to prove. There also might be
+other properties which the stakeholders of the project may wish to be proven.
+Again, To add these extra properties, a little bit more Isabelle knowledge is
+needed.
 
-In the second scenario we will need only 1 person to complete the proof (the system designer). Using the \gls{zmath} toolkit will assist the designer translating the specification into Isabelle syntax, however the user will then need to learn more Isabelle to finish of the proof for their specification. Since the \gls{zmath} has already produced an Isabelle file the user can then learn the Isabelle syntax by example as well as reading through the various Isabelle documentations online. The advantage of this scenario is that since there is only one person doing the entire proof, there is less cost in finding another Isabelle expert and paying them to complete the proof. The disadvantage in this case is that the system engineer has to spend more time on learning Isabelle syntax and proving in Isabelle which may become long and tedious. The stakeholders may also want other properties proven about the specification which again is down to the system designer to learn.
+In the second scenario we will need only 1 person to complete the proof (the
+system designer). Using the \gls{zmath} toolkit will assist the designer
+translating the specification into Isabelle syntax, however the user will then
+need to learn more Isabelle to finish of the proof for their specification.
+Since the \gls{zmath} has already produced an Isabelle file the user can then
+learn the Isabelle syntax by example as well as reading through the various
+Isabelle documentations online. The advantage of this scenario is that since
+there is only one person doing the entire proof, there is less cost in finding
+another Isabelle expert and paying them to complete the proof. The disadvantage
+in this case is that the system engineer has to spend more time on learning
+Isabelle syntax and proving in Isabelle which may become long and tedious. The
+stakeholders may also want other properties proven about the specification which
+again is down to the system designer to learn.
 
-The third case is a compromise between the first two scenarios, it will require the system designer and on some occasions, an Isabelle expert. The system designer translates the specification into Isabelle using the \gls{zmath} toolkit to assist them. They then learn the very basic automated proving tools, to assist them in proving the lemmas to check for consistency. By doing this the system engineer may be able to prove the entire specification for consistancy using the automated tool. However some lemmas if they are more complex may require more Isabelle skills then just the automated Isabelle tools to prove. Therefore the system engineer will be required to prove as much as they can and if there are some parts which can not be proved with automation, they can pass this along to an Isabelle expert. The Isabelle expert will then have less work to prove the remainer of the proof. If the stakeholders require more properties proved then the Isabelle expert can do this as well.
+The third case is a compromise between the first two scenarios, it will require
+the system designer and on some occasions, an Isabelle expert. The system
+designer translates the specification into Isabelle using the \gls{zmath}
+toolkit to assist them. They then learn the very basic automated proving tools,
+to assist them in proving the lemmas to check for consistency. By doing this the
+system engineer may be able to prove the entire specification for consistancy
+using the automated tool. However some lemmas if they are more complex may
+require more Isabelle skills then just the automated Isabelle tools to prove.
+Therefore the system engineer will be required to prove as much as they can and
+if there are some parts which can not be proved with automation, they can pass
+this along to an Isabelle expert. The Isabelle expert will then have less work
+to prove the remainer of the proof. If the stakeholders require more properties
+proved then the Isabelle expert can do this as well.
 
-The third case would be most beneficial as an Isabelle expert may not be required if the stakeholders only want to check the system for consistancy and the syntax of the specification is reletively easy where automated tools can be used to prove the specification. However, depending on the complexity of the specification, an Isabelle expert may be needed sometimes if the system designer can not prove the entire specification with just the automated tools and/or if the stakeholders require a more rigourous proof.
+The third case would be most beneficial as an Isabelle expert may not be
+required if the stakeholders only want to check the system for consistancy and
+the syntax of the specification is reletively easy where automated tools can be
+used to prove the specification. However, depending on the complexity of the
+specification, an Isabelle expert may be needed sometimes if the system designer
+can not prove the entire specification with just the automated tools and/or if
+the stakeholders require a more rigourous proof.
 
-Automation on both sides are constantly being redeveloped and revisted. One can automate a specification into Isabelle covering formal methods and perhaps one day, informal specification could be translated. On the other end, there are many \gls{smt} solvers being develop to cover more and more existing lemmas and theorems. However, due to the variations in systems, syntax and properties the user may wish to prove, it is difficult to cover everything. The more complex the system, the less automation available to assist in the users proofs. For a simple system, there exists automation on both sides to cover the proofs. However, once the user wishes to build a more complex system, the user will then need to learn more about their chosen theorem in order to check for complete correctness.
+Automation on both sides are constantly being redeveloped and revisted. One can
+automate a specification into Isabelle covering formal methods and perhaps one
+day, informal specification could be translated. On the other end, there are
+many \gls{smt} solvers being develop to cover more and more existing lemmas and
+theorems. However, due to the variations in systems, syntax and properties the
+user may wish to prove, it is difficult to cover everything. The more complex
+the system, the less automation available to assist in the users proofs. For a
+simple system, there exists automation on both sides to cover the proofs.
+However, once the user wishes to build a more complex system, the user will then
+need to learn more about their chosen theorem in order to check for complete
+correctness.
 
 \subsection{Assumptions and limitations of the ZMathLang toolkit}
 
-The recommendations made in this thesis are based on several assumptions and limitations as to what may be done to translate a Z specification into Isabelle using our \gls{zmath} toolkit.
+The recommendations made in this thesis are based on several assumptions and
+limitations as to what may be done to translate a Z specification into Isabelle
+using our \gls{zmath} toolkit.
 
 The assumptions are as follows:
 
 \begin{itemize}
-\item Firstly, we like to point out that the \gls{zmath} can only translate specifications with syntax used in our examples. Since the language of mathematical notation is vast we can not incoporate the entire syntax of mathematics in the \gls{zmath} within the scope of this thesis. More explanation is given on this topic in the next chapter.
+\item Firstly, we like to point out that the \gls{zmath} can only translate
+specifications with syntax used in our examples. Since the language of
+mathematical notation is vast we can not incoporate the entire syntax of
+mathematics in the \gls{zmath} within the scope of this thesis. More explanation
+is given on this topic in the next chapter.
 
-\item The \gls{zmath} toolkit uses \LaTeX{} and is implemented in \verb|python 2.7|. It uses the following python packages:
+\item The \gls{zmath} toolkit uses \LaTeX{} and is implemented in 
+\verb|python2.7|. It uses the following python packages:
 \begin{itemize}
 \item \textbf{re:} To read the users annotations from \gls{zcga} and \gls{zdra}.
-\item \textbf{networkx:} To implemented the instances and relationships into a graph form.
+\item \textbf{networkx:} To implemented the instances and relationships into a
+graph form.
 \item \textbf{matplotlib:} To produce the goto and dependency graphs.
 \item \textbf{Tkinter:} To run the user interface.
 \end{itemize}
 
-We assume that a user wanting to use the \gls{zmath} toolkit has installed the correct packages.
+We assume that a user wanting to use the \gls{zmath} toolkit has installed the
+correct packages.
 
-\item One of the assumptions the toolkit makes is that if the specification holds 1 state schema (and thus 1 record) then all the lemma's produced are under that record. Thus, if the specification holds 2 or more records then the lemmas produced will need to define which record they belong to. For example in the SteamBoiler specification we manually input `\verb|(in thesteamboiler)|' after the word `\verb|lemma|'. This does not have to be done to specification which only hold one state schema.
+\item One of the assumptions the toolkit makes is that if the specification
+holds 1 state schema (and thus 1 record) then all the lemma's produced are under
+that record. Thus, if the specification holds 2 or more records then the lemmas
+produced will need to define which record they belong to. For example in the
+SteamBoiler specification we manually input `\verb|(in thesteamboiler)|' after
+the word `\verb|lemma|'. This does not have to be done to specification which
+only hold one state schema.
 
-\item Another assumtion the \gls{zmath} toolkit makes is that the document it is checking contains a single specification. Although the \gls{zcga} can check multiple specification in a single document, the rest of the tools assume that it is checking 1 system. Thus, when producing the dependency and goto graphs and the specification isn't linked, it will assume that the instances are under one specification. Also when the \gls{zdra} translates the specification into Isabelle it will do so in a single theorem document. More discussion on this is in the `Future work' section in the next chapter.
+\item Another assumtion the \gls{zmath} toolkit makes is that the document it is
+checking contains a single specification. Although the \gls{zcga} can check
+multiple specification in a single document, the rest of the tools assume that
+it is checking 1 system. Thus, when producing the dependency and goto graphs and
+the specification isn't linked, it will assume that the instances are under one
+specification. Also when the \gls{zdra} translates the specification into
+Isabelle it will do so in a single theorem document. More discussion on this is
+in the `Future work' section in the next chapter.
 
-\item We also assume that the user actually wishes to check the specification for consistancy. As Stepney discussed in \cite{stepney1998tale} there are many properties to prove in a system. It is down to the stakeholders and clients of the project. For example a high integrity system may have some universal guidlines or codes of conduct it must obey. Proving properties to check for consistancy is highly valuable, however other properties such as if preconditions hold, or relationship between two specification may also be wanted by the project stakeholders. These other properties may be added at the end of stage 6 and if the consistancy checks are not needed, they can be deleted from the Isabelle file manually.
+\item We also assume that the user actually wishes to check the specification
+for consistancy. As Stepney discussed in \cite{stepney1998tale} there are many
+properties to prove in a system. It is down to the stakeholders and clients of
+the project. For example a high integrity system may have some universal
+guidlines or codes of conduct it must obey. Proving properties to check for
+consistancy is highly valuable, however other properties such as if
+preconditions hold, or relationship between two specification may also be wanted
+by the project stakeholders. These other properties may be added at the end of
+stage 6 and if the consistancy checks are not needed, they can be deleted from
+the Isabelle file manually.
 
 \end{itemize}
 
-We like to highlight the limitations of the \gls{zmath} toolkit. They are as follows:
+We like to highlight the limitations of the \gls{zmath} toolkit. They are as
+follows:
 
 \begin{itemize}
-\item One of the limitations of the \gls{zmath} toolkit is in the way the \gls{zdra} checks if the specification is correctly totalised. Althought an incorrectly totalised specification can still be translated into Isabelle a warning message comes up for incorrectly totalised specifications. If the users totalises preconditions e.g \verb|\totalises{TS#}{PRE#}| and all preconditions have been totalised then no warning appears. However, if the user totalises schemas which hold preconditions within them e.g. \verb|\totalises{TS#}{CS#}| then the \gls{zdra} checker doesnt pick up on it and would say the specification is incorrectly totalised.
+\item One of the limitations of the \gls{zmath} toolkit is in the way the
+\gls{zdra} checks if the specification is correctly totalised. Althought an
+incorrectly totalised specification can still be translated into Isabelle a
+warning message comes up for incorrectly totalised specifications. If the users
+totalises preconditions e.g \verb|\totalises{TS#}{PRE#}| and all preconditions
+have been totalised then no warning appears. However, if the user totalises
+schemas which hold preconditions within them e.g. \verb|\totalises{TS#}{CS#}|
+then the \gls{zdra} checker doesnt pick up on it and would say the specification
+is incorrectly totalised.
 
-\item Another limitation is in the way the dependency and goto graphs are presented. If the specification is reletively small, with not a lot of instances and connections then the graphs a presented quite clearly. On the other hand, when a specification is more complex with many instances the graph presents the nodes bundled together. Visually this becomes difficult to see the relationship between the nodes, it would be better if the nodes were represented with larger spaces between them.
+\item Another limitation is in the way the dependency and goto graphs are
+presented. If the specification is reletively small, with not a lot of instances
+and connections then the graphs a presented quite clearly. On the other hand,
+when a specification is more complex with many instances the graph presents the
+nodes bundled together. Visually this becomes difficult to see the relationship
+between the nodes, it would be better if the nodes were represented with larger
+spaces between them.
 \end{itemize}
 
 \section{Conclusion}
 
-The \gls{zmath} toolkit has been tried and tested on various examples of Z specifications. We have translated specifications with syntax using set and terms and specifications using terms only. It seems that the grammatical types do not affect the ease of translation, but the amount of instances and the notations of mathematics do. The Steamboiler specification was our most complex example and we had to manually input extra parts to the lemmas in order to prove them. The amount of changeSchema's and stateInvariants affect how many properties the toolkit will produce. The complexity of the mathematical notation will determine how difficult the properites are to prove, whether they can be proven with the assistance of automatic tools or whether they need more Isabelle expertise to prove. 
+The \gls{zmath} toolkit has been tried and tested on various examples of Z
+specifications. We have translated specifications with syntax using set and
+terms and specifications using terms only. It seems that the grammatical types
+do not affect the ease of translation, but the amount of instances and the
+notations of mathematics do. The Steamboiler specification was our most complex
+example and we had to manually input extra parts to the lemmas in order to prove
+them. The amount of changeSchema's and stateInvariants affect how many
+properties the toolkit will produce. The complexity of the mathematical notation
+will determine how difficult the properites are to prove, whether they can be
+proven with the assistance of automatic tools or whether they need more Isabelle
+expertise to prove. 
 
-We have outlined some of the assumptions and limitation of the \gls{zmath} toolkit and we disucss the achievments of the system and future work in the next chapter.
+We have outlined some of the assumptions and limitation of the \gls{zmath}
+toolkit and we disucss the achievments of the system and future work in the next
+chapter.

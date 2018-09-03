@@ -162,8 +162,8 @@ it is the first initial schema in the \emph{theory}. If there was another
 \begin{figure}[H]
 \centering
 \begin{footnotesize}
-\begin{BVerbatim}
-    [commandchars=+\[\]] [+color[red]\draschema{IS1}{]
+\begin{BVerbatim}[commandchars=+\[\]]
+[+color[red]\draschema{IS1}{]
 \begin{schema}{InitBirthdayBook} 
 BirthdayBook' 
 \where 
@@ -186,7 +186,8 @@ within a theory.
 \begin{figure}[H]
 \centering
 \begin{footnotesize}
-\begin{BVerbatim}[commandchars=+\[\]] [+color[red]\draschema{CS1}{]
+\begin{BVerbatim}[commandchars=+\[\]]
+[+color[red]\draschema{CS1}{]
 \begin{schema}{AddBirthday}
 \Delta BirthdayBook \\
 name?: NAME \\
@@ -221,7 +222,8 @@ the chunk \verb|OS4| that is the forth \emph{outputschema} in the specification.
 \begin{figure}[H]
 \centering
 \begin{footnotesize}
-\begin{BVerbatim}[commandchars=+\[\]] [+color[red]\draschema{OS4}{]
+\begin{BVerbatim}[commandchars=+\[\]]
+[+color[red]\draschema{OS4}{]
 \begin{schema}{AlreadyKnown}
 \Xi BirthdayBook \\
 name?: NAME \\
@@ -240,7 +242,7 @@ result!: REPORT
 
 A \emph{totalise} instance are parts of the specification which totalise
 preconditions and schemas within the specification. These are labelled as
-\verb|TS#| where \verb|#| is some number. \emph{Totoalise} instances can written
+\verb|TS#| where \verb|#| is some number. \emph{Totalise} instances can written
 in two ways. Either using the double equals operator:
 
 \begin{verbatim}
@@ -266,7 +268,8 @@ line of the instance only. The second way is useful if there are more than one
 \begin{figure}[H]
 \centering
 \begin{footnotesize}
-\begin{BVerbatim}[commandchars=+\[\]] [+color[red]\draschema{TS3}{]
+\begin{BVerbatim}[commandchars=+\[\]]
+[+color[red]\draschema{TS3}{]
 \begin{zed}
 VM3 \defs VM1 \lor VM2 \end{zed}[+color[red]}]
 \end{BVerbatim}
@@ -314,7 +317,8 @@ of an \emph{axiom} instance labelled in \gls{zdra} is shown in figure
 \begin{figure}[H]
 \centering
 \begin{footnotesize}
-\begin{BVerbatim}[commandchars=+\[\]] [+color[red]\draschema{A1}{]
+\begin{BVerbatim}[commandchars=+\[\]]
+[+color[red]\draschema{A1}{]
 \begin{axdef}
 maxPlayers: \nat
 \where
@@ -353,7 +357,8 @@ operations).
 \begin{figure}[H]
 \centering
 \begin{footnotesize}
-\begin{BVerbatim}[commandchars=+\[\]] [+color[red]\draschema{PRE1}{]
+\begin{BVerbatim}[commandchars=+\[\]]
+[+color[red]\draschema{PRE1}{]
 \begin{schema}{exact\_cash}
 cash\_tendered?: \nat
 \where
@@ -495,7 +500,7 @@ totalising condition then the specification is correctly totalised.
 Specification 2 in the table shows 4 existing preconditions. All but one (PRE2)
 precondition have a totalising relationship with a totalise schema. In this
 case, PRE2 is an outstanding preconditions to be totalised and therefore the
-message `\texttt{Specification incorectly totalised} appears. Specification 3 in
+message `\texttt{Specification incorrectly totalised} appears. Specification 3 in
 table \ref{tab:totalisecorrect} shows 5 schema preconditions. When checking
 totalising correctness it does not matter whether the preconditions are in
 \verb|draline| form or \verb|draschema| form. In the third example we see that
@@ -555,8 +560,8 @@ graph. For example if there was a graph with edges [a$\rightarrow$b,
 a$\rightarrow$c, b$\rightarrow$c] then that would still be legal as there are no
 directed loops, however, if there was a graph with edges [a$\rightarrow$b,
 b$\rightarrow$c, c$\rightarrow$a] then that would cause a loop in the reasoning
-and the specfication will not be \gls{zdra} correct. The program outputs a
-message informing the user whethere the specification is \gls{zdra} correct or
+and the specification will not be \gls{zdra} correct. The program outputs a
+message informing the user whether the specification is \gls{zdra} correct or
 not.
 
 \begin{figure}[H]
@@ -689,7 +694,7 @@ this is because it is indeed true that the initial schema \verb|IS1| is the
 \emph{goto graph} the edge is pointing the other way from the stateschema
 \verb|SS1| to the initialschema \verb|IS1|. This is because the initialschema
 \verb|IS1| needs \verb|SS1| to exist, that is if \verb|SS1| didn't exist then
-\verb|IS1| couldn't initialise it. Therfore the instance \verb|IS1| is dependent
+\verb|IS1| couldn't initialize it. Therefore the instance \verb|IS1| is dependent
 on \verb|SS1|.
 
 The other \gls{zdra} relations which also reverse the direction of the arrow in
@@ -700,7 +705,7 @@ the \emph{goto graph} are \emph{uses},\emph{requires} and \emph{totalises}.
 We denote the star character `*' to denote one or many. We remind the reader
 that `$\mathbf{\Gamma}$' denotes the schematext of a specification,
 $\mathcal{Z}, \mathcal{E}, \mathcal{T}$ and $\mathbb{S}$ are correctly typed
-\emph{declatation}, \emph{expression}, \emph{term} and \emph{set} respectively
+\emph{declaration}, \emph{expression}, \emph{term} and \emph{set} respectively
 (from table \ref{tab:zcga1} in chapter \ref{ch:zcga}).
 
 \begin{defin}
@@ -904,7 +909,7 @@ relation `totalises' in this case we would have $(\mathcal{Z} \& \mathcal{ED}) |
 \mathcal{ED}), totalises, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$. Hence
 the first part of the theorem is proven.
 
-\item Output schema has the \gls{zcga} sytntax $(\mathcal{Z} \& \mathcal{ED})$
+\item Output schema has the \gls{zcga} syntax $(\mathcal{Z} \& \mathcal{ED})$
 according to table \ref{tab:zcgainzdra}. If totaliseSchema has the \gls{zcga}
 syntax $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$ then using point 2 the
 permitted relation would be $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})
@@ -972,7 +977,7 @@ $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Using point 3, we substitute the
 
 \item The \gls{zcga} syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) |
 \mathcal{Z}$ and the \gls{zcga} syntax for axiom is  $\mathcal{Z} \&
-\mathcal{ED}$. By subsituting these \gls{zcga} syntax's in point 4 we get
+\mathcal{ED}$. By substituting these \gls{zcga} syntax's in point 4 we get
 $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \longrightarrow \mathcal{Z} \&
 \mathcal{ED}$. Since $\longrightarrow$ in this case is the relationship uses, we
 can change $\longrightarrow$ to `uses' and get $(\mathcal{Z} \& \mathcal{ED}) |

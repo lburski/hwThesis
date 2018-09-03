@@ -3,7 +3,7 @@
 
 The skeletons described in this chapter are automatically generated if the
 specification passes the \gls{zdra} check. Section \ref{sec:buildinggraphs}
-outlines how the dependency and goto graphs are geneted from the \gls{zdra}
+outlines how the dependency and goto graphs are generated from the \gls{zdra}
 annotations. Then section \ref{sec:zdra2gen} describes how \gls{zmath} builds
 the \gls{gps} from the graphs. 
 
@@ -16,7 +16,7 @@ the graph and each instance becomes a `\emph{node}' in the graph. The goto graph
 is then built from the dependency graph with the same nodes but some edges being
 reversed.
 
-\subsection{How \gls{zmath} builds the dependency graph from the \gls{zdra} anotations}
+\subsection{How \gls{zmath} builds the dependency graph from the \gls{zdra} annotations}
 
 We use the definitions from \cite{zengfirstyear} to describe `\emph{nodes}'
 `\emph{relational edges}' to describe the dependency graph as a set.
@@ -117,15 +117,15 @@ the relations are reversed:
 Table \ref{tab:verticiesandedges} show how a dependency graph can be created
 using the formal definitions for vertices and edges. The dependency graph is
 directly generated from the \gls{zdra} annotated document. The relations
-\emph{intialOf} and \emph{uses} are used between schemas, \emph{requires}
+\emph{initialOf} and \emph{uses} are used between schemas, \emph{requires}
 becomes a childOf the schema which requires it and \emph{allows} can be used
 between instances within the schema (see table \ref{tab:relationsallowed}). If
 the \emph{allows} relationship is used within the schema, then both the
 precondition and postcondition/output becomes childrenOf the schema. Figure
 \ref{fig:unnested} shows two separate schemas which are not nested within
-eachother, however figure \ref{fig:nested} shows the precondition PRE2 allows
+each other, however figure \ref{fig:nested} shows the precondition PRE2 allows
 the postcondition PO2 within the schema CS1, since CS1 requires PRE2 then both
-PRE2 and PO2 are chidrenOf CS1.
+PRE2 and PO2 are childrenOf CS1.
 
 \begin{figure}[H]
 \centering
@@ -181,7 +181,7 @@ $
 \newline
 \noindent and $\mathbb{D}_{comb} = \mathbb{V}_{comb} \union \mathbb{E}_{comb}$
 
-\subsection{Generating the GoTo graph from the depedency graph}
+\subsection{Generating the GoTo graph from the dependency graph}
 
 Since the dependency graph only follows the annotations of the \gls{zdra} we
 need to highlight the textual order of these annotations. For example some
@@ -284,7 +284,7 @@ Note the edges for the relations \emph{allows} and \emph{requires} have the same
 direction both in the dependency graph and the goto graph. This is because if
 instance v\_1 \emph{allows} another instance v\_2 to happen then instance v\_1
 must exist for instance v\_2 to exist. The relationship \emph{requires} is
-between a drashchema and a draline where a draschema requires a particular
+between a draschema and a draline where a draschema requires a particular
 draline, in the algorithm we have the dependency graph edge and goto graph edge
 point in the same direction.
 
@@ -320,7 +320,7 @@ must exist before the node v\_1 can totalise it.
 Figure \ref{fig:zdramodule} shows the moduleReg specification annotated in
 \gls{zdra} however the colours of the arrows have been changed as to compare it
 with the automatically generated dependency graph (figure \ref{fig:dpmodule})
-and it's corresponding goto grah (figure \ref{fig:gotomodule}). Note the red
+and it's corresponding goto graph (figure \ref{fig:gotomodule}). Note the red
 arrows which correspond to the `uses' relation are facing the same direction in
 the user annotated document and in the dependency graph (from CS1 to SS1 and
 from CS2 to SS1) however they go the opposite direction in the goto graph. This
@@ -373,12 +373,12 @@ entirety and to see clearly how each component is linked with another.
 \includegraphics[scale=0.15]{Figures/Formalising/requires.png} \\
 \hline
 \end{tabular}
-\caption{The relations representedby textual order and in the goto graph \label{tab:gotorelations}}
+\caption{The relations represented by textual order and in the goto graph \label{tab:gotorelations}}
 \end{table}
 
-Table \ref{tab:gotorelations} shows what the textual order reprsentation of each
+Table \ref{tab:gotorelations} shows what the textual order representation of each
 relation is and how it is represented as an edge in the GoTo graph. The uses
-relation has the texutal order `$\succ$' where the goto graph edge would be
+relation has the textual order `$\succ$' where the goto graph edge would be
 $(v_{A}, v_{B}, uses, \succ)$ as the relation uses would have a strong textual
 order. the initialof relation is similar to the uses relation where the syntax
 in the goto graph would be $(v_{A}, v_{B}, initialof, \succ)$. Totalises
@@ -519,12 +519,12 @@ There are many properties one may wish to prove about their specification. These
 certain properties are called proof obligations. Proof obligations for formal
 notations are an entire research area in their own right. However as the
 \gls{zmath} framework concentrates on giving the novice an idea of how to prove
-their specification we will focus on checking the specification for consistancy.
+their specification we will focus on checking the specification for consistency.
 Using the description in \cite{DBLP:conf/icsea/WenMZ06}, checking the
-specification is consitant can fall under two categories:
+specification is consistent can fall under two categories:
 
 \begin{itemize}
-\item POb1, Feasability of an operation
+\item POb1, Feasibility of an operation
 \item POb2, Other specific proof obligation for the chosen specification
 \end{itemize}
 
@@ -543,17 +543,17 @@ SI\# \land SI\#'$\\
 with their types. We denote $*$ to declare there is 1 or many variables and
 types. $SI\#$ is the state Invariants of the specification, $SI\#'$ is the state
 invariants prime in the specification, $PRE\#$ is the precondition of the
-schema, $PO\#$ is the post operation of the schema and $\#$ is some arbitary
+schema, $PO\#$ is the post operation of the schema and $\#$ is some arbitrary
 number which the user has labeled their instance with.
 \end{defin}
 
-POb1 shows the feasability of an operation. When an operation can transfor a
+POb1 shows the feasibility of an operation. When an operation can transfer a
 state to another state in the state space (a $\Delta$ schema). If an operation
 is feasible, the preconditional state and postconditional state should satisfy
 the state invariants of the specification.
 
 Again by using the ModuleReg specification we can see a proof obligation is
-needed when adding a student doesnt change the state invariants of the
+needed when adding a student doesn't change the state invariants of the
 specification.
 
 \begin{verbatim}
@@ -589,7 +589,7 @@ lemma AddStudentDoesntChangeSI:
 
 \subsection{POb2, Proof Obligation type 2}
 
-As POb2 are any other relevent properties users wish to prove about the
+As POb2 are any other relevant properties users wish to prove about the
 specification we can not formally define it. However an example would be if
 there existed a specification where an operator which added a member to a club
 and then removed a member from the club. Then the amount of members should be
@@ -665,7 +665,7 @@ to be the highest number. For example if there are existing lemmas in
 lemmas in \gls{gpsol} then \emph{i} stays as 0. Lines 347-250 take all the
 elements which are \emph{changeSchema} instances and adds them to a list of
 \emph{setCSandOS}. Then lines 350-359 loops through all the changeSchema's,
-takes the \gls{zdra} name, add's L + a number + \gls{zdra} name and adds it to
+takes the \gls{zdra} name, adds L + a number + \gls{zdra} name and adds it to
 the \emph{listOfProofObligations}.
 
 \paragraph{For Example}
@@ -708,11 +708,11 @@ L2\_CS2 have been added.
 
 \subsubsection{Proof Obligations in specification examples}
 Since the vending machine specification (appendix \ref{app:vm2}) doesn't have
-any stateInvaritants then the \gls{gps} will not have any added proof
-obligations to check for consistance. That is we can't check that the
+any stateInvariants then the \gls{gps} will not have any added proof
+obligations to check for consistence. That is we can't check that the
 postconditions do not change the state if the state has no restrictions. However
 the birthdaybook example (appendix \ref{app:bb3}) does have stateInvariants.
-Therfore we must add properties to check that any changeSchema's follow the
+Therefore we must add properties to check that any changeSchema's follow the
 state restrictions. Part of the birthdaybook \gls{gps} is shown in figure
 \ref{fig:bbgps}. Since there are stateInvariants (SI1) and a changing state
 Schema (CS1) then the proof obligation \texttt{L1\_(CS1)} has been added to the
@@ -721,7 +721,7 @@ Schema (CS1) then the proof obligation \texttt{L1\_(CS1)} has been added to the
 \begin{figure}[H]
 \begin{verbatim}
 stateSchema SS1 
-stateInvarients SI1 
+stateInvariants SI1 
 initialSchema IS1 
 postcondition PO2 
 outputSchema OS1 
@@ -744,6 +744,6 @@ file which displays the order in which this instances must go in a theorem
 prover to be logically correct. This chapter gives a basic understanding of
 proof obligations for Z and examples which proof obligations are automatically
 generated when translating Z specifications into Isabelle. We give a formal
-definition of the proof obligation to check for consistancy of the state
+definition of the proof obligation to check for consistency of the state
 invariants and show an example. The next chapter describes how the general proof
 skeleton is translated into Isabelle syntax.

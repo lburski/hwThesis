@@ -22,8 +22,8 @@ end
 
 If the user labels a schema `\texttt{SS1}' meaning the stateSchema of the
 specification then that in Isabelle becomes a `\texttt{record}' and a
-`\texttt{locale}' is created. Using our example of specifcation named
-`\texttt{a}' we get the following (after the premuable descibed before):
+`\texttt{locale}' is created. Using our example of specification named
+`\texttt{a}' we get the following (after the premuable described before):
 \begin{verbatim}
 record SS1 =
 (*DECLARATIONS*)
@@ -35,7 +35,7 @@ end
 end
 \end{verbatim}
 
-If there are no state invarients in the state schema at this point then there is
+If there are no state invariants in the state schema at this point then there is
 no `\texttt{assumes SI\#}') line.
 
 All other schemas including changeSchemas, outputSchemas, preconditions that are
@@ -417,7 +417,8 @@ following schema:
 \text{\declaration{\term{date?}: \expression{DATE}}}
 \where
 \draline{PRE1}{\text{\expression{\term{name?} \notin \set{known}}}}\\
-\draline{PO3}{\expression{\set{birthday'} = \set{\set{birthday} \cup \set{\{\term{\term{name?} \mapsto \term{date?}}\}}}}}
+\draline{PO3}{\expression{\set{birthday'} =
+\set{\set{birthday} \cup \set{\{\term{\term{name?} \mapsto \term{date?}}\}}}}}
 \end{schema}}
 \uses{CS1}{IS1}
 \requires{CS1}{PRE1}
@@ -428,7 +429,8 @@ The schema itself is represented in the filled in Isabelle syntax as:
 
 \begin{verbatim}
 definition AddBirthday :: 
-"(NAME set) \<Rightarrow> NAME \<Rightarrow> BirthdayBook \<Rightarrow> BirthdayBook \<Rightarrow> DATE \<Rightarrow> (NAME \<rightharpoonup> DATE) => bool"
+"(NAME set) \<Rightarrow> NAME \<Rightarrow> BirthdayBook 
+\<Rightarrow> BirthdayBook \<Rightarrow> DATE \<Rightarrow> (NAME \<rightharpoonup> DATE) => bool"
 where 
 "AddBirthday known' name birthdaybook birthdaybook' date birthday' ==
  (name \<notin> known)

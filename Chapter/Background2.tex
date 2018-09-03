@@ -533,16 +533,22 @@ Despite these advantages some managers sometimes argue the cost of producing a s
 
 So far we have seen what are the different types of formal methods, where formal methods have been used, and why some people are still reluctant to use them. So what needs to be done to make “formal methods” industrial strength? Nirmal Pandey \cite{formalmethodslides} suggests the following: 
 
-\begin{itemize}
-\item Bridge gap between real world and mathematics
-\item Mapping from formal specifications to code (preferably automated)
-\item Patterns identified
-\item Level of abstraction should be supported
-\item Tools needed to hide complexity of formalism
-\item Provide visualization of specifications 
-\item Certain activities not yet ‘formulizable’ methods
-\item No one model has been identified which should be used for software)
-\end{itemize}
+\begin{table}[H]
+\begin{tabular}{|ll|}
+\hline
+1 & Bridge gap between real world and mathematics \\
+2 & Mapping from formal specifications to code (preferably automated) \\
+3 &  Patterns identified \\
+4 & Level of abstraction should be supported \\
+5 &  Tools needed to hide complexity of formalism \\
+6 &  Provide visualization of specifications \\
+7 & Certain activities not yet ‘formulizable’ methods \\
+8 & No one model has been identified which should be used for software) \\
+\hline
+\end{tabular}
+\caption{Nirmal Pandeys suggestions of how to make formal methods industrial strength. \label{tab:nimpand}}
+\end{table}
+
 
 
 \subsection{Conclusion}
@@ -939,16 +945,25 @@ In this section we have highlighted the levels of rigour which describe systems 
 
 \section{Background Conclusion}
 
+This chapter starts from the very beginning of mathematics. The reason behind the research presented in this thesis has it's roots in the origins of mathematics and why it is important to so many people to verify and be confident in their own expertise whether it's mathematics, logic, science or systems. There has been many ways in which people have tried to prove the correctness of this work but it usually is labour intensive, hard work, and requires serious expertise not only in the subject of the work but also in the proving systems doing the checking. One of the ways to simplify the checking of mathematical correctness was the \gls{math} framework. This method has been described in this chapter and an entire example has been shown of how one could check the correctness of their mathematicals texts. Even in \cite{lamarphd} had stated that future work of \gls{math} is that the framework should be developed to cope with more mathematics, therefore adapting the framework for formal specifications would address this point.
+
+So far \gls{math} checks for mathematical correctness, however there are many other texts and documents which checking for correctness would play a big part. The rapid growth in technology \footnote{http://bigthink.com/think-tank/big-idea-technology-grows-exponentially} has meant that checking the specifications of software and systems for correctness is important now more than ever. We describe other tools and techniques which have been implemented to address this in section \ref{sec:formalmethodsandformallanguages}.  We describe where formal methods began and different types of formal methods being used. By adapting an existing framework (\gls{math}) and changing some design and implementations so that it can be used for formal system/software specifications we can cover items 1, 3, 5, 6, and 7 from table \ref{tab:nimpand}.
+
+Section \ref{sec:theznotation} gives and overview of the Z formal specification language and describes what it is made from and how one can write a software specification in Z. We use the Z notation to base this thesis on as a lot of other formal notatinos (B-method, event B etc.) use Z as the basis for their syntax.
+
+We have also described proving systems which have been used for mathematics, various formal methods and Z syntax. Each of these proving systems have their own advantages and disadvatages and it is always up to the user to choose the direction and prover they wish to use. Section \ref{subsec:propertiestoprove} described important properties users may wish to check about their system specification. Not all users wish to check the same thing, and since  systems all have various degrees of criticality they may have their own independent properties which may need to be checked in order to verify safety. Therefore this thesis will concentrate on sanity checks (item 2 in figure \ref{fig:ptp}) as these would be suitable for all systems.
+
 \subsection{MathLang for Z}
 
-\todo[inline]{Write conclusion to background chapter}
+To address some of the points made by Stringfellow in \cite{fmpresetation} of how to make formal methods industrial strength, this thesis takes work made by Kammeradine et al \cite{newmathlang} and work on Z notation \cite{spiveyreferencemanual} and brings these two works together to creates a novel way of checking the correctness of formal system specifications.
 
-\begin{itemize}
-\item \cite{fmpresetation} states what ro do to make formal methods industrial strength
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3]{Figures/Background/zmathlang.png}
+\end{center}
+\caption{Adapting the original \gls{math} to accomadate formal system specifications. \label{fig:zmathlang}}
+\end{figure}
 
-\item \cite{lamarphd} stating in future work mathlang should be developed to cope with more mathematics (formal spec is a type of mathematics)
+By adapting the original \gls{math} framework to accomadate Z specifications, each aspect in the original framework will need to be redesigned and reimplemented. Figure \ref{fig:zmathlang} shows the original design for \gls{math}, however we have replaced `\emph{common mathematical language}' with `\emph{formal specification}'. We removed the TSa as formal specifications are already written in a formal manner and may not need the TSa. We have also removed the arrow `\emph{b}' as there hasn't been any work as yet which formal specifications are translated first to a skeleton and then a full proof.
 
-\item diagram of math text to theorem prover using mathlang + diagram of specification to theorem prover using mathlang
-\end{itemize}
-
-ZMathLang covers items 1, 3, 5, 6, 7 from section \ref{sec:formalmethodsandformallanguages}.
+Formal specifications have previously been fully verified with theorem provers by users which have knowledge on the formal specification language and the targetted theorem prover. By adapting the \gls{math} framework it should be possible to check the properties of formal specifications by user who have little or no expertise in the taregt theorem prover. Although the step-by-step methodology of translating texts into theorem provers is not new, the idea to apply it to formal specifications and the design and implementations to accomadate Z is and this is where we begin our thesis.

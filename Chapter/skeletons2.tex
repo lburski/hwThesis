@@ -41,7 +41,7 @@ no `\texttt{assumes SI\#}') line.
 All other schemas including changeSchemas, outputSchemas, preconditions that are
 schemas, post conditions that are schemas and all other state schema become
 definitions in the Isabelle skeleton. So for example if we have the following
-schema writte in \gls{zdra}
+schema write in \gls{zdra}
 \begin{verbatim}
 \draschema{CS1}{
 \begin{schema}{b}
@@ -208,7 +208,7 @@ is added to the skeleton.
 
 \subsection{Declarations}
 
-In Isabelle the types and variables are added speratly. For insance if we had
+In Isabelle the types and variables are added separately. For instance if we had
 the following schema:
 
 \begin{verbatim}
@@ -359,13 +359,13 @@ $R^{k}$ & \verb|R^{k}| & \verb|\<R^k>| \\
 
 Some symbols in the Z toolkit are the same regardless of whether they are a
 sequence/list/set or total function/partial function. However the syntax
-sometimes varies in Isabelle on these ocassions.
+sometimes varies in Isabelle on these occasions.
 
 One part of the Z mathematical toolkit which we need to rewrite are the use of
 partial functions. In Isabelle/HOL all functions are total but there are ways to
 do certain proofs about partial functions \cite{Krauss08definingrecursive}. We
 translate total functions as a set of pairs \verb|(A * B) set|, we use the
-\verb|\<rightharpoonup>| symbol to describe partial funcations. Any proofs to
+\verb|\<rightharpoonup>| symbol to describe partial functions. Any proofs to
 check for partial functions if needed can be done by the user in step 6 shown in
 figure \ref{fig:steps} but the details of these proofs are beyond the scope of
 this thesis.
@@ -519,12 +519,12 @@ This chapter described the final steps in computerising a formal specification
 into full proof. It demonstrates how the program uses the automatically
 generated general skeleton to  create an Isabelle skeleton. From the Isabelle
 skeleton the user can then automatically fill in the skeleton using the
-\gls{zcga} annoatated specification giving a \gls{half}. The last step would be
-to fill in any mising proofs in the \gls{half}, this is still a difficult step
+\gls{zcga} annotated specification giving a \gls{half}. The last step would be
+to fill in any missing proofs in the \gls{half}, this is still a difficult step
 and may require some theorem prover knowledge however this part is difficult to
 automate as different system specifications have different properties users wish
 to prove, therefore tools such as sledgehammer \cite{sledgehammer} may be useful
 at this point.
 
-In the next chapeter we demonstrate a full example of a specification being
+In the next chapter we demonstrate a full example of a specification being
 taken through all the steps of the ZMathLang framework.

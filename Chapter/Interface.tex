@@ -5,7 +5,7 @@ The interface was designed so that the steps to convert a Z specification to a
 fully proven specification would be easier to complete by the user. It made the
 \gls{zmath} process more user friendly then by just typing commands in a
 terminal. Full details for the user interface and all its functions can be found
-in Mihaela's user guide \cite{zmathuser}. This chapter only explains the process
+in Mihaylova's user guide \cite{zmathuser}. This chapter only explains the process
 needed to translate a specification into a full proof, other steps such as
 writing the specification in the first place and outputting pdf using the
 interface can be found in the manual.
@@ -17,8 +17,9 @@ typing \newline \verb|python Interface.py|, figure \ref{fig:startinterface}
 shows an example of this.
 
 \begin{figure}[H]
-\includegraphics[scale=0.6]{Figures/Interface/startinterface.png}
-\caption{Example of how to start the interface for the \gls{zmath} framework. \label{fig:startinterface}}
+    \centering
+\includegraphics[scale=0.8]{Figures/Interface/startinterface.png}
+\caption{Example of how to start the interface for the \gls{zmath} framework using the terminal. \label{fig:startinterface}}
 \end{figure}
 
 An example of the interface can be seen in figure \ref{fig:openspec}. Depending
@@ -31,7 +32,7 @@ then \emph{open} from the main menu as shown in figure \ref{fig:openspec}.
 
 \begin{figure}[H]
 \includegraphics[scale=0.4]{Figures/Interface/openspec.png}
-\caption{Example of the interface and opening a specification. \label{fig:openspec}}
+\caption{This figure shows the steps to open an existing specification to be imported into the user interface. \label{fig:openspec}}
 \end{figure}
 
 A pop up box appears asking the user to locate the specification they would like
@@ -39,8 +40,8 @@ to translate. An example of the pop up box is shown in figure
 \ref{fig:choosespec}. 
 
 \begin{figure}[H]
-\includegraphics[scale=0.6]{Figures/Interface/choosespec.png}
-\caption{Asking the user to insert the specification. \label{fig:choosespec}}
+\includegraphics[scale=0.8]{Figures/Interface/choosespec.png}
+\caption{This figure shows the pop  up  window that comes up when a user is asked which specification they wish to insert. In our example we would like to import a file named "fullexample.tex". \label{fig:choosespec}}
 \end{figure}
 
 Once a specification has been chosen then the specification should appear in the
@@ -48,8 +49,8 @@ panel on the left hand side. Figure \ref{fig:specinserted} shows an example of
 this. Note that no messages appear yet in the messages box.
 
 \begin{figure}[H]
-\includegraphics[scale=0.4]{Figures/Interface/specinserted.png}
-\caption{Example of a specification inserted in the main panel. \label{fig:specinserted}}
+\includegraphics[scale=0.37]{Figures/Interface/specinserted.png}
+\caption{This figure shows an imported in the user interface which is shown in the main panel on the left. \label{fig:specinserted}}
 \end{figure}
 
 \section{Checking ZCGa}
@@ -60,13 +61,13 @@ interface must be \gls{zcga} annotated.
 \centering
 \begin{minipage}{0.45\textwidth}
 \centering
-\includegraphics[scale=0.5]{Figures/Interface/zcgacheck.png}
+\includegraphics[scale=0.6]{Figures/Interface/zcgacheck.png}
 \end{minipage}\hfill
 \begin{minipage}{0.45\textwidth}
 \centering
-\includegraphics[scale=0.6]{Figures/Interface/zcgacorrect.png}
+\includegraphics[scale=0.7]{Figures/Interface/zcgacorrect.png}
 \end{minipage}
-\caption{An example of how to check the specification for ZCGa correctness (left) and the message which appears when the specification is ZCGa correct.  \label{fig:zchecheck}}
+\caption{An example of how to check the specification for ZCGa correctness (left) and the message which appears when the specification is ZCGa correct (right).  \label{fig:zchecheck}}
 \end{figure}
 
 To check for \gls{zcga} correctness the user can click on the \emph{zcga} button
@@ -82,13 +83,13 @@ must be labelled with \gls{zdra} annotations (this can be with or without
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{0.45\textwidth}
+\begin{minipage}{0.4\textwidth}
 \centering
-\includegraphics[scale=0.5]{Figures/Interface/zdracheck.png}
+\includegraphics[scale=0.7]{Figures/Interface/zdracheck.png}
 \end{minipage}\hfill
-\begin{minipage}{0.45\textwidth}
+\begin{minipage}{0.6\textwidth}
 \centering
-\includegraphics[scale=0.55]{Figures/Interface/zdracorrect.png}
+\includegraphics[scale=0.6]{Figures/Interface/zdracorrect.png}
 \end{minipage}
 \caption{An example of how to check the specification for ZDRa correctness (left) and the message which appears when the specification is ZDRa correct.  \label{fig:zdracheck}}
 \end{figure}
@@ -110,13 +111,13 @@ this may be done.
 To create a general proof skeleton from the users \gls{zdra} annotated and
 correct specification. The user will need to input their specification into the
 interface, check the specification for \gls{zdra} correctness then click on the
-\emph{GPSa} button in the top menu and choose \emph{Proof Skeleton} fromt the
+\emph{GPSa} button in the top menu and choose \emph{Proof Skeleton} from the
 drop down menu. An example of this is shown in figure \ref{fig:gpsabutton}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/Interface/proofskeleton.png}
-\caption{How to create a general proof skeleton using the user interface. \label{fig:gpsabutton}}
+\includegraphics[scale=0.8]{Figures/Interface/proofskeleton.png}
+\caption{This part of the user interface shows the steps to create a general proof skeleton from the users loaded specification.. \label{fig:gpsabutton}}
 \end{figure}
 
 A new file should then appear in the same folder as your \texttt{Interface.py}
@@ -124,8 +125,8 @@ program (see figure \ref{fig:gpsadoc}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/Interface/skeletondoc.png}
-\caption{New general proof skeleton. \label{fig:gpsadoc}}
+\includegraphics[scale=0.6]{Figures/Interface/skeletondoc.png}
+\caption{A new file appears named skeleton in the same directory as the users specification. This is the automatically generated skeleton. \label{fig:gpsadoc}}
 \end{figure}
 
 The user may then open this file using an external text editor or they may view
@@ -146,8 +147,8 @@ figure \ref{fig:converttoisa}.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/Interface/isskeleton.png}
-\caption{The user choosing to create an Isabelle skeleton in the user interface. \label{fig:converttoisa}}
+\includegraphics[scale=0.8]{Figures/Interface/isskeleton.png}
+\caption{To create an Isabelle skeleton then `\textit{Isabelle Skeleton}' should be selected from the GPSa sub menu on the user interface. \label{fig:converttoisa}}
 \end{figure}
 
 If all is correct a message saying \texttt{Isabelle Skeleton Created} and a new
@@ -158,20 +159,20 @@ and automatically saved in the same directory as the interface with a
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/Interface/showsaskeleton.png}
-\caption{New buttons which appear if the user chooses to create a general proof skeleton or an Isabelle skeleton. \label{fig:showskeleton}}
+\includegraphics[scale=0.7]{Figures/Interface/showsaskeleton.png}
+\caption{New buttons which appear on the right hand side of the interface if the user chooses to create a general proof skeleton or an Isabelle skeleton. \label{fig:showskeleton}}
 \end{figure}
 
 The user may then open the Isabelle skeleton using an external text editor such
 as Jedit or Isabelle itself or they may choose to open the Isabelle Skeleton
-within the interface by clickon on the \texttt{Show Isabelle Skeleton Button}.
+within the interface by clicking on the \texttt{Show Isabelle Skeleton Button}.
 An example of a pop-up window showing the Isabelle skeleton in the user
 interface can be seen in figure \ref{fig:isaskelpopup}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{Figures/Interface/isaskelpopup.png}
-\caption{Popup box in the user interface showing the isabelle skeleton. \label{fig:isaskelpopup}}
+\caption{By clicking `\textit{Show Isabelle skeleton}' a box will be displayed in the user interface showing the isabelle skeleton. \label{fig:isaskelpopup}}
 \end{figure}
 
 The user may even wish to go as far as filling in the Isabelle skeleton. To do
@@ -185,8 +186,8 @@ to opening a specification (figure \ref{fig:choosespec}).
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/Interface/fillinisaskel.png}
-\caption{The user choosing to fill in the isabelle skeleton in the user interface . \label{fig:fillinisaskel}}
+\includegraphics[scale=0.7]{Figures/Interface/fillinisaskel.png}
+\caption{This figure shows the steps to automatically fill in the Isabelle skeleton. The user can choose the `\textit{FillInIsaSkeleton}' from the GPSa sub menu. \label{fig:fillinisaskel}}
 \end{figure}
 
 The user may then wish to open the filled-in isabelle skeleton externally or in
@@ -210,7 +211,7 @@ can appear in the message box along with an explanation about the message.
 \verb|Totalised| & have a totalising condition  \\
 \hline
 \verb|Warning! Specification not| & Not all preconditions have an alternative \\
-\verb|correcty totalised| & output (skeleton can still be created) \\
+\verb|correctly totalised| & output (skeleton can still be created) \\
 & \textit{(see chapter \ref{chap:zdra})} \\
 \hline
 \verb|Specification is Rhetorically| & Specification is ZDRa correct \\
@@ -248,8 +249,9 @@ in \\
 correctness\\
 \verb|Number of errors: 2| & and has 2 errors \textit{(see chapter
 \ref{chap:zcga})}\\
-\hline
-\caption{Messages which could appear in the user interface and their meanings.}
+\hline 
+
+\\ \caption{Messages which could appear in the user interface and their meanings.}
 \label{tab:uimessages}
 \end{longtable}
 }

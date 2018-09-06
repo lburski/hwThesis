@@ -48,6 +48,9 @@
 \usepackage{amsfonts}
 \usepackage[linesnumbered,lined,boxed]{algorithm2e}
 
+\usepackage{caption} 
+%\captionsetup[table]{skip=10pt}
+
 
 \usepackage{amsthm}
 \usepackage{parcolumns}
@@ -60,7 +63,7 @@
 \newcommand{\insertref}[1]{\todo[inline, color=green!40]{#1}} %My own to do note
 \newcommand{\writechapter}[1]{\todo[inline, color=blue!20!white]{#1}} %My own todo note
 \def\xstrut{\rule[-2ex]{0pt}{5ex}} %Fractions in tables
-%\usepackage{lscape}    % if you want to use land scape in one paper 
+\usepackage{lscape}    % if you want to use land scape in one paper 
                        %...\begin{landscape}\end{landscape}
                        
 \definecolor{lightblue}{HTML}{D2E4F5}
@@ -109,7 +112,7 @@
 {\small The copyright in this thesis is owned by the author. Any quotation from the report or use of any of the information contained in it must acknowledge this report as the source of the quotation or information.}
 %===================================Abstract===================================
 \clearpage
-%\input{Abstract}
+\input{Abstract}
 
 %==================================front stuff==================================
 \clearpage
@@ -138,29 +141,27 @@ makeglossaries HWThesis
 \renewcommand{\chaptermark}[1]{\markboth{\chaptername\ \thechapter:\ #1}{}}
 %===================================Chapters===================================
 
-%\input{Chapter/Introduction}
-%\input{Chapter/Background2}
-%\input{Chapter/Design}
-%\input{Chapter/zcga}
-%\input{Chapter/zdra}
-%\input{Chapter/skeletons}
-%\input{Chapter/skeletons2}
+\input{Chapter/Introduction}
+\input{Chapter/Background2}
+\input{Chapter/Design}
+\input{Chapter/zcga}
+\input{Chapter/zdra}
+\input{Chapter/skeletons}
+\input{Chapter/skeletons2}
 \input{Chapter/Interface}
-%\input{Chapter/Fullexample}
-%\input{Chapter/Analysis}
-%\input{Chapter/Evaluation}
-%\input{Chapter/Conclusion}
+\input{Chapter/Fullexample}
+\input{Chapter/Analysis}
+\input{Chapter/Evaluation}
+\input{Chapter/Conclusion}
 
 
 %===================================Appendix===================================
 \appendix
 \renewcommand{\chaptermark}[1]{\markboth{Appendix \thechapter.\ #1}{}}
-%\input{Appendix1}
+\input{Appendix1}
 
 %=================================Bibliography=================================
 \bibliographystyle{abbrv}
 \bibliography{Bibliography}
 
 \end{document}
-
-

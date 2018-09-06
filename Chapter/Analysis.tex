@@ -15,7 +15,7 @@ described in \cite{Kolyang1996}, \cite{Kolyang86towardsa} and \cite{hol-z}.
 
 \section{Vending Machine Example}
 
-The vending machine example shown in appendix \ref{app:vmspec} is a simple
+The vending machine example shown in appendix \ref{app:vm} is a simple
 specification using only natural numbers as variables and there are no other
 types in the specification. 
 
@@ -263,7 +263,7 @@ In both methods the user will need to have the same amount of knowledge of
 specification using \LaTeX{}. The only difference in this aspect is that the
 user will need to annotate their specification using \gls{zmath} annotations
 (ZCGa and ZDRa) in the \gls{zmath} method or the user will need to annotate
-their specification using \gls{hol} annotations (proof obligations, zsections
+their specification using \gls{hol} annotations (proof obligations, Z sections
 etc). In both cases the user will need to know how to import a package into
 \LaTeX{} and then read the instructions in either case on the annotations which
 need to be used.
@@ -286,7 +286,7 @@ know how to import the .holz files into the \gls{hol} theorem prover, unpack the
 schemas and values, and how to write and prove the properties. 
 
 To input the specification into the chosen theorem prover using \gls{zmath} the
-user will need no theorm prover knowledge at all. This is because the annotated
+user will need no theorem prover knowledge at all. This is because the annotated
 specification will be automatically translated into Isabelle/Hol when using the
 \gls{zmath} method. The program will automatically generate an `.thy' file which
 is a skeleton of the specification and then automatically fill in the
@@ -420,7 +420,7 @@ areas are of interest for future work.
 %machine specification is already in putted in the theorem prover before this
 %lemma is added. We can see that the lemma itself is slightly longer written in
 %Isabelle then it is in \gls{ppz}. However the proof of this lemma is a lot
-%longer in \gls{ppz} then it is in Isablle. Note that at the end of the proof in
+%longer in \gls{ppz} then it is in Isabelle. Note that at the end of the proof in
 %\gls{ppz} we have the following line: \begin{verbatim} val pre_VM1_thm =
 %save_pop_thm "pre_VM1_thm";. \end{verbatim} This saves the lemma and names it
 %"pre\_VM1\_thm" whereas in Isabelle we have the lemma saved as "pre\_VM1"

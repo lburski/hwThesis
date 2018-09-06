@@ -233,7 +233,7 @@ against all the state changing schemas.
 
 There are many other properties one can check in systems such as properties
 across specifications, required properties of a single specification etc (see
-section \ref{sec:generatingpropforformal} in chapter \ref{ch:background}).
+section \ref{subsec:propertiestoprove} in chapter \ref{ch:background}).
 However in this thesis we have supplied a formal definition for the sanity
 checks of Z specifications and implemented it in our tool so that it is
 automatically added during the translation.
@@ -389,13 +389,12 @@ Chapter \ref{chap:gpsa2isa} summarises the path of how the general proof sketch
 can be used to generate an Isabelle skeleton of the specification. Details of
 how the Isabelle skeleton can be filled in using the \gls{zcga} annotated
 specification is also shown in this chapter. A demonstration of how we can use
-this filled in Isabelle skeleton to get a full proof is also described.
-
-Chapter \ref{ch:formal} gives formal definitions of the \gls{zdra} correctness
-checker, dependency graphs and GoTo graphs. We prove various properties about
-the \gls{zdra}. We give examples of how each of these aspects can be represented
-in a formal manner. The algorithm which creates the dependency and GoTo graphs
-is given and explained.
+this filled in Isabelle skeleton to get a full proof is also described. It also
+gives formal definitions of the \gls{zdra} correctness checker, dependency
+graphs and GoTo graphs. We prove various properties about the \gls{zdra}. We
+give examples of how each of these aspects can be represented in a formal
+manner. The algorithm which creates the dependency and GoTo graphs is given and
+explained.
 
 In chapter \ref{ch:interface} we give an overview on the user interface for
 \gls{zmath} and we explain how one can use \gls{zmath} on Z specifications.

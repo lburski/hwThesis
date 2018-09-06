@@ -9,7 +9,7 @@ type theory for mathematics \cite{wtt}. Core grammatical correctness for Z has
 also adapted the rules from the \gls{cga} for mathematics (see section
 \ref{sec:mathlangbackground} in chapter \ref{ch:background}).
 
-This chapter focuses on the first step of the \gls{zmath} toolset. The user can
+This chapter focuses on the first step of the \gls{zmath} tool-set. The user can
 check for grammatical correctness with the aim to translate the specification
 fully into a theorem prover or they can use this step on it's own to check their
 specification for some level of rigor.
@@ -33,8 +33,7 @@ Since formal notation is a subset of mathematics we are able to adapt the
 notation.
 
 In order to check for grammatical correctness we introduce a weak type system
-for Z specifications illustrated in figures \ref{tab:zcga1} and
-\ref{tab:wttrules}.
+for Z specifications illustrated in figures \ref{tab:zcga1}.
  
 The ZCGa starts from it's lowest level, the \emph{atomic level}, which
 underlines the elementary characters from which the syntax is made. It then
@@ -202,7 +201,7 @@ giving a set with parameters is
 \newline
 `$studentTT = studentTT \union {s? \mapsto \emptyset}$'
 \newline
-taken from Timetable specification in appendix \ref{app:timetable}. Where the
+taken from Timetable specification in \cite{essenceofz}. Where the
 constant giving a set is `$\union$' and the parameters it takes is `$studentTT$'
 and `${s? \mapsto \emptyset}$'.
 
@@ -212,7 +211,7 @@ a set with an expression and declaration as parameters is
 
 `$\bigcup \{s:\dom studentTT \bullet \{s \mapsto (studentTT~s \setminus
 moduleTT~m?)\}\}$' \newline
-taken from Timetable specification in appendix \ref{app:timetable}. Where the
+taken from Timetable specification in \cite{essenceofz}. Where the
 constant is `$\bigcup$', the declaration parameter is `$s:\dom studentTT $' and
 the expression parameter is `$  \{s \mapsto (studentTT~s \setminus
 moduleTT~m?)\}$'.
@@ -225,25 +224,25 @@ giving sets.
 \label{subsubsec:expressions}
 
 The category of expressions ranges over two subsets, constants giving
-expressions with optional parameteres
+expressions with optional parameters
 $C^{\mathcal{E}}(\overrightarrow{\mathcal{P}})$, and binders giving expressions
 with a declarations and expression $B^{\mathcal{E}}_{\mathcal{Z}}(\mathcal{E})$.
 
 \begin{itemize}
 \item $C^{\mathcal{E}}(\overrightarrow{\mathcal{P}})$. A constant giving an
 expression can be seen in figure \ref{fig:toy} as `$m \geq 0$' where `$\geq$' is
-the constant giving an expression and the paramters are two terms: `$m$' and
+the constant giving an expression and the parameters are two terms: `$m$' and
 `$0$'.
 
 \item $B^{\mathcal{E}}_{\mathcal{Z}}(\mathcal{E})$. A binder giving an
 expression could be a `$\forall$' or `$\exists$' binder. An example of this is
-shown in the Timetable specification in appendix \ref{app:timetable} as
+shown in the Timetable specification in \cite{essenceofz} as
 \newline
 `$\exists schedule : TIMESLOT \leftrightarrow ROOM \bullet(allPairs moduleTT
 \cap schedule = \emptyset \land moduleTT = moduleTT \oplus \{m? \mapsto
 schedule\})$'
 \newline
-where the binder giving an expression is `$\exists$', the declaration paramter
+where the binder giving an expression is `$\exists$', the declaration parameter
 is `$TIMESLOT \leftrightarrow ROOM$' and the binding expression is `$(allPairs
 moduleTT \cap schedule = \emptyset \land moduleTT = moduleTT \oplus \{m? \mapsto
 schedule\})$'.
@@ -254,8 +253,8 @@ schedule\})$'.
 
 Theres is only one kind of definition in the weak type theory syntax for Z. A
 local definition in Z is a constant giving a definitions taking variables as
-paramters giving a set, $C^{\mathbb{S}}(\overrightarrow{V}):= \mathbb{S}$. An
-example of this is shown the GenDB specification in appendix \ref{app:gendb}.
+parameters giving a set, $C^{\mathbb{S}}(\overrightarrow{V}):= \mathbb{S}$. An
+example of this is shown the GenDB specification in \cite{essenceofz}.
 The definition is
 \newline
  `$\mathbf{let}\
@@ -269,7 +268,7 @@ where the defined constant is $cosrel$.
 \paragraph{schematext}
 \label{subsubsec:schematext}
 
-The schematext within a Z specification reighns over three sub categories,
+The schematext within a Z specification reigns over three sub categories,
 either the schema text can be empty $\emptyset$, or it can be schematext with a
 declaration $\mathbf{\Gamma}, \mathcal{Z}$ or it can be schematext with an
 expression $\mathbf{\Gamma}, \mathcal{E}$.
@@ -301,7 +300,7 @@ A paragraph $\Theta$ contains either an expression $\mathbf{\Gamma}
 \triangleright \mathcal{E}$ or a definition $\mathbf{\Gamma} \triangleright
 \mathcal{D}$, relative to a schematext.
 
-The symbol $\triangleright$ is a sepatation marker betwen the schematext and
+The symbol $\triangleright$ is a separation marker between the schematext and
 expression or definition
 
 \begin{itemize}
@@ -313,7 +312,7 @@ paragraph see section \ref{subsubsec:definitions}.
 \end{itemize}
 
 \paragraph{specifications}
-A specifiation $spec$ is a list of paragraphs: $spec= \emptyset \vert
+A specification $spec$ is a list of paragraphs: $spec= \emptyset \vert
 \mathbf{Spec}, \Theta$.
 
 A simple example of a specification is the entire of figure \ref{fig:toy}.
@@ -324,7 +323,7 @@ Here we describe the other categories which are needed in the \gls{zcga}
 abstract syntax.
 
 \paragraph{Declarations.} A declaration ina schematext represents the
-\emph{introduction of a vairable} of a known type. In the categories of ZCGa
+\emph{introduction of a variable} of a known type. In the categories of ZCGa
 syntax we can have two different kinds of declarations. This can be:
 \texttt{SET} (the type of all sets) or a set. Both of these declarations relates
 a \emph{subject} (the left hand side of the declaration) with its
@@ -341,10 +340,10 @@ $V^{\mathcal{T}:\mathbb{S}}$.
 `$m:\nat$' taken from figure \ref{fig:toy}.
 \end{itemize}
 
-\paragraph{Parameters.} The list of paramters represent the categories in which
-constants may depend. The paramters available in the \gls{zcga} abstract syntax
+\paragraph{Parameters.} The list of parameters represent the categories in which
+constants may depend. The parameters available in the \gls{zcga} abstract syntax
 are terms $\mathcal{T}$, sets $\mathbb{S}$ or expressions $\mathcal{E}$. For
-details on how each of these parameters are formed see the relevent sections
+details on how each of these parameters are formed see the relevant sections
 (\ref{subsubsec:terms}, \ref{subsubsec:sets} and \ref{subsubsec:expressions}
 respectively).
 
@@ -353,7 +352,7 @@ respectively).
 The ZCGa uses the weak types found in table \ref{tab:zcga1} and checks the
 specification is correct according to the rules found in \ref{tab:wttrules}. To
 write the rules for the \gls{zcga} we must first establish some definitions. The
-following definitions have been adapted from \cite{wtt} to accomadate Z
+following definitions have been adapted from \cite{wtt} to accommodate Z
 specifications.
 
 \begin{defin}
@@ -377,7 +376,7 @@ $dvar(\Gamma') = dvar(\Gamma), x$.
 set contains all the constants listed in the preface. If $c \in prefcons(spec)$
 and if $K_{1},...,K_{n}$ is the set of the weak types of the parameters of $c$
 and if $k$ is the resulting weak type of the full construct $c(...)$, then we
-attatch the type $k_{1} \times ... \times k_{n} \rightarrow l$ to $c$.
+attach the type $k_{1} \times ... \times k_{n} \rightarrow l$ to $c$.
 \end{defin}
 
 \begin{exam}
@@ -402,6 +401,34 @@ containing a definition $\Gamma \triangleright \mathcal{D}$ where $\mathcal{D}$
 is in the form $c(x_{1},...,c_{n}):=A$. Then the defined constant of the
 definition, or $defcons(\mathcal{D})$, is $c$.
 \end{defin}
+
+\begin{table}
+    \begin{tabular}{|c|} \hline 
+        \includegraphics[scale=0.7]{Figures/zcga/1.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/2.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/3.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/4.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/5.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/6.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/7.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/8.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/9.png} \\
+        \hline
+        \includegraphics[scale=0.7]{Figures/zcga/10.png} \\
+        \hline
+    \end{tabular}
+    \caption{Weak typing rules used by the ZCGa type checker. \label{tab:wttrules}}
+\end{table}
+
+
 
 
 %\begin{table}[H]
@@ -444,6 +471,8 @@ definition, or $defcons(\mathcal{D})$, is $c$.
 %\caption{Weak typing rules used by the ZCGa type checker. \label{tab:wttrules}}
 %\end{table} 
 
+
+
 \subsection{Weak typing properties and definitions}
 
 Since the categories and rules of the Z syntax $WT_{Z}$ are a subset of the
@@ -482,7 +511,7 @@ they help us complete the GPSa (see Figure \ref{fig:steps}).
 
 Using the ZMathLang \LaTeX{} package the user can label the specification with
 \gls{zcga} annotations. This can be either before or after labelling the
-specification with \gls{zdra} (see chapter \ref{chap:zdra}). The \gls{zcga}
+specification with \gls{zdra} (see chapter \ref{ch:zdra}). The \gls{zcga}
 annotations will highlight each individual grammatical aspect of the
 specification. Table \ref{tab:zcgannot} shows how to label specifications with
 \gls{zcga}.
@@ -576,7 +605,7 @@ declaration in \gls{zcga} (shown in figure \ref{fig:decinzcga})
 \end{figure}
 
 We label \emph{$\nat$} as declarations for the same reasons as the typing's
-behaviour in \cite{wtt}.
+behavior in \cite{wtt}.
 
 The second type of declaration would be the declaration of a set, for example
 \verb|s: \power \nat| this is saying that the set \emph{s} is in the set
@@ -623,8 +652,10 @@ is correct. A correct Z definition is shown in figure \ref{fig:definzcga}.
 \centering
 \begin{tabular}{|l|}
 \hline
-\verb|\definition{\LET \set{old} == \set{new} @ \expression{\term{t}\in\set{old}}}| 
-\verb|\definition{\LET \set{old} == \set{new} @ \expression{\term{t} \in\set{old}}}| \\
+\verb|\definition{\LET \set{old} == \set{new} @ | \\
+\verb|\expression{\term{t}\in\set{old}}}| 
+\verb|\definition{\LET \set{old} == \set{new} @ | \\
+\verb|\expression{\term{t} \in\set{old}}}| \\
 \hline
 \definition{\LET \set{old} == \set{new} @ \expression{\term{t} \in \set{old}}}\\
 \hline
@@ -671,8 +702,8 @@ specification in \gls{zcga} is shown in chapter \ref{ch:fullexample} in figure
 
 \section{Implementation}
 
-The \gls{zcga} program automtically checks the specification for grammatical
-correctness. To do this it uses the \gls{zcga} annotions inputted by the user
+The \gls{zcga} program automatically checks the specification for grammatical
+correctness. To do this it uses the \gls{zcga} annotations inputted by the user
 and will notify the user if all is correct or any errors it may encounter. The
 \gls{zcga} checker is a weak type checker. Therefore it only checks the
 correctness of the weak types of the specification (annotated) and not actual Z
@@ -747,7 +778,7 @@ Take a look at the following example fo a specification:
 \end{exam}
 
 In the schematext containing the expression \verb|\term{j} < \term{k}| the term
-\verb|j| has been previosuly declared with the type \verb|\nat| however the term
+\verb|j| has been previously declared with the type \verb|\nat| however the term
 \verb|k| is labelled and used in the expression however it has not been declared
 or assigned a type. This will cause the error message \emph{term not declared}.
 
@@ -755,7 +786,7 @@ or assigned a type. This will cause the error message \emph{term not declared}.
 
 Similar to the previous error message, this follows the rules for variables in
 table \ref{tab:wttrules}. The message \emph{set not declared} will appear when a
-variable is labelled \verb|\set{..}| in the schematext of a specifiation but has
+variable is labelled \verb|\set{..}| in the schematext of a specification but has
 not been declared previously. Look at the following example:
 
 \begin{exam}
@@ -815,7 +846,7 @@ define the set of natural numbers \verb|\nat| however this constant is already
 programmed in the preface of constants for Z specifications.
 
 This error would also appear if the user tried to define a constant such as
-\verb|[STUDETS]| more  than once in their specification.
+\verb|[STUDENTS]| more  than once in their specification.
 
 \paragraph{\emph{not a correct term}}
 
@@ -861,9 +892,9 @@ is because the constant \verb|\cup| takes two sets as parameters. However this
 labelling shows that a set `\verb|w|' and a term `\verb|v|' have been applied. 
 
 An example of a specification not passing the \gls{zcga} check is shown in
-appendix \ref{pp:nonworkingzcga}. This specification shows a telephone directory
+appendix \ref{app:nonworkingzcga}. This specification shows a telephone directory
 which adds telephone numbers and names to a theoretical directory. It shows a
-schema `\emph{TheTelephoneDirectory}' being usedd in the \emph{AddPerson}
+schema `\emph{TheTelephoneDirectory}' being used in the \emph{AddPerson}
 schema, however `\emph{TheTelephoneDirectory}' is not a valid schema. The term
 `\emph{person}' is being used in the `\emph{AlreadyInDirectory}' schema but only
 the variable `\emph{persons}' has been declared. The term `\emph{numberInUse}'
@@ -893,12 +924,12 @@ only caught when I ran the \gls{zcga} checker on them} benefits exists. The
 translate their ideas to the developers of the system. For example by using the
 \gls{zcga} the developers can clearly see which parts of the systems are
 represented as sets and which parts are represented as terms. Not only does it
-help describe the system to developers but other memebers of the project
+help describe the system to developers but other members of the project
 development team and other stakeholders such as the client would also get a
 better idea of the layout of the system. A further advantage to the \gls{zcga}
 is that it is able to check the grammatical correctness of partially-formal
 specifications. These can include specifications written in the english natural
-langugage but are on their way to becoming formal, or specifications with formal
+language but are on their way to becoming formal, or specifications with formal
 parts to them.
 
 \section{ZCGa on a semiformal specification}
@@ -908,7 +939,7 @@ in appendix \ref{app:semiform}, which describes an auto pilot system. This
 specification is written partly in the english natural language and partly in Z.
 Therefore the specification is on it's way to becoming formal. The user can then
 annotate the formal parts and some of the informal parts in \gls{zcga}, it can
-then be checked and will the user if there are any grammatica errors in the
+then be checked and will the user if there are any grammatical errors in the
 specification so far, and if any variables which have been used need to be
 declared etc. For example, in the auto pilot specification, the \verb|off_eng|
 schema has a declaration which states \verb|mode:mode_status| (figure

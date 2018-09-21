@@ -344,7 +344,8 @@ formal.
 The following case study is based on the \emph{Steamboiler}
 \cite{steamboilerslides} specification which has been translated and proved in
 Isabelle using the \gls{zmath} framework. This case study only uses variables
-which are terms. The steamboiler specification is the larges from our examples.
+which are terms. The steamboiler specification is the largest from our examples 
+(we use Beckert extended version from Steam Boiler Control}
 It is made up of 507 lines of \LaTeX{} code, 10 zed environments, 34 schemas and
 3 axiom definitions. When annotating with \gls{zcga} there were 297 schematext,
 26 declarations, 282 expressions, 595 terms and 4 sets. When annotated with
@@ -368,14 +369,13 @@ An example of how the steamboiler could look is shown in figure
 \ref{fig:steamboiler}. The variables of the steamboiler are shown in table
 \ref{tab:steamboilervariables}.
 
-\todo[inline]{find out what $l$ does}
 \begin{table}[H]
 \begin{tabular}{l|l}
 \textbf{variables} & \textbf{description} \\
 \hline
 $w_{min}$ & minimal water level \\
 $w_{max}$ & maximal water level \\
-$l$ & \\
+$l$ & water amount per pump\\
 $d_{max}$ & maximal quantity of steam exiting the boiler \\
 $\delta_{p}$ & error in the value of the pumps \\
 $\delta_{d}$ & error in steam\\

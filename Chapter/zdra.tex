@@ -1,6 +1,6 @@
 \chapter{Z Document Rhetorical aspect}
 \label{ch:zdra}
-The \gls{zdra} is similar to the \gls{dra} for mathematics. Here we describe how
+The \gls{zdra} is similar to the \gls{dra} for mathematics in MathLang. Here we describe how
 the \gls{zdra} was designed an implemented. 
 
 We use the ZMathLang \LaTeX{} package to chunk specifications together and see
@@ -25,6 +25,24 @@ totalised.
 As well as having instances, the ZDRa shows relations between them to make sure
 there are no loops in reasoning and to give warning in some situations (e.g.
 specification is not totalised).
+
+Identifying loops in the reasoning is important as it determines whether the
+program is deterministic. Safety-critical systems must be deterministic,
+practices which can lead to non-determinism must be avoided or carefully
+controlled \cite{rierson2013developing}. Identifying loops in the reasoning is one of these practices. 
+
+It is important to have a robust and totalised specification (in particular one
+for a high integrity system) because totalisation leaves less room for error.
+Specifications which are totalised are complete and therefore system
+requirements are better understood and the programmer of the system would have
+less assumptions about the system.
+By totalising schemas all preconditions will have a corresponding postcondition.
+Therefore when executing the system if all possible preconditions have a
+corresponding output (post condition) then the computing system will be able to
+handle errors better. Building a robust system encompasses as many points of
+failure  as possible and one way to do this is to make the specification total.
+
+
 
 Section \ref{sec:zdra_annotate} describes the labels used to annotate a
 specification. Then in section \ref{sec:zdra_implement} we illustrate the
@@ -297,8 +315,7 @@ NotKnown[+color[red]}] \\
 \caption{\label{fig:exampleofts2} A totalise line instance labelled in \gls{zdra}.}
 \end{figure}
 
-An example of the \verb|draline| instance is shown in figure
-\ref{fig:exampleofts2}. In this example we have three \emph{totalise instances}
+An example of the \verb|draline| instance is shown in figure \ref{fig:exampleofts2}. In this example we have three \emph{totalise instances}
 using the label \verb|\draline{TS1}{...|, \verb|\draline{TS2}{...| and
 \verb|\draline{TS3}{...| respectfully (shown in red).
 

@@ -42,7 +42,23 @@ corresponding output (post condition) then the computing system will be able to
 handle errors better. Building a robust system encompasses as many points of
 failure  as possible and one way to do this is to make the specification total.
 
+Identifying relationships between chunks of specification is useful as it allows
+us to carry out computations whether all dependencies are identified and to
+check whether the relationships are sensible (for example all pre conditions
+have a corresponding postconditions, a schema is defined if is used in another
+schema). The relationships also allow users to explain the logical structure of
+their system specification.
 
+State invariants are conditions thats can be relied upon to be true during the
+execution of the program. It is important that state invariants do not change as
+they confirm your system specification is valid if the state invariants hold
+even as the user states the preconditions and post conditions of each schema. 
+
+The dependency graph is useful as it allows the user to identify which chunks of
+specification are `\textit{dependent}' on each other i.e. if one chunk was
+changed or removed then what other chunks would be affected. The dependency
+graph also allow us to build the GoTo graph which in turn orders the
+specification to be automatically written in a theorem prover.
 
 Section \ref{sec:zdra_annotate} describes the labels used to annotate a
 specification. Then in section \ref{sec:zdra_implement} we illustrate the
@@ -55,8 +71,8 @@ described in section \ref{subsec:zdra_prodcuts}.
 \section{Annotations}
 \label{sec:zdra_annotate}
 
-Using our ZMathLang \LaTeX{} package we can label the specifications with
-\gls{zdra} annotations (either before of after the \gls{zcga}). These
+In a similar way as  MathLang for mathematics \ref{sec:mathlangbackground}, we can label the specifications with
+\gls{zdra} annotations (either before of after the \gls{zcga}) using our ZMathLang \LaTeX{} package . These
 annotations chunks parts of the specification together and upon compiling shows
 the relationships between each of these chunks.
 
@@ -80,7 +96,7 @@ changeschema & CS & $\backslash$draschema\{\textit{CS\#}\}\{\textit{instance}\}
 outputschema & OS & $\backslash$draschema\{\textit{OS\#}\}\{\textit{instance}\}
 \\
 \hline
-totaliseSchema & TS &
+totaliseschema & TS &
 $\backslash$draschema\{\textit{TS\#}\}\{\textit{instance}\}  \\
 \hline
 axiom & A  & $\backslash$draschema\{\textit{A\#}\}\{\textit{instance}\}  \\
@@ -129,11 +145,28 @@ instances as these names are what are referred to when creating the
 relationships between them. Table \ref{tab:relations} shows the relationships
 which are available between some of the instances. 
 
+The instances described in table \ref{tab:instances} are the building blocks of
+what makes a Z specification. These large chunks of specification are what were
+common across the literature describing Z specifications including Ed Curries descriptions \cite{essenceofz} and Spiveys descriptions
+\cite{spiveyreferencemanual} in one form or another. Just like in MathLang for
+mathematics \ref{sec:mathlangbackground} which included instances such as Lemma,
+Theorem, Proof, Definitions we can group chunk of text together to identify what
+is a theory, stateschema, initschema, changeschema, outputschema,
+totaliseschema, axiom, stateInvariants, precondition, postcondition and output.
+
 \subsection{Instances}
 
 We have designed the notation to include \verb|\draschema{..}{..}| for chunks of
 specification which include schemas and \verb|\draline{..}{..}| which only
 include lines within a schema.
+
+If we combine together \emph{changeschema} and \emph{outputschema} then these
+instances are the minimum amount of labels we need to create a compilable
+Isabelle file as both \emph{changeschema} and \emph{outputschema} become
+`\emph{definitions}' in Isabelle. However we have decided to label
+\emph{changeschema} and \emph{outputschema} separately as the user can easily
+identify which schemas can change the state of the system and which just output
+particular results.
 
 \subsubsection{theory}
 
@@ -152,8 +185,8 @@ state of the system. Figure \ref{fig:exampleofss} shows an example of a
 may be one or more \emph{stateschema}'s in a theory. So users can label their
 \emph{stateschema}'s accordingly, e.g.
 \verb|SS1, SS2,SS3|.....\footnote{Although it is not needed for the user to annotate the
-instances incrementally (the instances just need different numbers) it makes it
-easier to identify how many of each instance is within the specification.}
+instances incrementally (the instances just need different names) we have used
+it in our example to make it easier for the reader to identify how many of each instance is within the specification.}
 
 \begin{figure}[H]
 \centering
@@ -166,6 +199,9 @@ birthday[+color[blue]}]\end{schema}[+color[red]}]
 \end{footnotesize}
 \caption{\label{fig:exampleofss} A stateschema and stateinvariants labelled in \gls{zdra}.}
 \end{figure}
+
+\emph{Stateschema's} are important to identify as they go in the premuable of the
+Isabelle file.
 
 \subsubsection{initialschema}
 
@@ -192,6 +228,9 @@ BirthdayBook'
 \caption{\label{fig:exampleofis} An initialschema labelled in \gls{zdra}.}
 \end{footnotesize}
 \end{figure}
+
+\emph{Initschema's} are important to identify as they become \emph{definitions}
+Isabelle file (if it exists as they are not always defined in specifications).
 
 \subsubsection{changeschema}
 
@@ -228,6 +267,9 @@ in red). We name this instance \verb|CS1| as it is the first \emph{changeschema}
 instance seen in the specification, the next \emph{changeschema} should be named
 \verb|CS2| then \verb|CS3| etc.
 
+\emph{Changeschema's} are important to identify as they become \emph{definitions}
+Isabelle file (if it exists as they are not always defined in specifications).
+
 \subsubsection{outputschema}
 
 An \emph{outputschema} instance is a schema or a function which does not change
@@ -256,11 +298,14 @@ result!: REPORT
 \caption{\label{fig:exampleofos} A outputschema labelled in \gls{zdra}.}
 \end{figure}
 
+\emph{Outputschema's} are important to identify as they become \emph{definitions}
+Isabelle file (if it exists as they are not always defined in specifications).
+
 \subsubsection{totaliseSchema}
 
-A \emph{totalise} instance are parts of the specification which totalise
-preconditions and schemas within the specification. These are labelled as
-\verb|TS#| where \verb|#| is some number. \emph{Totalise} instances can written
+\emph{Totaliseschema} instances are parts of the specification which totalise
+preconditions within the specification. These are labelled as
+\verb|TS#| where \verb|#| is some number. \emph{Totaliseschema} instances can written
 in two ways. Either using the double equals operator:
 
 \begin{verbatim}
@@ -277,11 +322,11 @@ A \defs B \land C
 \end{zed}
 \end{verbatim}
 
-When labelling \emph{totalise} instances the user can do this in two ways. The
+When labelling \emph{totaliseschema} instances the user can do this in two ways. The
 first labelling is as a \verb|draschema| where the labelling comes before the
 \verb|\begin{zed}| or as a \verb|draline| where the labelling wraps around the
 line of the instance only. The second way is useful if there are more than one
-\emph{totalise} instance between the \verb|\begin{zed}| and \verb|\end{zed}|. 
+\emph{totaliseschema} instance between the \verb|\begin{zed}| and \verb|\end{zed}|. 
 
 \begin{figure}[H]
 \centering
@@ -319,8 +364,13 @@ An example of the \verb|draline| instance is shown in figure \ref{fig:exampleoft
 using the label \verb|\draline{TS1}{...|, \verb|\draline{TS2}{...| and
 \verb|\draline{TS3}{...| respectfully (shown in red).
 
-\emph{Totalise} instances become the properties to prove when converted to the
-half-baked proof (see chapter \ref{ch:skeletons} for details).
+\emph{Totaliseschema} instances become the properties to prove when converted to the
+half-baked proof (see chapter \ref{ch:skeletons} for details). This is because
+totaliseschema instances will should contain a preconditions and postconditions
+which should obey they stateinvariants within the specification. Totaliseschema
+instances should be total and therefore complete. If all the totaliseschemas are
+proved correct then their should be less room for errors within the entire
+system.
 
 
 \subsubsection{axiom}
@@ -345,13 +395,19 @@ maxPlayers = 20 \end{axdef}[+color[red]}]
 \caption{\label{fig:exampleofa} A axiom instance labelled in \gls{zdra}.}
 \end{figure}
 
+\emph{Axioms} are important to identify as they go in the premuable of the
+Isabelle file.
+
 \subsubsection{stateInvariants}
 The \emph{stateInvariants} instance are the conditions which must be obeyed
 throughout the specifications. These are the lines founds inside the
 \emph{stateschema} instance. Figure \ref{fig:exampleofss} shows a single
 \emph{stateinvariant} instance labelled as \verb|\draline{SI1}{..| (shown in
 blue). There can be 0 or more \emph{stateinvariance} instances within a
-\emph{theory}.
+\emph{theory}. \emph{StateInvariants} are important to be identified in the ZDRa
+as they come after the `\emph{assumes}' in the isabelle syntax (see chapter
+\ref{chap:gpsa2isa} to see how stateinvariants are translated). Each definition
+and lemma then described in Isabelle makes sure that all conditions obey the stateinvariants.
 
 \subsubsection{precondition}
 
@@ -389,6 +445,8 @@ A \emph{precondition} instance which is an entire schema is shown in figure
 \ref{fig:exampleofpre}. The \gls{zdra} labelling consists of the line
 \verb|\draschema{PRE1}{..| where the name of the instance is \verb|PRE1|.
 
+\emph{Precondition's} are important to identify as they must be checked that they
+conform with the stateInvariants of the specification.
 
 \subsubsection{postcondition}
 
@@ -397,6 +455,9 @@ example of this is demonstrated in figure \ref{fig:exampleofcs} (shown in
 green), where the name of the instance is \verb|PO3| and the instance itself is
 \verb|birthday' = birthday \cup \{name? \mapsto date?\}|.
 
+\emph{Postconditions's} are important to identify as they must be checked that they
+conform with the stateInvariants of the specification.
+
 \subsubsection{output}
 
 An \emph{output} instance can also be labelled as a \gls{zdra} line. An example
@@ -404,6 +465,8 @@ of this is shown in green in figure \ref{fig:exampleofos}. The instance in this
 case is named
  \verb|O4| and the instance itself is \verb|result! =already\_known|.
 
+ \emph{Output's} are important to identify as they must be checked that they
+conform with the stateInvariants of the specification.
 \subsection{Relations}
 \label{subsec:zdrarelations}
 
@@ -427,15 +490,15 @@ $\longrightarrow$ & axiom \\
 \cline{1-3}
 \textbf{totalises} & &  & outputSchema & $\longrightarrow$ & axiom \\
 \cline{1-3}
-totalise & $\longrightarrow$ & changeSchema  & changeSchema & $\longrightarrow$
+totaliseschema & $\longrightarrow$ & changeSchema  & changeSchema & $\longrightarrow$
 & axiom \\
 \cline{4-6}
-totalise & $\longrightarrow$ & outputSchema & \textbf{allows}  & & \\
+totaliseschema & $\longrightarrow$ & outputSchema & \textbf{allows}  & & \\
 \cline{4-6}
-totalise & $\longrightarrow$ & totalise  & precondition  & $\longrightarrow$  &
+totaliseschema & $\longrightarrow$ & totaliseschema  & precondition  & $\longrightarrow$  &
 postcondition \\
 \cline{4-6}
-& &  & \textbf{initialOf} &  &  \\ 
+totaliseschema & $\longrightarrow$ & precondition & \textbf{initialOf} &  &  \\ 
 \cline{4-6}
 & &  & initialSchema & $\longrightarrow$ & stateSchema \\ 
 \hline
@@ -446,7 +509,11 @@ postcondition \\
 Table \ref{tab:relationsallowed} shows the legal relations between each of the
 instances for example an \emph{initialSchema} can be an \emph{initialOf} a
 \emph{stateSchema} but it wont allow say a \emph{changeSchema} to be
-\emph{initialOf} an \emph{initialSchema} etc.
+\emph{initialOf} an \emph{initialSchema} etc. These relations are all we need to
+create a Dependency and GoTo graph and to describe the relationships between the
+instances of the specification. These relations are also the minimum we need to
+create the program to automatically translate the specification in the correct
+order into an Isabelle file.
 
 \subsubsection{initialOf}
 
@@ -480,6 +547,13 @@ an \emph{allows} relationship would be useful is in figure
 and an \emph{output} \verb|O4| (in green). In this case the user would write in
 their \gls{zdra} \LaTeX{} file: \verb|\allows{PRE3}{O4}|.
 
+\subsubsection{totalises}
+The \emph{totalise} relation allows users to describe which of their schema's
+have been totalised. If there exists a precondition which has not been totalised
+than the ZDRa check will identify this (see next section). Any schema which
+contains \emph{preconditions} be totalised in a \emph{totaliseschema}. For
+example the the user can label \verb|\totalises{TS1}{PRE1}|
+
 
 \section{Implementation}
 \label{sec:zdra_implement}
@@ -505,6 +579,19 @@ program will display a message saying "\texttt{Specification not correctly
 totalised}". This message is a warning not an error therefore even if the
 specification still has untotalised preconditions the user can still go on with
 the next steps of computerisation.
+
+It is important to have correctly totalised specifications, especially in safety
+critical systems as it leaves less room for error when translating specification
+into actual programs. If every preconditions have a corresponding postcondition
+than the specification will be deemed `\emph{totalised}' and therefore a safer
+system. With a totalised specification the programmer would not need to make any
+assumptions and any defined state the system is in will have a corresponding
+postcondition. Totalisation also adds a level of rigour to the specification for
+example in the Sholis project \cite{sholis} described in chapter
+\ref{ch:background} the Z specification found 75\% of faults in the system.
+Without a totalised specification those faults would of been implemented in the
+system and then potentially only found during testing where a lot of time and
+money would of been spent.
 
 \subsubsection{Errors}
 \label{subsubsec:zdra_toterrors}
@@ -568,6 +655,11 @@ specification. For example if the \gls{zdra} program finds \verb|\uses{x}{y}|
 and \texttt{x} and \texttt{y} are nodes in the directed graph then it will add a
 directed edge between \texttt{x} and \texttt{y} respectively. Nodes with no
 edges at all can also be added to the graph.
+
+Loops in the reasoning identify when two specifications or functions can call
+one another (mutual recursion). This should be avoided when writing safety critical systems because
+a system which has mutual recursion could possibly overload the stack and the
+software will crash.
 
 \subsubsection{Errors}
 \label{subsubsec:zdra_looperrors}
@@ -655,7 +747,7 @@ and shows the path of the loop, which in this case is \verb|CS4, TS4, TS5, TS6|.
 The error message which appears specifically for this example in shown in figure
 \ref{app:failzdraoutmessgae} in appendix \ref{app:failzdraoutmes}.
 
-\subsection{Products}
+\subsection{ZDRa Outputs}
 \label{subsec:zdra_prodcuts}
 
 When the specification has been ZDRa checked the program will then output two
@@ -690,6 +782,12 @@ are represented by nodes in the graph. The arrows from the instances are
 represented by the edges in the graph, all the arrows in the document and edges
 in the graph should be pointing in the same direction.
 
+The dependency graph is a directed graph representing dependencies
+of several towards one another. The benefits of a dependency graph would be for system analysis, one can see
+which parts of the specification are \textbf{dependent} on others. For example
+if one were to change a function (schema) which other functions would be
+affected. Circular reasoning will also be easy to identify on a dependency graph.
+
 
 \subsubsection{GoTo Graph}
 
@@ -717,307 +815,314 @@ on \verb|SS1|.
 The other \gls{zdra} relations which also reverse the direction of the arrow in
 the \emph{goto graph} are \emph{uses},\emph{requires} and \emph{totalises}.
 
-\section{A formal view on the \gls{zdra}.}
+The GoTo graph represents the order the instances should go in when translating
+the specification into Isabelle syntax.
 
-We denote the star character `*' to denote one or many. We remind the reader
-that `$\mathbf{\Gamma}$' denotes the schematext of a specification,
-$\mathcal{Z}, \mathcal{E}, \mathcal{T}$ and $\mathbb{S}$ are correctly typed
-\emph{declaration}, \emph{expression}, \emph{term} and \emph{set} respectively
-(from table \ref{tab:zcga1} in chapter \ref{ch:zcga}).
+The dependency and GoTo graphs contain the same instances and the same
+relations, however  the direction of the relations may be different. These differences between the dependency and GoTo graphs are
+described in the next chapter.
 
-\begin{defin}
-Let $\mathcal{E}$ be a correctly typed expression. \\ Let $\mathcal{D}$ be a
-correctly typed definition. \\
-Where $((\mathcal{Z}@\mathcal{E})$*$|\mathcal{T}$*$|\mathbb{S}$*$) \in
-\mathcal{E}$ and $(\mathcal{T}$*$|\mathbb{S}$*$) \in \mathcal{D}$\\
-Let $\mathcal{ED}$ be the set containing $\mathcal{E}$'s and $\mathcal{D}$'s.
-\end{defin}
+% %\section{A formal view on the \gls{zdra}.}
 
-For example an expression can be the following: \verb|t = t| where $t$ is a
-term. Therefore this expression contains two terms. Another example of an
-expression could be: $\forall t: S \bullet t = 0$. This expression contains a
-declaration within an expression ($(\mathcal{Z}@\mathcal{E})$, which is $t:S$.
+% % We denote the star character `*' to denote one or many. We remind the reader
+% that `$\mathbf{\Gamma}$' denotes the schematext of a specification,
+% $\mathcal{Z}, \mathcal{E}, \mathcal{T}$ and $\mathbb{S}$ are correctly typed
+% \emph{declaration}, \emph{expression}, \emph{term} and \emph{set} respectively
+% (from table \ref{tab:zcga1} in chapter \ref{ch:zcga}).
+
+% \begin{defin}
+% Let $\mathcal{E}$ be a correctly typed expression. \\ Let $\mathcal{D}$ be a
+% correctly typed definition. \\
+% Where $((\mathcal{Z}@\mathcal{E})$*$|\mathcal{T}$*$|\mathbb{S}$*$) \in
+% \mathcal{E}$ and $(\mathcal{T}$*$|\mathbb{S}$*$) \in \mathcal{D}$\\
+% Let $\mathcal{ED}$ be the set containing $\mathcal{E}$'s and $\mathcal{D}$'s.
+% \end{defin}
+
+% For example an expression can be the following: \verb|t = t| where $t$ is a
+% term. Therefore this expression contains two terms. Another example of an
+% expression could be: $\forall t: S \bullet t = 0$. This expression contains a
+% declaration within an expression ($(\mathcal{Z}@\mathcal{E})$, which is $t:S$.
 
 
-\begin{table}[H]
-\begin{footnotesize}
-\begin{tabular}{| l | l | l |}
-\hline
-\textbf{Instance} & \textbf{Allowed weak types} & \textbf{Annotations} \\
-\hline
-\hline
-precondition & $\mathcal{ED} \in \mathbf{\Gamma}$ &
-\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
+% \begin{table}[H]
+% \begin{footnotesize}
+% \begin{tabular}{| l | l | l |}
+% \hline
+% \textbf{Instance} & \textbf{Allowed weak types} & \textbf{Annotations} \\
+% \hline
+% \hline
+% precondition & $\mathcal{ED} \in \mathbf{\Gamma}$ &
+% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
 
-postcondition & $\mathcal{ED} \in \mathbf{\Gamma}$ &
-\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
+% postcondition & $\mathcal{ED} \in \mathbf{\Gamma}$ &
+% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
 
-output & $\mathcal{ED} \in \mathbf{\Gamma}$ &
-\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
+% output & $\mathcal{ED} \in \mathbf{\Gamma}$ &
+% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
 
-stateInvariants & $\mathcal{ED} \in \mathbf{\Gamma}$ &
-\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
+% stateInvariants & $\mathcal{ED} \in \mathbf{\Gamma}$ &
+% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
 
-stateSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \in \mathbf{\Gamma}$
-& $(\cgatext{\declaration{\mathcal{Z}$*$} \&
-\expression{\mathcal{E}}\definition{\mathcal{D}}}) |
-\cgatext{\declaration{\mathcal{Z}$*$}}$ \\
+% stateSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \in \mathbf{\Gamma}$
+% & $(\cgatext{\declaration{\mathcal{Z}$*$} \&
+% \expression{\mathcal{E}}\definition{\mathcal{D}}}) |
+% \cgatext{\declaration{\mathcal{Z}$*$}}$ \\
 
-theory & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \in \mathbf{\Gamma}$ &
-$(\cgatext{\declaration{\mathcal{Z}$*$} \&
-\expression{\mathcal{E}}\definition{\mathcal{D}}}) |
-\cgatext{\declaration{\mathcal{Z}$*$}}$\\
+% theory & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \in \mathbf{\Gamma}$ &
+% $(\cgatext{\declaration{\mathcal{Z}$*$} \&
+% \expression{\mathcal{E}}\definition{\mathcal{D}}}) |
+% \cgatext{\declaration{\mathcal{Z}$*$}}$\\
 
-changeSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \in
-\mathbf{\Gamma}$ & $(\cgatext{\declaration{\mathcal{Z}$*$} \&
-\expression{\mathcal{E}}\definition{\mathcal{D}}}) |
-\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+% changeSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \in
+% \mathbf{\Gamma}$ & $(\cgatext{\declaration{\mathcal{Z}$*$} \&
+% \expression{\mathcal{E}}\definition{\mathcal{D}}}) |
+% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
 
-totaliseSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \in
-\mathbf{\Gamma}$ & $(\cgatext{\declaration{\mathcal{Z}$*$} \&
-\expression{\mathcal{E}}\definition{\mathcal{D}}}) |
-\cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+% totaliseSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \in
+% \mathbf{\Gamma}$ & $(\cgatext{\declaration{\mathcal{Z}$*$} \&
+% \expression{\mathcal{E}}\definition{\mathcal{D}}}) |
+% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
 
-axiom & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
-$\cgatext{\declaration{\mathcal{Z}$*$} \&
-\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+% axiom & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
+% $\cgatext{\declaration{\mathcal{Z}$*$} \&
+% \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
 
-outputSchema & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
-$\cgatext{\declaration{\mathcal{Z}$*$} \&
-\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+% outputSchema & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
+% $\cgatext{\declaration{\mathcal{Z}$*$} \&
+% \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
 
-initSchema & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
-$\cgatext{\declaration{\mathcal{Z}$*$} \&
-\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
+% initSchema & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
+% $\cgatext{\declaration{\mathcal{Z}$*$} \&
+% \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
 
-\hline
-\end{tabular}
+% \hline
+% \end{tabular}
 
-\end{footnotesize}
-\caption{ZCGa annotations allowed in ZDRa instances \label{tab:zcgainzdra}}
-\end{table}
+% \end{footnotesize}
+% \caption{ZCGa annotations allowed in ZDRa instances \label{tab:zcgainzdra}}
+% \end{table}
 
-Table \ref{tab:zcgainzdra} shows which \gls{zcga} are allowed to be in certain
-\gls{zdra} instances. Where `\&' means these weak type categories must be
-included in the instance. For example a \emph{stateSchema} can be made up of one
-or more $\mathcal{Z}$ \textbf{AND} one or more $\mathcal{ED}$ \textbf{OR} one or
-more $\mathcal{Z}$ on their own. Therefore a \emph{stateSchema} can not be made
-up of $\mathcal{ED}$ on it's own.
+% Table \ref{tab:zcgainzdra} shows which \gls{zcga} are allowed to be in certain
+% \gls{zdra} instances. Where `\&' means these weak type categories must be
+% included in the instance. For example a \emph{stateSchema} can be made up of one
+% or more $\mathcal{Z}$ \textbf{AND} one or more $\mathcal{ED}$ \textbf{OR} one or
+% more $\mathcal{Z}$ on their own. Therefore a \emph{stateSchema} can not be made
+% up of $\mathcal{ED}$ on it's own.
 
-\paragraph{precondition, postcondition, output, stateInvariants.}
-These instances can only contain a correctly typed expression or definition
-within the schematext. There may be one or more expressions or definitions.
+% \paragraph{precondition, postcondition, output, stateInvariants.}
+% These instances can only contain a correctly typed expression or definition
+% within the schematext. There may be one or more expressions or definitions.
 
-\paragraph{stateSchema, theory.}
-These instances can only contain one or more correctly typed declaration
-\emph{and} one or more correctly typed expression and definition or one or more
-correctly typed declarations.
+% \paragraph{stateSchema, theory.}
+% These instances can only contain one or more correctly typed declaration
+% \emph{and} one or more correctly typed expression and definition or one or more
+% correctly typed declarations.
 
-\paragraph{changeSchema, totalise.}
-These instances can only contain one or more correctly typed declaration
-\emph{and} one or more correctly typed expression and definition or one or more
-correctly typed expressions or definitions.
+% \paragraph{changeSchema, totalise.}
+% These instances can only contain one or more correctly typed declaration
+% \emph{and} one or more correctly typed expression and definition or one or more
+% correctly typed expressions or definitions.
 
-\paragraph{axiom, outputSchema, initSchema}
-These instances can only contain one or more correctly typed declarations
-\emph{and} one or more correctly typed expression and definitions.
+% \paragraph{axiom, outputSchema, initSchema}
+% These instances can only contain one or more correctly typed declarations
+% \emph{and} one or more correctly typed expression and definitions.
 
-\subsection{Allowances when combining the ZCGa and ZDRa}
+% \subsection{Allowances when combining the ZCGa and ZDRa}
 
-Since we have formally outlined the \gls{zdra} in table \ref{tab:zcgainzdra} we
-can now show some rules which occur when we combing the \gls{zcga} and
-\gls{zdra} together.
+% Since we have formally outlined the \gls{zdra} in table \ref{tab:zcgainzdra} we
+% can now show some rules which occur when we combing the \gls{zcga} and
+% \gls{zdra} together.
 
-\begin{thm}
-Using table \ref{tab:zcgainzdra}, the initialOf relation only permits the
-annotations: \\
- $\mathcal{Z} \& \mathcal{ED}, initialOf, (\mathcal{Z} \& \mathcal{ED}) |
- \mathcal{Z}$.
-\end{thm}
+% \begin{thm}
+% Using table \ref{tab:zcgainzdra}, the initialOf relation only permits the
+% annotations: \\
+%  $\mathcal{Z} \& \mathcal{ED}, initialOf, (\mathcal{Z} \& \mathcal{ED}) |
+%  \mathcal{Z}$.
+% \end{thm}
 
-\begin{proof}
-From table \ref{tab:relationsallowed} (section \ref{subsec:zdrarelations}) we
-can see the only legal relation for initialOf is `initSchema $\longrightarrow$
-stateSchema'. An initSchema can only have the annotation $\mathcal{Z} \&
-\mathcal{ED}$ and a stateSchema can only have the annotations $(\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{Z}$ (from table \ref{tab:zcgainzdra}). Since
-$\longrightarrow$ represents the relation \emph{initialOf} then we get
-$\mathcal{Z} \& \mathcal{ED}, initialOf, ((\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z})$.
-\end{proof}
+% \begin{proof}
+% From table \ref{tab:relationsallowed} (section \ref{subsec:zdrarelations}) we
+% can see the only legal relation for initialOf is `initSchema $\longrightarrow$
+% stateSchema'. An initSchema can only have the annotation $\mathcal{Z} \&
+% \mathcal{ED}$ and a stateSchema can only have the annotations $(\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{Z}$ (from table \ref{tab:zcgainzdra}). Since
+% $\longrightarrow$ represents the relation \emph{initialOf} then we get
+% $\mathcal{Z} \& \mathcal{ED}, initialOf, ((\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z})$.
+% \end{proof}
 
-\begin{thm}
-Using table \ref{tab:zcgainzdra}, the allows relation only permits the
-annotations: \\
-$\mathcal{ED}, allows, \mathcal{ED}$.
-\end{thm}
+% \begin{thm}
+% Using table \ref{tab:zcgainzdra}, the allows relation only permits the
+% annotations: \\
+% $\mathcal{ED}, allows, \mathcal{ED}$.
+% \end{thm}
 
-\begin{proof}
-The allows relation only permits `precondition $\longrightarrow$ postcondition'
-(table \ref{tab:relationsallowed}). Both a precondition and postcondition have
-the \gls{zcga} annotations $\mathcal{ED}$. Since $\longrightarrow$ represents
-the relation. Then the result is $\mathcal{ED}, allows, \mathcal{ED}$.
-\end{proof}
+% \begin{proof}
+% The allows relation only permits `precondition $\longrightarrow$ postcondition'
+% (table \ref{tab:relationsallowed}). Both a precondition and postcondition have
+% the \gls{zcga} annotations $\mathcal{ED}$. Since $\longrightarrow$ represents
+% the relation. Then the result is $\mathcal{ED}, allows, \mathcal{ED}$.
+% \end{proof}
 
-\begin{thm}
-Using table \ref{tab:zcgainzdra}, the requires relation only permits the
-annotations:
-\begin{itemize}
-\item $\mathcal{Z} \& \mathcal{ED}, requires, \mathcal{ED}$
-\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, requires, \mathcal{ED}$
-\end{itemize}
-\end{thm}
+% \begin{thm}
+% Using table \ref{tab:zcgainzdra}, the requires relation only permits the
+% annotations:
+% \begin{itemize}
+% \item $\mathcal{Z} \& \mathcal{ED}, requires, \mathcal{ED}$
+% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, requires, \mathcal{ED}$
+% \end{itemize}
+% \end{thm}
 
-\begin{proof}
-Using table (table \ref{tab:relationsallowed}) of permitted relations the
-requires relation has the following syntax:
-\begin{enumerate}
-\item `outputSchema $\longrightarrow$ precondition'
-\item `outputSchema $\longrightarrow$ output', 
-\item `changeSchema $\longrightarrow$ precondition', 
-\item `changeSchema $\longrightarrow$ postcondition', 
-\end{enumerate} 
-\begin{itemize}
+% \begin{proof}
+% Using table (table \ref{tab:relationsallowed}) of permitted relations the
+% requires relation has the following syntax:
+% \begin{enumerate}
+% \item `outputSchema $\longrightarrow$ precondition'
+% \item `outputSchema $\longrightarrow$ output', 
+% \item `changeSchema $\longrightarrow$ precondition', 
+% \item `changeSchema $\longrightarrow$ postcondition', 
+% \end{enumerate} 
+% \begin{itemize}
 
-\item Using the allowed \gls{zcga} annotations in table \ref{tab:zcgainzdra} we
-can see that an outputSchema contains only $\mathcal{Z} \& \mathcal{ED}$ and a
-precondition and output both only contain $\mathcal{ED}$ thus 1 and 2 become
-$\mathcal{Z} \& \mathcal{ED} \longrightarrow \mathcal{ED}$. Since
-$\longrightarrow$ represents the relation then we end up with $\mathcal{Z} \&
-\mathcal{ED}, requires, \mathcal{ED}$.
+% \item Using the allowed \gls{zcga} annotations in table \ref{tab:zcgainzdra} we
+% can see that an outputSchema contains only $\mathcal{Z} \& \mathcal{ED}$ and a
+% precondition and output both only contain $\mathcal{ED}$ thus 1 and 2 become
+% $\mathcal{Z} \& \mathcal{ED} \longrightarrow \mathcal{ED}$. Since
+% $\longrightarrow$ represents the relation then we end up with $\mathcal{Z} \&
+% \mathcal{ED}, requires, \mathcal{ED}$.
 
-\item The allowed \gls{zcga} annotations for changeSchema are $(\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{ED}$ and the allowed \gls{zcga} annotations for both
-precondition and postcondition are $\mathcal{ED}$ therefore we end up with
-($(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \longrightarrow \mathcal{ED}$.
-Again the $\longrightarrow$ represents the relation so the $\longrightarrow$
-becomes `requires' and we are left with $(\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{ED}, requires, \mathcal{ED}$.
-\end{itemize}
-\end{proof}
+% \item The allowed \gls{zcga} annotations for changeSchema are $(\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{ED}$ and the allowed \gls{zcga} annotations for both
+% precondition and postcondition are $\mathcal{ED}$ therefore we end up with
+% ($(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \longrightarrow \mathcal{ED}$.
+% Again the $\longrightarrow$ represents the relation so the $\longrightarrow$
+% becomes `requires' and we are left with $(\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{ED}, requires, \mathcal{ED}$.
+% \end{itemize}
+% \end{proof}
 
-\begin{thm}
-Using table \ref{tab:zcgainzdra}, the totalises relation only permits the
-annotations:
-\begin{itemize}
-\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, (\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{ED}$
-\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, \mathcal{Z} \&
-\mathcal{ED}$
-\end{itemize}
-\end{thm}
+% \begin{thm}
+% Using table \ref{tab:zcgainzdra}, the totalises relation only permits the
+% annotations:
+% \begin{itemize}
+% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, (\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{ED}$
+% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, \mathcal{Z} \&
+% \mathcal{ED}$
+% \end{itemize}
+% \end{thm}
 
-\begin{proof}
-Using table (table \ref{tab:relationsallowed}) of permitted relations the
-totalises relation has the following syntax:
-\begin{enumerate}
-\item `totaliseSchema $\longrightarrow$ changeSchema'
-\item `totaliseSchema $\longrightarrow$ outputSchema'
-\item `totaliseSchema $\longrightarrow$ totaliseSchema'
-\end{enumerate} 
+% \begin{proof}
+% Using table (table \ref{tab:relationsallowed}) of permitted relations the
+% totalises relation has the following syntax:
+% \begin{enumerate}
+% \item `totaliseSchema $\longrightarrow$ changeSchema'
+% \item `totaliseSchema $\longrightarrow$ outputSchema'
+% \item `totaliseSchema $\longrightarrow$ totaliseSchema'
+% \end{enumerate} 
 
-\begin{itemize}
-\item Table \ref{tab:relationsallowed} shows the \gls{zcga} syntax for
-totaliseSchema and changeSchema is $(\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{ED})$. Thus the permitted relations would be $(\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{ED}) \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{ED})$ for points 1 and 3. Since $\longrightarrow$ represents the
-relation `totalises' in this case we would have $(\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{ED}), totalises, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$. Hence
-the first part of the theorem is proven.
+% \begin{itemize}
+% \item Table \ref{tab:relationsallowed} shows the \gls{zcga} syntax for
+% totaliseSchema and changeSchema is $(\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{ED})$. Thus the permitted relations would be $(\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{ED}) \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{ED})$ for points 1 and 3. Since $\longrightarrow$ represents the
+% relation `totalises' in this case we would have $(\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{ED}), totalises, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$. Hence
+% the first part of the theorem is proven.
 
-\item Output schema has the \gls{zcga} syntax $(\mathcal{Z} \& \mathcal{ED})$
-according to table \ref{tab:zcgainzdra}. If totaliseSchema has the \gls{zcga}
-syntax $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$ then using point 2 the
-permitted relation would be $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})
-\longrightarrow \mathcal{Z} \& \mathcal{ED}$. Again since $\longrightarrow$
-represent totalise in this case we conclude with $(\mathcal{Z} \& \mathcal{ED})
-| \mathcal{ED}), totalises, \mathcal{Z} \& \mathcal{ED}$.
-\end{itemize}
-\end{proof}
+% \item Output schema has the \gls{zcga} syntax $(\mathcal{Z} \& \mathcal{ED})$
+% according to table \ref{tab:zcgainzdra}. If totaliseSchema has the \gls{zcga}
+% syntax $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$ then using point 2 the
+% permitted relation would be $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})
+% \longrightarrow \mathcal{Z} \& \mathcal{ED}$. Again since $\longrightarrow$
+% represent totalise in this case we conclude with $(\mathcal{Z} \& \mathcal{ED})
+% | \mathcal{ED}), totalises, \mathcal{Z} \& \mathcal{ED}$.
+% \end{itemize}
+% \end{proof}
 
-\begin{thm}
-Using table \ref{tab:zcgainzdra}, the uses relation only permits the
-annotations:
-\begin{itemize}
-\item $\mathcal{Z} \& \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z}$
-\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, (\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{Z}$
-\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, (\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{Z}$
-\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, \mathcal{Z} \&
-\mathcal{ED}$
-\item $\mathcal{Z} \& \mathcal{ED}, uses, \mathcal{Z} \& \mathcal{ED}$
-\item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, \mathcal{Z} \&
-\mathcal{ED}$
-\end{itemize}
-\end{thm}
+% \begin{thm}
+% Using table \ref{tab:zcgainzdra}, the uses relation only permits the
+% annotations:
+% \begin{itemize}
+% \item $\mathcal{Z} \& \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z}$
+% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, (\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{Z}$
+% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, (\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{Z}$
+% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, \mathcal{Z} \&
+% \mathcal{ED}$
+% \item $\mathcal{Z} \& \mathcal{ED}, uses, \mathcal{Z} \& \mathcal{ED}$
+% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, \mathcal{Z} \&
+% \mathcal{ED}$
+% \end{itemize}
+% \end{thm}
 
-\begin{proof}
-Using table (table \ref{tab:relationsallowed}) of permitted relations the uses
-relation has the following syntax:
-\begin{enumerate}
-\item `outputSchema $\longrightarrow$ stateSchema'
-\item `changeSchema $\longrightarrow$ stateSchema'
-\item `stateSchema $\longrightarrow$ stateSchema'
-\item `stateSchema $\longrightarrow$ axiom'
-\item `outputSchema $\longrightarrow$ axiom'
-\item `changeSchema $\longrightarrow$ axiom'
-\end{enumerate} 
+% \begin{proof}
+% Using table (table \ref{tab:relationsallowed}) of permitted relations the uses
+% relation has the following syntax:
+% \begin{enumerate}
+% \item `outputSchema $\longrightarrow$ stateSchema'
+% \item `changeSchema $\longrightarrow$ stateSchema'
+% \item `stateSchema $\longrightarrow$ stateSchema'
+% \item `stateSchema $\longrightarrow$ axiom'
+% \item `outputSchema $\longrightarrow$ axiom'
+% \item `changeSchema $\longrightarrow$ axiom'
+% \end{enumerate} 
 
-\begin{itemize}
-\item According to table \ref{tab:zcgainzdra} the \gls{zcga} syntax for
-outputSchema is $\mathcal{Z}\&\mathcal{ED}$ and the syntax for stateSchema is
-$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Therefore using point 1 we get
-`$\mathcal{Z}\&\mathcal{ED} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z}$'. Since $\longrightarrow$ represents the relation uses in this case
-we get $\mathcal{Z} \& \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z}$.
+% \begin{itemize}
+% \item According to table \ref{tab:zcgainzdra} the \gls{zcga} syntax for
+% outputSchema is $\mathcal{Z}\&\mathcal{ED}$ and the syntax for stateSchema is
+% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Therefore using point 1 we get
+% `$\mathcal{Z}\&\mathcal{ED} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z}$'. Since $\longrightarrow$ represents the relation uses in this case
+% we get $\mathcal{Z} \& \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z}$.
 
-\item The syntax for changeSchema is $(\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{ED}$ and the syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z}$ according from table \ref{tab:zcgainzdra}. Substituting the
-\gls{zcga} for instance names in point 2 we get $(\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{ED} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. By
-substituting the relation uses for $\longrightarrow$ we end up with
-$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, (\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{Z}$.
+% \item The syntax for changeSchema is $(\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{ED}$ and the syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z}$ according from table \ref{tab:zcgainzdra}. Substituting the
+% \gls{zcga} for instance names in point 2 we get $(\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{ED} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. By
+% substituting the relation uses for $\longrightarrow$ we end up with
+% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, (\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{Z}$.
 
-\item Using table \ref{tab:zcgainzdra} the \gls{zcga} syntax for stateSchema is
-$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Using point 3, we substitute the
-\gls{zcga} syntax for the instance name and we get $(\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{Z} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z}$. Since $\longrightarrow$ represents uses then we get $(\mathcal{Z}
-\& \mathcal{ED}) | \mathcal{Z}, uses, (\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z}$.
+% \item Using table \ref{tab:zcgainzdra} the \gls{zcga} syntax for stateSchema is
+% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Using point 3, we substitute the
+% \gls{zcga} syntax for the instance name and we get $(\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{Z} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z}$. Since $\longrightarrow$ represents uses then we get $(\mathcal{Z}
+% \& \mathcal{ED}) | \mathcal{Z}, uses, (\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z}$.
 
-\item The \gls{zcga} syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z}$ and the \gls{zcga} syntax for axiom is  $\mathcal{Z} \&
-\mathcal{ED}$. By substituting these \gls{zcga} syntax's in point 4 we get
-$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \longrightarrow \mathcal{Z} \&
-\mathcal{ED}$. Since $\longrightarrow$ in this case is the relationship uses, we
-can change $\longrightarrow$ to `uses' and get $(\mathcal{Z} \& \mathcal{ED}) |
-\mathcal{Z}, uses, \mathcal{Z} \& \mathcal{ED}$.
+% \item The \gls{zcga} syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z}$ and the \gls{zcga} syntax for axiom is  $\mathcal{Z} \&
+% \mathcal{ED}$. By substituting these \gls{zcga} syntax's in point 4 we get
+% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \longrightarrow \mathcal{Z} \&
+% \mathcal{ED}$. Since $\longrightarrow$ in this case is the relationship uses, we
+% can change $\longrightarrow$ to `uses' and get $(\mathcal{Z} \& \mathcal{ED}) |
+% \mathcal{Z}, uses, \mathcal{Z} \& \mathcal{ED}$.
 
-\item According to table \ref{tab:zcgainzdra} the \gls{zcga} syntax for
-outputSchema and axiom are both $\mathcal{Z} \& \mathcal{ED}$. Therefore if we
-put in the \gls{zcga} syntax instead of the instance names in point 5 we get
-$\mathcal{Z} \& \mathcal{ED} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. From
-table \ref{tab:relationsallowed} we can deduce that $\longrightarrow$ mean
-`uses' so we finish with $\mathcal{Z} \& \mathcal{ED}, uses, \mathcal{Z} \&
-\mathcal{ED}$.
+% \item According to table \ref{tab:zcgainzdra} the \gls{zcga} syntax for
+% outputSchema and axiom are both $\mathcal{Z} \& \mathcal{ED}$. Therefore if we
+% put in the \gls{zcga} syntax instead of the instance names in point 5 we get
+% $\mathcal{Z} \& \mathcal{ED} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. From
+% table \ref{tab:relationsallowed} we can deduce that $\longrightarrow$ mean
+% `uses' so we finish with $\mathcal{Z} \& \mathcal{ED}, uses, \mathcal{Z} \&
+% \mathcal{ED}$.
 
-\item Finally, the \gls{zcga} syntax for changeSchema is $(\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{ED}$ and the \gls{zcga} syntax for axiom is
-$\mathcal{Z} \& \mathcal{ED}$ according to table \ref{tab:zcgainzdra}. If we
-substitute the allowed \gls{zcga} syntax in point 6 we get $(\mathcal{Z} \&
-\mathcal{ED}) | \mathcal{ED} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. Since
-$\longrightarrow$ is the relation `uses' in this case we end up with
-$(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, \mathcal{Z} \&
-\mathcal{ED}$.
-\end{itemize}
-\end{proof}
+% \item Finally, the \gls{zcga} syntax for changeSchema is $(\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{ED}$ and the \gls{zcga} syntax for axiom is
+% $\mathcal{Z} \& \mathcal{ED}$ according to table \ref{tab:zcgainzdra}. If we
+% substitute the allowed \gls{zcga} syntax in point 6 we get $(\mathcal{Z} \&
+% \mathcal{ED}) | \mathcal{ED} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. Since
+% $\longrightarrow$ is the relation `uses' in this case we end up with
+% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, \mathcal{Z} \&
+% \mathcal{ED}$.
+% \end{itemize}
+% \end{proof}
 
 \section{Conclusion}
 In this chapter the \gls{zdra} step of the \gls{zmath} has been described. A

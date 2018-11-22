@@ -1,11 +1,17 @@
-\chapter{From ZDRa to General Proof Sketch}
+\chapter{From ZDRa to Proof Sketch}
 \label{ch:skeletons}
 
-The skeletons described in this chapter are automatically generated if the
+The proof sketch described in this chapter are automatically generated if the
 specification passes the \gls{zdra} check. Section \ref{sec:buildinggraphs}
 outlines how the dependency and goto graphs are generated from the \gls{zdra}
 annotations. Then section \ref{sec:zdra2gen} describes how \gls{zmath} builds
-the \gls{gps} from the graphs. 
+the \gls{gps} from the graphs.  
+We describe how proof obligations are generated from the  proof sketch.
+Proof obligations are logical formulas associated to a correctness claim for a
+given verification property. Therefore by generating proof obligations from 
+the \gls{gpsa} we can then establish some correctness of the specification as
+they check for consistency and sanity of the specification.
+
 
 \section{Building the Dependency and GoTo graphs}
 \label{sec:buildinggraphs}
@@ -21,7 +27,7 @@ reversed.
 We use the definitions from \cite{zengfirstyear} to describe `\emph{nodes}'
 `\emph{relational edges}' to describe the dependency graph as a set.
 
-\begin{defin}[Nodes] We can say a node of the graph (or vertex) $\mathbb{V}$, is
+\begin{defin}[Nodes, \cite{zengfirstyear}] We can say a node of the graph (or vertex) $\mathbb{V}$, is
 a pair.
 \begin{center}
 (id, ins)
@@ -29,10 +35,10 @@ a pair.
 of a unique identifier id, and instance name ins. 
 \end{defin} 
 
-\begin{defin}[Relational Edges] We can say a relation edge $\mathbb{E}$, is a
+\begin{defin}[Relational Edges, \cite{zengfirstyear}] We can say a relation edge $\mathbb{E}$, is a
 triple
 \begin{center}
-($n_{1}$, rel, $n_{2}$)
+($v_{1}$, rel, $v_{2}$)
 \end{center}
 of a relation from node $v_{1}$ to $v_{2}$ with relation name rel.
 \end{defin} 
@@ -40,8 +46,8 @@ of a relation from node $v_{1}$ to $v_{2}$ with relation name rel.
 We can now show the how annotations are represented and processed for the
 dependency graph.
 
-\begin{defin}[Dep graph set] A dependency graph $\mathbb{D}$, is a set of
-relational edges and a set of nodes.\\
+\begin{defin}[Dep graph set, \cite{zengfirstyear}] A dependency graph $\mathbb{D}$, is a set of
+relational edges \mathbb{E}, and a set of nodes \mathbb{V}.\\
 $\mathbb{D} = \mathbb{E} \cup \mathbb{V}$
 \end{defin} 
 
@@ -90,6 +96,7 @@ relationship. The definitions are as follows:
 \begin{tabular}{l|l}
 \hline
 \textbf{Relation} & \textbf{dependency graph children}\\
+\hline
 \verb|\allows{A}{B}| & B childOf A \\
 \verb|\requires{A}{B}| & B childOf A \\
 \verb|\uses{A}{B}| & B childOf A\\
@@ -104,6 +111,7 @@ the relations are reversed:
 \begin{tabular}{l|l}
 \hline
 \textbf{Relation} & \textbf{goto graph children}\\
+\hline
 \verb|\allows{A}{B}| & B childOf A \\
 \verb|\requires{A}{B}| & B childOf A \\
 \verb|\uses{A}{B}| & A childOf B\\
@@ -184,75 +192,14 @@ $
 \subsection{Generating the GoTo graph from the dependency graph}
 
 Since the dependency graph only follows the annotations of the \gls{zdra} we
-need to highlight the textual order of these annotations. For example some
-annotations may be stronger then others. The order in which instances are
-inputted in the theorem prover are also important so that the theorem prover may
-be parsed correctly. The GoTo graph is generated using the textual order of the
-dependency graph. The following definitions have been taken from
-\cite{zengfirstyear}.
-
-\begin{defin}[Textual order] We can now formalise three different kinds of
-textual order when translating a dependency graph into the GoTo graph.
-
-\begin{itemize}
-\item \textbf{Strong textual order $\prec$:} This order describes an entire
-entity relation between two nodes ($id_{A}$ uses $id_{B}$ would be written as
-$id_{B}$ $\prec$ $id_{A}$, $id_{A}$ initialOf $id_{B}$ would be written as
-$id_{B} \prec id_{A}$, $id_{A}$ totalises $id_{B}$ would be written as $id_{B}$
-$\prec$ $id_{A}$).
-
-\item \textbf{Weak textual order $\preceq$:} This order describes a sub-part
-relation between two nodes ($id_{A}$ allows $id_{B}$ within a schema written as
-$id_{A} \preceq id_{B}$).
-
-\item \textbf{Common textual order $\leftrightarrow$:} This order describes a
-relation between two nodes where they are both dependent on each other (Where a
-draschema $id_{A}$ requires a draline of some sort $id_{B}$ is written as
-$id_{A}$ $\leftrightarrow$ $id_{B}$).
-\end{itemize}
-\end{defin}
-
-The dependency graph is a direct representation of the \gls{zdra} annotations
-and arrows represented when compiling the \gls{zdra} annotated document. The
-GoTo uses these annotations and describes the textual order of them. When
-inputting a specification into an automatic theorem prover, the textual order is
-important as it decides which part of the specification needs to be in-putted
-first in order to parse correctly. Using the definitions from
-\cite{zengfirstyear} we can now order the relations from the dependency graph.
-
-\begin{table}[H]
-\centering
-\begin{tabular}{| l | l | l |}
-\hline
-\textbf{Relation} & \textbf{Meaning} & \textbf{Order} \\
-\hline 
-$id_{A}$, initialOf, $id_{B}$ & $id_{A}$ is the initial schema of $id_{B}$ &
-$id_{B} \prec id_{A}$ \\
- & or $id_{A}$ initialises $id_{B}$ & \\
- \hline
-$id_{A}$, uses, $id_{B}$ & $id_{B}$ is being used in $id_{A}$ & $id_{B} \prec
-id_{A}$ \\
-& or $id_{B}$ is needed in $id_{A}$ & \\
- \hline
- $id_{A}$, totalises, $id_{B}$ & $id_{A}$ makes the precondition in $id_{B}$
- total & $id_{B} \prec id_{A}$ \\
- \hline
-$id_{A}$, allows, $id_{B}$ & $id_{A}$ is allowing $id_{B}$ to occur & $id_{A}
-\preceq id_{B}$ \\
-\hline
-$id_{A}$, requires, $id_{B}$ & $id_{A}$ is requiring $id_{B}$ to function &
-$id_{A} \leftrightarrow id_{B}$ \\
-\hline
-\end{tabular}
-\caption{Example of ZDRa annotations and the textual order of them. \label{tab:texorder}}
-\end{table}
-
-\begin{defin}
-We denote v\_1 and v\_2 to describe node 1 and node 2 respectively for example
-if we have $\backslash initialof\{id_{1}\}\{id_{2}\}$ and $id_{1}$ is IS1 and
-$id_{2}$ is SS1 then v\_1 would be (IS1, initialSchema) and v\_2 would be (SS1,
-stateSchema).
-\end{defin}
+need to change some of the ordering of some of the relations for the GoTo graph.
+Zengler \cite{zengfirstyear} uses \textit{textual orders} to change the order
+for mathematical relations (strong textual order, weak textual order,
+(common textual order), however for Z specifications we need to change the 
+ordering as shown in the algorithm \ref{alg:gotodep}. 
+When inputting a specification into an automatic theorem prover,
+ (in this case Isabelle) the order is important as it decides which part of the 
+ specification needs to be in-putted first in order to parse correctly. 
 
 \begin{algorithm}[H] \underline{goto\_graph = directedGraph} \;
 \underline{dependency\_graph = directedGraph} \; \SetAlgoLined
@@ -328,68 +275,47 @@ goes the same for the green arrows which represent the `requires' relation. On
 the other hand the yellow arrow, representing the `allows' relation goes in the
 same direction in all three figures.
 
-\begin{defin}[Textual order edge] We can say a textual order edge $\mathbb{O}$
-is a quadruple
-\begin{center}
-($v_{A}, v_{B}, rel, to$)
-\end{center}
-where it is a relation rel, from node $v_{A}$ to node $v_{B}$ and it's textual
-order to where $to \in \{\prec , \preceq , \leftrightarrow , \succ , \succeq
-\}$.
-\end{defin}
-
-\begin{defin}[Graph of Textual order] A graph of textual order is a pair (V,O),
-made up of a set of vertices V and a set of ordered edges O.
-\end{defin}
-
-The definitions for the `\emph{Textual order edge}' and `\emph{Graph of Textual
-order}' have been taken from \cite{zengfirstyear}. The main reason for producing
-a GoTo graph is to order the instances so that when printed they can parse
-through an automated theorem prover. However both the dependency and goto graphs
+ The main reason for producing
+a GoTo graph for a Z specification is to order the instances so that when printed they can parse
+through the Isabelle theorem prover. However both the dependency and goto graphs
 can also be used as documents to analyse the system in question. It may also be
 helpful to stakeholders in the systems project to view the system in it's
 entirety and to see clearly how each component is linked with another.
 
 \begin{table}[H]
 \centering
-\begin{tabular}{| c | c | c |}
+\begin{tabular}{| c | c |}
 \hline
-\textbf{Relation} & \textbf{Textual} & \textbf{GoTo} \\
-& \textbf{Order} & \textbf{Edge} \\
+\textbf{Relation} & \textbf{GoTo} \\
+ & \textbf{Edge} \\
 \hline
-($v_{A}$, uses, $v_{B}$) & $v_{A} \succ v_{B}$ &
+($v_{A}$, uses, $v_{B}$) & 
 \includegraphics[scale=0.15]{Figures/Formalising/uses.png} \\
 \hline
-($v_{A}$, initialof, $v_{B}$) & $v_{A} \succ v_{B}$  &
+($v_{A}$, initialof, $v_{B}$) & 
 \includegraphics[scale=0.15]{Figures/Formalising/initialof.png} \\
 \hline
-($v_{A}$, allows, $v_{B}$) & $v_{A} \preceq v_{B}$ &
+($v_{A}$, allows, $v_{B}$) & 
 \includegraphics[scale=0.15]{Figures/Formalising/allows.png} \\
 \hline
-($v_{A}$, totalises, $v_{B}$) & $v_{A} \succ v_{B}$ &
+($v_{A}$, totalises, $v_{B}$) & 
 \includegraphics[scale=0.15]{Figures/Formalising/totalises.png} \\
 \hline
-($v_{A}$, requires, $v_{B}$) & $v_{A} \leftrightarrow v_{B}$ &
+($v_{A}$, requires, $v_{B}$) & 
 \includegraphics[scale=0.15]{Figures/Formalising/requires.png} \\
 \hline
 \end{tabular}
 \caption{The relations represented by textual order and in the goto graph \label{tab:gotorelations}}
 \end{table}
 
-Table \ref{tab:gotorelations} shows what the textual order representation of each
-relation is and how it is represented as an edge in the GoTo graph. The uses
-relation has the textual order `$\succ$' where the goto graph edge would be
-$(v_{A}, v_{B}, uses, \succ)$ as the relation uses would have a strong textual
-order. the initialof relation is similar to the uses relation where the syntax
-in the goto graph would be $(v_{A}, v_{B}, initialof, \succ)$. Totalises
-relation also has a similar edge to uses and initialof as the syntax for the
-goto graph edge would be: $(v_{A}, v_{B}, totalises, \succ)$. The allows
-relation has a weak textual order where the goto edge syntax would be $(v_{A},
-v_{B}, allows, \preceq)$. The requires relation uses the textual symbol
-`$\leftrightarrow$' as the requires describes a relation that is $subpart\ of$,
-for example if we have $v_{A}$, requires, $v_{B}$ then this describes a relation
-that $v_{A}$ is $subpart\ of$ $v_{B}$ therefore the goto edge syntax would be
-$(v_{A}, v_{B}, requires, \leftrightarrow)$.
+Table \ref{tab:gotorelations} shows what the order representation of each
+relation is and how it is represented as an edge in the GoTo graph. The uses relation
+ has node $b$ going towards node $a$ therefore node $b$ will need to be written in
+ Isabelle before node $a$. The initialOf relation is similar and will require node
+ $b$ to be written in Isabelle before node $a$ and we have $a, initialOf, b$.
+ The same concept goes for the totalises relation. 
+ The allows relation and requires relation are the opposite and keep the same order in the GoTo graph as
+ the dependency graph.
 
 \begin{figure}[H]
 \centering
@@ -428,22 +354,23 @@ Therefore the goto graph would be the pair $\mathbb{V}_{figure\
 \ref{fig:gotospecdep}}, \mathbb{O}_{figure\ \ref{fig:gotospecdep}}$ which we
 could use to input into a theorem prover.
 
-\section{What is a General Proof Sketch}
+\section{What is a Proof Sketch}
 \label{sec:zdra2gen}
 
 When checking for ZDRa correctness the program adds all the annotated chunks
 into a dependency graph and a GoTo graph. Both these graphs are directed graphs.
 
-We then run an algorithm on the GoTo graph to generate a proof skeleton.
-Algorithm \ref{alg:code} shows part of the code in generating this proof sketch.
+We then run an algorithm on the GoTo graph to generate a proof sketch.
+Algorithm \ref{alg:code} shows psuedocode in generating this proof sketech.
 
 %\begin{figure}[H] \includegraphics[scale=0.5]{Figures/skeleton/code.png}
-%\caption{Part of the algorithm to create a proof sketch.} \label{fig:code}
+%\caption{Part of the algorithm to create a proof 
+.} \label{fig:code}
 %\end{figure}
 
 
 \begin{algorithm}[H] \KwData{instances are known as `nodes'}
-\KwData{OrderOfGraph is an ordered graph which lists the general proof skeleton}
+\KwData{OrderOfGraph is an ordered graph which lists the proof sketch}
 \KwData{ListOfAllNodes is an unordered list containing all nodes} \BlankLine
 \For{each node in ListOfAllNodes}{
 \eIf{node is a root}
@@ -452,17 +379,17 @@ in OrderOfGraph}{remove node from ListOfAllNodes}{$nothing$}} \While{there are
 nodes in ListOfAllNodes}{\For{each node in ListOfAllNodes}{predes = predecessor
 of each node\; \eIf{predes is a subset of OrderOfGraph}{push each node to
 OrderOfGraph\; remove each node\;}{$nothing$}}}
-\caption{Part of the algorithm to create a proof sketch\label{alg:code}.}
+\caption{Psuedo algorithm to create a proof sketech\label{alg:code}.}
 \end{algorithm}
 
 \section{Creating the Graph}
 
-Here we show how a Proof skeleton is calculated using the Goto graph created
+Here we show how a Proof sketch is calculated using the Goto graph created
 when running the ZDRa check on a specification.
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/1.png}
-\caption{GoTo graph and proof skeleton of vending machine step 1.}
+\caption{GoTo graph and proof sketch of vending machine step 1.}
 \label{fig:1}
 \end{figure}
 
@@ -474,38 +401,38 @@ diagram \ref{fig:1} we see that we have SS1, PRE1 PRE2 and PRE3 all printed.
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/2.png}
-\caption{GoTo graph and proof skeleton of vending machine step 2.}
+\caption{GoTo graph and proof sketch of vending machine step 2.}
 \label{fig:2}
 \end{figure}
 
 The next part of the algorithm checks whether there exists a node in the GoTo
-graph where all of its parents are printed out in the proof skeleton. Figure
-\ref{fig:2} shows that the next node to be in the proof skeleton is CS0. 
+graph where all of its parents are printed out in the proof sketch. Figure
+\ref{fig:2} shows that the next node to be in the proof sketch is CS0. 
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/3.png}
-\caption{GoTo graph and proof skeleton of vending machine step 3.}
+\caption{GoTo graph and proof sketch of vending machine step 3.}
 \label{fig:3}
 \end{figure}
 
-The next part we see that after CS0 is added to the proof skeleton then both
+The next part we see that after CS0 is added to the proof sketch then both
 CS1, and CS2 can be added. This is shown in figure \ref{fig:3}.
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/4.png}
-\caption{GoTo graph and proof skeleton of vending machine step 4.}
+\caption{GoTo graph and proof sketch of vending machine step 4.}
 \label{fig:4}
 \end{figure}
 
-Figure \ref{fig:4} shows the next stage of adding nodes to the Proof Skeleton.
-Since CS1 and CS2 are now added to the proof skeleton then the next row of nodes
+Figure \ref{fig:4} shows the next stage of adding nodes to the Proof sketch.
+Since CS1 and CS2 are now added to the proof sketch then the next row of nodes
 can be added. Since PO1 only had one parent (CS1) it is added first, PO2 also
 had one parent (CS2) it is added second. The others had more parents which are
-already in the proof sketch so they are added next randomly.
+already in the proof sketech so they are added next randomly.
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/5.png}
-\caption{GoTo graph and proof skeleton of vending machine step 5.}
+\caption{GoTo graph and proof sketch of vending machine step 5.}
 \label{fig:5}
 \end{figure}
 
@@ -615,10 +542,10 @@ the set is not empty follows the right arrow \verb|(taking' \<noteq> {})|.
 POb1 can be automate. Since POb2 is specification specific, each user will need
 to define these themselves if they so wish.
 
-\subsection{Proof Obligations in the General Proof Skeleton}
+\subsection{Proof Obligations in the Proof Sketch}
 
 Since the POb2 are specific to the specification only POb1 are automatically
-added. They are generated as `\emph{lemma's}' in the general proof skeleton. 
+added. They are generated as `\emph{lemma's}' in the proof sketch. 
 
 %\begin{algorithm}[H] \KwData{instances are known as `nodes'}
 %\KwData{OrderOfGraph is an ordered graph which lists the general proof
@@ -648,15 +575,15 @@ instance type) in GoTo graph}{Add ZDRa name to lemmaSet}
 } \eIf{there are elements in setOfCS}{\For{(zdra name, instance type) in
 setOfCS}{indexOfElement = index of (zdra name, instance type)\; numberOfNewLemma
 = i + indexOfElement + 1\; ZDRaNameOfNewLemma = `L' + numberOfNewLemma\; push
-(ZDRaNameOfNewLemma, "lemma") to general proof skeleton\;}}{$nothing$}
+(ZDRaNameOfNewLemma, "lemma") to proof sketch\;}}{$nothing$}
 \caption{Part of the algorithm to create Proof Obligation ZDRa names \label{alg:codepob}.}
 \end{algorithm}
 
 The proof obligations which check that changeSchema's and outputSchema's follow
-the stateInvariants are added to the original general proof skeleton. The
-general proof skeleton starts of with being an ordered list (GPSaOL), then the
+the stateInvariants are added to the original proof sketch. 
+The proof sketch starts of with being an ordered list (GPSaOL), then the
 algorithm for generating a list of proof obligations is run and added to the
-original proof skeleton. Algorithm \ref{alg:codepob} shows the algorithm which
+original proof sketch. Algorithm \ref{alg:codepob} shows the algorithm which
 creates the ordered list of proof obligations.
 
 Lines 338-344 find all the existing lemma's in the \gls{gpsol} and sets \emph{i}
@@ -696,11 +623,11 @@ lemma) as we would already have L1 and L2.
 \begin{figure}[H]
 \centering
 \includegraphics[scale=0.5]{Figures/skeleton/proofskeletonwithpo.png}
-\caption{Example of a General Proof Skeleton with lemma's.}
+\caption{Example of a Proof Sketch with lemma's.}
 \label{fig:gpswithpo}
 \end{figure}
 
-An example of a General Proof Skeleton with added proof obligations is shown in
+An example of a Proof Sketch with added proof obligations is shown in
 Figure \ref{fig:gpswithpo}. The changeSchema's in this specification are CS1 and
 CS2. Therefore to make sure the changeSchemas do not change the state of the
 specification and comply with the state invariants the two lemma's L1\_CS1 and
@@ -738,12 +665,12 @@ lemma L1_(CS1)
 \label{sec:skeletonsConclusion}
 
 This chapter describes how the \gls{zdra} program uses the GoTo graph to
-generate a general proof skeleton (step 2$\rightarrow$3 in figure
-\ref{fig:steps}). The general proof skeleton is an automatically generated .txt
+generate a proof sketch (step 2$\rightarrow$3 in figure
+\ref{fig:steps}). The proof sketch is an automatically generated .txt
 file which displays the order in which this instances must go in a theorem
 prover to be logically correct. This chapter gives a basic understanding of
 proof obligations for Z and examples which proof obligations are automatically
 generated when translating Z specifications into Isabelle. We give a formal
 definition of the proof obligation to check for consistency of the state
-invariants and show an example. The next chapter describes how the general proof
-skeleton is translated into Isabelle syntax.
+invariants and show an example. The next chapter describes how the proof
+sketchis translated into Isabelle syntax.

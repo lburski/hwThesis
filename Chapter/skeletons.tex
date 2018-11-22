@@ -387,6 +387,11 @@ OrderOfGraph\; remove each node\;}{$nothing$}}}
 Here we show how a Proof sketch is calculated using the Goto graph created
 when running the ZDRa check on a specification.
 
+\subsection{Finding the Parents}
+The first step of translating the GoTo graph into a proof sketch is to find
+the nodes which do not have any parents. That is, the nodes which do not have any 
+predecessors.
+
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/1.png}
 \caption{GoTo graph and proof sketch of vending machine step 1.}
@@ -397,7 +402,13 @@ First of all the program looks at all the nodes of the GoTo graph and prints out
 all the nodes which are not dependent on anything. That is, they may have
 successors but they have no predecessors, they do not use or need anything else
 and can stand by themselves. These nodes can be printed in any order, so in
-diagram \ref{fig:1} we see that we have SS1, PRE1 PRE2 and PRE3 all printed.
+figure \ref{fig:1} we see that we have SS1, PRE1 PRE2 and PRE3 all printed.
+
+\subsection{Children with all level 1 parents}
+
+The next step of the algorithm is to find any child nodes which already have all
+their parents printed. If there exists a node whose parents have no predecessors then these
+node go next onto the list and become the second level.
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/2.png}
@@ -408,6 +419,14 @@ diagram \ref{fig:1} we see that we have SS1, PRE1 PRE2 and PRE3 all printed.
 The next part of the algorithm checks whether there exists a node in the GoTo
 graph where all of its parents are printed out in the proof sketch. Figure
 \ref{fig:2} shows that the next node to be in the proof sketch is CS0. 
+
+\subsection{Finding the rest of the children}
+The following section loops over itself until all of the children have been found.
+The algorithm looks at the remaining nodes and if their predecessors have already 
+been written onto the proof sketch then it writes that node.
+For example if node $x$ and node $y$ are parents of node $z$ and node $x$ and node $y$
+are already on the proof sketch then it will write node $y$ to the proof sketch and
+remove it from the list of remaining nodes.
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/3.png}
@@ -576,7 +595,7 @@ instance type) in GoTo graph}{Add ZDRa name to lemmaSet}
 setOfCS}{indexOfElement = index of (zdra name, instance type)\; numberOfNewLemma
 = i + indexOfElement + 1\; ZDRaNameOfNewLemma = `L' + numberOfNewLemma\; push
 (ZDRaNameOfNewLemma, "lemma") to proof sketch\;}}{$nothing$}
-\caption{Part of the algorithm to create Proof Obligation ZDRa names \label{alg:codepob}.}
+\caption{Part of the algorithm to create Proof Obligation ZDRa names. \label{alg:codepob}}
 \end{algorithm}
 
 The proof obligations which check that changeSchema's and outputSchema's follow
@@ -585,6 +604,8 @@ The proof sketch starts of with being an ordered list (GPSaOL), then the
 algorithm for generating a list of proof obligations is run and added to the
 original proof sketch. Algorithm \ref{alg:codepob} shows the algorithm which
 creates the ordered list of proof obligations.
+The number of proof obligations will depend on how many changeSchema's, 
+outputSchemas and totalSchemas there are in the specification.
 
 Lines 338-344 find all the existing lemma's in the \gls{gpsol} and sets \emph{i}
 to be the highest number. For example if there are existing lemmas in
@@ -632,6 +653,9 @@ Figure \ref{fig:gpswithpo}. The changeSchema's in this specification are CS1 and
 CS2. Therefore to make sure the changeSchemas do not change the state of the
 specification and comply with the state invariants the two lemma's L1\_CS1 and
 L2\_CS2 have been added.
+
+In the next chapter we fill in these proof obligations into predicates and they 
+then become the prooperties to prove the correctness of the specification.
 
 \subsubsection{Proof Obligations in specification examples}
 Since the vending machine specification (appendix \ref{app:vm2}) doesn't have

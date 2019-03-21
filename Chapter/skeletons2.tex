@@ -537,11 +537,13 @@ into full proof. It demonstrates how the program uses the automatically
 generated general skeleton to  create an Isabelle skeleton. From the Isabelle
 skeleton the user can then automatically fill in the skeleton using the
 \gls{zcga} annotated specification giving a \gls{half}. The last step would be
-to fill in any missing proofs in the \gls{half}, this is still a difficult step
+to fill in any missing proofs in the \gls{half} (as show in the proof obligation
+in figure \ref{fig:exampleproof}), this is still a difficult step
 and may require some theorem prover knowledge however this part is difficult to
 automate as different system specifications have different properties users wish
 to prove, therefore tools such as sledgehammer \cite{sledgehammer} may be useful
-at this point.
+at this point. We will demonstrate how to go from a Z specification to a proven 
+specification in Isabelle in chapter \ref{ch:fullexample}.
 
 In the next chapter we demonstrate a full example of a specification being
 taken through all the steps of the ZMathLang framework.

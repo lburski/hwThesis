@@ -108,6 +108,11 @@ lemma L1_CS1:
 sorry
 \end{verbatim}
 
+We use the Isabelle word `\texttt{sorry}' to tell the theorem prover to skip a
+proof-in-progress and to treat the goal under consideration to be proved. This
+then causes the Isabelle skeleton to be an incorrect document but is a goal the
+user may prove at a later stage after the skeleton has been filled in.
+
 If the instance in the \gls{gpsa} was `\texttt{L1\_CS1}' and the relationship
 only had a precondition and no post condition ie (CS1, requires, PRE1) and (CS1,
 uses, IS1) but not the allows relationship the syntax in the Isabelle skeleton
@@ -144,26 +149,21 @@ sorry
 Where PO2 is the postcondition the changeSchema requires, SI1 is the
 stateInvariants in the stateSchema and SI1' is the stateInvariants prime. 
 
-We use the Isabelle word `\texttt{sorry}' to tell the theorem prover to skip a
-proof-in-progress and to treat the goal under consideration to be proved. This
-then causes the Isabelle skeleton to be an incorrect document but is a goal the
-user may prove at a later stage after the skeleton has been filled in.
+%\section{Benefits}
 
-\section{Benefits}
-
-The Isabelle skeleton allows for incomplete specifications to also be automated
-into a half-baked proof. This way the user can have a general outline for their
-specification and fill in the missing information directly into the Isabelle
-skeleton at a later stage. For this reason it is good to have an Isabelle
-skeleton before the full filled in half-baked proof. The user then has an
-outline if they wish to add to the specification directly as they will have an
-example of how the instances should be translated. An example of a semi formal
-specification which has been translated to step 5 (the half baked proof) is
-shown in appendix \ref{app:semiform}. Although this specification is not fully
-formal its grammatical correctness and rhetorical correctness can be checked. It
-can also start being translated into Isabelle syntax. The dependencies are shown
-between the current instances and the user can see what other information needs
-to be added for the specification to be complete.
+%The Isabelle skeleton allows for incomplete specifications to also be automated
+%into a half-baked proof. This way the user can have a general outline for their
+%specification and fill in the missing information directly into the Isabelle
+%skeleton at a later stage. For this reason it is good to have an Isabelle
+%skeleton before the full filled in half-baked proof. The user then has an
+%outline if they wish to add to the specification directly as they will have an
+%example of how the instances should be translated. An example of a semi formal
+%specification which has been translated to step 5 (the half baked proof) is
+%shown in appendix \ref{app:semiform}. Although this specification is not fully
+%formal its grammatical correctness and rhetorical correctness can be checked. It
+%can also start being translated into Isabelle syntax. The dependencies are shown
+%between the current instances and the user can see what other information needs
+%to be added for the specification to be complete.
 
 \section{ZCGa specification to Fill in the Isabelle Skeleton}
 \label{sec:zcga2fillin}
@@ -179,7 +179,7 @@ up to the user to input the variables and the types of that definition.
 It is important to note that all the \gls{zcga} annotations at this stage
 disappear as the labelled information is automatically put into Isabelle syntax.
 
-\subsection{Z Types and FreeTypes}
+\subsection{Types and Freetypes in Z}
 
 The program which fills in the Isabelle skeleton goes through the entire
 specification and adds any Z declared types and freetypes before the record. For

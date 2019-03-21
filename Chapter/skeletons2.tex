@@ -362,38 +362,51 @@ sequence/list/set or total function/partial function. However the syntax
 sometimes varies in Isabelle on these occasions.
 
 One part of the Z mathematical toolkit which we need to rewrite are the use of
-partial functions. In Isabelle/HOL all functions are total but there are ways to
-do certain proofs about partial functions \cite{Krauss08definingrecursive}. We
-translate total functions as a set of pairs \verb|(A * B) set|, we use the
-\verb|\<rightharpoonup>| symbol to describe partial functions. Any proofs to
-check for partial functions if needed can be done by the user in step 6 shown in
-figure \ref{fig:steps} but the details of these proofs are beyond the scope of
-this thesis.
+partial functions. In Isabelle/HOL all functions are total therefore 
+We translate total functions as a set of pairs \verb|(A * B) set|, we use the
+\verb|\<rightharpoonup>| symbol to describe partial functions in the isabelle syntax. 
+%Any proofs to check for partial functions if needed can be done by the user in step 6 shown in
+%figure \ref{fig:steps} but the details of these proofs are beyond the scope of
+%this thesis.
+%but there are ways to
+%do certain proofs about partial functions \cite{Krauss08definingrecursive}.%
 
+In the following section we highlight the symbols in the Z toolkit in \red{red}
+and the corresponding Isabelle translation in \blue{blue}
 Other parts which differ are the following:
 
 \begin{itemize}
-\item `\verb|\#|' is a symbol which takes a set or list \footnote{by list we
+\item \red{`\verb|\#|'} is a symbol which takes a set or list \footnote{by list we
 mean an ordered set} as a parameter and returns the number of elements within
-that set or list. In Z, `\verb|\#|' can be used for both set and list, however
-in Isabelle we must translate `\verb|\#|' into `\verb|card|' if the parameter is
-a set or `\verb|length|' if the parameter is a list.
+that set or list. In Z, \red{`\verb|\#|'} can be used for both set and list, however
+in Isabelle we must translate \red{`\verb|\#|'} into \blue{`\verb|card|'} if the parameter is
+a set or \blue{`\verb|length|'} if the parameter is a list.
 
-\item `\verb|\mapsto|' is a symbol which takes two terms and returns a term. If
-we have a set `\verb|funset|', which has type `\verb|A \fun B|' and $f \mapsto s
-\in funset$ then in Isabelle the term `\verb|f \mapsto s|' will be translated as
-`\verb|(f,s)|'. However if `\verb|funset|' had the type `\verb|A \pfun B|' then
-the Isabelle translation of `\verb|f \mapsto s|' would be `\verb|f s|'.
+\item \red{`\verb|\mapsto|'} is a symbol which takes two terms and returns a term. If
+the \red{`\verb|\mapsto|'} term is in a total function where the Z syntax is \red{`\verb|A \fun B|'} then the 
+\red{`\verb|\mapsto|'} term will be translated as \blue{`\verb|(f,s)|'} in isabelle. However if the
+\red{`\verb|\mapsto|'} term is in partial function set then the \red{`\verb|\mapsto|'} term will be
+translated as \blue{`\verb|f s|'}.
+For example
+if \red{`\verb|funset: A \fun B |'} and \red{`\verb|c \mapsto d \in funset|'}
+then the isabelle translatioin will be \blue{$(c,d) \in funset$}
+however if \red{`\verb|pfunset: A \pfun B |'} and \red{`\verb|c \mapsto d \in pfunset|'}
+then the isabelle translation will be \blue{$c\ d \in pfunset$}.
 
-\item `\verb|\dom|' and `\verb|\ran|' in Z are the same regardless whether it is
+\item \red{`\verb|\dom|'} and \red{`\verb|\ran|'} in Z syntax are the same regardless whether it is
 being applied to an element in a partial function or a total function. However
 in Isabelle the syntax varies between the two types of functions. If the
-`\verb|dom|' being applied to an element `\verb|k|', with type
-`\verb|(A * B)set|' then the Isabelle translation would be `\verb|Domain k|' whereas if
-`\verb|k|' has type `\verb|A \<rightharpoonup B|' then the `\verb|domain|' of
-`\verb|k|' in Isabelle would be translated as `\verb|dom k|'. Similarly we would
-have `\verb|Range k|' and `\verb|ran k|' for total and partial functions of
+\red{`\verb|\dom|'} being applied to an element \red{`\verb|k|'}, with type
+\red{`\verb|A \fun B|'} then the Isabelle translation would be \blue{`\verb|Domain k|'} whereas if
+\red{`\verb|k|'} has type \red{`\verb|A \pfun B|'} thenit will be
+translated as \blue{`\verb|dom k|'}. Similarly we would
+have \blue{`\verb|Range k|'} and \blue{`\verb|ran k|'} for total and partial functions of
 `\verb|k|' respectively.
+For example
+if \red{`\verb|funset: A \fun B |'} and \red{`\verb|\dom k \in funset|'}
+then the isabelle translatioin will be \blue{$(A*B) set$} and \blue{$Domain k \in funset$}.
+however if \red{`\verb|pfunset: A \pfun B |'} and \red{`\verb|\dom k \in pfunset|'}
+then the isabelle translation will be \blue{$A \rightharpoonup B$} and \blue{$dom\ k$}.
 \end{itemize}
 
 \subsection{Schema Names}
@@ -416,9 +429,11 @@ following schema:
 \text{\declaration{\term{name?}: \expression{NAME}}} \\
 \text{\declaration{\term{date?}: \expression{DATE}}}
 \where
-\draline{PRE1}{\text{\expression{\term{name?} \notin \set{known}}}}\\
+\draline{PRE1}{\text{\expression{\term{name?} \notin 
+\set{known}}}}\\
 \draline{PO3}{\expression{\set{birthday'} =
-\set{\set{birthday} \cup \set{\{\term{\term{name?} \mapsto \term{date?}}\}}}}}
+\set{\set{birthday} \cup \set{\{\term{\term{name?} \mapsto 
+\term{date?}}\}}}}}
 \end{schema}}
 \uses{CS1}{IS1}
 \requires{CS1}{PRE1}
@@ -430,9 +445,11 @@ The schema itself is represented in the filled in Isabelle syntax as:
 \begin{verbatim}
 definition AddBirthday :: 
 "(NAME set) \<Rightarrow> NAME \<Rightarrow> BirthdayBook 
-\<Rightarrow> BirthdayBook \<Rightarrow> DATE \<Rightarrow> (NAME \<rightharpoonup> DATE) => bool"
+\<Rightarrow> BirthdayBook \<Rightarrow> DATE \<Rightarrow> 
+(NAME \<rightharpoonup> DATE) => bool"
 where 
-"AddBirthday known' name birthdaybook birthdaybook' date birthday' ==
+"AddBirthday known' name birthdaybook birthdaybook' 
+date birthday' ==
  (name \<notin> known)
 \<and> (birthday' = birthday \<union> (name,date))"
 \end{verbatim}

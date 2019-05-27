@@ -284,8 +284,8 @@ MODULE[+color[gray]}}}]\\
 
 \end{BVerbatim}
 \end{tiny}
-\includegraphics[scale=1, clip, trim=2cm 3cm 2cm 3cm, width=1.00\textwidth]{Figures/fullexample/1n2.pdf}
-%\includegraphics[scale=0.6]{Figures/fullexample/zdra.png}
+%\includegraphics[scale=1, clip, trim=2cm 3cm 2cm 3cm, width=1.00\textwidth]{Figures/fullexample/1n2.pdf}
+\includegraphics[scale=0.8]{Figures/fullexample/1n2.jpg}
 %\vspace{-0.18in}
 \caption{An example of a specification output labelled in \gls{zcga} and \gls{zdra}.).\label{fig:zdrazcgaout}}
 %\vspace{-0.2in}
@@ -310,13 +310,13 @@ saved on the users computer.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.55]{Figures/fullexample/dp_fullexample.png}
+\includegraphics[scale=0.7]{Figures/fullexample/dp_fullexample.png}
 \caption{Dependency graph automatically generated from the ZDRa for our example. \label{fig:depexample}}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.55]{Figures/fullexample/goto_fullexample.jpg}
+\includegraphics[scale=0.7]{Figures/fullexample/goto_fullexample.jpg}
 \caption{GoTo graph automatically generated from the ZDRa for our example. \label{fig:gotoexample}}
 \end{figure}
 
@@ -329,7 +329,7 @@ The skeletons are automatically generated if the specification passes the
 
 We can generate a general proof skeleton which prints out the \gls{zdra} name
 and the instances they should be converted to when inputting into any theorem
-prover. If the specification is \gls{zdra}] correct we can then generate the
+prover. If the specification is \gls{zdra} correct we can then generate the
 \gls{gpsa} by clicking on the \gls{gpsa} menu in the interface (figure
 \ref{fig:gpsabutton}).
 
@@ -338,6 +338,13 @@ prover. If the specification is \gls{zdra}] correct we can then generate the
 \includegraphics[scale=0.45]{Figures/fullexample/gpsa.png}
 \caption{The GPSa button the interface which allows the user to generate the general proof skeleton. \label{fig:gpsabutton}}
 \end{figure}
+
+The GPSa can be created after a specification has been annotated with ZDRa. The GPSa is what orders the specification 
+logically to put into a theorem prover. Steps 4, 5 and 6 will need to be created after the GPSa. Step 4 will uses the skeleton 
+created in step 3 and ZCGa annotations created in step 2 to create the Isabelle skeleton. The Isabelle skeleton in
+step 4 requires ZCGa annotations and the GPSa to be complete. Without the GPSa the logical order of the specification may not be correct
+e.g. there may be some changeSchemas used which haven't been created yet. Without the ZCGa the some variables may be used which havn't been 
+declared and therefore will not pass through Isabelle.
 
 Figure \ref{fig:gpsaFullexample} shows the general proof skeleton which was
 generated for our example. Note all instances but the last 2 are actual

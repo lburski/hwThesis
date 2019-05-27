@@ -108,6 +108,11 @@ lemma L1_CS1:
 sorry
 \end{verbatim}
 
+We use the Isabelle word `\texttt{sorry}' to tell the theorem prover to skip a
+proof-in-progress and to treat the goal under consideration to be proved. This
+then causes the Isabelle skeleton to be an incorrect document but is a goal the
+user may prove at a later stage after the skeleton has been filled in.
+
 If the instance in the \gls{gpsa} was `\texttt{L1\_CS1}' and the relationship
 only had a precondition and no post condition ie (CS1, requires, PRE1) and (CS1,
 uses, IS1) but not the allows relationship the syntax in the Isabelle skeleton
@@ -144,26 +149,21 @@ sorry
 Where PO2 is the postcondition the changeSchema requires, SI1 is the
 stateInvariants in the stateSchema and SI1' is the stateInvariants prime. 
 
-We use the Isabelle word `\texttt{sorry}' to tell the theorem prover to skip a
-proof-in-progress and to treat the goal under consideration to be proved. This
-then causes the Isabelle skeleton to be an incorrect document but is a goal the
-user may prove at a later stage after the skeleton has been filled in.
+%\section{Benefits}
 
-\section{Benefits}
-
-The Isabelle skeleton allows for incomplete specifications to also be automated
-into a half-baked proof. This way the user can have a general outline for their
-specification and fill in the missing information directly into the Isabelle
-skeleton at a later stage. For this reason it is good to have an Isabelle
-skeleton before the full filled in half-baked proof. The user then has an
-outline if they wish to add to the specification directly as they will have an
-example of how the instances should be translated. An example of a semi formal
-specification which has been translated to step 5 (the half baked proof) is
-shown in appendix \ref{app:semiform}. Although this specification is not fully
-formal its grammatical correctness and rhetorical correctness can be checked. It
-can also start being translated into Isabelle syntax. The dependencies are shown
-between the current instances and the user can see what other information needs
-to be added for the specification to be complete.
+%The Isabelle skeleton allows for incomplete specifications to also be automated
+%into a half-baked proof. This way the user can have a general outline for their
+%specification and fill in the missing information directly into the Isabelle
+%skeleton at a later stage. For this reason it is good to have an Isabelle
+%skeleton before the full filled in half-baked proof. The user then has an
+%outline if they wish to add to the specification directly as they will have an
+%example of how the instances should be translated. An example of a semi formal
+%specification which has been translated to step 5 (the half baked proof) is
+%shown in appendix \ref{app:semiform}. Although this specification is not fully
+%formal its grammatical correctness and rhetorical correctness can be checked. It
+%can also start being translated into Isabelle syntax. The dependencies are shown
+%between the current instances and the user can see what other information needs
+%to be added for the specification to be complete.
 
 \section{ZCGa specification to Fill in the Isabelle Skeleton}
 \label{sec:zcga2fillin}
@@ -179,7 +179,7 @@ up to the user to input the variables and the types of that definition.
 It is important to note that all the \gls{zcga} annotations at this stage
 disappear as the labelled information is automatically put into Isabelle syntax.
 
-\subsection{Z Types and FreeTypes}
+\subsection{Types and Freetypes in Z}
 
 The program which fills in the Isabelle skeleton goes through the entire
 specification and adds any Z declared types and freetypes before the record. For
@@ -362,38 +362,51 @@ sequence/list/set or total function/partial function. However the syntax
 sometimes varies in Isabelle on these occasions.
 
 One part of the Z mathematical toolkit which we need to rewrite are the use of
-partial functions. In Isabelle/HOL all functions are total but there are ways to
-do certain proofs about partial functions \cite{Krauss08definingrecursive}. We
-translate total functions as a set of pairs \verb|(A * B) set|, we use the
-\verb|\<rightharpoonup>| symbol to describe partial functions. Any proofs to
-check for partial functions if needed can be done by the user in step 6 shown in
-figure \ref{fig:steps} but the details of these proofs are beyond the scope of
-this thesis.
+partial functions. In Isabelle/HOL all functions are total therefore 
+We translate total functions as a set of pairs \verb|(A * B) set|, we use the
+\verb|\<rightharpoonup>| symbol to describe partial functions in the isabelle syntax. 
+%Any proofs to check for partial functions if needed can be done by the user in step 6 shown in
+%figure \ref{fig:steps} but the details of these proofs are beyond the scope of
+%this thesis.
+%but there are ways to
+%do certain proofs about partial functions \cite{Krauss08definingrecursive}.%
 
+In the following section we highlight the symbols in the Z toolkit in \red{red}
+and the corresponding Isabelle translation in \blue{blue}
 Other parts which differ are the following:
 
 \begin{itemize}
-\item `\verb|\#|' is a symbol which takes a set or list \footnote{by list we
+\item \red{`\verb|\#|'} is a symbol which takes a set or list \footnote{by list we
 mean an ordered set} as a parameter and returns the number of elements within
-that set or list. In Z, `\verb|\#|' can be used for both set and list, however
-in Isabelle we must translate `\verb|\#|' into `\verb|card|' if the parameter is
-a set or `\verb|length|' if the parameter is a list.
+that set or list. In Z, \red{`\verb|\#|'} can be used for both set and list, however
+in Isabelle we must translate \red{`\verb|\#|'} into \blue{`\verb|card|'} if the parameter is
+a set or \blue{`\verb|length|'} if the parameter is a list.
 
-\item `\verb|\mapsto|' is a symbol which takes two terms and returns a term. If
-we have a set `\verb|funset|', which has type `\verb|A \fun B|' and $f \mapsto s
-\in funset$ then in Isabelle the term `\verb|f \mapsto s|' will be translated as
-`\verb|(f,s)|'. However if `\verb|funset|' had the type `\verb|A \pfun B|' then
-the Isabelle translation of `\verb|f \mapsto s|' would be `\verb|f s|'.
+\item \red{`\verb|\mapsto|'} is a symbol which takes two terms and returns a term. If
+the \red{`\verb|\mapsto|'} term is in a total function where the Z syntax is \red{`\verb|A \fun B|'} then the 
+\red{`\verb|\mapsto|'} term will be translated as \blue{`\verb|(f,s)|'} in isabelle. However if the
+\red{`\verb|\mapsto|'} term is in partial function set then the \red{`\verb|\mapsto|'} term will be
+translated as \blue{`\verb|f s|'}.
+For example
+if \red{`\verb|funset: A \fun B |'} and \red{`\verb|c \mapsto d \in funset|'}
+then the isabelle translatioin will be \blue{$(c,d) \in funset$}
+however if \red{`\verb|pfunset: A \pfun B |'} and \red{`\verb|c \mapsto d \in pfunset|'}
+then the isabelle translation will be \blue{$c\ d \in pfunset$}.
 
-\item `\verb|\dom|' and `\verb|\ran|' in Z are the same regardless whether it is
+\item \red{`\verb|\dom|'} and \red{`\verb|\ran|'} in Z syntax are the same regardless whether it is
 being applied to an element in a partial function or a total function. However
 in Isabelle the syntax varies between the two types of functions. If the
-`\verb|dom|' being applied to an element `\verb|k|', with type
-`\verb|(A * B)set|' then the Isabelle translation would be `\verb|Domain k|' whereas if
-`\verb|k|' has type `\verb|A \<rightharpoonup B|' then the `\verb|domain|' of
-`\verb|k|' in Isabelle would be translated as `\verb|dom k|'. Similarly we would
-have `\verb|Range k|' and `\verb|ran k|' for total and partial functions of
+\red{`\verb|\dom|'} being applied to an element \red{`\verb|k|'}, with type
+\red{`\verb|A \fun B|'} then the Isabelle translation would be \blue{`\verb|Domain k|'} whereas if
+\red{`\verb|k|'} has type \red{`\verb|A \pfun B|'} thenit will be
+translated as \blue{`\verb|dom k|'}. Similarly we would
+have \blue{`\verb|Range k|'} and \blue{`\verb|ran k|'} for total and partial functions of
 `\verb|k|' respectively.
+For example
+if \red{`\verb|funset: A \fun B |'} and \red{`\verb|\dom k \in funset|'}
+then the isabelle translatioin will be \blue{$(A*B) set$} and \blue{$Domain k \in funset$}.
+however if \red{`\verb|pfunset: A \pfun B |'} and \red{`\verb|\dom k \in pfunset|'}
+then the isabelle translation will be \blue{$A \rightharpoonup B$} and \blue{$dom\ k$}.
 \end{itemize}
 
 \subsection{Schema Names}
@@ -416,9 +429,11 @@ following schema:
 \text{\declaration{\term{name?}: \expression{NAME}}} \\
 \text{\declaration{\term{date?}: \expression{DATE}}}
 \where
-\draline{PRE1}{\text{\expression{\term{name?} \notin \set{known}}}}\\
+\draline{PRE1}{\text{\expression{\term{name?} \notin 
+\set{known}}}}\\
 \draline{PO3}{\expression{\set{birthday'} =
-\set{\set{birthday} \cup \set{\{\term{\term{name?} \mapsto \term{date?}}\}}}}}
+\set{\set{birthday} \cup \set{\{\term{\term{name?} \mapsto 
+\term{date?}}\}}}}}
 \end{schema}}
 \uses{CS1}{IS1}
 \requires{CS1}{PRE1}
@@ -430,9 +445,11 @@ The schema itself is represented in the filled in Isabelle syntax as:
 \begin{verbatim}
 definition AddBirthday :: 
 "(NAME set) \<Rightarrow> NAME \<Rightarrow> BirthdayBook 
-\<Rightarrow> BirthdayBook \<Rightarrow> DATE \<Rightarrow> (NAME \<rightharpoonup> DATE) => bool"
+\<Rightarrow> BirthdayBook \<Rightarrow> DATE \<Rightarrow> 
+(NAME \<rightharpoonup> DATE) => bool"
 where 
-"AddBirthday known' name birthdaybook birthdaybook' date birthday' ==
+"AddBirthday known' name birthdaybook birthdaybook' 
+date birthday' ==
  (name \<notin> known)
 \<and> (birthday' = birthday \<union> (name,date))"
 \end{verbatim}
@@ -520,11 +537,13 @@ into full proof. It demonstrates how the program uses the automatically
 generated general skeleton to  create an Isabelle skeleton. From the Isabelle
 skeleton the user can then automatically fill in the skeleton using the
 \gls{zcga} annotated specification giving a \gls{half}. The last step would be
-to fill in any missing proofs in the \gls{half}, this is still a difficult step
+to fill in any missing proofs in the \gls{half} (as show in the proof obligation
+in figure \ref{fig:exampleproof}), this is still a difficult step
 and may require some theorem prover knowledge however this part is difficult to
 automate as different system specifications have different properties users wish
 to prove, therefore tools such as sledgehammer \cite{sledgehammer} may be useful
-at this point.
+at this point. We will demonstrate how to go from a Z specification to a proven 
+specification in Isabelle in chapter \ref{ch:fullexample}.
 
 In the next chapter we demonstrate a full example of a specification being
 taken through all the steps of the ZMathLang framework.

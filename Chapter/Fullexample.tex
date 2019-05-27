@@ -1,5 +1,6 @@
 \chapter{From raw specification to fully proven spec: A full example}
 \label{ch:fullexample}
+%Chapter 9
 
 In this chapter we take a system specification through all the steps of
 \gls{zmath} to demonstrate how we can get from a raw specification to a full
@@ -11,7 +12,7 @@ step of the \gls{zmath} framework.
 We take a raw specification ModuleReg \cite{essenceofz}, which displays students
 taking modules in a school environment (shown in figure \ref{fig:rawschema}) The
 output for the specification can be seen in figure \ref{fig:rawschemaout}. The
-full input for this can be found in appendix \ref{app:vm}.
+full proof for the ModuleReg specification can be found in \ref{app:moduleregfullproof}.
 
 \begin{figure}[H]
 \vspace{-0.2in}
@@ -62,9 +63,9 @@ degModules' = degModules
 \end{document}
 \end{BVerbatim}
 \end{tiny}
-\vspace{-0.18in}
+%\vspace{-0.2in}
 \caption{Part of the raw schema.\label{fig:rawschema}}
-\vspace{-0.2in}
+%\vspace{-0.2in}
 \end{minipage}\hfill
 \begin{minipage}{0.45\textwidth}
 \centering
@@ -95,11 +96,9 @@ outputting result can be seen in figure \ref{fig:zcgaschemaout}.
 \documentclass{article}
 \usepackage{zmathlang}
 \begin{document}
-
 \begin{zed}
 [+color[red]\set{]PERSON[+color[red]}], [+color[red]\set{]MODULE[+color[red]}]
 \end{zed}
-
 \begin{schema}{ModuleReg}
 [+color[red]\text{\declaration{\set{]students[+color[red]}]:[+color[red]\expression{]\power
 PERSON[+color[red]}}}]\\
@@ -113,7 +112,6 @@ MODULE[+color[red]}}}]\\
 [+color[red]\text{\expression{\set{]\ran [+color[red]\set{]taking[+color[red]}}]
 \subseteq [+color[red]\set{]degModules[+color[red]}}}]
 \end{schema}
-
 \begin{schema}{AddStudent}
 [+color[red]\text{]\Delta ModuleReg[+color[red]}]\\
 [+color[red]\text{\declaration{\term{]p?[+color[red]}]:[+color[red]\expression{]PERSON[+color[red]}}}]\\
@@ -128,7 +126,6 @@ MODULE[+color[red]}}}]\\
 [+color[red]\text{\expression{\set{]taking'[+color[red]}] =
 [+color[red]\set{]taking[+color[red]}}}]
 \end{schema}
-
 \begin{schema}{RegForModule}
 [+color[red]\text{]\Delta ModuleReg[+color[red]}]\\
 [+color[red]\text{\declaration{\term{]p?[+color[red]}]:
@@ -155,15 +152,15 @@ MODULE[+color[red]}}}]\\
 \end{document}
 \end{BVerbatim}
 \end{tiny}
-\vspace{-0.2in}
+%\vspace{-0.2in}
 \caption{Part of the raw schema.\label{fig:zcgaschema}}
-\vspace{-0.2in}
+%\vspace{-0.2in}
 \end{minipage}\hfill
 \begin{minipage}{0.45\textwidth}
 \centering
 \centering
-\includegraphics[scale=0.8, clip, trim=5.5cm 8cm 9.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/1.jpg}
-\includegraphics[scale=0.8, clip, trim=5.5cm 13cm 8.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/2.jpg}
+\includegraphics[scale=0.7, clip, trim=5.5cm 8cm 9.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/1.jpg}
+\includegraphics[scale=0.7, clip, trim=5.5cm 13cm 8.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/2.jpg}
 %\includegraphics[scale=0.4]{Figures/fullexample/zcga.png}
 \vspace{-0.3in}
 \caption{Part of a ZCGa labelled specification output. \label{fig:zcgaschemaout}}
@@ -253,6 +250,18 @@ MODULE[+color[gray]}}}]\\
 [+color[gray]\text{\declaration{\term{]m?[+color[gray]}]:
 [+color[gray]\expression{]MODULE[+color[gray]}}}]
 \where
+
+\end{document}
+\end{BVerbatim}
+\end{tiny}
+%\vspace{-0.18in}
+\caption{An example of a specification labelled in \gls{zcga} and \gls{zdra}.).\label{fig:zdrazcgaAno}}
+%\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{tiny}
+\begin{BVerbatim}[commandchars=+\[\]]
 [+color[blue]\draline{PRE2}{]
 [+color[gray]\text{\expression{\term{]p?[+color[gray]}] \in
 [+color[gray]\set{]students[+color[gray]}}}]\\
@@ -261,17 +270,6 @@ MODULE[+color[gray]}}}]\\
 [+color[gray]\text{\expression{\term{\term{]p?[+color[gray]}] \mapsto
 [+color[gray]\term{]m?[+color[gray]}}] \notin
 [+color[gray]\set{]taking[+color[gray]}}}][+color[blue]}]\\
-\end{document}
-\end{BVerbatim}
-\end{tiny}
-\vspace{-0.18in}
-\caption{An example of a specification labelled in \gls{zcga} and \gls{zdra}.).\label{fig:zdrazcgaAno}}
-\vspace{-0.2in}
-\end{minipage}\hfill
-\begin{minipage}{0.45\textwidth}
-\centering
-\begin{tiny}
-\begin{BVerbatim}[commandchars=+\[\]]
 [+color[blue]\draline{PO2}{]
 [+color[gray]\text{\expression{\set{]taking'[+color[gray]}] =
 [+color[gray]\set{\set{]taking[+color[gray]}] \cup
@@ -286,7 +284,7 @@ MODULE[+color[gray]}}}]\\
 
 \end{BVerbatim}
 \end{tiny}
-\includegraphics[scale=0.5]{Figures/fullexample/zdra.png}
+\includegraphics[scale=0.6]{Figures/fullexample/zdra.png}
 \vspace{-0.18in}
 \caption{An example of a specification output labelled in \gls{zcga} and \gls{zdra}.).\label{fig:zdrazcgaout}}
 \vspace{-0.2in}

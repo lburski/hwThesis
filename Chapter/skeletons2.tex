@@ -371,42 +371,43 @@ We translate total functions as a set of pairs \verb|(A * B) set|, we use the
 %but there are ways to
 %do certain proofs about partial functions \cite{Krauss08definingrecursive}.%
 
-In the following section we highlight the symbols in the Z toolkit in \red{red}
-and the corresponding Isabelle translation in \blue{blue}
+In the following section we highlight the symbols in the Z toolkit in {\color{set}red}
+and the corresponding Isabelle translation in {\color{blue}{blue}
 Other parts which differ are the following:
 
 \begin{itemize}
-\item \red{`\verb|\#|'} is a symbol which takes a set or list \footnote{by list we
+\item {\color{red}`\verb|\#|'} is a symbol which takes a set or list \footnote{by list we
 mean an ordered set} as a parameter and returns the number of elements within
-that set or list. In Z, \red{`\verb|\#|'} can be used for both set and list, however
-in Isabelle we must translate \red{`\verb|\#|'} into \blue{`\verb|card|'} if the parameter is
-a set or \blue{`\verb|length|'} if the parameter is a list.
+that set or list. In Z, {\color{red}`\verb|\#|'} can be used for both set and list, however
+in Isabelle we must translate {\color{red}`\verb|\#|'} into {\color{blue}`\verb|card|'} if the parameter is
+a set or {\color{blue}{`\verb|length|'}} if the parameter is a list.
 
-\item \red{`\verb|\mapsto|'} is a symbol which takes two terms and returns a term. If
-the \red{`\verb|\mapsto|'} term is in a total function where the Z syntax is \red{`\verb|A \fun B|'} then the 
-\red{`\verb|\mapsto|'} term will be translated as \blue{`\verb|(f,s)|'} in isabelle. However if the
-\red{`\verb|\mapsto|'} term is in partial function set then the \red{`\verb|\mapsto|'} term will be
-translated as \blue{`\verb|f s|'}.
+\item {\color{red}`\verb|\mapsto|'} is a symbol which takes two terms and returns a term. If
+the {\color{red}`\verb|\mapsto|'} term is in a total function where the Z syntax is {\color{red}{`\verb|A \fun B|'}} then the 
+{\color{red}`\verb|\mapsto|'} term will be translated as {\color{blue}{`\verb|(f,s)|'}} in isabelle. However if the
+{\color{red}`\verb|\mapsto|'} term is in partial function set then the {\color{red}{`\verb|\mapsto|'}} term will be
+translated as {\color{blue}{`\verb|f s|'}}.
 For example
-if \red{`\verb|funset: A \fun B |'} and \red{`\verb|c \mapsto d \in funset|'}
-then the isabelle translatioin will be \blue{$(c,d) \in funset$}
-however if \red{`\verb|pfunset: A \pfun B |'} and \red{`\verb|c \mapsto d \in pfunset|'}
-then the isabelle translation will be \blue{$c\ d \in pfunset$}.
+if {\color{red}`\verb|funset: A \fun B |'} and {\color{red}`\verb|c \mapsto d \in funset|'}
+then the isabelle translation will be {\color{blue}{$(c,d) \in funset$}}
+however if {\color{red}{`\verb|pfunset: A \pfun B |'}} and {\color{red}{`\verb|c \mapsto d \in pfunset|'}}
+then the isabelle translation will be {\color{blue}{$c\ d \in pfunset$}}.
 
-\item \red{`\verb|\dom|'} and \red{`\verb|\ran|'} in Z syntax are the same regardless whether it is
+\item {\color{red}{`\verb|\dom|'}} and {\color{red}{`\verb|\ran|'}} in Z syntax are the same regardless whether it is
 being applied to an element in a partial function or a total function. However
 in Isabelle the syntax varies between the two types of functions. If the
-\red{`\verb|\dom|'} being applied to an element \red{`\verb|k|'}, with type
-\red{`\verb|A \fun B|'} then the Isabelle translation would be \blue{`\verb|Domain k|'} whereas if
-\red{`\verb|k|'} has type \red{`\verb|A \pfun B|'} thenit will be
-translated as \blue{`\verb|dom k|'}. Similarly we would
-have \blue{`\verb|Range k|'} and \blue{`\verb|ran k|'} for total and partial functions of
+{\color{red}{`\verb|\dom|'}} being applied to an element {\color{red}{`\verb|k|'}}, with type
+{\color{red}{`\verb|A \fun B|'}} then the Isabelle translation would be {\color{blue}{`\verb|Domain k|'}} whereas if
+{\color{red}{`\verb|k|'}} has type {\color{red}{`\verb|A \pfun B|'}} then it will be
+translated as {\color{blue}{`\verb|dom k|'}}. Similarly we would
+have {\color{blue}{`\verb|Range k|'}} and {\color{blue}{`\verb|ran k|'}} for total and partial functions of
 `\verb|k|' respectively.
 For example
-if \red{`\verb|funset: A \fun B |'} and \red{`\verb|\dom k \in funset|'}
-then the isabelle translatioin will be \blue{$(A*B) set$} and \blue{$Domain k \in funset$}.
-however if \red{`\verb|pfunset: A \pfun B |'} and \red{`\verb|\dom k \in pfunset|'}
-then the isabelle translation will be \blue{$A \rightharpoonup B$} and \blue{$dom\ k$}.
+if {\color{red}{`\verb|funset: A \fun B |'}} and {\color{red}{`\verb|\dom k \in funset|'}}
+then the isabelle translation will be {\color{blue}{$(A*B) set$}} and {\color{blue}{$Domain k \in funset$}}.
+however if {\color{red}{`\verb|pfunset: A \pfun B |'}} and {\color{red}{`\verb|\dom k \in pfunset|'}}
+then the isabelle translation will be {\color{blue}{$A \rightharpoonup B$}} and {\color{blue}{$dom\ k$}}.
+
 \end{itemize}
 
 \subsection{Schema Names}

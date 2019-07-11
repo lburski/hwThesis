@@ -159,8 +159,8 @@ MODULE[+color[red]}}}]\\
 \begin{minipage}{0.45\textwidth}
 \centering
 \centering
-\includegraphics[scale=0.7, clip, trim=5.5cm 8cm 9.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/1.jpg}
-\includegraphics[scale=0.7, clip, trim=5.5cm 13cm 8.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/2.jpg}
+\includegraphics[scale=0.6, clip, trim=5.5cm 8cm 9.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/1.jpg}
+\includegraphics[scale=0.6, clip, trim=5.5cm 13cm 8.5cm 4cm, width=1.00\textwidth]{Figures/fullexample/2.jpg}
 %\includegraphics[scale=0.4]{Figures/fullexample/zcga.png}
 \vspace{-0.3in}
 \caption{Part of a ZCGa labelled specification output. \label{fig:zcgaschemaout}}
@@ -386,29 +386,48 @@ interface then clicking `\texttt{Isabelle Skeleton}' shown in figure
 
 \begin{figure}[H]
 \centering
-\begin{minipage}{0.45\textwidth}
-\centering
 \begin{scriptsize}
 \begin{BVerbatim}
-theory gpsa1n2 imports Main begin (*DATATYPES*) record SS1 = (*DECLARATIONS*)
+theory gpsaModuleReg imports Main begin (*DATATYPES*) record SS1 = (*DECLARATIONS*)
 locale 1n2 = fixes (*GLOBAL DECLARATIONS*) assumes SI1 begin definition CS2 ::
 "(*CS2_TYPES*) => bool" where "CS2 (*CS2_VARIABLES*) == (PRE2) \<and> (PO2)"
 definition CS1 :: "(*CS1_TYPES*) => bool" where "CS1 (*CS1_VARIABLES*) == (PRE1)
 \<and> (PO1)"
-\end{BVerbatim}
-\end{scriptsize}
-\end{minipage}\hfill
-\begin{minipage}{0.45\textwidth}
-\begin{scriptsize}
-\begin{BVerbatim}
+
 lemma CS2_L1: "(\<exists> (*CS2_VARIABLESANDTYPES*). (PRE2) \<and> (PO2) \<and>
 (SI1) \<and> (SI1'))" sorry lemma CS1_L2: "(\<exists> (*CS1_VARIABLESANDTYPES*).
 (PRE1) \<and> (PO1) \<longrightarrow> ((SI1) \<and> (SI1')))" sorry end end
+
 \end{BVerbatim}
 \end{scriptsize}
-\end{minipage}
 \caption{Isabelle proof skeleton. \label{fig:isaFullexample}}
 \end{figure}
+
+%\begin{figure}[H]
+%\centering
+%\begin{minipage}{0.45\textwidth}
+%\centering
+%\begin{scriptsize}
+%\begin{BVerbatim}
+%theory gpsa1n2 imports Main begin (*DATATYPES*) record SS1 = (*DECLARATIONS*)
+%locale 1n2 = fixes (*GLOBAL DECLARATIONS*) assumes SI1 begin definition CS2 ::
+%"(*CS2_TYPES*) => bool" where "CS2 (*CS2_VARIABLES*) == (PRE2) \<and> (PO2)"
+%definition CS1 :: "(*CS1_TYPES*) => bool" where "CS1 (*CS1_VARIABLES*) == (PRE1)
+%\<and> (PO1)"
+%\end{BVerbatim}
+%\end{scriptsize}
+%\end{minipage}\hfill
+%\begin{minipage}{0.45\textwidth}
+%\begin{scriptsize}
+%\begin{BVerbatim}
+%lemma CS2_L1: "(\<exists> (*CS2_VARIABLESANDTYPES*). (PRE2) \<and> (PO2) \<and>
+%(SI1) \<and> (SI1'))" sorry lemma CS1_L2: "(\<exists> (*CS1_VARIABLESANDTYPES*).
+%(PRE1) \<and> (PO1) \<longrightarrow> ((SI1) \<and> (SI1')))" sorry end end
+%\end{BVerbatim}
+%\end{scriptsize}
+%\end{minipage}
+%\caption{Isabelle proof skeleton. \label{fig:isaFullexample}}
+%\end{figure}
 
 \subsection{Step 5\\Isabelle Skeleton Filled in}
 
@@ -429,6 +448,8 @@ on the \gls{gpsa} button on the main menu bar in the interface and then click on
 Figure \ref{fig:fillinFullexample} shows our example with a filled in Isabelle
 skeleton. It is important to note that the program also changes some of the
 syntax from \LaTeX{} to Isabelle so that it is fully parsable by Isabelle.
+We have used the rules described in section \ref{sec:zcga2fillin} to fill in the Isabelle
+ skeleton with the ZCGa annotations.
 
 \begin{figure}[H]
 \centering
@@ -436,7 +457,7 @@ syntax from \LaTeX{} to Isabelle so that it is fully parsable by Isabelle.
 \centering
 \begin{scriptsize}
 \begin{BVerbatim}
-theory new5 imports Main 
+theory gpsaModuleReg imports Main 
 
 begin typedecl PERSON typedecl MODULE
 
@@ -460,7 +481,8 @@ PERSON \<Rightarrow> MODULE => MODULE set
 modulereg' p m degModules' students' taking' == 
 (p \<in> students) \<and> (m
 \<in> degModules) \<and> ((p, m) \<notin> taking) 
-\<and> (taking' = taking\<union> {(p, m)}) \<and> (students' = students) 
+\<and> (taking' = taking\<union> {(p, m)}) \<and> 
+(students' = students) 
 \<and> (degModules' =degModules)"
 
 definition AddStudent :: "ModuleReg \<Rightarrow> 
@@ -469,7 +491,8 @@ ModuleReg => PERSON
 \<Rightarrow> (PERSON *
 MODULE) set \<Rightarrow> bool" where "AddStudent 
 modulereg modulereg' p
-degModules' students' taking' == ((p \<notin> students) \<and> (students' =
+degModules' students' taking' == ((p \<notin> students) 
+\<and> (students' =
 students \<union> {(p)}) 
 \end{BVerbatim}
 \end{scriptsize}
@@ -481,7 +504,8 @@ students \<union> {(p)})
 (taking' = taking))"
 
 lemma RegForModule_L1: 
-"(\<exists> degModules:: MODULE set. \<exists> students
+"(\<exists> degModules:: MODULE set. 
+\<exists> students
 :: PERSON set. \<exists> taking :: 
 (PERSON * MODULE) set. \<exists> p :: PERSON.
 \<exists> degModules':: MODULE set. 
@@ -490,7 +514,8 @@ taking' :: (PERSON * MODULE) set.
 \<exists> m :: MODULE. ((p \<in> students)
 \<and> (m \<in> degModules) \<and> ((p, m) 
 \<notin> taking) \<and> (taking' =
-taking \<union> {(p, m)}) \<and> (students' = students) 
+taking \<union> {(p, m)}) \<and> 
+(students' = students) 
 \<and> (degModules' =
 degModules)) \<longrightarrow> ((Domain taking 
 \<subseteq> students) \<and>
@@ -502,13 +527,15 @@ students') \<and> (Range taking'
 lemma AddStudent_L2: 
 "(\<exists> degModules:: MODULE set. 
 \<exists> students ::
-PERSON set. \<exists> taking :: (PERSON * MODULE) set. 
+PERSON set. \<exists> taking :: 
+(PERSON * MODULE) set. 
 \<exists> p :: PERSON.
 \<exists> degModules':: MODULE set. 
 \<exists> students' :: PERSON set. \<exists>
 taking' :: (PERSON * MODULE) set. 
 ( (students' = students \<union> {(p)}) \<and>
-(degModules' = degModules) \<and> (taking' = taking)) 
+(degModules' = degModules) \<and> 
+(taking' = taking)) 
 \<longrightarrow ((Domain
 taking \<subseteq> students) \<and> 
 (Range taking \<subseteq> degModules) \<and>
@@ -535,6 +562,13 @@ lemma's automatically and it is up to the user to do this (explained in the next
 section). However at this stage \gls{zmath} puts the Isar command
 `\texttt{sorry}' as to ignore the lemma and act as if it was proven.
 
+In this case the new "Lemmas" are added to the end of the specification at random.
+For this specification it doesn't matter which lemma comes first (RegForModule\_L1 or AddStudent\_L2)
+as the schemas \texttt{RegForModule} and \texttt{AddStudent} are independent of eachother
+and one does not `\textit{use}' the other. If we did have a changeSchema which did use another changeSchema
+then this would have to be annotated in the zDRa and therefore the order would matter when the lemmas are produced.
+
+
 \section{Step 6\\Full Proof}
 
 The next part is to prove any existing lemmas from the filled in Isabelle
@@ -558,17 +592,26 @@ hand for the \texttt{modulereg} specification.
 
 \begin{BVerbatim}[commandchars=+\[\]] 
 lemma RegForModule_L1: "(\<exists>
-degModules:: MODULE set. \<exists> students :: PERSON set. \<exists> taking ::
-(PERSON * MODULE) set. \<exists> p :: PERSON. \<exists> degModules':: MODULE
-set. \<exists> students' :: PERSON set. \<exists> taking' :: (PERSON * MODULE)
-set. \<exists> m :: MODULE. ((p \<in> students) \<and> (m \<in> degModules)
-\<and> ((p, m) \<notin> taking) \<and> (taking' = taking \<union> {(p, m)})
-\<and> (students' = students) \<and> (degModules' = degModules))
-\<longrightarrow> ((Domain taking \<subseteq> students) \<and> (Range taking
-\<subseteq> degModules) \<and> (Domain taking' \<subseteq> students') \<and>
+degModules:: MODULE set. \<exists> students ::
+ PERSON set. \<exists> taking ::
+(PERSON * MODULE) set. \<exists> p :: PERSON. 
+\<exists> degModules':: MODULE
+set. \<exists> students' :: PERSON set. 
+\<exists> taking' :: (PERSON * MODULE)
+set. \<exists> m :: MODULE. ((p \<in> students) 
+\<and> (m \<in> degModules)
+\<and> ((p, m) \<notin> taking) \<and> 
+(taking' = taking \<union> {(p, m)})
+\<and> (students' = students) \<and> 
+(degModules' = degModules))
+\<longrightarrow> ((Domain taking 
+\<subseteq> students)  \<and> (Range taking
+\<subseteq> degModules) \<and> (Domain taking' 
+\<subseteq> students') \<and>
 (Range taking' \<subseteq> degModules')))"
 
-[+color[red]by (smt Domain_empty Domain_insert] [+color[red]Range.intros
+[+color[red]by (smt Domain_empty Domain_insert] 
+[+color[red]Range.intros
 Range_empty Range_insert]
 \end{BVerbatim}
 \end{scriptsize}
@@ -576,33 +619,54 @@ Range_empty Range_insert]
 \begin{minipage}{0.45\textwidth}
 \begin{scriptsize}
 \begin{BVerbatim}[commandchars=+\[\]]
-[+color[red]Un_empty Un_insert_right
-empty_iff] [+color[red]empty_subsetI empty_subsetI insert_mono]
+[+color[red]Un_empty Un_insert_right empty_iff] 
+[+color[red]empty_subsetI 
+ empty_subsetI insert_mono]
 [+color[red]insert_mono singletonI singletonI ]
-[+color[red]singleton_insert_inj_eq' singleton_insert_inj_eq')]
+[+color[red]singleton_insert_inj_eq' ]
+[+color[red]singleton_insert_inj_eq')]
 
-lemma AddStudent_L2: "(\<exists> degModules:: MODULE set. \<exists> students ::
-PERSON set. \<exists> taking :: (PERSON * MODULE) set. \<exists> p :: PERSON.
-\<exists> degModules':: MODULE set. \<exists> students' :: PERSON set. \<exists>
-taking' :: (PERSON * MODULE) set. ((students' = students \<union> {(p)}) \<and>
-(degModules' = degModules) \<and> (taking' = taking)) \<longrightarrow> ((Domain
-taking \<subseteq> students) \<and> (Range taking \<subseteq> degModules) \<and>
-(Domain taking' \<subseteq> students') \<and> (Range taking' \<subseteq>
+lemma AddStudent_L2: 
+"(\<exists> degModules:: MODULE set. 
+\<exists> students :: PERSON set. 
+\<exists> taking :: (PERSON * MODULE) set. 
+\<exists> p :: PERSON.
+\<exists> degModules':: MODULE set. 
+\<exists> students' :: PERSON set. \<exists>
+taking' :: (PERSON * MODULE) set. 
+((students' = students \<union> {(p)}) \<and>
+(degModules' = degModules) \<and> 
+(taking' = taking))
+ \<longrightarrow> ((Domain
+taking \<subseteq> students) \<and> 
+(Range taking \<subseteq> degModules) \<and>
+(Domain taking' \<subseteq> students') \<and> 
+(Range taking' \<subseteq>
 degModules')))"
 
 [+color[red]by blast]
 \end{BVerbatim}
 \end{scriptsize}
 \end{minipage}
-\caption{An example of a property and it's proof for the Vending Machine example. \label{fig:propertyproof}}
+\caption{An example of a property and it's proof for the Module Reg example. \label{fig:propertyproof}}
 \end{figure}
 
 Figure \ref{fig:propertyproof} shows how the lemmas automatically generated from
 the \gls{zdra} annotated specification (black) and the user input needed to
 prove this lemma (red). Notice that the user has deleted the word
-"\texttt{sorry}" which would have automatically come after the lemma. More
-information on proving these lemmas can be found in the Isabelle Manual
+"\texttt{sorry}" which would have automatically come after the lemma.
+The user has completed this proof by using techniques written in Isabelle, there are some forms of 
+help by automatically solving proofs using the "sledgehammer" and "smt" provers which is what the 
+user used to help solve these proofs.
+Proofs can be completed in a variety of different ways and there are so many different strategies 
+to complete a single proof. Automatically solving proofs can be a whole research area in itself.
+More information on proving these lemmas can be found in the Isabelle Manual
 \cite{isabelle} and is beyond the scope of this thesis.
+
+We know that the Isabelle skeleton is now correct as it can be parsed through the 
+Isabelle theorem prover with no errors.
+All variables have been declared before they are used in Isabelle and all the CGa names
+have been translated back to the original names used in the Z Specification.
 
 \section{Conclusion}
 In this chapter we have taken a single specification and shown the entire path
@@ -610,10 +674,10 @@ from the raw specification to it's translation in Isabelle. We have shown the
 \LaTeX{} code and the compiled output for the raw specification, \gls{zcga}
 annotated specification and \gls{zdra} annotated specification. We have shown
 screenshots of the interface to demonstrate of how to check for each step of
-correctness. The dependency and goto graphs where automatically demonstrated and
+correctness. The dependency and goto graphs where automatically generated and
 displayed. Then the general proof skeleton, (which shows the order the instances
 must be in to input into a theorem prover) was displayed. We then generated an
-Isabelle proof skeleton for the vending machine and automatically filled it in
+Isabelle proof skeleton for the modulereg and automatically filled it in
 using the \gls{zmath} program. In the final section we explained that it would
 be difficult to automate a proof due to the fact that the lemma's which need to
 be proved for a specification will vary due to the nature of the specification

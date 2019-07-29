@@ -5,6 +5,8 @@ The concept for this thesis was to argue that breaking up the translation path
 from a formal specification to a full proof would be easier to conduct than to
 do a full proof all in one go. The vending machine example has been fully proved
 in \gls{ppz} and the birthday book example has been fully proved in \gls{hol}.
+There have not been any proofs for our examples already done in Isabelle (apart
+from the proofs I have already written myself which would be unfair to compare).
 We will now look at these to examples and compare them to the proofs done in a
 stepwise method using MathLang.
 
@@ -12,6 +14,30 @@ It is important to note, the way the specifications are translated into
 Isabelle/Hol syntax is just one way. There are various other ways one may choose
 to translate specifications into Isabelle. Some of there other variations are
 described in \cite{Kolyang1996}, \cite{Kolyang86towardsa} and \cite{hol-z}.
+
+Note: we use number of lines to compare the lengths of the proof and not
+to measure the efficiency  or superiority over one proof over another.
+
+To compare proofs we have looked at the amount of complexity in the specification.
+For example the vending machine example only uses integers as `types' in the specificaion.
+Where as other examples such as the birthdaybook declare its own "type" at the beginning
+of the specification and is used throughout. The complexity of proofs are discussed more in the
+next chapter.
+This chapter focusses on what `expertise' is needed to create a proof for a specification
+using different theorem provers.
+
+In figure \ref{fig:propertyproof} to prove the proof obligations (red parts) one must have some
+theorem prover expertise. However, automated theorem proving tools which exist such as 
+`sledgehammer' or `blast'. These tools are also available to a theorem proving expert. Therefore
+effort is the same.
+The difference is in translating the specification into Isabelle from \LaTeX. One can 
+translate the specification by hand-rewrite the entire specification again into Isabelle syntax
+or one can use ZMathLang for the translation with doing ZCGa and ZDRa checks a long the way.
+This allows the user to `digest' the specification and moreover check that the specification isabelle
+ZCGa and ZDRa correct before inputting into the theorem prover. This does not save time but 
+allows checks to be done at an earlier phase instead of directly translating the entire specification
+into a theorem prover and finding grammatical and logical errors at the end. The user will then
+need to go over the entire specification and find where those errors have occurred.
 
 \section{Vending Machine Example}
 
@@ -38,7 +64,7 @@ using \gls{zmath} & & automated & ep = 124 (63 automated) \\
 \hline
 \end{tabular}
 \end{center}
-\caption{The vending machine proof using \gls{ppz} verses the \gls{zmath} proof.}
+\caption{The vending machine proof using \gls{ppz} versus the \gls{zmath} proof.}
 \label{tab:comparevm}
 \end{table}
 
@@ -146,7 +172,7 @@ automatically translated from the annotated specification written in \LaTeX{}.
 
 \section{Birthday Book Example}
 
-The birthday book example (shown in appendix {app:bb}), was created by Spivey
+The birthday book example (shown in appendix \ref{app:bb}), was created by Spivey
 \cite{spiveyreferencemanual}. This example is a specification which describes a
 system of a birthday book where the main functions include adding a person and
 their birthday, removing a person and their birthday etc. This system uses sets
@@ -171,13 +197,13 @@ using \gls{zmath} & & automated & ep = 120 \\
 \hline
 \end{tabular}
 \end{center}
-\caption{The birthday book proof using \gls{hol} verses the \gls{zmath} proof.}
+\caption{The birthday book proof using \gls{hol} versus the \gls{zmath} proof.}
 \label{tab:comparebb}
 \end{table}
 
 Table \ref{tab:comparebb} shows the comparison between the birthday book proof
 done using Hol-Z \cite{hol-z} and the birthday book proof done using the
-\gls{zmath} method (see appendix \ref{tab:comparebb}). Again to calculate the
+\gls{zmath} method (see appendix \ref{app:bb}). Again to calculate the
 lines of proof, all comments and empty lines have been removed from the proof.
 Since the birthday book proof in \gls{hol} comes in many different files, all
 the lines from these files have been added. The translation via \gls{zmath}
@@ -231,12 +257,42 @@ theorem prover &  &  \\
 Table \ref{tab:expertisebb} shows the type and amount of expertise needed in
 order to get from a specification into a fully proof.
 
+Since starting this thesis the Hol-Z project is no longer developed. Therefore the
+comparison done here is limited with the support available.
+
+%How can we judge based on table 10.2 that it is more efficient to do
+%PPZed than in MathLang?  The discussion you give in sections
+%10.1.1.. 10.1.4 does not conclude the efficiency.  Reading your
+%section 10.1.4, you seem to be focusing on knowledge of the language
+%of Isabelle.  So here the question that poses itself is again that to
+%fill the Isabelle part, an Isabelle expert is needed and the non
+%Isabelle expert will neither contribute nor understand that part. So,
+%what is the role of a non Isabelle expert?  Why is he ever included in
+%the process?
+
+It is important to note that the time it takes translating a Z specification into 
+a theorem prover with full proofs may or may not be longer using small steps in ZMathLang Vs
+using Hol-Z, as that will depend on the user and their expertise/typing skills/knowledge of Z etc.
+However what table \ref{tab:expertisebb} does show is that for both methods the user would
+need knowledge of Z and of \LaTeX{}. For the actual translation of the specification alone (without proofs) 
+the user would need none to very little knowledge of the theorem prover using ZMathLang but will need some 
+knowledge of the theorem prover using Hol-Z.
+Using Hol-Z the user would also need to type up the specification again whereas in Z-MathLang the user
+would need to annotate the specification in \LaTeX{}. The time it takes to do this again would
+depend on the user and if they are comfortable with the Hol-Z tool or \LaTeX{} annotations.
+Therefore the `efficiency' would be the same for both methods however using the Hol-Z method the user
+would need additional Hol-Z and \LaTeX{} expertise whereas using ZMathLang the user would need to have just \LaTeX{} 
+expertise on it's own. This is for the translation on it's own.
+
+To complete the proofs for the specification the user would need both \LaTeX{} and some theorem
+prover expertise. Therefore the `efficiency' is about the same.
+
 \subsection{Knowledge of Z}
 
 For both methods the user will need to have some knowledge of Z specifications.
 This is because in both methods the initial step is to write the specification
 in \LaTeX{} for the system. However by using the \gls{zmath} method when
-annotating the Z specification in ZCGa, toe compiled documents outputs the weak
+annotating the Z specification in ZCGa, to compiled documents outputs the weak
 types in different grammars. This then allows others to identify certain parts
 of the Z syntax. Therefore the knowledge of Z is exactly the same in both these
 methods.
@@ -255,6 +311,30 @@ knowledge. Although it is possible to ease the translation of the specification
 into \gls{hol} using ZeTa (see section \ref{knowledgeofinputforbb}), the user
 will need to have the \gls{hol} plugin knowledge as well as the original
 Isabelle/Hol Knowledge to do the proofs for the specification.
+
+The Hol-Z proof comes in 10+ files all written in complex code, the ZMathLang proof
+includes:
+\begin{enumerate}
+    \item 1 ZCGa Labelled tex document + it's pdf output
+    \item 1 ZDRa Labelled tex document + it's pdf output
+    \item GPSa
+    \item proof skeleton in Isabelle
+    \item Filled in skeleton
+    \item Full proof in Isabelle
+\end{enumerate}
+
+Both theorem provers offer a \LaTeX{} written specification.
+The ZMathLang toolkit also produces graphs in order to help the user understand
+the layout and dependencies of the specification. Hol-Z does not offer such diagrams and
+therefore understanding the proof purely via code may be more difficult.
+
+An e-mail from `Burkhart Wolff' (who wrote the Hol-Z tutorial) explained the following
+about Hol-Z:
+\\
+`\texttt{The port of the library is not particularly difficult though.
+What is hairy, is the front-end, and in particular the Zeta Parser.
+A project around 2012 trying to port it to a more recent Isabelle-version
+and a new Z parser/typechecker front-end was abandoned.}'
 
 \subsection{Knowledge of \LaTeX}
 
@@ -283,7 +363,7 @@ would need more than the former. By using the ZeTa-to-\gls{hol} plug-in, the
 user can write their specification in \LaTeX{} format with the \gls{hol}
 annotations (very similar to \gls{zmath} method), however the user will need to
 know how to import the .holz files into the \gls{hol} theorem prover, unpack the
-schemas and values, and how to write and prove the properties. 
+schemas and values, and how to write and prove the properties.
 
 To input the specification into the chosen theorem prover using \gls{zmath} the
 user will need no theorem prover knowledge at all. This is because the annotated
@@ -305,12 +385,9 @@ actual properties and the proof obligations of the specification are a whole
 research area on their own and beyond the scope of this thesis but touched upon
 in chapter \ref{ch:background}.
 
-Even when teaching the syntax of Z in an academic setting, the \gls{zmath}
-aspects and it's tools can be used as helpful tools to help students understand
-the syntax of their formal specifications. Such as allowing students to annotate
-the grammatical categories ie what is a declaration, what is an expression. The
-students can also use the \gls{zdra} instance to highlight which schema is a
-totaliseSchema, and which schema is a changeSchema etc.
+The \gls{zmath} aspects and it's tools can be used as helpful tools to the user digest 
+the specification and allow them to understand
+the syntax of their formal specifications.
 
 In the next chapter we conclude our findings of this thesis and highlight what
 areas are of interest for future work.

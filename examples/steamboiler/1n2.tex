@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{zmathlang}
 
+\pagenumbering{gobble}
+
 \begin{document}
 
 \dratheory{T1}{0.04}{
@@ -45,7 +47,8 @@ Control values
 
 \draschema{A3}{
 \begin{schema}{Pumps}
-\text{\declaration{\term{p_{1}}, \term{p_{2}}, \term{p_{3}}, \term{p_{4}}: \expression{OnOff}}}
+\text{\declaration{\term{p_{1}}, \term{p_{2}}, \term{p_{3}},
+\term{p_{4}}: \expression{OnOff}}}
 \end{schema}}
 
 \draschema{SS1}{
@@ -64,7 +67,9 @@ Auxiliary Schemata
 \begin{schema}{PumpsOff}
 \text{Pumps'}
 \where
-\draline{O1}{\text{\expression{\expression{\term{p_{1}'} = \term{off}} \land \expression{\term{p_{2}'} = \term{off}} \land \expression{\term{p_{3}'} = \term{off}} \land \expression{\term{p_{4}'} = \term{off}}}}}
+\draline{O1}{\text{\expression{\expression{\term{p_{1}'} = \term{off}} \land
+\expression{\term{p_{2}'} = \term{off}} \land \expression{\term{p_{3}'} =
+\term{off}} \land \expression{\term{p_{4}'} = \term{off}}}}}
 \end{schema}}
 
 \uses{OS1}{A3}
@@ -74,7 +79,9 @@ Auxiliary Schemata
 \begin{schema}{PumpsOn}
 \text{Pumps'}
 \where
-\draline{O2}{\text{\expression{\expression{\term{p_{1}'} = \term{on}} \land \expression{\term{p_{2}'} = \term{on}} \land \expression{\term{p_{3}'} = \term{on}} \land \expression{\term{p_{4}'} = \term{on}}}}}
+\draline{O2}{\text{\expression{\expression{\term{p_{1}'} = \term{on}} \land
+\expression{\term{p_{2}'} = \term{on}} \land \expression{\term{p_{3}'} =
+\term{on}} \land \expression{\term{p_{4}'} = \term{on}}}}}
 \end{schema}}
 
 \uses{OS2}{A3}
@@ -206,7 +213,8 @@ Operations for Normal State
 \text{\expression{\term{w?} \leq \term{\term{w_{opt}} -\term{\term{3}\term{l}}}}}} \\
 \draline{PO6}{
 \text{\expression{\text{PumpsOn}}} \\
-\text{{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} = \term{on}} \land \expression{\term{z'} = \term{z}}}}}
+\text{{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} =
+\term{on}} \land \expression{\term{z'} = \term{z}}}}}
 \end{schema}}
 
 \uses{CS5}{IS1}
@@ -243,7 +251,8 @@ Note: Simplified version where all four pumps are swicthed on simultaneously.
 \text{\expression{\term{w?} \leq \term{w_{max}}}}} \\
 \draline{PO8}{
 \text{\expression{\text{PumpsOff}}} \\
-\text{\expression{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} = \term{on}} \land \expression{\term{z'} = \term{z}}}}}
+\text{\expression{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} =
+\term{on}} \land \expression{\term{z'} = \term{z}}}}}
 \end{schema}}
 
 \uses{CS6}{IS1}
@@ -259,8 +268,10 @@ Note: Simplified version where all four pumps are swicthed on simultaneously.
 \where
 \draline{PRE8}{
 \text{\expression{\term{z} = \term{norm}}} \\
-\text{\expression{\expression{\term{w?} < \term{w_{min}}} \lor \expression{\term{w?} > \term{w_{max}}}}}} \\
-\draline{PO9}{\text{\expression{\expression{\term{a'} = \term{off}} \land \expression{\term{z'} = \term{stop}}}}}
+\text{\expression{\expression{\term{w?} < \term{w_{min}}} \lor
+\expression{\term{w?} > \term{w_{max}}}}}} \\
+\draline{PO9}{\text{\expression{\expression{\term{a'} =
+\term{off}} \land \expression{\term{z'} = \term{stop}}}}}
 \end{schema}}
 
 \uses{CS7}{IS1}
@@ -519,7 +530,8 @@ Operations for Normal State
 \draline{PO15}{
 \text{\expression{\term{s'} = \term{w?}}} \\
 \text{\expression{\text{PumpsControlledOn}}} \\
-\text{\expression{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} = \term{on}} \land \expression{\term{z'} = \term{z}}}}}
+\text{\expression{\expression{\term{v'} = \term{closed}} \land
+\expression{\term{a'} = \term{on}} \land \expression{\term{z'} = \term{z}}}}}
 \end{schema}}
 
 \requires{CS12}{PRE13}
@@ -541,10 +553,14 @@ Operations for Normal State
 \text{\expression{\term{w?} > \term{\term{w_{opt}} - \term{\term{3}\term{l}}}}} \\
 \text{\expression{\term{w?} \leq \term{w_{opt}}}}} \\
 \draline{PO16}{
-\text{\expression{\expression{\term{p_{1}'} = \term{\term{pswitch}(\term{p_{1}}, \term{k_{p1}})}} \land \expression{\term{p_{2}'} = \term{\term{pswitch}(\term{p_{2}}, \term{k_{p2}})}}}} \\
-\text{\expression{\expression{\term{p_{3}'} = \term{\term{pswitch}(\term{p_{3}}, \term{k_{p3}})}} \land \expression{\term{p_{4}'} = \term{\term{pswitch}(\term{p_{4}}, \term{k_{p4}})}}}} \\
+\text{\expression{\expression{\term{p_{1}'} = \term{\term{pswitch}(\term{p_{1}}, 
+\term{k_{p1}})}} \land \expression{\term{p_{2}'} = \term{\term{pswitch}(\term{p_{2}}, 
+\term{k_{p2}})}}}} \\
+\text{\expression{\expression{\term{p_{3}'} = \term{\term{pswitch}(\term{p_{3}}, 
+\term{k_{p3}})}} \land \expression{\term{p_{4}'} = \term{\term{pswitch}(\term{p_{4}}, \term{k_{p4}})}}}} \\
 \text{\expression{\term{s'} = \term{w?}}} \\
-\text{\expression{\expression{\term{v'} = \term{v}} \land \expression{\term{a'} = \term{a}} \land \expression{\term{z'} = \term{z}}}}}
+\text{\expression{\expression{\term{v'} = \term{v}} \land \expression{\term{a'} = 
+\term{a}} \land \expression{\term{z'} = \term{z}}}}}
 \end{schema}}
 
 \requires{CS13}{PRE14}
@@ -568,7 +584,8 @@ Operations for Normal State
 \draline{PO17}{
 \text{\expression{\term{s'} = \term{w?}}} \\
 \text{\expression{\text{PumpsControlledOff}}} \\
-\text{\expression{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} = \term{on}} \land \expression{\term{z'} = \term{z}}}}}
+\text{\expression{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} = 
+\term{on}} \land \expression{\term{z'} = \term{z}}}}}
 \end{schema}}
 
 \requires{CS14}{PRE15}
@@ -586,10 +603,13 @@ Operations for Normal State
 \text{ControlInput}
 \where
 \draline{PRE16}{
-\text{\expression{\expression{\term{z} = \term{norm}} \lor \expression{\term{z} = \term{broken}}}} \\
+\text{\expression{\expression{\term{z} = \term{norm}} \lor \expression{\term{z} = 
+\term{broken}}}} \\
 \text{\expression{\term{k_{w}} = \term{works}}} \\
-\text{\expression{\expression{\term{w?} < \term{w_{min}}} \lor \expression{\term{w?} > \term{w_{max}}}}}} \\
-\draline{PO18}{\text{\expression{\expression{\term{a'} = \term{off}} \land \expression{\term{z'} = \term{stop}}}}}
+\text{\expression{\expression{\term{w?} < \term{w_{min}}} \lor 
+\expression{\term{w?} > \term{w_{max}}}}}} \\
+\draline{PO18}{\text{\expression{\expression{\term{a'} = 
+\term{off}} \land \expression{\term{z'} = \term{stop}}}}}
 \end{schema}}
 
 \requires{CS15}{PRE16}
@@ -606,8 +626,10 @@ Operations for Normal State
 \where
 \draline{PRE17}{
 \text{\expression{\term{z} = \term{norm}}} \\
-\text{\expression{\expression{\term{k_{w}} = \term{broken}} \land \expression{\term{k_{d}} = \term{broken}}}}} \\
-\draline{PO19}{\text{\expression{\expression{\term{a'} = \term{off}} \land \expression{\term{z'} = \term{stop}}}}}
+\text{\expression{\expression{\term{k_{w}} = \term{broken}} \land 
+\expression{\term{k_{d}} = \term{broken}}}}} \\
+\draline{PO19}{\text{\expression{\expression{\term{a'} = \term{off}} 
+\land \expression{\term{z'} = \term{stop}}}}}
 \end{schema}}
 
 \requires{CS16}{PRE17}
@@ -625,10 +647,14 @@ Operations for Normal State
 \where
 \draline{O5}{
 \text{\expression{\term{amount} = \\
-\term{\term{l} * (\term{\term{\term{pamount}(\term{p_{1}}, \term{k_{p1}?})} + \term{\term{pamount}(\term{p_{2}}, \term{k_{p2}?})} +  \\
-\term{\term{pamount}(\term{p_{3}}, \term{k_{p3}?})} + \term{\term{pamount}(\term{p_{4}}, \term{k_{p4}?})}})}}} \\
+\term{\term{l} * (\term{\term{\term{pamount}(\term{p_{1}}, \term{k_{p1}?})} + 
+\term{\term{pamount}(\term{p_{2}}, \term{k_{p2}?})} +  \\
+\term{\term{pamount}(\term{p_{3}}, \term{k_{p3}?})} + 
+\term{\term{pamount}(\term{p_{4}}, \term{k_{p4}?})}})}}} \\
 \text{\expression{\term{\delta_{pumps}} = \\
-\term{\term{\delta_{p}} * (\term{\term{\term{pamount}(\term{p_{1}}, \term{works})} +  \term{(\term{\term{pamount}(\term{p_{2}}},  \term{works})} + \\ \term{(\term{pamount}(\term{p_{3}}, \term{works})} + \term{(\term{pamount}(\term{p_{4}}, \term{works})}})}}}}
+\term{\term{\delta_{p}} * (\term{\term{\term{pamount}(\term{p_{1}}, \term{works})} +  
+\term{(\term{\term{pamount}(\term{p_{2}}},  \term{works})} + \\ 
+\term{(\term{pamount}(\term{p_{3}}, \term{works})} + \term{(\term{pamount}(\term{p_{4}}, \term{works})}})}}}}
 \end{schema}}
 
 \requires{OS6}{O5}
@@ -652,9 +678,12 @@ Operations for Normal State
 \draline{PO20}{
 \text{\expression{\term{s'} \geq \term{\term{w_{min}} + \term{\delta'}}}} \\
 \text{\expression{\term{s'} \leq \term{\term{w_{max}} - \term{\delta'}}}} \\
-\text{\expression{\expression{\term{s'} < \term{(\term{\term{w_{min}} + \term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOn}}}} \\
-\text{\expression{\expression{\term{s'} \geq \term{(\term{\term{w_{min}} + \term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOff}}}} \\
-\text{\expression{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} = \term{on}}}} \\
+\text{\expression{\expression{\term{s'} < \term{(\term{\term{w_{min}} + 
+\term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOn}}}} \\
+\text{\expression{\expression{\term{s'} \geq \term{(\term{\term{w_{min}} + 
+\term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOff}}}} \\
+\text{\expression{\expression{\term{v'} = \term{closed}} \land 
+\expression{\term{a'} = \term{on}}}} \\
 \text{\expression{\term{z'} = \term{broken}}}}
 \end{schema}}
 
@@ -704,9 +733,12 @@ Operations for Broken State
 \text{\expression{\term{\delta'} = \term{\term{\delta} + \term{\delta_{pumps}} + \term{\delta_{d}}}}} \\
 \text{\expression{\term{s'} \geq \term{\term{w_{min}} + \term{\delta'}}}} \\
 \text{\expression{\term{s'} \leq \term{\term{w_{max}} - \term{\delta'}}}} \\
-\text{\expression{\expression{\term{s'} < \term{(\term{\term{w_{min}} + \term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOn}}}} \\
-\text{\expression{\expression{\term{s'} \geq \term{(\term{\term{w_{min}} + \term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOff}}}} \\
-\text{\expression{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} = \term{on}}}} \\
+\text{\expression{\expression{\term{s'} < \term{(\term{\term{w_{min}} + 
+\term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOn}}}} \\
+\text{\expression{\expression{\term{s'} \geq \term{(\term{\term{w_{min}} + 
+\term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOff}}}} \\
+\text{\expression{\expression{\term{v'} = \term{closed}} \land 
+\expression{\term{a'} = \term{on}}}} \\
 \text{\expression{\term{z'} = \term{broken}}}}
 \end{schema}}
 
@@ -731,8 +763,10 @@ Operations for Broken State
 \text{\expression{\term{k_{w}} = \term{works}}} \\
 \text{\expression{\term{w?} \geq \term{w_{min}}}} \\
 \text{\expression{\term{w?} \leq \term{w_{max}}}} \\
-\text{\expression{\expression{\term{w?} < \term{(\term{\term{w_{min}} + \term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOn}}}} \\
-\text{\expression{\expression{\term{w?} \geq \term{\term{\term{(w_{min}} + \term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOff}}}}} \\
+\text{\expression{\expression{\term{w?} < \term{(\term{\term{w_{min}} + 
+\term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOn}}}} \\
+\text{\expression{\expression{\term{w?} \geq \term{\term{\term{(w_{min}} + 
+\term{w_{max}}})/\term{2}}} \rightarrow \expression{\text{PumpsControlledOff}}}}} \\
 \draline{PO22}{
 \text{\expression{\term{s'} = \term{w?}}} \\
 \text{\expression{\expression{\term{v'} = \term{closed}} \land \expression{\term{a'} = \term{on}}}} \\
@@ -758,7 +792,8 @@ Operations for Broken State
 \text{\expression{\term{z} = \term{broken}}} \\
 \text{\expression{\term{k_{w}} = \term{broken}}} \\
 \text{\expression{\term{k_{d}} = \term{broken}}}} \\
-\draline{PO23}{\text{\expression{\expression{\term{a'} = \term{off}} \land \expression{\term{z'} = \term{stop}}}}}
+\draline{PO23}{\text{\expression{\expression{\term{a'} = \term{off}} \land 
+\expression{\term{z'} = \term{stop}}}}}
 \end{schema}}
 
 \requires{CS20}{PRE21}
@@ -780,9 +815,13 @@ Operations for Broken State
 \text{\expression{\term{k_{d}} = \term{works}}}} \\
 \draline{PO24}{
 \text{\expression{\term{s'} = \term{\term{s} + \term{amount} - \term{d?}}}} \\
-\text{\expression{\expression{\term{z} = \term{broken}} \rightarrow \expression{\term{\delta'} = \term{\term{\delta} + \term{\delta_{pumps}} + \term{\delta_{d}}}}}} \\
-\text{\expression{\expression{\term{z} = \term{norm}} \rightarrow \expression{\term{\delta'} = \term{\term{\delta_{pumps}} + \term{\delta_{d}}}}}} \\
-\text{\expression{\expression{\term{s'} < \term{\term{w_{min}} + \term{\delta'}}} \lor \expression{\term{s'} > \term{\term{w_{max}} - \term{\delta'}}}}} \\
+\text{\expression{\expression{\term{z} = \term{broken}} \rightarrow 
+\expression{\term{\delta'} = \term{\term{\delta} + \term{\delta_{pumps}} + 
+\term{\delta_{d}}}}}} \\
+\text{\expression{\expression{\term{z} = \term{norm}} \rightarrow 
+\expression{\term{\delta'} = \term{\term{\delta_{pumps}} + \term{\delta_{d}}}}}} \\
+\text{\expression{\expression{\term{s'} < \term{\term{w_{min}} + 
+\term{\delta'}}} \lor \expression{\term{s'} > \term{\term{w_{max}} - \term{\delta'}}}}} \\
 \text{\expression{\expression{\term{a'} = \term{off}} \land \expression{\term{z'} = \term{stop}}}}}
 \end{schema}}
 

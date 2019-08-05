@@ -6,8 +6,9 @@ between the specification translations if any. Table \ref{tab:specstranslated}
 shows the specifications we have translated into Isabelle using \gls{zmath}. We
 have classified these examples to show the different types of specifications
 which can be translated using the \gls{zmath} tool-kit. In this chapter we take
-one example from each class and describe in more detail how the translation was
-done.
+one example from each class (Steamboiler from appendix \ref{app:steamboiler}, ModuleReg from chapter \ref{ch:fullexample}
+ and AutoPilot from appendix \ref{app:semiform}) 
+and describe in more detail how the translation was done.
 
 \begin{table}[H]
 \begin{tabular}{|l|l|}
@@ -32,14 +33,21 @@ A specification which fails ZDRa & ProjectAlloc \\
 \caption{A table showing the specifications we have translated into Isabelle using \gls{zmath} \label{tab:specstranslated}}
 \end{table}
 
-We have categoriesed the specification into three groups; specifications which
+We have categorised the specification into three groups; specifications which
 only use terms, specifications which use both terms and set and specifications
-which the translation is incomplete for a variety of reasons. All the
+which the translation is incomplete for a variety of reasons.
+These categories are important as the examples using sets and terms are more complex
+then the specifications only using terms. This is because there is an extra ZCGa type
+to manage. The specification which are categorised as "incomplete" can be using terms
+and sets however they are not full specification so have not been fully translated into 
+Isabelle and/or have proofs to check the stateInvariants.
+All the
 specifications we have translated are `state based specifications', which means
 they operate within a state and to change the state their may become
 precondition and postconditions within the state. Some specifications are
-described differently such as functional specifications, however those type of
-specifications are out of the scope of this thesis.
+described differently such as functional specifications, however 
+it was difficult to find full examples of functional specification and therefore
+we couldn't add it to the list of examples.
 
 \section{Complexity of specifications}
 
@@ -109,6 +117,20 @@ Thus removing a line. Formal specifications can also include comments written in
 natural language which are not part of the formal script. These extra comments
 about the specification may have also added to the line count in table
 \ref{tab:numbersspec}.
+
+However, there are also many lines which can not be simplified in the specification
+for example if a specification uses a certain Z-type i.e. `'\texttt{COLOUR}' then
+`\texttt{COLOUR}' must be declared at the beginning of the specification:
+\verb|[COLOUR]|\\
+in the specification this line can not be removed. Therefore
+we use the number of lines plus the number of environment to discuss the complexity.
+
+The number of environments is also used to discuss complexity as we could have simple
+program which only has one function (such as a program which outputs a number). This 
+type of specification would only have 1 output schema and therefore be considered as 
+quite simple. Other programs/specifications can have many different functions and 
+therefore many different environments. Hence, when we discuss complexity in this chapter
+the more the environments a specification has the more complex it is.
 
 \subsection{ZCGa Count}
 
@@ -207,6 +229,19 @@ of a \texttt{declaration}, 2 annotations of \texttt{sets} and 1 annotation of an
 than declarations in every specification, which is true according to table
 \ref{tab:specgram}.
 
+The SteamBoiler specification has by far the most ZCGa weak types in total at 1204.
+Therefore in terms of complexity it would take the longest to annotate in ZCGa.
+In terms of doing a ZCGa weak type check it would also take the longest as the ZCGa
+would have to parse through all 1204 weak types and check they are correct.
+There are only 4 `\texttt{sets}' in the SteamBoiler specification but in our case
+this doesn't make a difference because the ZCGa weak typing rules are similar for set
+and term. Therefore if the next complex specification (ProjectAlloc) still wouldn't class
+as being more complex than the Steamboiler specification. 
+GenDB can also be argued as being complex as it contains the highest amount of weak types
+ \textbf{and} containing a definition. However as the specification only contains 1 
+ definition out of a total of 378 weak types, we can not dispute that GenDB has a strong
+ case for being the most complex. This conclusion is drawn just by analysing 
+the amount of ZCGa weak types. We will look at ZDRa in the next section.
 
 \subsection{ZDRa Count}
 
@@ -247,10 +282,18 @@ From table \ref{tab:speczdracount} we can see that all specifications have
 either 1 or 2 statesSchema's. For state base specification it should be the case
 that then specification has at least 1 state. Most state based specifications
 have stateInvariants that must be conformed to through all the changes of the
-specification. However this is not a must and some specification (even from our
-sample) do not have any stateInvariants. 
+specification.
+Invariants can be relied upon to be true throughout the duration of a computer program.
+Therefore to prove the program is correct it is important to check that the
+stateInvariants still hold true throughout every transformation on the current
+state of the program. Transformations on the state and represented by changeSchemas
+in Z. Therefore we check the stateInvariants still hold true after each changeSchema
+in ZMathLang.
 
-All precondition must have a corresponding postcondition or output, therefore we
+Some specifications in our examples do not have any stateInvariants 
+such as our autopilot specification. In this case we can not prove that our
+stateInvariants are consistent throughout the specification. However in this was we
+can prove that all preconditions must have a corresponding postcondition or output. Therefore we
 can say:
 
 \begin{lemma}

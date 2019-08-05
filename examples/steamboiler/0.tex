@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage{zmathlang}
+\pagenumbering{gobble}
 
 \begin{document}
 
@@ -399,7 +400,8 @@ amount: \nat \\
 \where
 amount = l * (pamount(p_{1}, k_{p1}?) + pamount(p_{2}, k_{p2}?) +  \\
 pamount(p_{3}, k_{p3}?) + pamount(p_{4}, k_{p4}?)) \\
-\delta_{pumps} = \delta_{p} * (pamount(p_{1}, works) + (pamount(p_{2}, \\ works) + (pamount(p_{3}, works) + (pamount(p_{4}, works))
+\delta_{pumps} = \delta_{p} * (pamount(p_{1}, works) + (pamount(p_{2}, \\ works) + 
+(pamount(p_{3}, works) + (pamount(p_{4}, works))
 \end{schema}
 
 \begin{schema}{SNormalBroken1}

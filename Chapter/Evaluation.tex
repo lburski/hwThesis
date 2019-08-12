@@ -278,6 +278,17 @@ ModuleReg & 0 & 1 & 0 & 2 & 0 & 0 & 2 & 2 & 0 & 1 \\
 \caption{How many of each ZDRa instances exists in each specification. \label{tab:speczdracount}}
 \end{table}
 
+Table \ref{tab:speczdracount} shows our example specifications in left column and the
+following ZDRa instances:
+
+\begin{tabular}{l l l l}
+    \textbf{A} & axiom & \textbf{TS} & totaliseSchema\\
+    \textbf{SS} & statesSchema & \textbf{PRE} & precondition \\
+    \textbf{IS} & initialSchema & \textbf{PO} & postcondition \\
+    \textbf{CS} & changeSchema & \textbf{O} & output \\
+    \textbf{OS} & outputSchema & \textbf{SI} & stateInvariants \\
+\end{tabular}
+
 From table \ref{tab:speczdracount} we can see that all specifications have
 either 1 or 2 statesSchema's. For state base specification it should be the case
 that then specification has at least 1 state. Most state based specifications
@@ -298,13 +309,23 @@ can say:
 
 \begin{lemma}
 $precondition \longrightarrow postcondition \lor output$
+\label{lem:precondition}
 \end{lemma}
 
-The table supports this information as there are more combined postconditions and
-outputs then there are precondition. However not all postconditions and outputs
+In \cite{essenceofz}, Ed Currie states that predicates which state what must be true 
+about the `before' state of the system and the inputs, in order for 
+the operation to take place. These are known as \textit{preconditions}.
+
+If an operation can be either a \textit{postcondition} or an \textit{output}.
+Then we can say lemma \ref{lem:precondition} holds.
+For our sample of specifications we can see evidence of this in table \ref{tab:speczdracount}.
+There are more combined postconditions and
+outputs then there are preconditions. However not all postconditions and outputs
 need to have a precondition, they can be executed without one. Therefore the
 number of preconditions does not need to equal the total number of postcondition
 and outputs.
+The only way we could have more preconditions then combined outputs and postconditions
+would be in an incomplete or semi-formal specification.
 
 \begin{table}[H]
 \begin{tabular}{|l |l | l |l | l| l |}
@@ -339,13 +360,7 @@ can only occur if the specification has an \emph{initialSchema}. Not all
 specifications have an \emph{initialSchema} and therefore do not have an
 \emph{initialOf} relation.
 
-There is also an equal amount of \emph{allows} relations as there is
-\emph{preconditions}. As was written previously, all preconditions must have a
-corresponding output or postcondition, therefore the relation `\emph{allows}'
-links each precondition to its corresponding postcondition or output. However,
-the vendingMachine specification is an exception to this as the preconditions
-are written as entire schema's. For example we have the following instance in
-the vending machine specification:
+We have the following instance in the vending machine specification:
 
 \begin{verbatim}
 \draschema{PRE3}{
@@ -367,7 +382,7 @@ Obviously, the relation `\emph{totalises}' only occurs in specifications where
 totaliseSchema's are present. Therefore the `\emph{totalise}' relation is not
 necessary in all specifications.
 
-VideoShop specification is one of the largest specifications (in terms of lines
+VideoShop specification is the third largest specifications from our examples (in terms of lines
 of \LaTeX{}) in our sample set however it has quite a small amount of relations.
 
 \section{Case Studies}
@@ -478,11 +493,12 @@ We then annotate the specification using \gls{zcga} and \gls{zdra} labels.
 \begin{minipage}{0.45\textwidth}
 \centering
 %[clip,l,b,r,t]
-\includegraphics[ scale=0.5]{examples/steamboiler/zcgacorrect.png}
-\includegraphics[ scale=0.5]{examples/steamboiler/zdracorrect.png}
-\vspace{-0.2in}
-\caption{The outputting result when checking the steamboiler specification with the \gls{zcga} and \gls{zdra} checkers. \label{fig:steamboilercorrect}}
-\vspace{-0.2in}
+\includegraphics[ scale=0.6]{examples/steamboiler/zcgacorrect.png}
+
+\includegraphics[ scale=0.6]{examples/steamboiler/zdracorrect.png}
+
+\caption{The result when checking the steamboiler specification with the \gls{zcga} and \gls{zdra} checkers. \label{fig:steamboilercorrect}}
+
 \end{minipage}
 \end{figure}
 
@@ -511,7 +527,11 @@ specification we can now generate a goto graph and dependency graphs for it.
 The dependency and goto graphs are shown in figures \ref{fig:steamdepgraph} and
 \ref{fig:steamgotograph} respectively. Since there are a lot of \gls{zdra}
 instances and therefore a lot of nodes, both the dependency graph and goto graph
-are cluttered. We will discuss this as a limitation in the next section.
+are cluttered. One way to solve this is to use zooming facilities for graphs.
+However, as the program at the moment outputs the graphs as `.png' files, the
+program will need to be modified in a way so that the graphs are produced in a 
+different file format for graph exploration.
+ We will discuss this as a limitation in the next section.
 
 From the goto graph the \gls{zmath} tool kit automatically generates a general
 proof skeleton, which uses the order from the goto graph to order the instances
@@ -586,7 +606,11 @@ first record. Half way through the theory file we see another record,
 picture in figure \ref{fig:filledinsteamskeleton}. $SS2$ introduced 2 new state
 variables, $S$ and $delta$ which are added to the new record. Towards the end of
 the \gls{half}, \gls{zmath} has filled in the lemma's to prove which are sanity
-checks for the specification. It fills in the lemma's with the correct syntax so
+checks for the specification.
+The sanity checks for the steamboiler specification check that all 21 of the 
+steamboiler `\textit{changeSchema's}' do not conflict with the stateInvariants.
+So after every change in state $w_{min}<w_{max}$.
+It fills in the lemma's with the correct syntax so
 that the user only needs to delete the word `\emph{sorry}' prove the properties
 in order to get a proof of their specification. 
 
@@ -660,6 +684,37 @@ We have taken the natural language specification for an autopilot system from
 \end{minipage}
 \end{figure}
 
+In \cite{laibinis} a link between safety requirements, event-B models and corresponding fragments of
+a safety case is created. Laibinis et al present a method and tool support linking formal modelling in
+Event-B and safety case construction. Whereas \gls{zmath} translates formal modelling into the Isabelle 
+theorem prover which can then be used as evidence to create a safety case for high integrity systems.
+Laibinis paper employs refinement to create proofs (point 5 from figure \ref{fig:ptp}) whereas \gls{zmath}
+employs sanity and consistency checks (points 1 and 2 from figure \ref{fig:ptp}). Refinement proofs requires
+refinement specifications to be present in order to develop the proofs. The aim of \gls{zmath} was to be able
+to create proofs for specifications which are also semi-formal and therefore creates proofs sanity and consistency
+instead.
+
+In \cite{laibinis} SteamBoiler example, Laibinis et al uses an abstract specification as well as 
+4 other refinement specifications. \Gls{zmath} can translate an abstract specification and creates 
+proof obligations without a refinement specification. Safety requirements are added and translated 
+into event-B. An example of such a safety requirement is `\textit{during system operation the water level shall not exceed the
+predefined safety boundaries}'. In \gls{zmath} additional safety requirements to prove can also be added
+and written in Isabelle.
+
+One advantage of using \cite{laibinis} to prove the SteamBoiler specification is that the SteamBoiler
+has been written in Event-B which is supported by the Rodin platform to prove refinements and
+ that this technique has been used by industry.
+ However a disadvantage of using this technique is that in order to create proofs one must have refinement
+ specifications as well as an abstract specification. The specification must also be a completed finished product.
+ An advantage of the \gls{zmath} toolkit is that one can do proofs on a single abstract specification, and the 
+ proofs can also be done on specification which aren't complete and ones which are semi-formalised.
+ Another advantage of using \gls{zmath} is that the steamboiler can undergo other checks (ZGa, ZDRa) just
+ using the abstract specification. So the specification doesn't need refinement specifications. The diagrams
+ and results produced (dependency graphs, GoTo graphs etc) can also be presented as evidence within the safety case.
+ However, to get this evidence the user will need to label the specification which could be argued as a little tedious.
+ A disadvantage of using \gls{zmath} to prove the Steamboiler specification is to generate a solid safety case
+ one needs to add safety related requirements in Isabelle.
+
 \subsubsection{ZMathLang steps for the autopilot case study.}
 
 We give the informal specification in figure \ref{fig:originalautopilot} and one
@@ -688,7 +743,7 @@ and \gls{zdra} errors.
 \includegraphics[clip, trim=0cm 8.5cm 9cm 0cm, scale=0.5]{examples/semiform/zcgacorrect.png}
 \includegraphics[clip, trim=0cm 8.5cm 9cm 0cm, scale=0.5]{examples/semiform/zdracorrect.png}
 \vspace{-0.2in}
-\caption{The outputting result when checking the autopilot specification with the \gls{zcga} and \gls{zdra} checkers. \label{fig:autopilotcorrect}}
+\caption{The result when checking the autopilot specification with the \gls{zcga} and \gls{zdra} checkers. \label{fig:autopilotcorrect}}
 \vspace{-0.2in}
 \end{minipage}
 \end{figure}
@@ -698,8 +753,10 @@ with \gls{zcga} and \gls{zdra} and check for the correctness of the parts which
 have been annotated (shown in figures \ref{fig:autopilot1n2} and
 \ref{fig:autopilotcorrect}). When checking with \gls{zdra} we have a warning
 message telling the user that the specification is not correctly totalised.
-That is there is a precondition outstand with not postcondition counter part.
-This does not matter for now as we can still carry on with the translation.
+We remind the reader that a specification is `\textit{not correctly totalised}' when 
+every preconditions has a corresponding postcondition or output (section \ref{subsec:correctlytotalised}). 
+This does not matter for now in our semi-formal specification
+as we can still carry on with the translation.
 
 When checking the specification for \gls{zdra}, \gls{zmath} has also produced a
 dependency graph and goto graphs (shown in figures \ref{fig:autodepgraph} and
@@ -1038,7 +1095,7 @@ prime} \\
 \end{tabular}
 
 Since there are 2 records in our steamboiler specification we have to manually
-write the line \verb|(in thesteamboiler)| which lets isabelle know that the
+write the line \verb|(in the steamboiler)| which lets isabelle know that the
 changeSchema uses variables from the first record. The \verb|SNormalStop0_L1|
 lemma is proved using 2 tactics \verb|smt| and \verb|State.distinct(9)|. We
 remind the reader that although we have used these 2 tactics to prove our lemma

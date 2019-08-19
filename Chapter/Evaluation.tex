@@ -878,61 +878,61 @@ user did have to go through each property and prove it. In total, there were 21
 changeSchema's and 1 set of stateInvariants, therefore there was 21 properties
 which the user had to prove manually.
 
-\subsection{SteamBoiler}
+% \subsection{SteamBoiler}
 
-In our largest example there were 21 changeSchema's and 1 set of
-stateInvariants, therefore there was 21 properties which the user had to prove
-manually.
+% In our largest example there were 21 changeSchema's and 1 set of
+% stateInvariants, therefore there was 21 properties which the user had to prove
+% manually.
 
-To prove the sanity of the steamboiler specification, we went through the
-consistency lemmas (automatically generated) one by one and manually prove them.
-We started of with unproven lemma's with the command `\emph{sorry}' at the end
-such as the lemma shown in figure \ref{fig:steamboilerL1lemma}.
+% To prove the sanity of the steamboiler specification, we went through the
+% consistency lemmas (automatically generated) one by one and manually prove them.
+% We started of with unproven lemma's with the command `\emph{sorry}' at the end
+% such as the lemma shown in figure \ref{fig:steamboilerL1lemma}.
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.5]{Figures/Evaluation/sorryoutputlemma.png}
-\caption{The `\texttt{SNormalStop0}' lemma taken from the steamboiler \gls{half}. \label{fig:steamboilerL1lemma}}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% \includegraphics[scale=0.5]{Figures/Evaluation/sorryoutputlemma.png}
+% \caption{The `\texttt{SNormalStop0}' lemma taken from the steamboiler \gls{half}. \label{fig:steamboilerL1lemma}}
+% \end{figure}
 
-We then delete the `\emph{sorry}' command and if sledgehammer is set up to be
-automatic, the user can sometimes leave their cursor at the end of the lemma and
-`\emph{auto sledgehammer}' finds a proof which is displayed in the output
-terminal. In our case, this has happened for the `\texttt{SNormalStop0}' lemma
-which is displayed in figure \ref{fig:autosolvelemma}.
+% We then delete the `\emph{sorry}' command and if sledgehammer is set up to be
+% automatic, the user can sometimes leave their cursor at the end of the lemma and
+% `\emph{auto sledgehammer}' finds a proof which is displayed in the output
+% terminal. In our case, this has happened for the `\texttt{SNormalStop0}' lemma
+% which is displayed in figure \ref{fig:autosolvelemma}.
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.5]{Figures/Evaluation/steamboilerlemmaproof.png}
-\caption{Auto sledgehammer finding a proof for one of the lemma's in the steamboiler specification using the \gls{smt} solver `\emph{cvc4}'. \label{fig:autosolvelemma}}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% \includegraphics[scale=0.5]{Figures/Evaluation/steamboilerlemmaproof.png}
+% \caption{Auto sledgehammer finding a proof for one of the lemma's in the steamboiler specification using the \gls{smt} solver `\emph{cvc4}'. \label{fig:autosolvelemma}}
+% \end{figure}
 
-In this particular lemma we are proving the property that the
-\verb|SNormal_Stop)| schema does not conflict with the state invariants of the
-specification either before or after the state has been changed. Some other
-lemma's in the steamboiler example (such as the \verb|SInitNormal1_L9| lemma)
-could be proven by the isabelle command `\texttt{blast}' as shown in figure
-\ref{fig:blastprovenlemma}. 
+% In this particular lemma we are proving the property that the
+% \verb|SNormal_Stop)| schema does not conflict with the state invariants of the
+% specification either before or after the state has been changed. Some other
+% lemma's in the steamboiler example (such as the \verb|SInitNormal1_L9| lemma)
+% could be proven by the isabelle command `\texttt{blast}' as shown in figure
+% \ref{fig:blastprovenlemma}. 
 
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.6]{Figures/Evaluation/steamboilerblastlemma.png}
-\caption{An example of a lemma in the steamboiler specification being proved by blast. \label{fig:blastprovenlemma}}
-\end{figure}
+% \begin{figure}[H]
+% \centering
+% \includegraphics[scale=0.6]{Figures/Evaluation/steamboilerblastlemma.png}
+% \caption{An example of a lemma in the steamboiler specification being proved by blast. \label{fig:blastprovenlemma}}
+% \end{figure}
 
-Proving by `\emph{blast}' is obviously less complex then the proof needed for
-lemma \verb|SNormalStop0_L1| in figure \ref{fig:steamboilerL1lemma}, however if
-we look back to figure \ref{fig:timeline} in chapter \ref{ch:design} we can see
-that `\emph{blast}' covers less properties then `\emph{sledgehammer}'. Therefore
-for the lemma's in the steamboiler specification we have proved 2 lemma's by
-blast and 19 using sledgehammer. 
+% Proving by `\emph{blast}' is obviously less complex then the proof needed for
+% lemma \verb|SNormalStop0_L1| in figure \ref{fig:steamboilerL1lemma}, however if
+% we look back to figure \ref{fig:timeline} in chapter \ref{ch:design} we can see
+% that `\emph{blast}' covers less properties then `\emph{sledgehammer}'. Therefore
+% for the lemma's in the steamboiler specification we have proved 2 lemma's by
+% blast and 19 using sledgehammer. 
 
-It is important to note that a single lemma can be proven in a variety of ways,
-so even though we have chosen to prove our specification in certain ways other
-users may choose to use other tools to prove their theorems and lemmas. Even
-though we have proved 19 lemmas by sledgehammer in the steamboiler
-specification, we might have been able to prove all the lemmas by sledgehammer
-but chosen to prove 2 by blast to show variety.
+% It is important to note that a single lemma can be proven in a variety of ways,
+% so even though we have chosen to prove our specification in certain ways other
+% users may choose to use other tools to prove their theorems and lemmas. Even
+% though we have proved 19 lemmas by sledgehammer in the steamboiler
+% specification, we might have been able to prove all the lemmas by sledgehammer
+% but chosen to prove 2 by blast to show variety.
 
 \subsection{ModuleReg}
 

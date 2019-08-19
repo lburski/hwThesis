@@ -3,7 +3,7 @@
 
 In this chapter we discuss the current development of \gls{zmath} and it's
 future works. We also conclude a comparison between \gls{zmath} framework to
-other system. Finally in section{sec:conclusion} we give add concluding thoughts
+other system. Finally in section \ref{sec:conclusion} we give add concluding thoughts
 to this thesis.
 
 
@@ -14,26 +14,55 @@ thesis these are summarized by the following points:
 
 \begin{enumerate}
 
-\item To create a weak type checker which checks the grammatical categories of a
-specification, which could be used on formal or semi formal specifications.
+\item Staged an approach to translating semi-formal and formal specifications 
+into Isabelle with automatic assistance.
 
-\item To create a document rhetorical checker which checks a formal
-specification for loops in the reasoning and give warnings if there are
-outstanding preconditions to be totalised.
+\item Built a collection of tools to enable a step by step approach for Z
+specifications.
 
-\item To automatically produce documents such as dependency and goto graphs to
-assist the users in analysing the system specification and to help with the
-translation into a theorem prover.
+\item Formalised and proved properties on a number of examples of Z
+specifications.
 
-\item To create an easy step by step method to translate formal specifications
-into a theorem prover for user who are novices in theorem proving. With each step
-in this path will be it's own correctness checker with some level of rigor.
+\item Demonstrated and evaluated the performance of the tool set on a convincing
+ set of examples.
 
 \end{enumerate}
 
-\subsection{To create a weak type checker which checks the grammatical categories of a specification.}
+\subsection{Staged an approach to translating semi-formal and formal
+specifications into Isabelle with automatic assistance.}
 
-The first point is outlined in chapter \ref{ch:design} and described in detail
+The first accomplishment of this thesis is also the general aim of this thesis.
+The step by step method is outlined in chapter \ref{ch:design}, which outlines
+how a user can get from a Z specification to a full proof in Isabelle. An
+example of this on a single specification is given in chapter
+\ref{ch:fullexample}. Each of these steps are described individually throughout
+this thesis. There are 6 steps to achieve a full proof for the specification in
+question. The first 2 steps require user input and automation, the last step
+requires user input and 3 steps in between are fully automated. By following
+this method it is easier to translate a specification into a theorem prover with
+no theorem prover knowledge up to step 5 (as described in chapter
+\ref{ch:analysis}). A \LaTeX{} ZMathLang package has also been created in order
+to display ZMathLang annotations when a \LaTeX{} specification is compiled. This
+\LaTeX package is also what is used by the ZCGa and ZDRa python program in order
+to parse through the specifcation. The ZMathLang \LaTeX package is shown in
+appendix \ref{app:zmathlatex}.
+
+However the limitation of this is that step 5 to step 6 requires user input and
+this stage requires some theorem prover knowledge. Proving lemma's in a theorem
+prover is not easy and requires expertise in the chosen theorem prover. Apart
+from the theorem provers own help tools (such as sledgehammer in Isabelle),
+future work may include investigating how to help users with this final stage.
+For example automating a way to show users which tactics they may find useful in
+proving a certain lemma. Another limitation of this outcome is that even though
+the user doesn't need Isabelle expertise to translate their specification into
+Isabelle they still need to learn the \gls{zmath} framework. This limitation can
+be aided with a user friendly interface and well documented guides such as
+\cite{zmathuser}.
+
+\subsection{Built a collection of tools to enable a step by step approach for Z
+specifications.}
+
+The second achievement is outlined in chapter \ref{ch:design} and described in detail
 in chapter \ref{ch:zcga}. The weak type checker can check for grammatical
 correctness of formal and semi formal specification. A \LaTeX{} package named
 \texttt{zmathlang.sty} has been implemented which allows the user to annotated
@@ -55,9 +84,7 @@ the weak type checker to parse it. A more beneficial weak type checker would
 possible be able to parse over \textbf{informal} specifications. More on this
 idea is described in section \ref{subsubsec:informalspecs}.
 
-\subsection{To create a document rhetorical checker which checks a formal specification for loops in the reasoning.}
-
-The second achievement of this thesis was to create a document rhetorical
+Another point to the second achievement of this thesis was to create a document rhetorical
 checker which is described in detail in chapter \ref{ch:zdra}. The document
 rhetorical checker can check for any loops in the reasoning in the dependency
 and goto graph of the specification. The annotations for the \gls{zdra} are
@@ -80,8 +107,6 @@ informal) the translation from the \gls{zdra} annotated text can only be done
 from Z into Isabelle. It may be useful to translate from any formal
 specification into Isabelle (or any other theorem prover). More information on
 this extension is described in section \ref{subsubsec:anyformanythe}.
-
-\subsection{To automatically produce documents such as dependency and goto graphs to assist users in analysing the system specification.}
 
 The third creation of this research is automatically produce documents which
 will be used to aid system engineers and software developers in analysing their
@@ -130,31 +155,57 @@ properties which the user may wish to prove about the specification. Other
 complex proof obligations could also be added to \gls{zmath}, more details on
 this topic are described in section \ref{subsubsec:extenproofobli}.
 
-\subsection{To create an easy step by step method to translate a specification into a theorem prover for novices in theorem proving.}
+\subsection{Formalised and proved properties on a number of examples of Z
+specifications.}
 
-The final accomplishment of this thesis is also the general aim of this thesis.
-The step by step method is outlined in chapter \ref{ch:design}, which outlines
-how a user can get from a Z specification to a full proof in Isabelle. An
-example of this on a single specification is given in chapter
-\ref{ch:fullexample}. Each of these steps are described individually throughout
-this thesis. There are 6 steps to achieve a full proof for the specification in
-question. The first 2 steps require user input and automation, the last step
-requires user input and 3 steps in between are fully automated. By following
-this method it is easier to translate a specification into a theorem prover with
-no theorem prover knowledge up to step 5 (as described in chapter
-\ref{ch:analysis}).
+The third contribution to this thesis is shown in chapter \ref{ch:fullexample},
+chapter \ref{ch:evaluation}, appendix \ref{app:vm6}, \ref{app:bb6},
+\ref{app:moduleregfullproof} and \ref{app:sb6} and in \cite{mathlangexamples} (as all the
+examples are quite long and including them will exceed the thesis limit). The ModuleReg
+example has been discussed from a raw specification to a fully proven
+specification with it's automatically generated lemmas. The lemma's have then
+been proven in the theorem prover Isabelle using various tactics. All our
+specification examples have been fully proven for consistency checks in Isabelle
+except for Vending Machine and Autopilot as they didn't have any State
+Invariants and therefore no lemma's where automatically generated for them.
 
-However the limitation of this is that step 5 to step 6 requires user input and
-this stage requires some theorem prover knowledge. Proving lemma's in a theorem
-prover is not easy and requires expertise in the chosen theorem prover. Apart
-from the theorem provers own help tools (such as sledgehammer in Isabelle),
-future work may include investigating how to help users with this final stage.
-For example automating a way to show users which tactics they may find useful in
-proving a certain lemma. Another limitation of this outcome is that even though
-the user doesn't need Isabelle expertise to translate their specification into
-Isabelle they still need to learn the \gls{zmath} framework. This limitation can
-be aided with a user friendly interface and well documented guides such as
-\cite{zmathuser}.
+One limitation of this contribution is that the lemma's we have proven
+only check the sanity and consistency of the specifications (see figure
+\ref{fig:ptp} for definitions) and there are many more checks one can do on a
+specification such as properties across specifications and emergent properties
+in one specification. One popular way to prove a specification is to create proofs
+between a specification and a refinement specification. However a refinement
+specification would be difficult to automate on it's own. One way of extended
+the ZMathLang toolkit would be to create lemma's between a specification and
+it's refinement.
+
+\subsection{Demonstrated and evaluated the performance of the tool set on a convincing
+ set of examples.}
+
+ The final contribution to this thesis is we have analysed and evaluated the
+ performance of the ZMathLang toolset. This contribution is discussed in
+ chapters \ref{ch:analysis} and \ref{ch:evaluation}. We have also discussed
+ three case studies in chapter \ref{ch:evaluation} of how the toolkit works. The
+ analysis discusses the difference between fully proven specifications using
+ other methods Vs specifications proven using ZMathLang. The evaluation discusses
+ the complexity of the specification and the advantages of using the ZMathLang
+ toolkit as well as some of it's limitations. The complexity of the
+ specifications as well as the complexity of the proofs are evaluated when using
+the ZMathLang toolkit.
+
+A limitation of this contribution is that the evaluation only looked at the
+specifications and their proofs. Other ways to evaluate the specification could
+include the time it took to create the proofs and compare them to the time it
+took to complete the proof using another method. However this would be quite
+difficult as we would need to experiment using the same specification to do a
+fair comparison. In some examples we have used, they have not been proved using
+another method. The examples which have been proven using a different method
+(such as BirthdayBook in ProofPower-Z) are difficult to get figures for (such as
+how long the proof would take) as the ProofPower-Z community is no longer
+supported.
+Further work using the ZMathLang toolkit could include conducting experiments
+with theorem prover experts and participants not proficient with theorem proving
+and get their feedback on which method they prefer to prove specifications.
 
 
 \section{ZMathLang Current and Future Developments}

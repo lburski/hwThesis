@@ -979,7 +979,13 @@ specification.
 
 We can see that the complexity of the proof used for the \verb|RegForModule_L1|
 lemma in the modulereg specification is larger than the complexity of the proof
-for the \verb|SNormalStop0_L1| in the steamboiler specification. Although we
+for the \verb|SNormalStop0_L1| in the steamboiler specification because it uses
+more tactics.
+There are other ways to measure
+complexity of a proof (e.g. type of tactics used, time taken to prove etc). 
+However for the purpose of this
+thesis we say the more tactics we need to use for a proof the more complex it
+is.  Although we
 used `\emph{Auto sledgehammer}' to assist proving the lemma's there are 16
 methods used in proving the \verb|RegForModule_L1| lemma (\verb|Domain_empty|,
 \verb|Range_empty| etc.) compared with 1 method used in proving the
@@ -1044,71 +1050,86 @@ only one tactic to be proved whilst other need a few. There are various
 different ways to prove these lemmas and it all comes down to the personal
 preference of the user. We have mainly used Isabelles `\emph{sledgehammer}' tool
 to assist us with our proving.
+We see that the AutoPilot specification has 0 generated lemmas and therefore 0
+tactics to prove them. This is because the AutoPilot specification is only
+semi-formalised and there will need to be \textit{preconditions}, \textit{changeSchemas} and
+\textit{stateInvariants} to exist for the lemmas to be automatically generated.
+Once the user adds these ZDRa categories to the Autopilot specification in a
+formal manner (using Z) then the lemmas can be generated.
 
-\subsubsection{SteamBoiler}
+Proof complexity is a whole different research area that studies the concept of
+complexity from the point of view of logic \cite{complexityofproofs}. It is connected with
+computational complexity, but the goals are different. There are many ways to
+measure `\textit{complexity} i.e. the size of the proofs, how strong theory is
+needed to prove the theorem etc. Pudlak \cite{complexityofproofs} describes more on the
+complexity of proofs. In order to discuss the complexity of proofs in this
+thesis we will look at the size of the proof for each lemma.
 
-The steamboiler has in total 20 lemmas to check the specifications sanity as it
-has 20 changing state schemas. The specification has 1 set of stateInvariants
-and we used 41 tactics to prove our lemmas.
 
-The steamboiler state invariants is shown in the expression part of the
-stateSchema. The state invariants for this specification is that the minimum
-water level (\verb|w_min|) must be smaller than the maximum water level
-(\verb|w_max|). Therefore, the state invariants are written after
-`\texttt{assumes}' in the specification (\verb|w_min < w_max|). 
+% \subsubsection{SteamBoiler}
 
-When \gls{zmath} produces the proof obligations to check the sanity of the
-specification it must also check that the changeSchema does not conflict with
-the prime state invariants. Thus, the proof obligations to check for all
-changing state schema will check that the preconditions and postconditions of
-each changeSchema still imply that (\verb|w_min < w_max|) \textbf{and}
-(\verb|w_min' < w_max'|).
+% The steamboiler has in total 20 lemmas to check the specifications sanity as it
+% has 20 changing state schemas. The specification has 1 set of stateInvariants
+% and we used 41 tactics to prove our lemmas.
 
-For example to prove our first lemma \verb|SNormalStop0_L1|, we wish to make
-sure that the \verb|SNormalStop0| changeSchema does not conflict with the
-stateInvariants and the stateInvariants prime.
+% The steamboiler state invariants is shown in the expression part of the
+% stateSchema. The state invariants for this specification is that the minimum
+% water level (\verb|w_min|) must be smaller than the maximum water level
+% (\verb|w_max|). Therefore, the state invariants are written after
+% `\texttt{assumes}' in the specification (\verb|w_min < w_max|). 
 
-\noindent \begin{tabular}{|l | l|}
-\hline
-\verb|lemma (in  thesteamboiler)| & {\color{red}begin} \\
-\verb|SNormalStop0_L1:|& {\color{red}Name of lemma} \\
-\verb|"(\<exists> steamboiler0 :: | & \\
-\verb|SteamBoiler0.|&  {\color{red}list of all} \\
-\verb|\<exists> a' :: OnOff.|&  {\color{red}variables and} \\
-\verb|\<exists> steamboiler0' :: | & {\color{red}types} \\
-\verb|SteamBoiler0.|&  \\
-\verb|\<exists> w_max' :: nat.|&  \\
-\verb|\<exists> w_min' :: nat.|&  \\
-\verb|\<exists> z' :: State.|&  \\
-\verb|\<exists> v' :: OpenClosed.|&  \\
-\verb|(z = norm)|&  {\color{red}preconditions \textbf{and}}\\
-\verb|\<and> (w < w_min ∨|& {\color{red}postconditions of} \\
-\verb|w > w_max)|& {\color{red}SNormalStop0 schema} \\
-\verb|\<and> (a' = off \<and>|&  \\
-\verb|z' = stop)|&  \\
-\verb|\<longrightarrow> (w_min < w_max|& {\color{red}\textbf{implies}
-stateInvariants} \\
-\verb|\<and> (w_min' < w_max')))"|& {\color{red}\textbf{and} stateInvariants
-prime} \\
-\verb|by (smt State.distinct(9))|&  \\
-\hline
-\end{tabular}
+% When \gls{zmath} produces the proof obligations to check the sanity of the
+% specification it must also check that the changeSchema does not conflict with
+% the prime state invariants. Thus, the proof obligations to check for all
+% changing state schema will check that the preconditions and postconditions of
+% each changeSchema still imply that (\verb|w_min < w_max|) \textbf{and}
+% (\verb|w_min' < w_max'|).
 
-Since there are 2 records in our steamboiler specification we have to manually
-write the line \verb|(in the steamboiler)| which lets isabelle know that the
-changeSchema uses variables from the first record. The \verb|SNormalStop0_L1|
-lemma is proved using 2 tactics \verb|smt| and \verb|State.distinct(9)|. We
-remind the reader that although we have used these 2 tactics to prove our lemma
-there may be other ways in which to do so. 
+% For example to prove our first lemma \verb|SNormalStop0_L1|, we wish to make
+% sure that the \verb|SNormalStop0| changeSchema does not conflict with the
+% stateInvariants and the stateInvariants prime.
 
-Our most complex proof is for the \verb|SNormalContinue1_L11| lemma in which we
-use 3 tactics to prove the property that the \verb|SNormalContinue1|
-changeSchema does not conflict with the state Invariants. The tactics we use
-here are \verb|smt|, \verb|OnOff.distinct(1)| and \verb|pswitch.simps(1)|.
+% \noindent \begin{tabular}{|l | l|}
+% \hline
+% \verb|lemma (in  thesteamboiler)| & {\color{red}begin} \\
+% \verb|SNormalStop0_L1:|& {\color{red}Name of lemma} \\
+% \verb|"(\<exists> steamboiler0 :: | & \\
+% \verb|SteamBoiler0.|&  {\color{red}list of all} \\
+% \verb|\<exists> a' :: OnOff.|&  {\color{red}variables and} \\
+% \verb|\<exists> steamboiler0' :: | & {\color{red}types} \\
+% \verb|SteamBoiler0.|&  \\
+% \verb|\<exists> w_max' :: nat.|&  \\
+% \verb|\<exists> w_min' :: nat.|&  \\
+% \verb|\<exists> z' :: State.|&  \\
+% \verb|\<exists> v' :: OpenClosed.|&  \\
+% \verb|(z = norm)|&  {\color{red}preconditions \textbf{and}}\\
+% \verb|\<and> (w < w_min ∨|& {\color{red}postconditions of} \\
+% \verb|w > w_max)|& {\color{red}SNormalStop0 schema} \\
+% \verb|\<and> (a' = off \<and>|&  \\
+% \verb|z' = stop)|&  \\
+% \verb|\<longrightarrow> (w_min < w_max|& {\color{red}\textbf{implies}
+% stateInvariants} \\
+% \verb|\<and> (w_min' < w_max')))"|& {\color{red}\textbf{and} stateInvariants
+% prime} \\
+% \verb|by (smt State.distinct(9))|&  \\
+% \hline
+% \end{tabular}
+
+% Since there are 2 records in our steamboiler specification we have to manually
+% write the line \verb|(in the steamboiler)| which lets isabelle know that the
+% changeSchema uses variables from the first record. The \verb|SNormalStop0_L1|
+% lemma is proved using 2 tactics \verb|smt| and \verb|State.distinct(9)|. We
+% remind the reader that although we have used these 2 tactics to prove our lemma
+% there may be other ways in which to do so. 
+
+% Our most complex proof is for the \verb|SNormalContinue1_L11| lemma in which we
+%use 3 tactics to prove the property that the \verb|SNormalContinue1|
+%changeSchema does not conflict with the state Invariants. The tactics we use
+%here are \verb|smt|, \verb|OnOff.distinct(1)| and \verb|pswitch.simps(1)|.
 
 \subsubsection{ProjectAlloc}
 
-The projectAlloc specification has 5 changeSchema's and 1 set of stateInvariants
+The projectAlloc specification \cite{mathlangexamples} has 5 changeSchema's and 1 set of stateInvariants
 therefore it has 5 lemmas which \gls{zmath} has automatically generated to check
 for the consistency. To prove these lemmas we have in total used 18 tactics.
 
@@ -1181,7 +1202,7 @@ where we just used 1 tactic (\verb|fastforce| and \verb|auto| respectively).
 
 \subsubsection{VideoShop}
 
-The videoShop specification has 3 changeSchemas and 1 set of stateInvariants,
+The videoShop specification cite{mathlangexamples} has 3 changeSchemas and 1 set of stateInvariants,
 therefore \gls{zmath} has generated 3 proof obligations to check that none of
 the changeSchemas conflict with the stateInvariants and stateInvariants prime.
 
@@ -1207,7 +1228,7 @@ We are able to prove all 3 lemma's by the tactic \verb|blast|.
 
 \subsubsection{TelephoneDirectory}
 
-The telephone directory has 1 set of stateInvariants and 4 changeSchema's.
+The telephone directory \ref{app:nonworkingzcga} has 1 set of stateInvariants and 4 changeSchema's.
 Therefore we have 4 lemma's which \gls{zmath} generated and which we need to
 prove. The structure for the lemmas to check the consistency of the telephone
 directory specification are as follows:
@@ -1236,7 +1257,7 @@ tactics to prove all 4 properties.
 
 \subsubsection{ClubState}
 
-The clubstate specification has 4 changing schemas and thus 4 properties to
+The clubstate specification \cite{mathlangexamples} has 4 changing schemas and thus 4 properties to
 check the state invariants are not conflicted when the state has been changed.
 The stateinvariants for the clubstate specification is are as follows:
 
@@ -1261,7 +1282,7 @@ specification (\verb|LeaveHall_L1| and \verb|AddMember_L2|) were proven by
 
 \subsubsection{ZCGa}
 
-In the specification representing the \gls{zcga} we have 6 properties to prove.
+In the specification \cite{mathlangexamples} representing the \gls{zcga} we have 6 properties to prove.
 The syntax for the properties which \gls{zmath} has generated are:
 
 \begin{verbatim}
@@ -1289,7 +1310,7 @@ and the remaining 4 using \verb|blast|.
 
 \subsubsection{GenDB}
 
-GenDB has 4 consistency checks we must prove against the stateInvariants. The
+GenDB \cite{mathlangexamples} has 4 consistency checks we must prove against the stateInvariants. The
 syntax for the stateInvariants are as follows:
 
 \begin{verbatim}
@@ -1321,7 +1342,7 @@ postconditions satisfied the stateInvariants.
 
 \subsubsection{Timetable}
 
-The timetable specification has 4 schemas in which the original state has
+The timetable specification \cite{mathlangexamples} has 4 schemas in which the original state has
 changed and 1 set of stateInvariants that must be obeyed throughout the
 specification. The stateInvariants for the timetable specification are as
 follows.
@@ -1350,7 +1371,7 @@ able to prove 3 properties (\verb|RegForModule_L1|, \verb|AddStudent_L2| and
 
 \subsubsection{BirthdayBook}
 
-Since we used the simplest form of the birthdaybook specification (there are
+Since we used the simplest form of the birthdaybook \ref{app:bb} specification (there are
 many different forms) we only had 1 lemma to prove. The \verb|AddBirthday_L1|
 property was proven by \verb|auto| however we could have also solved it using
 \verb|smt|.
@@ -1367,7 +1388,7 @@ PostConditions
 
 \subsubsection{ClubState2}
 
-The clubstate2 specification is an extension of the original clubstate
+The clubstate2 specification \cite{mathlangexamples} is an extension of the original clubstate
 specification. Since the specification stemmed from the original clubstate we
 have to make sure that the changeState schemas do not conflict with the
 stateInvariants from the first stateSchema as well as the stateInvariants in the
@@ -1429,21 +1450,42 @@ empty_subsetI insert_mono insert_mono singletonI singletonI
 singleton_insert_inj_eq' singleton_insert_inj_eq'
 \end{verbatim}
 
+\subsection{Summary}
+In conclusion we can see our examples how each of the lemma's are proven in
+order to check the sanity of the specification. The amount of tactics used in
+the specification does not depend on the amount of lemma's generated. The
+complexity of the lemma can be measured in a variety of different ways
+\cite{complexityofproofs} and therefore some specification will require more or
+less strategies to prove (or more complex strategies). For example the Module
+Reg specification has 2 lemmas but requires 18 tactics to be proved. Whereas the
+Timetable specification has double the amount of lemma's (4) and only requires 4
+tactics to prove the specification. Therefore the complexity of the
+specification can not be measured in terms of "number of lemmas".
+Finding proofs for these lemma's has to be done manually (or using the automated
+help already in Isabelle). Some specification will require more theorem prover
+expertise (moduleReg) in order to complete the final step to have a fully proven
+specification. Whereas others (Timetable) will require less theorem prover
+expertise to prove  the automatically generated lemmas. Therefore the amount of effort for
+the last step of ZMathlang is difficult to measure as it depends on the
+specification to be proven.
+
+
 \section{Reflection and Discussion}
 
-To check the consistency of all our specification we had to prove 56 lemmas with
+To check the consistency (section \ref{sec:proofobl}) of all our specification we had to prove 56 lemmas with
 a total of 120 tactics. In this section we discuss how far the \gls{zmath}
 tool-kit can take us,how difficult it is for the user to get the full proof and
 what other proof is left.
 
 \subsection{How far can ZMathLang tool-kit take us and what is left for the user to do manually.}
 
-Looking back at our examples described in the previous section. The proofs to
-check for the complexity depend on the complexity of the specification. The more
+Looking back at our examples described in the previous section. The more
 complex the language of the specification (whether it uses terms and set or just
 terms), the more complex the proofs and syntax of the proofs are. The vending
 machine has no stateinvariants therefore \gls{zmath} does not generate any
-lemmas to be proven. The steamboiler specification, which is our longest
+lemmas to be proven. This does not mean that stateInvariants are good or bad, it
+means that the ZMathLang toolkit will be unable to generate any lemma to check
+for the  consistency of the specification without them. The steamboiler specification, which is our longest
 example, uses only terms but has 2 stateSchemas and therefore 2 records. We were
 able to prove all the lemmas using 2 different automatic isabelle tools (blast
 and sledgehammer).
@@ -1473,9 +1515,10 @@ In the first case we will need 2 people to complete the proof. Since the system
 designer has already translated the specification into Isabelle syntax
 automatically so a lot of the work has been done. The theory file has been set
 up and properties have been written, the expert will just need to prove them.
-Therefore a big chunk of work has been done. The advantage with this approach goes
+Therefore a big chunk of work has been done. With this approach the majority of
+the work goes 
 to the system designer as they do not need to learn anything beyond their
-existing knowledge. However, the disadvantage to this approach is that there
+existing knowledge. However, there
 needs to be an Isabelle expert ready to complete the proofs and depending on the
 syntax of the specification this may be difficult to prove. There also might be
 other properties which the stakeholders of the project may wish to be proven.
@@ -1488,17 +1531,17 @@ translating the specification into Isabelle syntax, however the user will then
 need to learn more Isabelle to finish of the proof for their specification.
 Since the \gls{zmath} has already produced an Isabelle file the user can then
 learn the Isabelle syntax by example as well as reading through the various
-Isabelle documentations online. The advantage of this scenario is that since
+Isabelle documentations online. In this scenario 
 there is only one person doing the entire proof, there is less cost in finding
-another Isabelle expert and paying them to complete the proof. The disadvantage
-in this case is that the system engineer has to spend more time on learning
+another Isabelle expert and paying them to complete the proof (depending on
+the specification). The system engineer has to spend more time on learning
 Isabelle syntax and proving in Isabelle which may become long and tedious. The
 stakeholders may also want other properties proven about the specification which
 again is down to the system designer to learn.
 
 The third case is a compromise between the first two scenarios, it will require
-the system designer and on some occasions, an Isabelle expert. The system
-designer translates the specification into Isabelle using the \gls{zmath}
+the system designer and on some occasions and an Isabelle expert. The system
+engineer translates the specification into Isabelle using the \gls{zmath}
 tool-kit to assist them. They then learn the very basic automated proving tools,
 to assist them in proving the lemmas to check for consistency. By doing this the
 system engineer may be able to prove the entire specification for consistency
@@ -1510,8 +1553,10 @@ this along to an Isabelle expert. The Isabelle expert will then have less work
 to prove the remainder of the proof. If the stakeholders require more properties
 proved then the Isabelle expert can do this as well.
 
-The third case would be most beneficial as an Isabelle expert may not be
-required if the stakeholders only want to check the system for consistency and
+in the third cas an Isabelle expert may not be
+required and proving the specification \textit{could} be done by one person
+(depending on the specification) if the stakeholders only want to check the system for consistency
+and
 the syntax of the specification is relatively easy where automated tools can be
 used to prove the specification. However, depending on the complexity of the
 specification, an Isabelle expert may be needed sometimes if the system designer

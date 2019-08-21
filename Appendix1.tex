@@ -27,18 +27,37 @@ The specifications translated using \gls{zmath} written here are the ones which 
 %\input{examples/vm/1.tex}
 \subsection{ZCGa output}
 \label{app:vm1o}
-\includegraphics[clip, trim=5cm 7cm 5cm 4.2cm]{examples/vm/1comp.pdf}
+%\includegraphics[clip, trim=5cm 7cm 5cm 4.2cm]{examples/vm/1comp.pdf}
+%\noindent \includegraphics[clip, trim=4cm 7cm 5cm 4cm]{examples/vm/1comp2.pdf}
 
-\noindent \includegraphics[clip, trim=4cm 7cm 5cm 4cm]{examples/vm/1comp2.pdf}
-%\includepdf[pages={1-2}]{examples/vm/1comp.pdf}
+\begin{figure}[H]
+    \hfill
+    \subfigure{\includegraphics[width=8cm]{Figures/appendix/vmzcgao1.png}}
+    \hfill
+    \subfigure{\includegraphics[width=8cm]{Figures/appendix/vmzvgao2.png}}
+    \hfill
+\end{figure}
+
+
 \subsection{ZDRa Annotated Latex Code}
 \label{app:vm2}
-\includegraphics[scale=0.5]{examples/vm/2imagea.png}
+%\includegraphics[scale=0.5]{examples/vm/2imagea.png}
 
-\noindent \includegraphics[scale=0.5]{examples/vm/2imageb.png}
+\begin{figure}[H]
+    \hfill
+    \subfigure{\includegraphics[width=9cm]{examples/vm/2imagea.png}}
+    \hfill
+    \subfigure{\includegraphics[width=9cm]{examples/vm/2imageb.png}}
+    \hfill
+\end{figure}
 
-\noindent \includegraphics[scale=0.5]{examples/vm/2imagec.png}
-%\input{examples/vm/2.tex}
+\begin{figure}[H]
+    \includegraphics[width=7cm]{examples/vm/2imagec.png}
+\end{figure}
+
+%\noindent \includegraphics[scale=0.5]{examples/vm/2imageb.png}
+%\noindent \includegraphics[scale=0.5]{examples/vm/2imagec.png}
+
 \subsection{ZDRa Output}
 \label{app:vm2o}
 
@@ -66,6 +85,7 @@ The specifications translated using \gls{zmath} written here are the ones which 
 \subsection{General Proof Skeleton}
 \label{app:vm3}
 \input{examples/vm/3.txt}
+
 \subsection{Isabelle Proof Skeleton}
 \label{app:vm4}
 \includegraphics[scale=0.5]{examples/vm/4imagea.png}
@@ -112,10 +132,18 @@ The specifications translated using \gls{zmath} written here are the ones which 
 %\includepdf[pages={1-2}]{examples/bb/0comp.pdf}
 \subsection{ZCGa Annotated Latex Code}
 \label{app:bb1}
-\includegraphics[scale=0.5]{examples/bb/1imagea.png}
 
-\noindent \includegraphics[scale=0.5]{examples/bb/1imageb.png}
-%\input{examples/bb/1.tex}
+\begin{figure}[H]
+    \hfill
+    \subfigure{\includegraphics[width=9cm]{examples/bb/1imagea.png}}
+    \hfill
+    \subfigure{\includegraphics[width=9cm]{examples/bb/1imageb.png}}
+    \hfill
+\end{figure}
+%\includegraphics[scale=0.5]{examples/bb/1imagea.png}
+
+%\noindent \includegraphics[scale=0.5]{examples/bb/1imageb.png}
+
 \subsection{ZCGa output}
 \label{app:bb1o}
 \noindent \includegraphics[clip, trim=4cm 6cm 4cm 4.2cm]{examples/bb/1comp.pdf}
@@ -369,37 +397,44 @@ This section shows the full proof for the modulereg example from \cite{essenceof
 \label{app:sb0o}
 \includepdf[page={1}, pagecommand={}]{examples/steamboiler/0.pdf}
 
-%\subsection{ZCGa and ZDRa Annotated Latex Code}
-%\label{app:sb1n2}
-%\VerbatimInput{examples/steamboiler/1n2.tex}
-%
 
 \subsection{ZCGa and ZDRa Output}
 \label{app:sb1n2o}
 
-\includegraphics[clip, trim=3cm 8cm 6cm 2cm]{examples/steamboiler/1n2.pdf}
+\begin{center}
+\noindent \includegraphics[scale=0.8]{Figures/appendix/steamboiler/zdraoutput.png}
+\end{center}
 
 \subsection{Dependency and Goto Graphs}
 \label{app:sb2.5}
 \noindent \includegraphics[scale=0.5]{examples/steamboiler/25a.png}
 
-\noindent \includegraphics[scale=0.5]{examples/steamboiler/25a.png}
+\noindent \includegraphics[scale=0.5]{examples/steamboiler/25b.png}
 
 \subsection{General Proof Skeleton}
 \label{app:sb3}
+This is written in multi columns. 
+\begin{multicols}{2}
 \VerbatimInput{examples/steamboiler/new3.txt}
+\end{multicols}
 
 \subsection{Isabelle Proof Skeleton}
 \label{app:sb4}
+\begin{multicols}{2}
 \VerbatimInput{examples/steamboiler/new4.thy}
+\end{multicols}
 
 \subsection{Isabelle Filled In}
 \label{app:sb5}
+\begin{multicols}{2}
 \VerbatimInput{examples/steamboiler/new5.thy}
+\end{multicols}
 
 \subsection{Full Proof in Isabelle}
 \label{app:sb6}
+\begin{multicols}{2}
 \VerbatimInput{examples/steamboiler/new6.thy}
+\end{multicols}
 
 \chapter{ZMathLang \LaTeX{} package}
 \label{app:zmathlatex}

@@ -78,17 +78,20 @@ where
 definition TS2 :: 
 "(*TS2_TYPES*) => bool"
 where 
-"TS2 (*TS2_VARIABLES*) == (*TS2_EXPRESSION*)"
+"TS2 (*TS2_VARIABLES*) == 
+(*TS2_EXPRESSION*)"
 
 definition TS1 :: 
 "(*TS1_TYPES*) => bool"
 where 
-"TS1 (*TS1_VARIABLES*) == (*TS1_EXPRESSION*)"
+"TS1 (*TS1_VARIABLES*) == 
+(*TS1_EXPRESSION*)"
 
 definition TS3 :: 
 "(*TS3_TYPES*) => bool"
 where 
-"TS3 (*TS3_VARIABLES*) == (*TS3_EXPRESSION*)"
+"TS3 (*TS3_VARIABLES*) ==
+ (*TS3_EXPRESSION*)"
 
 end
 
@@ -97,7 +100,8 @@ record SS2 = SS1 +
 definition IS2 :: 
  "(*IS2_TYPES*) => bool"
 where 
-"IS2 (*IS2_VARIABLES*) == (PO10)"
+"IS2 (*IS2_VARIABLES*) == 
+(PO10)"
 
 definition OS5 :: 
  "(*OS5_TYPES*) => bool"
@@ -215,20 +219,24 @@ where
 definition TS6 :: 
 "(*TS6_TYPES*) => bool"
 where 
-"TS6 (*TS6_VARIABLES*) == (*TS6_EXPRESSION*)"
+"TS6 (*TS6_VARIABLES*) == 
+(*TS6_EXPRESSION*)"
 
 definition TS4 :: 
 "(*TS4_TYPES*) => bool"
 where 
-"TS4 (*TS4_VARIABLES*) == (*TS4_EXPRESSION*)"
+"TS4 (*TS4_VARIABLES*) == 
+(*TS4_EXPRESSION*)"
 
 definition TS5 :: 
 "(*TS5_TYPES*) => bool"
 where 
-"TS5 (*TS5_VARIABLES*) == (*TS5_EXPRESSION*)"
+"TS5 (*TS5_VARIABLES*) == 
+(*TS5_EXPRESSION*)"
 
 lemma CS7_L1:
-"(\<exists> (*CS7_VARIABLESANDTYPES*).
+"(\<exists>
+ (*CS7_VARIABLESANDTYPES*).
 (PRE8)
 \<and> (PO9)
 \<longrightarrow> ((SI1)
@@ -236,7 +244,8 @@ lemma CS7_L1:
 sorry
 
 lemma CS2_L2:
-"(\<exists> (*CS2_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS2_VARIABLESANDTYPES*).
 (PRE8)
 \<and> (PO9)
 \<longrightarrow> ((SI1)
@@ -244,7 +253,8 @@ lemma CS2_L2:
 sorry
 
 lemma CS5_L3:
-"(\<exists> (*CS5_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS5_VARIABLESANDTYPES*).
 (PRE5)
 \<and> (PO6)
 \<longrightarrow> ((SI1)
@@ -252,7 +262,8 @@ lemma CS5_L3:
 sorry
 
 lemma CS4_L4:
-"(\<exists> (*CS4_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS4_VARIABLESANDTYPES*).
 (PRE4)
 \<and> (PO5)
 \<longrightarrow> ((SI1)
@@ -260,7 +271,8 @@ lemma CS4_L4:
 sorry
 
 lemma CS6_L5:
-"(\<exists> (*CS6_VARIABLESANDTYPES*).
+"(\<exists>
+ (*CS6_VARIABLESANDTYPES*).
 (PRE7)
 \<and> (PO8)
 \<longrightarrow> ((SI1)
@@ -268,7 +280,8 @@ lemma CS6_L5:
 sorry
 
 lemma CS1_L6:
-"(\<exists> (*CS1_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS1_VARIABLESANDTYPES*).
 (PRE1)
 \<and> (PO2)
 \<longrightarrow> ((SI1)
@@ -276,7 +289,8 @@ lemma CS1_L6:
 sorry
 
 lemma CS3_L7:
-"(\<exists> (*CS3_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS3_VARIABLESANDTYPES*).
 (PRE3)
 \<and> (PO4)
 \<longrightarrow> ((SI1)
@@ -284,7 +298,8 @@ lemma CS3_L7:
 sorry
 
 lemma CS9_L8:
-"(\<exists> (*CS9_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS9_VARIABLESANDTYPES*).
 (PRE10)
 \<and> (PO12)
 \<longrightarrow> ((SI1)
@@ -292,7 +307,8 @@ lemma CS9_L8:
 sorry
 
 lemma CS8_L9:
-"(\<exists> (*CS8_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS8_VARIABLESANDTYPES*).
 (PRE9)
 \<and> (PO11)
 \<longrightarrow> ((SI1)
@@ -300,7 +316,8 @@ lemma CS8_L9:
 sorry
 
 lemma CS11_L10:
-"(\<exists> (*CS11_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS11_VARIABLESANDTYPES*).
 (PRE12)
 \<and> (PO14)
 \<longrightarrow> ((SI1)
@@ -308,7 +325,8 @@ lemma CS11_L10:
 sorry
 
 lemma CS13_L11:
-"(\<exists> (*CS13_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS13_VARIABLESANDTYPES*).
 (PRE14)
 \<and> (PO16)
 \<longrightarrow> ((SI1)
@@ -316,7 +334,8 @@ lemma CS13_L11:
 sorry
 
 lemma CS15_L12:
-"(\<exists> (*CS15_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS15_VARIABLESANDTYPES*).
 (PRE16)
 \<and> (PO18)
 \<longrightarrow> ((SI1)
@@ -324,7 +343,8 @@ lemma CS15_L12:
 sorry
 
 lemma CS14_L13:
-"(\<exists> (*CS14_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS14_VARIABLESANDTYPES*).
 (PRE15)
 \<and> (PO17)
 \<longrightarrow> ((SI1)
@@ -332,7 +352,8 @@ lemma CS14_L13:
 sorry
 
 lemma CS20_L14:
-"(\<exists> (*CS20_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS20_VARIABLESANDTYPES*).
 (PRE21)
 \<and> (PO23)
 \<longrightarrow> ((SI1)
@@ -340,7 +361,8 @@ lemma CS20_L14:
 sorry
 
 lemma CS21_L15:
-"(\<exists> (*CS21_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS21_VARIABLESANDTYPES*).
 (PRE22)
 \<and> (PO24)
 \<longrightarrow> ((SI1)
@@ -348,7 +370,8 @@ lemma CS21_L15:
 sorry
 
 lemma CS19_L16:
-"(\<exists> (*CS19_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS19_VARIABLESANDTYPES*).
 (PRE20)
 \<and> (PO22)
 \<longrightarrow> ((SI1)
@@ -356,7 +379,8 @@ lemma CS19_L16:
 sorry
 
 lemma CS18_L17:
-"(\<exists> (*CS18_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS18_VARIABLESANDTYPES*).
 (PRE19)
 \<and> (PO21)
 \<longrightarrow> ((SI1)
@@ -364,7 +388,8 @@ lemma CS18_L17:
 sorry
 
 lemma CS10_L18:
-"(\<exists> (*CS10_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS10_VARIABLESANDTYPES*).
 (PRE11)
 \<and> (PO13)
 \<longrightarrow> ((SI1)
@@ -372,7 +397,8 @@ lemma CS10_L18:
 sorry
 
 lemma CS12_L19:
-"(\<exists> (*CS12_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS12_VARIABLESANDTYPES*).
 (PRE13)
 \<and> (PO25)
 \<longrightarrow> ((SI1)
@@ -380,7 +406,8 @@ lemma CS12_L19:
 sorry
 
 lemma CS17_L20:
-"(\<exists> (*CS17_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS17_VARIABLESANDTYPES*).
 (PRE18)
 \<and> (PO20)
 \<longrightarrow> ((SI1)
@@ -388,7 +415,8 @@ lemma CS17_L20:
 sorry
 
 lemma CS16_L21:
-"(\<exists> (*CS16_VARIABLESANDTYPES*).
+"(\<exists> 
+(*CS16_VARIABLESANDTYPES*).
 (PRE17)
 \<and> (PO19)
 \<longrightarrow> ((SI1)

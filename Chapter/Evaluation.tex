@@ -493,9 +493,9 @@ We then annotate the specification using \gls{zcga} and \gls{zdra} labels.
 \begin{minipage}{0.45\textwidth}
 \centering
 %[clip,l,b,r,t]
-\includegraphics[ scale=0.6]{examples/steamboiler/zcgacorrect.png}
+\includegraphics[width=7cm]{examples/steamboiler/zcgacorrect.png}
 
-\includegraphics[ scale=0.6]{examples/steamboiler/zdracorrect.png}
+\includegraphics[width=7cm]{examples/steamboiler/zdracorrect.png}
 
 \caption{The result when checking the steamboiler specification with the \gls{zcga} and \gls{zdra} checkers. \label{fig:steamboilercorrect}}
 
@@ -546,25 +546,34 @@ steamboiler specification is shown in figure \ref{fig:steamgpsa}.
 We can now translate the \gls{gps} into Isabelle syntax using the \gls{zmath}
 tool-kit.
 
-
 \begin{figure}[H]
-\centering
-\begin{minipage}{0.43\textwidth}
-\centering
-\includegraphics[ scale=0.5]{Figures/Evaluation/4image.png}
-\end{minipage}\hfill
-\begin{minipage}{0.53\textwidth}
-%[clip,l,b,r,t]
-\centering
-\includegraphics[scale=0.5]{Figures/Evaluation/4imageb.png}
-\end{minipage}
-\begin{minipage}{0.45\textwidth}
-%[clip,l,b,r,t]
-\centering
-\includegraphics[scale=0.5]{Figures/Evaluation/4imagec.png}
-\end{minipage}
-\caption{Part of the isabelle skeleton for the steamboiler specification.\label{fig:steamisaskel}}
+    \hfill
+    \subfigure{\includegraphics[width=6cm]{Figures/Evaluation/4image.png}}
+    \hfill
+    \subfigure{\includegraphics[width=8cm]{Figures/Evaluation/4imageb.png}}
+    \hfill
+    \caption{Part of the isabelle skeleton for the steamboiler specification.\label{fig:steamisaskel}}
 \end{figure}
+
+
+% \begin{figure}[H]
+% \centering
+% \begin{minipage}{0.43\textwidth}
+% \centering
+% \includegraphics[width=7cm]{Figures/Evaluation/4image.png}
+% \end{minipage}\hfill
+% \begin{minipage}{0.53\textwidth}
+% %[clip,l,b,r,t]
+% \centering
+% \includegraphics[width=7cm]{Figures/Evaluation/4imageb.png}
+% \end{minipage}
+% \begin{minipage}{0.45\textwidth}
+% %[clip,l,b,r,t]
+% \centering
+% \includegraphics[width=7cm]{Figures/Evaluation/4imagec.png}
+% \end{minipage}
+% \caption{Part of the isabelle skeleton for the steamboiler specification.\label{fig:steamisaskel}}
+% \end{figure}
 
 Part of the isabelle skeleton for the steamboiler specification is shown in
 figure \ref{fig:steamisaskel}. Since the steamboiler example has 2 stateSchema's
@@ -579,23 +588,32 @@ Using the \gls{zcga} annotated specification and the steamboiler isabelle
 skeleton, the \gls{zmath} tool support can now fill in the isabelle skeleton the
 declarations, expressions, schemaNames etc.
 
-
 \begin{figure}[H]
-\centering
-\begin{minipage}{0.43\textwidth}
-\centering
-\includegraphics[ scale=0.4]{Figures/Evaluation/5imagea.png}
-\end{minipage}\hfill
-\begin{minipage}{0.53\textwidth}
-%[clip,l,b,r,t]
-\centering
-\includegraphics[scale=0.4]{Figures/Evaluation/5imagec.png}
-\end{minipage}\hfill\hfill
-%\begin{minipage}{0.7\textwidth} [clip,l,b,r,t] \centering
-\includegraphics[scale=0.4]{Figures/Evaluation/5imageb.png}
-%\end{minipage}
-\caption{Part of the filled in isabelle skeleton for the steamboiler specification.\label{fig:filledinsteamskeleton}}
+    \hfill
+    \subfigure{\includegraphics[width=7cm]{Figures/Evaluation/5imagea.png}}
+    \hfill
+    \subfigure{\includegraphics[width=7cm]{Figures/Evaluation/5imagec.png}}
+    \hfill
+    \caption{Part of the filled in isabelle skeleton for the steamboiler specification.\label{fig:filledinsteamskeleton}}
 \end{figure}
+
+
+% \begin{figure}[H]
+% \centering
+% \begin{minipage}{0.43\textwidth}
+% \centering
+% \includegraphics[ scale=0.4]{Figures/Evaluation/5imagea.png}
+% \end{minipage}\hfill
+% \begin{minipage}{0.53\textwidth}
+% %[clip,l,b,r,t]
+% \centering
+% \includegraphics[scale=0.4]{Figures/Evaluation/5imagec.png}
+% \end{minipage}\hfill\hfill
+% %\begin{minipage}{0.7\textwidth} [clip,l,b,r,t] \centering
+% \includegraphics[scale=0.4]{Figures/Evaluation/5imageb.png}
+% %\end{minipage}
+% \caption{Part of the filled in isabelle skeleton for the steamboiler specification.\label{fig:filledinsteamskeleton}}
+% \end{figure}
 
 In figure \ref{fig:filledinsteamskeleton} we show 3 parts of the filled in
 isabelle skeleton (\gls{half}). The first part shows the beginning of the
@@ -732,7 +750,7 @@ and \gls{zdra} errors.
 \centering
 \begin{minipage}{0.45\textwidth}
 \centering
-\includegraphics[clip, trim=0cm 8cm 6cm 2cm, scale=0.6]{examples/semiform/1n2.pdf}
+\includegraphics[width=7cm]{examples/semiform/1n2.png}
 \vspace{-0.18in}
 \caption{An example of the original Autopilot specification annotated in \gls{zcga} and \gls{zdra}. \label{fig:autopilot1n2}}
 \vspace{-0.2in}
@@ -740,8 +758,8 @@ and \gls{zdra} errors.
 \begin{minipage}{0.45\textwidth}
 \centering
 %[clip,l,b,r,t]
-\includegraphics[clip, trim=0cm 8.5cm 9cm 0cm, scale=0.5]{examples/semiform/zcgacorrect.png}
-\includegraphics[clip, trim=0cm 8.5cm 9cm 0cm, scale=0.5]{examples/semiform/zdracorrect.png}
+\includegraphics[width=7cm]{examples/semiform/zcgacorrect.png}
+\includegraphics[width=7cm]{examples/semiform/zdracorrect.png}
 \vspace{-0.2in}
 \caption{The result when checking the autopilot specification with the \gls{zcga} and \gls{zdra} checkers. \label{fig:autopilotcorrect}}
 \vspace{-0.2in}
@@ -1160,7 +1178,8 @@ Our most complex lemma to prove is the \verb|AddLecturer_L5| lemma which we used
 9 tactics:
 
 (\verb|metis|, \verb|full_types|, \verb|dom_empty|, \verb|dom_empty|,
-\verb|dom_empty|, \verb|dom_eq_singleton_conv|, \verb|dom_restrict|,
+\verb|dom_empty|, \\
+ \verb|dom_eq_singleton_conv|, \verb|dom_restrict|,
 \verb|inf.idem| and \verb|insert_not_empty|).
 
 The most simple lemma to prove was \verb|AddStudent_L3| and \verb|DeAllocate_L2|

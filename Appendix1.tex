@@ -180,12 +180,28 @@ The specifications translated using \gls{zmath} written here are the ones which 
 
 \subsection{Dependency and Goto Graphs}
 \label{app:bb2.5}
-\includegraphics[scale=0.7]{examples/bb/25a.png}
+%\includegraphics[scale=0.7]{examples/bb/25a.png}
 
-\includegraphics[scale=0.7]{examples/bb/25b.png}
+%\includegraphics[scale=0.7]{examples/bb/25b.png}
+
+\begin{figure}[H]
+    \hfill
+    \subfigure{\includegraphics[width=7cm]{examples/bb/25a.png}}
+    \hfill
+    \subfigure{\includegraphics[width=7cm]{examples/bb/25b.png}}
+    \hfill
+\end{figure}
+
 \subsection{General Proof Skeleton}
 \label{app:bb3}
-\input{examples/bb/new3.txt}
+%\input{examples/bb/new3.txt}
+
+
+\begin{multicols}{2}
+    \VerbatimInput{examples/bb/new3.txt}
+    \end{multicols}
+
+
 \subsection{Isabelle Proof Skeleton}
 \label{app:bb4}
 \includegraphics[scale=0.5]{examples/bb/4imagea.png}
@@ -283,8 +299,7 @@ This section shows an example of a specification which is grammatically correct 
 \noindent \includegraphics[clip, trim=4cm 4cm 4cm 4.2cm]{examples/nonworkzdra/0comp2.pdf}
 
 \noindent \includegraphics[clip, trim=4cm 8cm 0cm 4.2cm]{examples/nonworkzdra/0comp3.pdf}
-%\subsection{ZCGa and ZDRa Annotated Latex Code}
-%\input{examples/nonworkzdra/1n2.tex}
+
 \subsection{ZCGa and ZDRa output}
 \label{app:failzdraout}
 \noindent \includegraphics[clip, trim=0cm 4cm 6cm 4.2cm]{examples/nonworkzdra/1n2.pdf}
@@ -306,25 +321,21 @@ This section shows an example of a specification which is grammatically correct 
 \label{app:semiform}
 This section shows an auto pilot specification which is partially written in natural language and partially written formally. Thus it is a natural language specification which is on it's way to being formalised.
 
-%\subsection{Raw Latex}
-%\input{examples/semiform/0.tex}
 \subsection{Raw Latex output}
 \noindent \includegraphics[clip, trim=4cm 4cm 4cm 4.2cm, scale=0.9]{examples/semiform/0.pdf}
 
 \noindent \includegraphics[clip, trim=4cm 4cm 4cm 4.2cm, scale=0.9]{examples/semiform/0comp2.pdf}
-%\includepdf[pages={1-2}]{examples/semiform/0.pdf}
+
 \subsection{ZCGa and ZDRa Annotated Latex Code}
 \includegraphics[scale=0.5]{examples/semiform/1n2a.png}
 
 \noindent \includegraphics[scale=0.5]{examples/semiform/1n2b.png}
 
 \noindent \includegraphics[scale=0.5]{examples/semiform/1n2c.png}
-%\input{examples/semiform/1n2images.tex}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\noindent \includegraphics[clip, trim=left lower right upper]{examples/bb/1comp3.pdf}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\includepdf[pages={1-3}]{examples/bb/1comp.pdf}
-%%%%\noindent \includegraphics[clip, trim=0cm 4cm 6cm
-%1.5cm]{examples/semiform/1n2.pdf}
+
 \includepdf[scale=0.9,pages=2,pagecommand=\subsection{ZCGa and ZDRa output \label{app:zcgazdrasemiform}}]{examples/semiform/1n2.pdf}
 
 \subsection{Messages when running the specification through the ZCGa and ZDRa checks}
@@ -349,21 +360,16 @@ This section shows an auto pilot specification which is partially written in nat
 
 \subsection{Isabelle Filled In}
 \label{app:semiform5}
-\includegraphics[scale=0.4]{examples/semiform/5imagea.png}
+%includegraphics[scale=0.4]{examples/semiform/5imagea.png}
 
-\noindent \includegraphics[scale=0.4]{examples/semiform/5imageb.png}
-
-%\section{An example of a specification which \\ a changeSchema which does not comply with the stateInvariants}
-%This section shows a specification which is \gls{zcga} and \gls{zdra} correct however when it translates to Isabelle syntax one of the proof obligations can not be satisfied as a changeSchema does  not comply with the stateInvariants.
-
-%\subsection{Raw Latex}
-%\input{examples/semiform/0.tex}
-%\subsection{Raw Latex output}
-%\includepdf[pages={1-2}]{examples/semiform/0.pdf}
-%\subsection{ZCGa and ZDRa Annotated Latex Code}
-%\input{examples/semiform/1n2.tex}
-%\subsection{ZCGa and ZDra output}
-%\includepdf[pages={1}]{examples/semiform/1n2.pdf}
+%\noindent \includegraphics[scale=0.4]{examples/semiform/5imageb.png}
+\begin{figure}[H]
+    \hfill
+    \subfigure{\includegraphics[width=7cm]{examples/semiform/5a.png}}
+    \hfill
+    \subfigure{\includegraphics[width=7cm]{examples/semiform/5b.png}}
+    \hfill
+\end{figure}
 
 
 \section{ModuleReg}
@@ -373,17 +379,17 @@ This section shows an auto pilot specification which is partially written in nat
 
 This section shows the full proof for the modulereg example from \cite{essenceofz}. It includes the filled in Isabelle skeleton. Along with added proofs which have been input by the user.
 
-\noindent \includegraphics[scale=0.5]{examples/modulereg/6imagea.png}
+\noindent \includegraphics[scale=0.4]{examples/modulereg/6imagea.png}
 
-\noindent \includegraphics[scale=0.5]{examples/modulereg/6imageb.png}
+\noindent \includegraphics[scale=0.4]{examples/modulereg/6imageb.png}
 
-\noindent \includegraphics[scale=0.5]{examples/modulereg/6imagec.png}
+\noindent \includegraphics[scale=0.4]{examples/modulereg/6imagec.png}
 
-\noindent \includegraphics[scale=0.5]{examples/modulereg/6imaged.png}
+\noindent \includegraphics[scale=0.4]{examples/modulereg/6imaged.png}
 
-\noindent \includegraphics[scale=0.5]{examples/modulereg/6imagee.png}
+\noindent \includegraphics[scale=0.4]{examples/modulereg/6imagee.png}
 
-\noindent \includegraphics[scale=0.5]{examples/modulereg/6imagef.png}
+\noindent \includegraphics[scale=0.4]{examples/modulereg/6imagef.png}
 
 \section{SteamBoiler}
 \label{app:steamboiler}
@@ -392,10 +398,49 @@ This section shows the full proof for the modulereg example from \cite{essenceof
 %\label{app:sb0}
 %\VerbatimInput{examples/steamboiler/0.tex}
 
-
 \subsection{Raw Latex output}
 \label{app:sb0o}
-\includepdf[page={1}, pagecommand={}]{examples/steamboiler/0.pdf}
+%\includepdf[pages=-, scale=0.9, pagecommand={}]{examples/steamboiler/0.pdf}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0a.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0b.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0c.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0d.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0e.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0f.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0g.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0h.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0i.png}
+\end{center}
+
+\begin{center}
+    \noindent \includegraphics[scale=0.8]{examples/steamboiler/0j.png}
+\end{center}
 
 
 \subsection{ZCGa and ZDRa Output}
@@ -407,9 +452,15 @@ This section shows the full proof for the modulereg example from \cite{essenceof
 
 \subsection{Dependency and Goto Graphs}
 \label{app:sb2.5}
-\noindent \includegraphics[scale=0.5]{examples/steamboiler/25a.png}
 
-\noindent \includegraphics[scale=0.5]{examples/steamboiler/25b.png}
+\begin{figure}[H]
+    \hfill
+    \subfigure{\includegraphics[width=7cm]{examples/steamboiler/25a.png}}
+    \hfill
+    \subfigure{\includegraphics[width=7cm]{examples/steamboiler/25b.png}}
+    \hfill
+\end{figure}
+
 
 \subsection{General Proof Skeleton}
 \label{app:sb3}

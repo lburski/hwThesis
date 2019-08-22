@@ -1,13 +1,10 @@
 theory new4
 imports 
 Main 
-
 begin 
 (*DATATYPES*)
-
 record SS1 = 
 (*DECLARATIONS*)
-
 locale 1n2 = 
 fixes (*GLOBAL DECLARATIONS*) 
 assumes SI1

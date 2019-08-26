@@ -1,27 +1,28 @@
 \chapter{Analysis}
 \label{ch:analysis}
 
-The concept for this thesis was to argue that breaking up the translation path
-from a formal specification to a full proof would be easier to conduct than to
-do a full proof all in one go. The vending machine example has been fully proved
-in \gls{ppz} and the birthday book example has been fully proved in \gls{hol}.
+The concept for this thesis was to develop a new method to enable a stepwise
+approach to prove formal specifications instead of proving specifications
+in one step. The vending machine example has been fully proved
+in \gls{ppz} and the birthday book example has been fully proved in \gls{hol} in
+one step.
 There have not been any proofs for our examples already done in Isabelle (apart
 from the proofs I have already written myself which would be unfair to compare).
-We will now look at these to examples and compare them to the proofs done in a
+We will now look compare these examples to the proofs done in a
 stepwise method using MathLang.
 
 It is important to note, the way the specifications are translated into
 Isabelle/Hol syntax is just one way. There are various other ways one may choose
-to translate specifications into Isabelle. Some of there other variations are
+to translate specifications into Isabelle. Other variations are
 described in \cite{Kolyang1996}, \cite{Kolyang86towardsa} and \cite{hol-z}.
 
 Note: we use number of lines to compare the lengths of the proof and not
 to measure the efficiency  or superiority over one proof over another.
 
 To compare proofs we have looked at the amount of complexity in the specification.
-For example the vending machine example only uses integers as `types' in the specificaion.
-Where as other examples such as the birthdaybook declare its own "type" at the beginning
-of the specification and is used throughout. The complexity of proofs are discussed more in the
+For example the vending machine example uses integers as `types' in the specification.
+Where as other examples such as the birthdaybook declare its own `type' within
+the specification and is used throughout. The complexity of proofs are discussed more in the
 next chapter.
 This chapter focusses on what `expertise' is needed to create a proof for a specification
 using different theorem provers.
@@ -385,9 +386,9 @@ actual properties and the proof obligations of the specification are a whole
 research area on their own and beyond the scope of this thesis but touched upon
 in chapter \ref{ch:background}.
 
-The \gls{zmath} aspects and it's tools can be used as helpful tools to the user digest 
+The \gls{zmath} aspects and it's tools can be used as helpful means to the user digest 
 the specification and allow them to understand
-the syntax of their formal specifications.
+the syntax of their specifications.
 
 In the next chapter we conclude our findings of this thesis and highlight what
 areas are of interest for future work.

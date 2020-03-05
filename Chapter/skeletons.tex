@@ -1,7 +1,7 @@
 \chapter{From ZDRa to Proof Sketch}
 \label{ch:skeletons}
 
-The proof sketch described in this chapter are automatically generated if the
+The proof sketches described in this chapter are automatically generated if the
 specification passes the \gls{zdra} check. Section \ref{sec:buildinggraphs}
 outlines how the dependency and goto graphs are generated from the \gls{zdra}
 annotations. Then section \ref{sec:zdra2gen} describes how \gls{zmath} builds
@@ -101,7 +101,7 @@ relationship. The definitions are as follows:
 \verb|\requires{A}{B}| & B childOf A \\
 \verb|\uses{A}{B}| & B childOf A\\
 \verb|\initialOf{A}{B}| & B childOf A \\
-\verb|\totalises|{A}{B}| & B childOf A \\
+\verb|\totalises{A}{B}| & B childOf A \\
 \hline
 \end{tabular}
 
@@ -116,7 +116,7 @@ the relations are reversed:
 \verb|\requires{A}{B}| & B childOf A \\
 \verb|\uses{A}{B}| & A childOf B\\
 \verb|\initialOf{A}{B}| & A childOf B \\
-\verb|\totalises|{A}{B}| & A childOf B \\
+\verb|\totalises{A}{B}| & A childOf B \\
 \hline
 \end{tabular}
 
@@ -195,7 +195,7 @@ Since the dependency graph only follows the annotations of the \gls{zdra} we
 need to change some of the ordering of some of the relations for the GoTo graph.
 Zengler \cite{zengfirstyear} uses \textit{textual orders} to change the order
 for mathematical relations (strong textual order, weak textual order,
-(common textual order), however for Z specifications we need to change the 
+common textual order), however for Z specifications we need to change the 
 ordering as shown in the algorithm \ref{alg:gotodep}. 
 When inputting a specification into an automatic theorem prover,
  (in this case Isabelle) the order is important as it decides which part of the 
@@ -425,7 +425,7 @@ The following section loops over itself until all of the children have been foun
 The algorithm looks at the remaining nodes and if their predecessors have already 
 been written onto the proof sketch then it writes that node.
 For example if node $x$ and node $y$ are parents of node $z$ and node $x$ and node $y$
-are already on the proof sketch then it will write node $y$ to the proof sketch and
+are already on the proof sketch then it will write node $z$ to the proof sketch and
 remove it from the list of remaining nodes.
 
 \begin{figure}[H]
@@ -447,7 +447,7 @@ Figure \ref{fig:4} shows the next stage of adding nodes to the Proof sketch.
 Since CS1 and CS2 are now added to the proof sketch then the next row of nodes
 can be added. Since PO1 only had one parent (CS1) it is added first, PO2 also
 had one parent (CS2) it is added second. The others had more parents which are
-already in the proof sketech so they are added next randomly.
+already in the proof sketech so they are added randomly.
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/5.png}
@@ -528,10 +528,10 @@ lemma AddStudentDoesntChangeSI:
 \<and (SI1'))"
 \end{verbatim}
 
- The ZDRa syntax of the proof obligation stays that there exists some variables
+ The ZDRa syntax of the proof obligation states that there exists some variables
  of the operational schema where the precondition (PRE1) \emph{and}
  postCondition (PO1) imply that the stateInvariants (SI1) and stateInvariants
- prime hold.
+ prime (SI1'), hold.
 
 \subsection{POb2, Proof Obligation type 2}
 
@@ -542,7 +542,7 @@ and then removed a member from the club. Then the amount of members should be
 the same after both operators have completed the task.
 
 One such example is in the ModuleReg specification the RegForModule schema
-postcondition shows that \verb|(taking' = taking ∪ {(p, m)}) | therefore if this
+postcondition shows that \verb|(taking' = taking \<union> {(p, m)}) | therefore if this
 were to happen then we should make sure that \verb|taking'| is not empty after
 the operation. This proof obligation is very specific to the ModuleReg
 specification and the user would need to write and check this themselves. To do
@@ -655,7 +655,7 @@ specification and comply with the state invariants the two lemma's L1\_CS1 and
 L2\_CS2 have been added.
 
 In the next chapter we fill in these proof obligations into predicates and they 
-then become the prooperties to prove the correctness of the specification.
+then become the properties to prove the correctness of the specification.
 
 \subsubsection{Proof Obligations in specification examples}
 Since the vending machine specification (appendix \ref{app:vm2}) doesn't have
@@ -697,4 +697,4 @@ proof obligations for Z and examples which proof obligations are automatically
 generated when translating Z specifications into Isabelle. We give a formal
 definition of the proof obligation to check for consistency of the state
 invariants and show an example. The next chapter describes how the proof
-sketchis translated into Isabelle syntax.
+sketch is translated into Isabelle syntax.

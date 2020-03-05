@@ -34,7 +34,7 @@ controlled \cite{rierson2013developing}. Identifying loops in the reasoning is o
 It is important to have a robust and totalised specification (in particular one
 for a high integrity system) because totalisation leaves less room for error.
 Specifications which are totalised are complete and therefore system
-requirements are better understood and the programmer of the system would have
+requirements are better understood and the programmer would have
 less assumptions about the system.
 By totalising schemas all preconditions will have a corresponding postcondition.
 Therefore when executing the system if all possible preconditions have a
@@ -57,7 +57,7 @@ even as the user states the preconditions and post conditions of each schema.
 The dependency graph is useful as it allows the user to identify which chunks of
 specification are `\textit{dependent}' on each other i.e. if one chunk was
 changed or removed then what other chunks would be affected. The dependency
-graph also allow us to build the GoTo graph which in turn orders the
+graph also allow us to build the GoTo graph which orders the
 specification to be automatically written in a theorem prover.
 
 Section \ref{sec:zdra_annotate} describes the labels used to annotate a
@@ -171,7 +171,7 @@ particular results.
 \subsubsection{theory}
 
 A \emph{theory} would be a whole specification of one particular system.
-Appendix ?? shows an entire specification labelled in \gls{zdra}. You can have
+Appendix \ref{app:bb2} shows an entire specification labelled in \gls{zdra}. You can have
 more than one \emph{theory} in a single document. The \emph{theory} would
 contain all other instances within it but no instance can have a \emph{theory}
 inside of it.
@@ -222,8 +222,7 @@ it is the first initial schema in the \emph{theory}. If there was another
 BirthdayBook' 
 \where 
 [+color[blue]\draline{PO2}{]known' = \{ \}[+color[blue]}]
-\end{schema}
-[+color[red]}]
+\end{schema} [+color[red]}]
 \end{BVerbatim}
 \caption{\label{fig:exampleofis} An initialschema labelled in \gls{zdra}.}
 \end{footnotesize}
@@ -253,8 +252,7 @@ date?: DATE
 [+color[blue]\draline{PRE1}{]name? \notin known[+color[blue]}]
 [+color[green]\draline{PO3}{]birthday' = birthday \cup \{name? \mapsto
 date?\}[+color[green]}]
-\end{schema}
-[+color[red]}]
+\end{schema} [+color[red]}]
 \end{BVerbatim}
 \end{footnotesize}
 \caption{\label{fig:exampleofcs} A changeschema labelled in \gls{zdra}.}
@@ -291,8 +289,7 @@ result!: REPORT
 \where
 [+color[blue]\draline{PRE3}{]name? \in known[+color[blue]}] \\
 [+color[green]\draline{O4}{]result! = already\_known[+color[green]}]
-\end{schema}
-[+color[red]}]
+\end{schema} [+color[red]}]
 \end{BVerbatim}
 \end{footnotesize}
 \caption{\label{fig:exampleofos} A outputschema labelled in \gls{zdra}.}
@@ -550,7 +547,7 @@ their \gls{zdra} \LaTeX{} file: \verb|\allows{PRE3}{O4}|.
 The \emph{totalise} relation allows users to describe which of their schema's
 have been totalised. If there exists a precondition which has not been totalised
 than the ZDRa check will identify this (see next section). Any schema which
-contains \emph{preconditions} be totalised in a \emph{totaliseschema}. For
+contains \emph{preconditions} can be totalised in a \emph{totaliseschema}. For
 example the the user can label \verb|\totalises{TS1}{PRE1}|
 
 
@@ -728,7 +725,7 @@ If the specification is \gls{zdra} correct then the program also creates visual
 dependency and GoTo graphs automatically (see section
 \ref{subsec:zdra_prodcuts}). If not then the graphs are not created.
 
-A full specification which passes \gls{zcga} is shown in appendix
+A specification which passes \gls{zcga} but not \gls{zdra} is shown in appendix
 \ref{app:failzdra}. There is one loop in the reasoning of this specification and
 the user is able to see it when they annotated the specification in \gls{zdra}
 and have compiled the document using \texttt{pdflatex}. A snippet of this is
@@ -763,8 +760,8 @@ new files.
 The \gls{zdra} specification Dependency graph uses the labels and annotations
 from the \gls{zdra} to show the dependencies between each of the instances. The
 ZDRa GoTo graph illustrates which instances are dependent or are needed for
-another instance to exist. Both graphs are built using the directed graph built
-in the \gls{zdra} check (see section \ref{subsec:loops}). Further information on
+another instance to exist. Both graphs are directed graph built
+within the \gls{zdra} check (see section \ref{subsec:loops}). Further information on
 how these products are formed can be found in the next chapter.
 
 \subsubsection{Dependency Graph}
@@ -777,13 +774,13 @@ how these products are formed can be found in the next chapter.
 
 An example of a \emph{dependency graph} can be seen in figure
 \ref{fig:depgraph}. This image represents the compiled \gls{zdra} annotated
-document but it graph form. All the boxes that show up in the compiled document
+document in graph form. All the boxes that show up in the compiled document
 are represented by nodes in the graph. The arrows from the instances are
 represented by the edges in the graph, all the arrows in the document and edges
 in the graph should be pointing in the same direction.
 
-The dependency graph is a directed graph representing dependencies
-of several towards one another. The benefits of a dependency graph would be for system analysis, one can see
+The dependency graph is a directed graph representing the dependencies
+of instances. The benefits of a dependency graph would be for system analysis, one can see
 which parts of the specification are \textbf{dependent} on others. For example
 if one were to change a function (schema) which other functions would be
 affected. Circular reasoning will also be easy to identify on a dependency graph.
@@ -813,7 +810,7 @@ this is because it is indeed true that the initial schema \verb|IS1| is the
 on \verb|SS1|.
 
 The other \gls{zdra} relations which also reverse the direction of the arrow in
-the \emph{goto graph} are \emph{uses},\emph{requires} and \emph{totalises}.
+the \emph{goto graph} are \emph{uses}, \emph{requires} and \emph{totalises}.
 
 The GoTo graph represents the order the instances should go in when translating
 the specification into Isabelle syntax.

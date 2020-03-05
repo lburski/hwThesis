@@ -1,4 +1,3 @@
-
 \chapter{Overview of ZMathLang}
 \label{ch:design}
 
@@ -9,7 +8,7 @@ the way. This translation consists of one large framework (executed by a user
 interface) with many smaller tools to assist the translation. Not only is the
 translation useful for a novice to translate a formal specification into a
 theorem prover but it also creates other diagrams and graphs to help with the
-analysis of a formal system specification.
+analysis of a specification.
 
 \begin{figure}[H]
  \begin{center}
@@ -19,7 +18,7 @@ analysis of a formal system specification.
 \end{center}
 \end{figure} 
 
-The framework is targeted at beginners in theorem proving. The users should have
+The framework is targeted at beginners in theorem proving. Users should have
 some idea of formal specifications but have no or little knowledge of the
 targeted theorem prover. Figure \ref{fig:steps} shows the outline of the
 framework. The higher the user goes up the steps the more rigorous the checks
@@ -28,7 +27,7 @@ order. However they both must be completed before moving up to step 3. Step 6 is
 the highest level of rigour and checks for full correctness in a theorem prover.
 For this thesis I have chose to translate Z specifications into Isabelle,
 however this framework is an outline for any formal specification into any
-theorem prover which could done in the future.
+theorem prover which could be done in the future.
 
 The user doesn't need to go all the way to the top to check for correctness, one
 advantage of breaking up the translation is that the user gets some level of
@@ -94,7 +93,7 @@ external user input (dark blue) to complete the path. However, the \gls{zmath}
 toolkit does assist the user in the translation past the halfway milestone on
 the diagram.
 
-We have created the \Gls{zmath} toolkit which assist the user from the
+We have created the \Gls{zmath} toolkit which assists the user from the
 specification to full proof however there is also ongoing research on proving
 properties from the theorem prover end. Figure \ref{fig:timeline} shows the
 amount of proving techniques each automation holds. We have highlighted that
@@ -292,7 +291,7 @@ example of a filled in isabelle skeleton is shown in figure \ref{fig:fillin1}.
 The final step in the \gls{zmath} framework (top of the stairs from figure
 \ref{fig:steps}), is to fill in the Isabelle file from step 5. This final step
 is represented by a slightly thicker arrow in figure \ref{fig:steps} compared
-with the others as the user may need to have some little theorem prover
+with the others as the user may need to have some theorem prover
 knowledge to prove properties. Also if there is some missing information such as
 missing expressions and definitions the user must fill these out as well in
 order to have a fully proven specification. However this may be slightly easier
@@ -315,7 +314,7 @@ when using the framework and which documents are produced automatically,
 semi-automatically and totally by the user. Products which are created by full
 automation are diamonds in \colorbox{lightblue}{blue}. Diamonds in
 \colorbox{lightgreen}{green} are produced by user input and products shown in
-\colorbox{aqua}{aqua} diamonds are partial automated.
+\colorbox{aqua}{aqua} are partial automated.
 
 The \colorbox{lightpink}{pink} diamond is the starting point for all users. The
 \colorbox{lightorange}{orange} ovals describe procedures of the ZCGa and ZDRa.
@@ -379,7 +378,7 @@ Therefore we define the colour for `\emph{term}' as \emph{3A9FF1}.
 
 \subsection{\LaTeX{} commands to identify ZDRa Instances}
 
-The \gls{zdra} section of the \LaTeX{} file provides three new commands:
+The \gls{zdra} section of the \LaTeX{} style file provides three new commands:
 \verb|\draschema|, \verb|\draline| and \verb|\dratheory|. The \verb|\dratheory|
 annotation is for the entire specification which contains all the instances and
 relations. The \verb|\draschema| command is to annotate the instances which are
@@ -478,7 +477,7 @@ have been implemented in the \gls{zmath} \LaTeX{} package.
 \end{figure}
 
 Figure \ref{fig:latexzdrauses} shows how the command \verb|uses| has been
-implemented. The command takes 2 arguments (the should be 2 instances which have
+implemented. The command takes two arguments (these should be 2 instances which have
 been previously annotated) and draws an arrow going from the first instance to
 the second one. The arrow bend angle is at 90, the arrow width is at 1mm and the
 arrow goes from the east part of the first instance to the east part of the

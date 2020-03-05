@@ -5,7 +5,7 @@
 Industries developing high integrity software are always looking for ways to
 make their software safer. \gls{sil} are used to define a level of
 risk-reduction provided by a safety-function. The highest \gls{sil}
-\cite{siliso} which could be given to hardware or safety integrity system, as
+\cite{siliso} which could be given to hardware or software system, as
 given by the \gls{iec} \cite{iec} standard, is a SIL4. A SIL4 has a probability
 of failure of between 0.0001 and 0.00001 \cite{IEC61508}, and although these
 probabilities are very low, they are non-zero, and the upper bound of 0.000001
@@ -110,13 +110,17 @@ contributions of this thesis in the following list:
 
 \begin{enumerate}
 \item Staged an approach to translating semi-formal and formal specifications
-into Isabelle with automatic assistance.
+into Isabelle with automatic assistance (described in chapter \ref{ch:design}
+and entire thesis).
 \item Built a collection of tools to enable a step by step approach for Z
-specifications.
+specifications (includes ZCGa implementation in chapter \ref{ch:zcga}, ZDRa implementation in
+chapter \ref{ch:zdra} and further aspects in chapters \ref{ch:skeletons},
+\ref{chap:gpsa2isa} and \ref{ch:interface}).
 \item Formalised and proved properties on a number of examples of Z
-specifications.
+specifications (described in chapters \ref{ch:fullexample}, \ref{ch:evaluation}
+and in \cite{mathlangexamples}).
 \item Demonstrated and evaluated the performance of the tool set on a convincing
-set of examples.
+set of examples (described in chapter \ref{ch:analysis} and \ref{ch:evaluation}).
 \end{enumerate}
 
 \subsection{Staged an approach to translating semi-formal and formal specifications into Isabelle with automatic assistance.}
@@ -143,7 +147,7 @@ Time is on going therefore time' < time
 
 Not only does our new approach assist with translating the text but it can also
 performs the various checks of rigor along the way. For example, the grammatical
-correctness of this document can be checked (see \gls{zcga} chapter
+correctness of this example can be checked (see \gls{zcga} chapter
 \ref{ch:zcga}) without it needing to be fully formalised. The documents
 rhetorical correctness (see \gls{zdra} chapter \ref{ch:zdra}) can also be
 checked without the need for the document to be fully formal. \Gls{zmath} is one

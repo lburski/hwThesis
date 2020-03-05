@@ -33,7 +33,7 @@ Since formal notation is a subset of mathematics we are able to adapt the
 notation.
 
 In order to check for grammatical correctness we introduce a weak type system
-for Z specifications illustrated in figures \ref{tab:zcga1}.
+for Z specifications illustrated in figure \ref{tab:zcga1}.
  
 The ZCGa starts from it's lowest level, the \emph{atomic level}, which
 underlines the elementary characters from which the syntax is made. It then
@@ -153,7 +153,7 @@ There are two subsets of binders in the categories for Z specifications. Binders
 giving sets $B^{\mathbb{S}}$, and binders giving expressions $B^{\mathcal{E}}$.
 
 \begin{itemize}
-\item $B^{\mathbb{S}}$. An example of a binder giving an expression is 
+\item $B^{\mathcal{E}}$. An example of a binder giving an expression is 
 \newline
 \noindent `$\exists schedule:TIMESLOT \leftrightarrow ROOM \bullet (allPairs
 moduleTT \cap schedule = \emptyset \land moduleTT = moduleTT \oplus {m? \mapsto
@@ -161,7 +161,7 @@ schedule})$'
 \newline
 \noindent taken from Timetable specification in \cite{mathlangexamples}.
 
-\item $B^{\mathcal{E}}$. An example of a binder giving a set is
+\item $B^{\mathbb{S}}$. An example of a binder giving a set is
 \newline
 \noindent `$\bigcup \{s:\dom studentTT \bullet \{s \mapsto (studentTT~s
 \setminus moduleTT~m?)\}$' \newline
@@ -199,7 +199,7 @@ $V^{\mathbb{S}}$.
 \item $C^{\mathbb{S}}(\overrightarrow{\mathcal{P}})$. An example of a constant
 giving a set with parameters is
 \newline
-`$studentTT = studentTT \union {s? \mapsto \emptyset}$'
+`$studentTT \union {s? \mapsto \emptyset}$'
 \newline
 taken from Timetable specification in \cite{essenceofz}. Where the
 constant giving a set is `$\union$' and the parameters it takes is `$studentTT$'
@@ -322,7 +322,7 @@ A simple example of a specification is the entire of figure \ref{fig:toy}.
 Here we describe the other categories which are needed in the \gls{zcga}
 abstract syntax.
 
-\paragraph{Declarations.} A declaration ina schematext represents the
+\paragraph{Declarations.} A declaration in a schematext represents the
 \emph{introduction of a variable} of a known type. In the categories of ZCGa
 syntax we can have two different kinds of declarations. This can be:
 \texttt{SET} (the type of all sets) or a set. Both of these declarations relates
@@ -342,10 +342,7 @@ $V^{\mathcal{T}:\mathbb{S}}$.
 
 \paragraph{Parameters.} The list of parameters represent the categories in which
 constants may depend. The parameters available in the \gls{zcga} abstract syntax
-are terms $\mathcal{T}$, sets $\mathbb{S}$ or expressions $\mathcal{E}$. For
-details on how each of these parameters are formed see the relevant sections
-(\ref{subsubsec:terms}, \ref{subsubsec:sets} and \ref{subsubsec:expressions}
-respectively).
+are terms $\mathcal{T}$, sets $\mathbb{S}$ or expressions $\mathcal{E}$. 
 
 \subsection{Weak Typing Rules}
 
@@ -370,8 +367,8 @@ $dvar(\Gamma') = dvar(\Gamma), x$.
 \end{itemize}
 \end{defin}
 
-\begin{defin} We denote a preface for a Z specification spec by prefcons(spec)
-\footnote{The full set of $prefcons$ can be found in the implementation of the
+\begin{defin} We denote a preface for a Z specification spec by 
+prefcons(spec)\footnote{The full set of $prefcons$ can be found in the implementation of the
 \gls{zcga} checker. They are in under the variable $preface\_constants$.}. This
 set contains all the constants listed in the preface. If $c \in prefcons(spec)$
 and if $K_{1},...,K_{n}$ is the set of the weak types of the parameters of $c$
@@ -640,10 +637,10 @@ checker. A correct expression is shown in figure \ref{fig:expinzcga}.
 
 \subsection{definition}
 
-If all the variables within the definition have been declared and the constant
-the user is defining is a constant set. As well as the constant the user is
-defining is not already in predefined and preface constants then the definition
-is correct. A correct Z definition is shown in figure \ref{fig:definzcga}.
+A correct definition is if all the variables within the definition have been declared and the constant
+the user is defining is a constant set and the constant is not already in
+predefined or the preface constants.
+A correct Z definition is shown in figure \ref{fig:definzcga}.
 
 \begin{figure}[H]
 \begin{footnotesize}
@@ -701,7 +698,7 @@ specification in \gls{zcga} is shown in chapter \ref{ch:fullexample} in figure
 \section{Implementation}
 
 The \gls{zcga} program automatically checks the specification for grammatical
-correctness. To do this it uses the \gls{zcga} annotations inputted by the user
+correctness. To do this it uses the \gls{zcga} annotations are inputted by the user
 and will notify the user if all is correct or any errors it may encounter. The
 \gls{zcga} checker is a weak type checker. Therefore it only checks the
 correctness of the weak types of the specification (annotated) and not actual Z
@@ -721,7 +718,7 @@ There is a variable t which is a number that:
 \end{verbatim}
 \end{exam}
 
-This example shows a small specification that is \gls{semiform}, the \gls{zcga}
+This example shows a small specification that is semi-formal, the \gls{zcga}
 will read the annotations \verb|\text|, \verb|\expression| and \verb|\term|. It
 will see that the specification contains a correct expression, however the
 specification is \gls{zcga} incorrect as it would not pick up that the terms
@@ -925,8 +922,8 @@ represented as sets and which parts are represented as terms. Not only does it
 help describe the system to developers but other members of the project
 development team and other stakeholders such as the client would also get a
 better idea of the layout of the system. A further advantage to the \gls{zcga}
-is that it is able to check the grammatical correctness of partially-formal
-specifications. These can include specifications written in the english natural
+is that it is able to check the grammatical correctness of a partially-formal
+specifications. These can include specifications written in natural
 language but are on their way to becoming formal, or specifications with formal
 parts to them.
 
@@ -934,7 +931,7 @@ parts to them.
 
 The \gls{zcga} can also be used on semiformal specification. An example is shown
 in appendix \ref{app:semiform}, which describes an auto pilot system. This
-specification is written partly in the english natural language and partly in Z.
+specification is written partly in the English natural language and partly in Z.
 Therefore the specification is on it's way to becoming formal. The user can then
 annotate the formal parts and some of the informal parts in \gls{zcga}, it can
 then be checked and will the user if there are any grammatical errors in the

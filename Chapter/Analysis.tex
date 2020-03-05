@@ -8,8 +8,8 @@ in \gls{ppz} and the birthday book example has been fully proved in \gls{hol} in
 one step.
 There have not been any proofs for our examples already done in Isabelle (apart
 from the proofs I have already written myself which would be unfair to compare).
-We will now look compare these examples to the proofs done in a
-stepwise method using MathLang.
+We will now compare these examples to the proofs done in a
+stepwise method using ZMathLang.
 
 It is important to note, the way the specifications are translated into
 Isabelle/Hol syntax is just one way. There are various other ways one may choose
@@ -69,7 +69,7 @@ using \gls{zmath} & & automated & ep = 124 (63 automated) \\
 \label{tab:comparevm}
 \end{table}
 
-Table \ref{tab:comparevm} shows an outlined comparison between the vending
+Table \ref{tab:comparevm} shows a comparison between the vending
 machine proof done in \gls{ppz} \cite{pp} and the vending machine proof done
 using the \gls{zmath} method (see appendix \ref{app:vm}). To calculate the lines
 of proof, all comments and empty lines have been removed from the proof and only
@@ -125,8 +125,8 @@ Both methods need the same amount of expertise in Z and the \gls{zmath} method
 even shares some of the expertise with others looking at the documents produced.
 
 \subsection{Knowledge of theorem prover}
-In table \ref{tab:expertise}, it states that a "little" amount of knowledge of
-theorem prover is needed for the full proof using \gls{zmath}. This is because
+In table \ref{tab:expertise}, it states that a `little' amount of theorem prover
+knowledge is needed for the full proof using \gls{zmath}. This is because
 the final step is to prove any lemmas that are left unproven (these lemmas have
 been created from the original Z specification) and write new properties as
 lemmas and prove them if needed. However the original specification is
@@ -147,7 +147,7 @@ all imputed using the zed style package, which the user can learn using Mike
 Spivey's reference card \cite{zrefcard}.
 
 The schema boxes and symbols are written in \gls{ppz}'s own syntax. \gls{ppz}
-also has a user interface, (PPXPP), in which it uses an extended character set
+also has a user interface, (PPXPP), which uses an extended character set
 instead of ascii to input the specifications and their proofs. In this, the user
 may open a palette in which they can search for the symbol they wish to use and
 click on it. The same works with schema boxes, axiomatic definitions, generic
@@ -273,7 +273,8 @@ comparison done here is limited with the support available.
 
 It is important to note that the time it takes translating a Z specification into 
 a theorem prover with full proofs may or may not be longer using small steps in ZMathLang Vs
-using Hol-Z, as that will depend on the user and their expertise/typing skills/knowledge of Z etc.
+using Hol-Z, as that will depend on the user and their expertise/ typing skills/
+knowledge of Z etc.
 However what table \ref{tab:expertisebb} does show is that for both methods the user would
 need knowledge of Z and of \LaTeX{}. For the actual translation of the specification alone (without proofs) 
 the user would need none to very little knowledge of the theorem prover using ZMathLang but will need some 
@@ -303,7 +304,7 @@ methods.
 Table \ref{tab:expertisebb} shows that by using the \gls{zmath} method `little'
 knowledge of theorem prover is needed. This is because the final step to prove
 any unproven lemmas and write and new safety properties and lemmas and prove
-them. For this the user may need some theorem prover knowledge to compete this
+them. The user may need some theorem prover knowledge to compete this
 final step. However the entire specification itself is already written in the
 chosen theorem prover (in our case Isabelle) and the user does not need to
 import any further definitions which are part of the original specification.
@@ -313,7 +314,7 @@ into \gls{hol} using ZeTa (see section \ref{knowledgeofinputforbb}), the user
 will need to have the \gls{hol} plugin knowledge as well as the original
 Isabelle/Hol Knowledge to do the proofs for the specification.
 
-The Hol-Z proof comes in 10+ files all written in complex code, the ZMathLang proof
+The Hol-Z proof comes in 10+ files written in languages (hol-z, zeta, sml etc), the ZMathLang proof
 includes:
 \begin{enumerate}
     \item 1 ZCGa Labelled tex document + it's pdf output

@@ -1,16 +1,11 @@
 \chapter{General Proof Sketch aspect and beyond}
 \label{chap:gpsa2isa}
 
-When translating from the \gls{zdra} annotated specification to the Isabelle
-skeleton, the syntax needed to be changed in order for the specification to
-parse through Isabelle. In this section we outline how the Z specification is
-translated into Isabelle.
-
-If the user has labelled a theory in the specification (T\#) then that will
+ In this section we outline how the Z specification is
+translated into Isabelle. If the user has labelled a theory in the specification (T\#) then that will
 begin writing an Isabelle skeleton.
-
-For example if we had an empty specification and named it "a" then the program
-will create an empty Isabelle skeleton such as:
+For example if we had an empty specification and named it `a' then the program
+will create an empty Isabelle skeleton e.g.
 
 \begin{verbatim}
 theory gpsa_a
@@ -41,7 +36,7 @@ no `\texttt{assumes SI\#}') line.
 All other schemas including changeSchemas, outputSchemas, preconditions that are
 schemas, post conditions that are schemas and all other state schema become
 definitions in the Isabelle skeleton. So for example if we have the following
-schema write in \gls{zdra}
+schema written in \gls{zdra}:
 \begin{verbatim}
 \draschema{CS1}{
 \begin{schema}{b}
@@ -83,7 +78,7 @@ in at the next stage.
 
 \section{Proof Obligations in Isabelle Syntax}
 
-Lemmas which are proof obligations. That is instances with the a \gls{zdra} name
+Lemmas which are proof obligations- that is instances with the a \gls{zdra} name
 \texttt{L\#\_CS\#} where `\texttt{\#}' is a number become \texttt{lemma's} in
 Isabelle syntax. The translation from the \gls{gpsa} into Isabelle syntax
 depends if the changeSchema in question has a precondition, postcondition or
@@ -133,7 +128,7 @@ stateInvariants prime.
 \subsection{Proof Obligation translation where the changeSchema has only postcondition}
 
 If the instance in the \gls{gpsa} was L1\_CS1 and CS1 only required a
-postcondition with no precondition that is had the relation (CS1, requires, PO2)
+postcondition with no precondition i.e. had the relation (CS1, requires, PO2)
 and (CS1, uses, IS1) then the syntax in the Isabelle skeleton would be as
 follows:
 
@@ -168,8 +163,7 @@ stateInvariants in the stateSchema and SI1' is the stateInvariants prime.
 \section{ZCGa specification to Fill in the Isabelle Skeleton}
 \label{sec:zcga2fillin}
 
-Since translating using ZMathLang to translate Z specifications into an Isabelle
-skeleton can even been done on incomplete specifications, it is important to
+Since translating using ZMathLang can even been done on incomplete specifications, it is important to
 note that if some missing information is missing e.g. a declaration, expression
 etc then the comments of where these should go will not be changed. For example
 if we have the line \verb|"(*CS1_TYPES*) => bool"| in the skeleton and the
@@ -363,7 +357,7 @@ sometimes varies in Isabelle on these occasions.
 
 One part of the Z mathematical toolkit which we need to rewrite are the use of
 partial functions. In Isabelle/HOL all functions are total therefore 
-We translate total functions as a set of pairs \verb|(A * B) set|, we use the
+we translate total functions as a set of pairs \verb|(A * B) set|, we use the
 \verb|\<rightharpoonup>| symbol to describe partial functions in the isabelle syntax. 
 %Any proofs to check for partial functions if needed can be done by the user in step 6 shown in
 %figure \ref{fig:steps} but the details of these proofs are beyond the scope of
@@ -372,7 +366,8 @@ We translate total functions as a set of pairs \verb|(A * B) set|, we use the
 %do certain proofs about partial functions \cite{Krauss08definingrecursive}.%
 
 In the following section we highlight the symbols in the Z toolkit in {\color{set}red}
-and the corresponding Isabelle translation in {\color{blue}{blue}}
+and the corresponding Isabelle translation in {\color{blue}{blue}}.
+
 Other parts which differ are the following:
 
 \begin{itemize}
@@ -404,7 +399,7 @@ have {\color{blue}{`\verb|Range k|'}} and {\color{blue}{`\verb|ran k|'}} for tot
 `\verb|k|' respectively.
 For example
 if {\color{red}{`\verb|funset: A \fun B |'}} and {\color{red}{`\verb|\dom k \in funset|'}}
-then the isabelle translation will be {\color{blue}{$(A*B) set$}} and {\color{blue}{$Domain k \in funset$}}.
+then the isabelle translation will be {\color{blue}{$(A*B) set$}} and {\color{blue}{$Domain\ k \in funset$}}.
 however if {\color{red}{`\verb|pfunset: A \pfun B |'}} and {\color{red}{`\verb|\dom k \in pfunset|'}}
 then the isabelle translation will be {\color{blue}{$A \rightharpoonup B$}} and {\color{blue}{$dom\ k$}}.
 
@@ -502,12 +497,12 @@ proving the properties.
 
 Figure \ref{fig:exampleproof} shows an example of a proof obligations generated
 by \gls{zmath} proved in Isabelle. Again we have highlighted the user input in
-{\color{red}red}. To help prove these properties wed have used sledgehammer
+{\color{red}red}. To help prove these properties we have used sledgehammer
 \cite{sledgehammer} which is part of the Isabelle/Hol package. The full proof of
 this specification can be found in appendix \ref{app:moduleregfullproof}. At
 this point, proving properties in a theorem prover may require some expertise in
 the field. Proving tools such as \gls{smt} solvers
-\cite{DeMoura:2011:SMT:1995376.1995394} such as sledgehammer are an interesting
+\cite{DeMoura:2011:SMT:1995376.1995394} and sledgehammer are an interesting
 area of research on it's own however these such details are out with the scope
 of this thesis.
 
@@ -515,8 +510,8 @@ of this thesis.
 \begin{figure}[H]
 \centering
 \begin{footnotesize}
-\begin{BVerbatim}
-    [commandchars=+\[\]] lemma AddStudent_L2: "(\<exists>
+\begin{BVerbatim}[commandchars=+\[\]]
+lemma AddStudent_L2: "(\<exists>
 degModules:: MODULE set. \<exists> students :: PERSON set. \<exists> taking ::
 (PERSON * MODULE) set. \<exists> p :: PERSON. \<exists> degModules':: MODULE
 set. \<exists> students' :: PERSON set. \<exists> taking' :: (PERSON * MODULE)
@@ -534,8 +529,9 @@ students) \<and> (Range taking \<subseteq> degModules) \<and> (Domain taking'
 \section{Conclusion}
 
 This chapter described the final steps in computerising a formal specification
-into full proof. It demonstrates how the program uses the automatically
-generated general skeleton to  create an Isabelle skeleton. From the Isabelle
+into full proof. It demonstrates how the program uses the
+automatically-generated
+general skeleton to create an Isabelle skeleton. From the Isabelle
 skeleton the user can then automatically fill in the skeleton using the
 \gls{zcga} annotated specification giving a \gls{half}. The last step would be
 to fill in any missing proofs in the \gls{half} (as show in the proof obligation
@@ -545,6 +541,3 @@ automate as different system specifications have different properties users wish
 to prove, therefore tools such as sledgehammer \cite{sledgehammer} may be useful
 at this point. We will demonstrate how to go from a Z specification to a proven 
 specification in Isabelle in chapter \ref{ch:fullexample}.
-
-In the next chapter we demonstrate a full example of a specification being
-taken through all the steps of the ZMathLang framework.

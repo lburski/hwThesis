@@ -9,7 +9,7 @@ can get from one step to another. We have added figures and screenshots of each
 step of the \gls{zmath} framework.
 
 \section{Step 0\\Raw Specification}
-We take a raw specification ModuleReg \cite{essenceofz}, which displays students
+We take the raw specification ModuleReg \cite{essenceofz}, which displays students
 taking modules in a school environment (shown in figure \ref{fig:rawschema}) The
 output for the specification can be seen in figure \ref{fig:rawschemaout}. The
 full proof for the ModuleReg specification can be found in \ref{app:moduleregfullproof}.
@@ -84,8 +84,8 @@ degModules' = degModules
 The user then goes to label the raw specification with the \gls{zcga} labels.
 The labelled specification can be seen in figure \ref{fig:zcgaschema}. The words
 highlighted in {\color{red}red} are the \gls{zcga} annotations done by the user
-and the black text is the existing specification. Figure \ref{fig:zcgaschema}
-outputting result can be seen in figure \ref{fig:zcgaschemaout}.
+and the black text is the existing specification. The output from figure \ref{fig:zcgaschema}
+is shown in figure \ref{fig:zcgaschemaout}.
 
 \begin{figure}[H]
 \centering
@@ -168,7 +168,7 @@ MODULE[+color[red]}}}]\\
 \end{minipage}
 \end{figure}
 
-After annotating we run it through the \gls{zcga} correctness checker. Figure
+After annotating the text, we run it through the \gls{zcga} correctness checker. Figure
 \ref{fig:zcgacorrect} shows the message which appears when the annotated
 specification has been checked. 
 
@@ -323,7 +323,7 @@ saved on the users computer.
 
 \section{Skeletons}
 
-The skeletons are automatically generated if the specification passes the
+The skeletons can be automatically generated if the specification passes the
 \gls{zcga} and \gls{zdra} check.
 
 \subsection{Step 3\\General Proof Skeleton}
@@ -341,11 +341,11 @@ prover. If the specification is \gls{zdra} correct we can then generate the
 \end{figure}
 
 The GPSa can be created after a specification has been annotated with ZDRa. The GPSa is what orders the specification 
-logically to put into a theorem prover. Steps 4, 5 and 6 will need to be created after the GPSa. Step 4 will uses the skeleton 
+logically to put into a theorem prover. Steps 4, 5 and 6 will need to be created after the GPSa. Step 4 will use the skeleton 
 created in step 3 and ZCGa annotations created in step 2 to create the Isabelle skeleton. The Isabelle skeleton in
-step 4 requires ZCGa annotations and the GPSa to be complete. Without the GPSa the logical order of the specification may not be correct
-e.g. there may be some changeSchemas used which haven't been created yet. Without the ZCGa the some variables may be used which havn't been 
-declared and therefore will not pass through Isabelle.
+step 4 requires ZCGa annotations and the GPSa to be complete. Without the GPSa, the logical order of the specification may not be correct
+e.g. there may be some changeSchemas used which haven't been created yet. Without the ZCGa, some variables may be used which haven't been 
+declared and therefore will not parse through Isabelle.
 
 Figure \ref{fig:gpsaFullexample} shows the general proof skeleton which was
 generated for our example. Note all instances but the last 2 are actual
@@ -357,9 +357,16 @@ a change in state (CS1 and CS2) then there are 2 proof obligations added to the
 \centering
 \begin{scriptsize}
 \begin{BVerbatim}
-stateSchema SS1 stateInvariants SI1 changeSchema CS2 precondition PRE2
-changeSchema CS1 precondition PRE1 postcondition PO2 postcondition PO1 lemma
-L1_(CS2) lemma L2_(CS1) 
+stateSchema SS1
+stateInvariants SI1
+changeSchema CS2
+precondition PRE2
+changeSchema CS1
+precondition PRE1
+postcondition PO2
+postcondition PO1
+lemma L1_(CS2)
+lemmaL2_(CS1) 
 \end{BVerbatim}
 \end{scriptsize}
 \caption{General proof skeleton. \label{fig:gpsaFullexample}}
@@ -389,16 +396,27 @@ interface then clicking `\texttt{Isabelle Skeleton}' shown in figure
 \centering
 \begin{scriptsize}
 \begin{BVerbatim}
-theory gpsaModuleReg imports Main begin (*DATATYPES*) record SS1 = (*DECLARATIONS*)
-locale 1n2 = fixes (*GLOBAL DECLARATIONS*) assumes SI1 begin definition CS2 ::
-"(*CS2_TYPES*) => bool" where "CS2 (*CS2_VARIABLES*) == (PRE2) \<and> (PO2)"
-definition CS1 :: "(*CS1_TYPES*) => bool" where "CS1 (*CS1_VARIABLES*) == (PRE1)
-\<and> (PO1)"
+theory gpsaModuleReg
+imports Main begin (*DATATYPES*)
+record SS1 = (*DECLARATIONS*)
+locale 1n2 = fixes (*GLOBAL DECLARATIONS*)
+assumes SI1 begin definition CS2 ::
+"(*CS2_TYPES*) => bool"
+where
+"CS2 (*CS2_VARIABLES*) == (PRE2) \<and> (PO2)"
+definition CS1 :: "(*CS1_TYPES*) => bool"
+where
+"CS1 (*CS1_VARIABLES*) == (PRE1) \<and> (PO1)"
 
-lemma CS2_L1: "(\<exists> (*CS2_VARIABLESANDTYPES*). (PRE2) \<and> (PO2) \<and>
-(SI1) \<and> (SI1'))" sorry lemma CS1_L2: "(\<exists> (*CS1_VARIABLESANDTYPES*).
-(PRE1) \<and> (PO1) \<longrightarrow> ((SI1) \<and> (SI1')))" sorry end end
-
+lemma CS2_L1: "(\<exists> (*CS2_VARIABLESANDTYPES*).
+(PRE2) \<and> (PO2) \<longrightarrow> 
+(SI1) \<and> (SI1'))" 
+sorry 
+lemma CS1_L2: "(\<exists> (*CS1_VARIABLESANDTYPES*).
+(PRE1) \<and> (PO1) \<longrightarrow> 
+((SI1) \<and> (SI1')))" sorry 
+end
+end
 \end{BVerbatim}
 \end{scriptsize}
 \caption{Isabelle proof skeleton. \label{fig:isaFullexample}}
@@ -558,16 +576,17 @@ the state after \texttt{RegforModule} (PO2), \emph{implies}
 \texttt{stateInvariants} (SI1), \emph{and} the \texttt{stateInvariants'} (SI1')
 is true. So the precondition and postcondition imply that the stateInvariants
 and stateInvariants prime hold. The same goes for the \texttt{AddStudent}
-operation. When the skeleton is Filled in the \gls{zmath} is unable to prove the
+operation. When the skeleton is filled in, \gls{zmath} is unable to prove the
 lemma's automatically and it is up to the user to do this (explained in the next
 section). However at this stage \gls{zmath} puts the Isar command
 `\texttt{sorry}' as to ignore the lemma and act as if it was proven.
 
 In this case the new "Lemmas" are added to the end of the specification at random.
 For this specification it doesn't matter which lemma comes first (RegForModule\_L1 or AddStudent\_L2)
-as the schemas \texttt{RegForModule} and \texttt{AddStudent} are independent of eachother
+as the schemas \texttt{RegForModule} and \texttt{AddStudent} are independent of
+each other
 and one does not `\textit{use}' the other. If we did have a changeSchema which did use another changeSchema
-then this would have to be annotated in the zDRa and therefore the order would matter when the lemmas are produced.
+then this would have to be annotated in the ZDRa and therefore the order would matter when the lemmas are produced.
 
 
 \section{Step 6\\Full Proof}
@@ -652,7 +671,7 @@ degModules')))"
 \caption{An example of a property and it's proof for the Module Reg example. \label{fig:propertyproof}}
 \end{figure}
 
-Figure \ref{fig:propertyproof} shows how the lemmas automatically generated from
+Figure \ref{fig:propertyproof} shows how the lemmas are automatically generated from
 the \gls{zdra} annotated specification (black) and the user input needed to
 prove this lemma (red). Notice that the user has deleted the word
 "\texttt{sorry}" which would have automatically come after the lemma.
@@ -666,7 +685,7 @@ More information on proving these lemmas can be found in the Isabelle Manual
 
 We know that the Isabelle skeleton is now correct as it can be parsed through the 
 Isabelle theorem prover with no errors.
-All variables have been declared before they are used in Isabelle and all the CGa names
+All variables have been declared before they are used in Isabelle and all the ZCGa names
 have been translated back to the original names used in the Z Specification.
 
 \section{Conclusion}

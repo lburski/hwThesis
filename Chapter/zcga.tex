@@ -419,8 +419,6 @@ definition, or $defcons(\mathcal{D})$, is $c$.
         \hline
         \includegraphics[scale=0.6]{Figures/zcga/9.png} \\
         \hline
-        \includegraphics[scale=0.6]{Figures/zcga/10.png} \\
-        \hline
     \end{tabular}
     \caption{Weak typing rules used by the ZCGa type checker. \label{tab:wttrules}}
 \end{table}
@@ -554,7 +552,7 @@ correctly typed term.
 
 \subsection{set}
 
-Similar to typing a term, set can be correctly type in one of two ways. The
+Similar to typing a term, set can be correctly typed in one of two ways. The
 first is a variable set which is correctly declared such as `\emph{s}' in figure
 \ref{fig:sdecinzcga}. The second way a set could be correctly typed is by having
 a constant with parameters.
@@ -707,7 +705,7 @@ types like a Z type checker would find, such as fuzz.
 \subsection{Checking if a specification is ZCGa correct}
 
 The \gls{zcga} program uses regular expressions to read the annotations written
-by the user to determine with a specification is \gls{zcga} correct. It ignores
+by the user to determine if a specification is \gls{zcga} correct. It ignores
 all the parts which are not labelled in \gls{zcga} which allows for
 \gls{semiform} to be checked as well. Look at the following:
 
@@ -797,7 +795,7 @@ not been declared previously. Look at the following example:
 When the \gls{zcga} checker runs through this specification the error message
 \emph{js: set not declared} should appear. This is because the term \verb|j| has
 been declared, however the set \verb|js| has not been declared yet it is used in
-the schematext \verb|\term{j} \in \set{js}|.
+the schematext \\ \verb|\term{j} \in \set{js}|.
 
 \paragraph{\emph{constant not in preface}}
 
@@ -957,7 +955,7 @@ syntax (step 5 from figure \ref{fig:steps}).
 
 \section{Conclusion}
 In this chapter we have seen how the \gls{zcga} has grown from weak type theory
-for mathematics \cite{wtt}. We have giving examples of different categories are
+for mathematics \cite{wtt}. We have given examples of different categories are
 used within a Z specification and highlighted the rules these categories need to
 follow in order to be \gls{zcga} correct. We have described a few properties of
 the checker and have explained how these categories are transformed into weak

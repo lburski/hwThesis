@@ -1,0 +1,18 @@
+
+\documentclass{article}
+\usepackage{zmathlang}
+\begin{document}
+
+\dratheory{T5}{0.3}{
+	
+	\draschema{CS1}{The Unmanned Air Vehicle takes command from the Wildcat Helicopter.}
+	\draschema{CS2}{The Unmanned Air Vehicle shall stay in it's allocated airspace.}
+	\draschema{CS3}{The Wildcat Helicopter takes command from the Chinook.}
+	\draschema{CS4}{The Wildcat Helicopter shall stay on base until told to deploy.}
+	\draschema{CS5}{The Chinook takes command from the Unmanned Air Vehicle.}
+	
+	\uses{CS1}{CS5}
+	\uses{CS3}{CS1}
+	\uses{CS5}{CS3}
+}
+\end{document}

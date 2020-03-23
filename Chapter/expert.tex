@@ -104,14 +104,16 @@ For example if we had the following list of requirements:
 
 The user will then annotate these requirements
 
-%\dratheory{T5}{0.3}{
+\dratheory{T5}{0.3}{
     
-%\draschema{CS1}{The Unmanned Air Vehicle takes command from the Wildcat Helicopter.}
-%\draschema{CS2}{The Unmanned Air Vehicle shall stay in it's allocated airspace.}
-%\draschema{CS3}{The Wildcat Helicopter takes command from the Chinook.}
-%\draschema{CS4}{The Wildcat Helicopter shall stay on base until told to deploy.}
-%\draschema{CS5}{The Chinook takes command from the Unmanned Air Vehicle.}
-%}
+\draschema{CS1}{The Unmanned Air Vehicle takes command from the Wildcat Helicopter.}
+\draschema{CS2}{The Unmanned Air Vehicle shall stay in it's allocated airspace.}
+\draschema{CS3}{The Wildcat Helicopter takes command from the Chinook.}
+\draschema{CS4}{The Wildcat Helicopter shall stay on base until told to deploy.}
+\draschema{CS5}{The Chinook takes command from the Unmanned Air Vehicle.}
+
+\uses{CS1}{CS2}
+}
 
 \begin{figure}[H]
     \includegraphics[width=12cm]{informal/zdra.png}

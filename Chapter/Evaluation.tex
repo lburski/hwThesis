@@ -59,7 +59,7 @@ and how this affects the translation into Isabelle.
 
 \subsection{Raw Latex Count}
 
-Table \ref{ch:evaluation} how long each specification is by amount of lines of
+Table \ref{ch:evaluation} shows how long each specification is by amount of lines of
 code and environments uses. We have listed the specifications in decreasing
 complexity of how many lines of \LaTeX{} the raw specification has.
 
@@ -119,7 +119,7 @@ about the specification may have also added to the line count in table
 \ref{tab:numbersspec}.
 
 However, there are also many lines which can not be simplified in the specification
-for example if a specification uses a certain Z-type i.e. `'\texttt{COLOUR}' then
+for example if a specification uses a certain Z-type i.e. `\texttt{COLOUR}' then
 `\texttt{COLOUR}' must be declared at the beginning of the specification:
 \verb|[COLOUR]|\\
 in the specification this line can not be removed. Therefore
@@ -509,7 +509,7 @@ specification we can now generate a goto graph and dependency graphs for it.
 \centering
 \begin{minipage}{0.45\textwidth}
 \centering
-\includegraphics[trim=4cm 1cm 1cm 1cm, scale=0.5]{examples/steamboiler/25a.png}
+\includegraphics[trim=4cm 1cm 1cm 1cm, scale=0.5]{Figures/Evaluation/25a.png}
 \caption{The dependency graph produced for the steamboiler specification. \label{fig:steamdepgraph}}
 \end{minipage}\hfill
 \begin{minipage}{0.43\textwidth}
@@ -647,56 +647,6 @@ does not conflict with the state Invariants. We did this step manually for all
 remaining lemmas, the full proof of the steamboiler specification can be found
 in \cite{mathlangexamples}.
 
-\subsection{Case Study 2: A specification using both terms and sets.}
-
-This case study based is on the \emph{ModuleReg} specification which uses both
-terms and sets. The specification has been translated into Isabelle using the
-\gls{zmath} framework. The entire \gls{zmath} works for the ModuleReg example is
-shown in chapter \ref{ch:fullexample}.
-
-The \emph{ModuleReg} specification is our smallest example with 43 lines of
-\LaTeX{} code, 1 \emph{zed} environment and 3 \emph{schema}'s. There are 20
-labels of \emph{schemaText}, 6 \emph{declarations}, 18 \emph{expressions}, 13
-\emph{terms}, and 31 \emph{sets}. Since there are \emph{stateInvariants} for the
-\emph{modulereg} specification, \gls{zmath} was able to generate lemma's to
-prove for the 2 \emph{changeSchemas}. There is also 1 \emph{stateSchema}, 2
-\emph{preconditions} and 2 \emph{postconditions}. There are 3 \emph{requires}
-relations, 2 \emph{allows} and 2 \emph{uses}.
-
-Since the \emph{modulereg} specification is quite small but did have
-stateInvariants which \gls{zmath} could prove are satisfied throughout the
-specification, we decided it would be a could example to show the full workings
-of. This is shown in chapter \ref{ch:fullexample}.
-
-\subsection{Case Study 3: A semi formal specification.}
-
-In this case study we present the \emph{AutoPilot} specification. The
-specification is a semi formal specification and has been partially translated
-into Isabelle. The parts which have been translated are written formally and
-have been annotated accordingly. This gives an example of a specification which
-is written in natural language and is on it's way to being formalised.
-
-We have taken the natural language specification for an autopilot system from
-\cite{Butler96} and started to formalise it.
-
-\begin{figure}[H]
-\centering
-\begin{minipage}{0.45\textwidth}
-\centering
-\includegraphics[clip, trim=5.5cm 11cm 4cm 4.5cm, scale=0.6]{examples/semiform/informal.pdf}
-\vspace{-0.18in}
-\caption{An example of the original Autopilot specification. \label{fig:originalautopilot}}
-\vspace{-0.2in}
-\end{minipage}\hfill
-\begin{minipage}{0.45\textwidth}
-\centering
-%[clip,l,b,r,t]
-\includegraphics[clip, trim=5.5cm 11cm 4cm 4.5cm, scale=0.6]{examples/semiform/semiformal.pdf}
-\vspace{-0.2in}
-\caption{An example of the Autopilot specification partially formalised. \label{fig:semiformautopilot}}
-\vspace{-0.2in}
-\end{minipage}
-\end{figure}
 
 In \cite{laibinis} a link between safety requirements, event-B models and corresponding fragments of
 a safety case is created. Laibinis et al present a method and tool support linking formal modelling in
@@ -728,6 +678,60 @@ has been written in Event-B which is supported by the Rodin platform to prove re
  However, to get this evidence the user will need to label the specification which could be argued as a little tedious.
  A disadvantage of using \gls{zmath} to prove the Steamboiler specification is to generate a solid safety case
  one needs to add safety related requirements in Isabelle.
+
+\subsection{Case Study 2: A specification using both terms and sets.}
+
+This case study based is on the \emph{ModuleReg} specification which uses both
+terms and sets. The specification has been translated into Isabelle using the
+\gls{zmath} framework. The entire \gls{zmath} works for the ModuleReg example is
+shown in chapter \ref{ch:fullexample}.
+
+The \emph{ModuleReg} specification is our smallest example with 43 lines of
+\LaTeX{} code, 1 \emph{zed} environment and 3 \emph{schema}'s. There are 20
+labels of \emph{schemaText}, 6 \emph{declarations}, 18 \emph{expressions}, 13
+\emph{terms}, and 31 \emph{sets}. Since there are \emph{stateInvariants} for the
+\emph{modulereg} specification, \gls{zmath} was able to generate lemma's to
+prove for the 2 \emph{changeSchemas}. There is also 1 \emph{stateSchema}, 2
+\emph{preconditions} and 2 \emph{postconditions}. There are 3 \emph{requires}
+relations, 2 \emph{allows} and 2 \emph{uses}.
+
+Since the \emph{modulereg} specification is quite small but did have
+stateInvariants which \gls{zmath} could prove are satisfied throughout the
+specification, we decided it would be a could example to show the full workings
+of. This is shown in chapter \ref{ch:fullexample}.
+
+
+
+\subsection{Case Study 3: A semi formal specification.}
+
+In this case study we present the \emph{AutoPilot} specification. The
+specification is a semi formal specification and has been partially translated
+into Isabelle. The parts which have been translated are written formally and
+have been annotated accordingly. This gives an example of a specification which
+is written in natural language and is on it's way to being formalised.
+
+We have taken the natural language specification for an autopilot system from
+\cite{Butler96} and started to formalise it.
+
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[clip, trim=5.5cm 11cm 4cm 4.5cm, scale=0.6]{examples/semiform/informal.pdf}
+\vspace{-0.18in}
+\caption{An example of the original Autopilot specification. \label{fig:originalautopilot}}
+\vspace{-0.2in}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+%[clip,l,b,r,t]
+\includegraphics[clip, trim=5.5cm 11cm 4cm 4.5cm, scale=0.6]{examples/semiform/semiformal.pdf}
+\vspace{-0.2in}
+\caption{An example of the Autopilot specification partially formalised. \label{fig:semiformautopilot}}
+\vspace{-0.2in}
+\end{minipage}
+\end{figure}
+
 
 \subsubsection{ZMathLang steps for the autopilot case study.}
 
@@ -780,7 +784,7 @@ dependency graph and goto graphs (shown in figures \ref{fig:autodepgraph} and
 \centering
 \begin{minipage}{0.45\textwidth}
 \centering
-\includegraphics[scale=0.5]{examples/semiform/25a.png}
+\includegraphics[scale=0.5]{Figures/Evaluation/semiform25a.png}
 \vspace{-0.18in}
 \caption{The dependency graph produced for the autopilot specification. \label{fig:autodepgraph}}
 \vspace{-0.2in}
@@ -1217,7 +1221,7 @@ where we just used 1 tactic (\verb|fastforce| and \verb|auto| respectively).
 
 \subsubsection{VideoShop}
 
-The videoShop specification cite{mathlangexamples} has 3 changeSchemas and 1 set of stateInvariants,
+The videoShop specification \cite{mathlangexamples} has 3 changeSchemas and 1 set of stateInvariants,
 therefore \gls{zmath} has generated 3 proof obligations to check that none of
 the changeSchemas conflict with the stateInvariants and stateInvariants prime.
 
@@ -1537,7 +1541,7 @@ existing knowledge. However, there
 needs to be an Isabelle expert ready to complete the proofs and depending on the
 syntax of the specification this may be difficult to prove. There also might be
 other properties which the stakeholders of the project may wish to be proven.
-Again, To add these extra properties, a little bit more Isabelle knowledge is
+Again, to add these extra properties, a little bit more Isabelle knowledge is
 needed.
 
 In the second scenario we will need only 1 person to complete the proof (the
@@ -1568,7 +1572,7 @@ this along to an Isabelle expert. The Isabelle expert will then have less work
 to prove the remainder of the proof. If the stakeholders require more properties
 proved then the Isabelle expert can do this as well.
 
-in the third cas an Isabelle expert may not be
+In the third cas an Isabelle expert may not be
 required and proving the specification \textit{could} be done by one person
 (depending on the specification) if the stakeholders only want to check the system for consistency
 and

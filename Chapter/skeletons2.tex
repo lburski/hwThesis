@@ -4,7 +4,7 @@
  In this section we outline how the Z specification is
 translated into Isabelle. If the user has labelled a theory in the specification (T\#) then that will
 begin writing an Isabelle skeleton.
-For example if we had an empty specification and named it `a' then the program
+For example if we had an empty specification (without a context) and named it `\texttt{a}' then the program
 will create an empty Isabelle skeleton e.g.
 
 \begin{verbatim}
@@ -164,7 +164,7 @@ stateInvariants in the stateSchema and SI1' is the stateInvariants prime.
 \label{sec:zcga2fillin}
 
 Since translating using ZMathLang can even been done on incomplete specifications, it is important to
-note that if some missing information is missing e.g. a declaration, expression
+note that if some information is missing e.g. a declaration, expression
 etc then the comments of where these should go will not be changed. For example
 if we have the line \verb|"(*CS1_TYPES*) => bool"| in the skeleton and the
 schema CS1 has no declarations yet then the line will not be changed, and it is
@@ -250,6 +250,10 @@ replaced by the expression \verb|c \<in> d|. Note this expression is very
 similar to the expression in \LaTeX{} \verb|c \in d| apart from the symbol
 \verb|\in| becomes \verb|\<in>|. Table \ref{tab:latextoisabelle} shows the rest
 of these automatic changes of the syntax made from \LaTeX{} to Isabelle.
+
+Note: The following table shows one example of mapping Z specifications into the
+Isabelle theorem prover. There may be other ways to map the syntax from \LaTeX{}
+into Isabelle but we use the following table to show the proof of concept.
 
 {\def\arraystretch{0.5}\tabcolsep=0.5pt
 \begin{longtable}[H]{|c | c | c |}
@@ -400,7 +404,9 @@ have {\color{blue}{`\verb|Range k|'}} and {\color{blue}{`\verb|ran k|'}} for tot
 For example
 if {\color{red}{`\verb|funset: A \fun B |'}} and {\color{red}{`\verb|\dom k \in funset|'}}
 then the isabelle translation will be {\color{blue}{$(A*B) set$}} and {\color{blue}{$Domain\ k \in funset$}}.
-however if {\color{red}{`\verb|pfunset: A \pfun B |'}} and {\color{red}{`\verb|\dom k \in pfunset|'}}
+however if {\color{red}{`\verb|pfunset: A \pfun B |'}} and
+
+{\color{red}{`\verb|\dom k \in pfunset|'}}
 then the isabelle translation will be {\color{blue}{$A \rightharpoonup B$}} and {\color{blue}{$dom\ k$}}.
 
 \end{itemize}

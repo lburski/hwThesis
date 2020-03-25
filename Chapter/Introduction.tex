@@ -281,7 +281,7 @@ the diagram.
 
 \begin{figure}[H]
  \begin{center}
- \includegraphics [scale=0.75]{Figures/Design/timeline.png}
+ \includegraphics [scale=0.75]{Figures/Design/timeline2.png}
  \caption{How far can one automate a specification proof.}
  \label{fig:timeline}
 \end{center}
@@ -310,10 +310,9 @@ the diagram.
 
 We have created the \Gls{zmath} toolkit which assist the user from the
 specification to full proof however there is also ongoing research on proving
-properties from the theorem prover end. Figure \ref{fig:timeline} shows the
-amount of proving techniques each automation holds. We have highlighted that
+properties from the theorem prover end. We have highlighted that
 \gls{zmath} only gets the user so far in their proof however they are free to
-use external automated theorem provers in completing their specification proof
+use external automated theorem provers such as sledgehammer in completing their specification proof
 if they so wish.
 
 Even external automated theorem provers have their limitations. For example, the
@@ -326,31 +325,7 @@ times it may not and the user will still need to invoke sledgehammer to reach
 their goal. Sledgehammer itself is a tool that applies \gls{smt} solvers on the
 current goal e.g. Vampire\cite{vampire}, SPASS \cite{fmintrol} and E \cite{e}. We
 use sledghammer as a collective, to describe all the \gls{smt} solvers it covers
-\cite{sledgehammer}.
-
-Other automated methods include:
-
-\begin{itemize}
-
-\item \textbf{simp:} simplifies the current goal using term rewriting.
-
-\item \textbf{arith:} automatically solves linear arithmetic problems.
-
-\item \textbf{clarify:} like `\emph{auto}' but less aggressive.
-
-\item \textbf{clarsimp:} a combination of `\emph{clarify}' and `\emph{simp}'.
-
-\item \textbf{force:} like `\emph{auto}' but only applied to the first goal.
-
-\item \textbf{auto:} applies automated tools to look for a solution.
-
-\item \textbf{blast:} a powerful first-order prover. \cite{isacheat}
-\end{itemize}
-
-All these automated tools get increasingly more complex and cover more
-properties, e.g \emph{clarsimp} covers more proving techniques then \emph{simp}
-and \emph{blast} covers more proving techniques than \emph{auto} etc. With these
-tools, one can prove certain properties about their theorem. However, there
+\cite{sledgehammer}. However, there
 still doesn't exist an automated proving tool which covers \textbf{all} proving
 techniques. Therefore some user input will be required for more complex proofs.
 

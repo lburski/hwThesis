@@ -732,6 +732,11 @@ produced in each step whether they were produced automatically or manually. A
 full worked example was shown from the original text into a fully parseable and
 checked Isabelle proof.
 
+This thesis follows similar steps from \gls{math} as \gls{math} is already a
+working proven concept which translates a mathematical text into a full proof.
+Since Z is a subset of Mathematics the steps should work for Z specifications as
+well.
+
 We will use the same steps to check the correctness of a software specification
 albeit each step in the \gls{math} framework will be adapted, changed and
 implemented to suit the software specification syntax.
@@ -1146,7 +1151,9 @@ In this section we gave a brief introduction to Z. We described
 structure of a Z specification. We gave a full example of a Z specification and
 explained each part and what it means. In the next section we identify various
 proving systems which currently exist for mathematics, other formal methods and
-Z.
+ Z. We have chosen to translate Z specifications as they are the root of many
+ other formal notations (object Z, B-Method etc.) Z specifications can also
+ accommodate informal text being written around the formal notation.
 
 \section{Proving systems}
 
@@ -1276,6 +1283,10 @@ require to have some form of computer programming knowledge. A proof system can
 check the logical correctness of a document if it is detailed enough for the
 software to parse, therefore the computerisation of the mathematical document
 becomes labour intensive and tedious for the author to write.
+
+We have chosen to translate our specification into Isabelle as Isabelle has a
+lot of support and information online, and the syntax of Isabelle is very
+similar to the notation of Z.
 
 \subsection{Proving systems for specific formal method}
 

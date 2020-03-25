@@ -213,8 +213,8 @@ $\rightarrow$, v\_1)  to goto\_graph \;}
 {addEdge(v\_1, $\rightarrow$, v\_2) to dependency\_graph \; addEdge(v\_1,
 $\rightarrow$, v\_2)  to goto\_graph \;}
 \uIf{$\backslash$requires\{$id_{1}$\}\{$id_{2}$\}} 
-{addEdge(v\_1, $\rightarrow$, v\_2) to dependency\_graph \; addEdge(v\_1,
-$\rightarrow$, v\_2)  to goto\_graph \;}
+{addEdge(v\_1, $\rightarrow$, v\_2) to dependency\_graph \; addEdge(v\_2,
+$\rightarrow$, v\_1)  to goto\_graph \;}
 \uIf{$\backslash$totalises\{$id_{1}$\}\{$id_{2}$\}} 
 {addEdge(v\_1, $\rightarrow$, v\_2) to dependency\_graph \; addEdge(v\_2,
 $\rightarrow$, v\_1)  to goto\_graph \;}
@@ -476,6 +476,12 @@ specification is consistent can fall under two categories:
 
 We use the syntax \textit{Context} $\vdash$ \textit{predicate} taken from
 \cite{DBLP:conf/icsea/WenMZ06} to define the proof obligations.
+
+Out of the many proof obligations to choose we have chosen POb1 as these proof
+proof obligations would be easiest to automatically generate using the
+information we have from the ZCGa and ZDRa. We have chosen to add POb2 as these
+proof obligations are specific to the formal specification and allows the user
+choice in what they would like to prove.
 
 \subsection{POb1, Proof Obligation type 1}
 \label{subsec:pob1}

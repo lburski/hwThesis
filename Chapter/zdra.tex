@@ -26,10 +26,17 @@ As well as having instances, the ZDRa shows relations between them to make sure
 there are no loops in reasoning and to give warning in some situations (e.g.
 specification is not totalised).
 
-Identifying loops in the reasoning is important as it determines whether the
+We have chosen to identify loops in the reasoning as it determines whether the
 program is deterministic. Safety-critical systems must be deterministic,
 practices which can lead to non-determinism must be avoided or carefully
-controlled \cite{rierson2013developing}. Identifying loops in the reasoning is one of these practices. 
+controlled \cite{rierson2013developing}. Identifying loops in the reasoning is
+one of these practices. Checking for loops in the reasoning can also be
+automatically checked on an informal specification as shown in section \ref{sec:zdrainformal}.
+
+There are millions of safety properties one can check for however we have chosen
+to check the state invariants \& checking the robustness of the specification as
+these will be the easiest to automate using the information we have from the
+annotations.
 
 It is important to have a robust and totalised specification (in particular one
 for a high integrity system) because totalisation leaves less room for error.
@@ -75,6 +82,11 @@ In a similar way as  MathLang for mathematics \ref{sec:mathlangbackground}, we c
 \gls{zdra} annotations (either before of after the \gls{zcga}) using our ZMathLang \LaTeX{} package . These
 annotations chunks parts of the specification together and upon compiling shows
 the relationships between each of these chunks.
+
+We have chosen the following annotations for similar reasons as the \gls{zcga}.
+We only wanted the minimum amount of categories in order to check for rhetorical
+correctness. We also wanted the minimum amount of categories to translate the
+specification into an Isabelle skeleton.
 
 \begin{table}[H]
 \begin{tabular}{| c | c | c | c |}
@@ -1120,6 +1132,9 @@ described in the next chapter.
 % \mathcal{ED}$.
 % \end{itemize}
 % \end{proof}
+
+\section{ZDRa on an Informal Specification}
+\label{sec:zdrainformal}
 
 \section{Conclusion}
 In this chapter the \gls{zdra} step of the \gls{zmath} has been described. A

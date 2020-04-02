@@ -396,6 +396,10 @@ complex. The final case study we present is a partial translation of a
 specification which is not fully formalised but on it's way to becoming fully
 formal.
 
+We have chosen these particular case studies in order to analyse the differences
+in complexity between those specifications using just terms and those
+specifications using both terms and sets.
+
 \subsection{Case Study 1: A specification using only terms.}
 \label{subsec:casestudy1}
 
@@ -551,26 +555,6 @@ tool-kit.
     \caption{Part of the isabelle skeleton for the steamboiler specification.\label{fig:steamisaskel}}
 \end{figure}
 
-
-% \begin{figure}[H]
-% \centering
-% \begin{minipage}{0.43\textwidth}
-% \centering
-% \includegraphics[width=7cm]{Figures/Evaluation/4image.png}
-% \end{minipage}\hfill
-% \begin{minipage}{0.53\textwidth}
-% %[clip,l,b,r,t]
-% \centering
-% \includegraphics[width=7cm]{Figures/Evaluation/4imageb.png}
-% \end{minipage}
-% \begin{minipage}{0.45\textwidth}
-% %[clip,l,b,r,t]
-% \centering
-% \includegraphics[width=7cm]{Figures/Evaluation/4imagec.png}
-% \end{minipage}
-% \caption{Part of the isabelle skeleton for the steamboiler specification.\label{fig:steamisaskel}}
-% \end{figure}
-
 Part of the isabelle skeleton for the steamboiler specification is shown in
 figure \ref{fig:steamisaskel}. Since the steamboiler example has 2 stateSchema's
 the \gls{zmath} tool-set creates 2 isabelle 	\texttt{records} in the theory file.
@@ -592,24 +576,6 @@ declarations, expressions, schemaNames etc.
     \hfill
     \caption{Part of the filled in isabelle skeleton for the steamboiler specification.\label{fig:filledinsteamskeleton}}
 \end{figure}
-
-
-% \begin{figure}[H]
-% \centering
-% \begin{minipage}{0.43\textwidth}
-% \centering
-% \includegraphics[ scale=0.4]{Figures/Evaluation/5imagea.png}
-% \end{minipage}\hfill
-% \begin{minipage}{0.53\textwidth}
-% %[clip,l,b,r,t]
-% \centering
-% \includegraphics[scale=0.4]{Figures/Evaluation/5imagec.png}
-% \end{minipage}\hfill\hfill
-% %\begin{minipage}{0.7\textwidth} [clip,l,b,r,t] \centering
-% \includegraphics[scale=0.4]{Figures/Evaluation/5imageb.png}
-% %\end{minipage}
-% \caption{Part of the filled in isabelle skeleton for the steamboiler specification.\label{fig:filledinsteamskeleton}}
-% \end{figure}
 
 In figure \ref{fig:filledinsteamskeleton} we show 3 parts of the filled in
 isabelle skeleton (\gls{half}). The first part shows the beginning of the
@@ -700,7 +666,9 @@ stateInvariants which \gls{zmath} could prove are satisfied throughout the
 specification, we decided it would be a could example to show the full workings
 of. This is shown in chapter \ref{ch:fullexample}.
 
-
+In conclusion there is not much difference in the difficulty of translation
+between those specifications using just terms and those specifications using
+both terms and sets.
 
 \subsection{Case Study 3: A semi formal specification.}
 
@@ -880,11 +848,12 @@ raw \LaTeX{} specification, or fully formalise their specification. Another way
 to fully prove their specification is to add other properties to the Isabelle
 document.
 
+
+
 \section{Analysing examples}
 
 In this section we analyse the examples we have successfully translated into
 Isabelle and proved the sanity of the specification. 
-
 
 We remind the reader of figure \ref{fig:timeline} in chapter \ref{ch:design}.
 \Gls{zmath} is able assist the user with the translation of specification up to
@@ -896,61 +865,6 @@ user did have to go through each property and prove it. In total, there were 21
 changeSchema's and 1 set of stateInvariants, therefore there was 21 properties
 which the user had to prove manually.
 
-% \subsection{SteamBoiler}
-
-% In our largest example there were 21 changeSchema's and 1 set of
-% stateInvariants, therefore there was 21 properties which the user had to prove
-% manually.
-
-% To prove the sanity of the steamboiler specification, we went through the
-% consistency lemmas (automatically generated) one by one and manually prove them.
-% We started of with unproven lemma's with the command `\emph{sorry}' at the end
-% such as the lemma shown in figure \ref{fig:steamboilerL1lemma}.
-
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=0.5]{Figures/Evaluation/sorryoutputlemma.png}
-% \caption{The `\texttt{SNormalStop0}' lemma taken from the steamboiler \gls{half}. \label{fig:steamboilerL1lemma}}
-% \end{figure}
-
-% We then delete the `\emph{sorry}' command and if sledgehammer is set up to be
-% automatic, the user can sometimes leave their cursor at the end of the lemma and
-% `\emph{auto sledgehammer}' finds a proof which is displayed in the output
-% terminal. In our case, this has happened for the `\texttt{SNormalStop0}' lemma
-% which is displayed in figure \ref{fig:autosolvelemma}.
-
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=0.5]{Figures/Evaluation/steamboilerlemmaproof.png}
-% \caption{Auto sledgehammer finding a proof for one of the lemma's in the steamboiler specification using the \gls{smt} solver `\emph{cvc4}'. \label{fig:autosolvelemma}}
-% \end{figure}
-
-% In this particular lemma we are proving the property that the
-% \verb|SNormal_Stop)| schema does not conflict with the state invariants of the
-% specification either before or after the state has been changed. Some other
-% lemma's in the steamboiler example (such as the \verb|SInitNormal1_L9| lemma)
-% could be proven by the isabelle command `\texttt{blast}' as shown in figure
-% \ref{fig:blastprovenlemma}. 
-
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=0.6]{Figures/Evaluation/steamboilerblastlemma.png}
-% \caption{An example of a lemma in the steamboiler specification being proved by blast. \label{fig:blastprovenlemma}}
-% \end{figure}
-
-% Proving by `\emph{blast}' is obviously less complex then the proof needed for
-% lemma \verb|SNormalStop0_L1| in figure \ref{fig:steamboilerL1lemma}, however if
-% we look back to figure \ref{fig:timeline} in chapter \ref{ch:design} we can see
-% that `\emph{blast}' covers less properties then `\emph{sledgehammer}'. Therefore
-% for the lemma's in the steamboiler specification we have proved 2 lemma's by
-% blast and 19 using sledgehammer. 
-
-% It is important to note that a single lemma can be proven in a variety of ways,
-% so even though we have chosen to prove our specification in certain ways other
-% users may choose to use other tools to prove their theorems and lemmas. Even
-% though we have proved 19 lemmas by sledgehammer in the steamboiler
-% specification, we might have been able to prove all the lemmas by sledgehammer
-% but chosen to prove 2 by blast to show variety.
 
 \subsection{ModuleReg}
 

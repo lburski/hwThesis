@@ -141,5 +141,6 @@
         "zermelo",
         "zspec",
         "zwikia"
-    ]
+    ],
+    "python.pythonPath": "/usr/bin/python2.7"
 }

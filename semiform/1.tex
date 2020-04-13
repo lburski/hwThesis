@@ -15,9 +15,22 @@ dialling in or displaying values. The system supports the following four modes:
 \end{itemize}
 
 \begin{zed}
-\set{events} ::= \term{press\_att\_cws} |  \term{press\_cas\_eng} | \term{press\_alt\_eng} | \\
- \term{press\_fpa\_sel}
+\set{mode\_status} ::= \term{off} | \term{engaged}
 \end{zed}
+
+\begin{schema}{off\_eng}
+\text{\declaration{\term{mode}: \expression{mode\_status}}}
+\where
+\text{\expression{\expression{\term{mode} = \term{off}} \lor \expression{\term{mode} = \term{engaged}}}}
+\end{schema}
+
+
+\begin{schema}{AutoPilot}
+\text{\declaration{\term{att\_cws}: \expression{mode\_status}}} \\
+\text{\declaration{\term{fpa\_sel}: \expression{mode\_status}}} \\
+\text{\declaration{\term{alt\_eng}: \expression{mode\_status}}} \\
+\text{\declaration{\term{cas\_eng}: \expression{mode\_status}}} 
+\end{schema}
 
 Only one of the first three modes can be engaged at any time. However, the \term{cas\_eng} mode
 can be engaged at the same time as any of the other modes. The pilot engages a mode by pressing

@@ -920,11 +920,11 @@ checker whilst the specification is not complete.
      \centering
      \begin{minipage}{0.45\textwidth}
      \centering
-     \includegraphics[width=\linewidth]{Figures/fullexample/semiform1a.png}
+     \includegraphics[scale=0.5]{Figures/fullexample/sfzcgaincorrect.png}
      \end{minipage}\hfill
      \begin{minipage}{0.45\textwidth}
      \centering
-     \includegraphics[width=\linewidth]{Figures/fullexample/semiform1a.png}
+     \includegraphics[scale=0.5]{Figures/fullexample/sfoutputincorrect.png}
      \end{minipage}
      \caption{Part of the autopilot specification which is \gls{zcga} incorrect.\label{fig:sfzcgaincorrect}}
      \end{figure}
@@ -934,91 +934,133 @@ in figure \ref{fig:sfzcgaincorrect}) then the \gls{zcga} would identify this as 
 incorrect.
 
 The user would need to declare his terms first before using them within the
-paragraph. This is shown in figure \ref{...}.
+paragraph. This is shown in figure \ref{fig:sfzcgacorrect}.
 
-% \section{Step 2\\ZDRa}
+\begin{figure}[H]
+     \centering
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{Figures/fullexample/sfzcgacorrect.png}
+     \end{minipage}\hfill
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{Figures/fullexample/semiformcorrect.png}
+     \end{minipage}
+     \caption{Part of the autopilot specification which is \gls{zcga} correct.\label{fig:sfzcgacorrect}}
+     \end{figure}
 
-% Next the user can add \gls{zdra} relations to chunk parts of the specification
-% together and add relations to them. Figure \ref{fig:zdrazcgaAno} shows our
-% example labelled in \gls{zdra} annotations (in blue), the \gls{zcga} annotations
-% are in grey and existing specification in black. Figure \ref{fig:zdrazcgaout}
-% shows the compiled result.
+ \section{Step 2\\ZDRa}
 
-% \begin{figure}[H]
-% \vspace{-0.2in}
-% \centering
-% \begin{minipage}{0.45\textwidth}
-% \centering
-% \begin{tiny}
-% \begin{BVerbatim}[commandchars=+\[\]]
-% \documentclass{article}
-% \usepackage{zmathlang}
-% \begin{document}
+ The user can then add \gls{zdra} annotations to chunk part of the specification
+together and add relations together. These chunks can be from the informal or
+formal part of the specification. Figure \ref{...} shows the Autopilot
+specification labelled in \gls{zdra} ) (blue) and \gls{zcga} (grey).
 
-% [+color[blue]\dratheory{T1}{0.5}{]
-% \begin{zed}
-% [+color[gray]\set{]PERSON[+color[gray]}],
-% [+color[gray]\set{]MODULE[+color[gray]}]
-% \end{zed}
-
-% [+color[blue]\draschema{SS1}{]
-% \begin{schema}{ModuleReg}
-% [+color[gray]\text{\declaration{\set{]students[+color[gray]}]:[+color[gray]\expression{]\power
-% PERSON[+color[gray]}}}]\\
-% [+color[gray]\text{\declaration{\set{]degModules[+color[gray]}]:[+color[gray]\expression{]\power
-% MODULE[+color[gray]}}}]\\
-% [+color[gray]\text{\declaration{\set{]taking[+color[gray]}]:[+color[gray]\expression{]PERSON
-% \rel MODULE[+color[gray]}}}]
-% \where
-% [+color[blue]\draline{SI1}{] [+color[gray]\text{\expression{\set{]\dom
-% [+color[gray]\set{]taking[+color[gray]}}] \subseteq
-% [+color[gray]\set{]students[+color[gray]}}}]\\
-% [+color[gray]\text{\expression{\set{]\ran
-% [+color[gray]\set{]taking[+color[gray]}}] \subseteq
-% [+color[gray]\set{]degModules[+color[gray]}}}][+color[blue]}]
-% \end{schema}[+color[blue]}]
-
-% [+color[blue]\requires{SS1}{SI1}]
-
-% [+color[blue]\draschema{CS1}{]
-% \begin{schema}{AddStudent}
-% [+color[gray]\text{]\Delta ModuleReg[+color[gray]}]\\
-% [+color[gray]\text{\declaration{\term{]p?[+color[gray]}]:[+color[gray]\expression{]PERSON[+color[gray]}}}]\\
-% \where
-% [+color[blue]\draline{PRE1}{]
-% [+color[gray]\text{\expression{\term{]p?[+color[gray]}] \notin
-% [+color[gray]\set{]students[+color[gray]}}}][+color[blue]}]\\
-% [+color[blue]\draline{PO1}{]
-% [+color[gray]\text{\expression{\set{]students'[+color[gray]}] =
-% [+color[gray]\set{\set{]students[+color[gray]}] \cup
-% [+color[gray]\set{]\{[+color[gray]\term{]p?[+color[gray]}]\}[+color[gray]}}}}]\\
-% [+color[gray]\text{\expression{\set{]degModules'[+color[gray]}] =
-% [+color[gray]\set{]degModules[+color[gray]}}}]\\
-% [+color[gray]\text{\expression{\set{]taking'[+color[gray]}] =
-% [+color[gray]\set{]taking[+color[gray]}}}][+color[blue]}]
-% \end{schema}[+color[blue]}]
-
-% [+color[blue]\requires{CS1}{PRE1}] [+color[blue]\allows{PRE1}{PO1}]
-% [+color[blue]\uses{CS1}{SS1}]
-
-% [+color[blue]\draschema{CS2}{]
-% \begin{schema}{RegForModule}
-% [+color[gray]\text{]\Delta ModuleReg[+color[gray]}]\\
-% [+color[gray]\text{\declaration{\term{]p?[+color[gray]}]:
-% [+color[gray]\expression{]PERSON[+color[gray]}}}]\\
-% [+color[gray]\text{\declaration{\term{]m?[+color[gray]}]:
-% [+color[gray]\expression{]MODULE[+color[gray]}}}]
-% \where
-
-% \end{document}
-% \end{BVerbatim}
-% \end{tiny}
-% %\vspace{-0.18in}
-% \caption{An example of a specification labelled in \gls{zcga} and \gls{zdra}.\label{fig:zdrazcgaAno}}
-% %\vspace{-0.2in}
-% \end{minipage}\hfill
-% \begin{minipage}{0.45\textwidth}
-% \centering
+ \begin{figure}[H]
+ \vspace{-0.2in}
+ \centering
+ \begin{minipage}{0.45\textwidth}
+ \centering
+ \begin{tiny}
+ \begin{BVerbatim}[commandchars=+\[\]]
+ \documentclass{article}
+ \usepackage{zmathlang}
+ \begin{document}
+ [+color[blue]\dratheory{T1}{0.4}{]
+ 
+ \begin{enumerate}
+ \item The mode-control panel contains four buttons for selecting modes and three displays for
+ dialling in or displaying values. The system supports the following four modes:
+ 
+ \begin{itemize}
+ \item attitude control wheel steering (att\_cws)
+ \item flight path angle selected (fpa\_sel)
+ \item altitude engage (alt\_eng)
+ \item calibrated air speed (cas\_eng)
+ \end{itemize}
+ 
+ \begin{zed}
+[+color[gray]\set{]events} ::= \term{press\_att\_cws} |  \term{press\_cas\_eng} | \term{press\_alt\_eng} | \\
+  \term{press\_fpa\_sel}
+ \end{zed}
+ 
+ \begin{zed}
+      \set{mode\_status} ::= \term{off} | \term{engaged}
+ \end{zed}
+ 
+ \draschema{OS1}{
+      \begin{schema}{off\_eng}
+           \text{\declaration{\term{mode}: \expression{mode\_status}}}
+           \where
+           \draschema{O1}{
+                \text{\expression{\expression{\term{mode} = \term{off}} \lor \expression{\term{mode} = \term{engaged}}}}}
+ \end{schema}}
+ 
+ \requires{OS1}{O1}
+ 
+ \draschema{SS1}{
+      \begin{schema}{AutoPilot}
+           \text{\declaration{\term{att\_cws}: \expression{mode\_status}}} \\
+           \text{\declaration{\term{fpa\_sel}: \expression{mode\_status}}} \\
+           \text{\declaration{\term{alt\_eng}: \expression{mode\_status}}} \\
+           \text{\declaration{\term{cas\_eng}: \expression{mode\_status}}} 
+ \end{schema}}
+ 
+ \draschema{OS2}{Only one of the first three modes can be engaged at any time. However, the \term{cas\_eng} mode
+ can be engaged at the same time as any of the other modes.} \draschema{CS1}{The pilot engages a mode by pressing
+ the corresponding button on the panel. One of the three modes, \term{att\_cws}, \term{fpa\_sel}, or \term{alz\_eng},
+ should be engaged at all times.}
+ \draschema{CS2}{Engaging any of the first three modes will automatically cause the
+ other two to be disengaged since only one of these three modes can be engaged at a time.}
+ 
+ \uses{OS2}{SS1}
+ \uses{CS1}{SS1}
+ \uses{CS2}{SS1}
+ 
+ \draschema{SS2}{
+ \begin{schema}{AutoPilot'}
+ \text{\declaration{\term{att\_cws'}: \expression{mode\_status}}} \\
+ \text{\declaration{\term{fpa\_sel'}: \expression{mode\_status}}} \\
+ \text{\declaration{\term{alt\_eng'}: \expression{mode\_status}}} \\
+ \text{\declaration{\term{cas\_eng'}: \expression{mode\_status}}} 
+ \end{schema}}
+ 
+ \uses{SS2}{SS1}
+ 
+ \draschema{CS3}{
+ \begin{schema}{att\_cwsDo}
+ \text{\Delta AutoPilot }
+ \where
+ \draline{PRE1}{
+ \text{\expression{\term{att\_cws} = \term{off}}}} \\
+ \draline{PO1}{
+ \text{\expression{\term{att\_cws'} = \term{engaged}}} \\
+ \text{\expression{\term{fpa\_sel'} = \term{off}}} \\
+ \text{\expression{\term{alt\_eng'} = \term{off}}} \\
+ \text{\expression{\expression{\term{cas\_eng'} = \term{off}} \lor
+  \expression{\term{cas\_eng'} = \term{engaged}}}}}
+ \end{schema}}
+ 
+ \uses{CS3}{SS2}
+ \allows{PRE1}{PO1}
+ \requires{CS3}{PRE1}
+ 
+ \item There are three displays on the panel: and altitude [ALT], flight path angle [FPA], and
+ calibrated air speed [CAS]. The displays usually show the current values for the altitude, flight
+ path angle, and air speed of the aircraft. However, the pilot can enter a new value into a display by
+ dialling in the value using the knob next to the display. This is the target or "pre-selected" value that
+ the pilot wishes the aircraft to attain. For example, if the pilot wishes to climb to 25,000 feet, he 
+ will dial 25,000 into the altitude display window and then press the alz\_eng button to engage the 
+ altitude mode. Once the target value is achieved or the mode is disengaged, the display reverts to 
+ showing the "current" value.
+ \end{BVerbatim}
+ \end{tiny}
+ %\vspace{-0.18in}
+ \caption{An example of a specification labelled in \gls{zcga} and \gls{zdra}.\label{fig:zdrazcgaAno}}
+ %\vspace{-0.2in}
+ \end{minipage}\hfill
+ \begin{minipage}{0.45\textwidth}
+ \centering
 % \begin{tiny}
 % \begin{BVerbatim}[commandchars=+\[\]]
 % [+color[blue]\draline{PRE2}{]
@@ -1036,20 +1078,19 @@ paragraph. This is shown in figure \ref{...}.
 % [+color[gray]\term{]m?[+color[gray]}}]\}[+color[gray]}}}}]\\
 % [+color[gray]\text{\expression{\set{]students'[+color[gray]}] =
 % [+color[gray]\set{]students[+color[gray]}}}]\\
-% [+color[gray]\text{\expression{\set{]degModules'[+color[gray]}] =
+%% [+color[gray]\text{\expression{\set{]degModules'[+color[gray]}] =
 % [+color[gray]\set{]degModules[+color[gray]}}}][+color[blue]}]
 % \end{schema}[+color[blue]}] [+color[blue]}]
-
-
-% \end{BVerbatim}
-% \end{tiny}
-% %\includegraphics[scale=1, clip, trim=2cm 3cm 2cm 3cm, width=1.00\textwidth]{Figures/fullexample/1n2.pdf}
-% \includegraphics[scale=0.75]{Figures/fullexample/1n2.jpg}
-% %\vspace{-0.18in}
-% \caption{An example of a specification output labelled in \gls{zcga} and \gls{zdra}.\label{fig:zdrazcgaout}}
-% %\vspace{-0.2in}
-% \end{minipage}
-% \end{figure}
+%
+ %\end{BVerbatim}
+ %\end{tiny}
+ %\includegraphics[scale=1, clip, trim=2cm 3cm 2cm 3cm, width=1.00\textwidth]{Figures/fullexample/1n2.pdf}
+ \includegraphics[scale=0.75]{Figures/fullexample/sfzdracorrectout.png}
+ %\vspace{-0.18in}
+ \caption{An example of a specification output labelled in \gls{zcga} and \gls{zdra}.\label{fig:sfzdrazcgaout}}
+ %\vspace{-0.2in}
+ \end{minipage}
+ \end{figure}
 
 % After annotating our example in \gls{zdra} labels we can then run our
 % specification through the \gls{zdra} checker. Figure \ref{fig:zdracorrect} shows

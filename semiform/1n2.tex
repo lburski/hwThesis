@@ -22,33 +22,38 @@ dialling in or displaying values. The system supports the following four modes:
  \term{press\_fpa\_sel}
 \end{zed}
 
-Only one of the first three modes can be engaged at any time. However, the cas\_eng mode
-can be engaged at the same time as any of the other modes. The pilot engages a mode by pressing
-the corresponding button on the panel. One of the three modes, att\_cws, fpa\_sel, or alz\_eng,
-should be engaged at all times. Engaging any of the first three modes will automatically cause the
-other two to be disengaged since only one of these three modes can be engaged at a time.
-
 \begin{zed}
-\set{mode\_status} ::= \term{off} | \term{engaged}
+	\set{mode\_status} ::= \term{off} | \term{engaged}
 \end{zed}
 
 \draschema{OS1}{
-\begin{schema}{off\_eng}
-\text{\declaration{\term{mode}: \expression{mode\_status}}}
-\where
-\draschema{O1}{
-\text{\expression{\expression{\term{mode} = \term{off}} \lor \expression{\term{mode} = \term{engaged}}}}}
+	\begin{schema}{off\_eng}
+		\text{\declaration{\term{mode}: \expression{mode\_status}}}
+		\where
+		\draschema{O1}{
+			\text{\expression{\expression{\term{mode} = \term{off}} \lor \expression{\term{mode} = \term{engaged}}}}}
 \end{schema}}
 
 \requires{OS1}{O1}
 
 \draschema{SS1}{
-\begin{schema}{AutoPilot}
-\text{\declaration{\term{att\_cws}: \expression{mode\_status}}} \\
-\text{\declaration{\term{fpa\_sel}: \expression{mode\_status}}} \\
-\text{\declaration{\term{alt\_eng}: \expression{mode\_status}}} \\
-\text{\declaration{\term{cas\_eng}: \expression{mode\_status}}} 
+	\begin{schema}{AutoPilot}
+		\text{\declaration{\term{att\_cws}: \expression{mode\_status}}} \\
+		\text{\declaration{\term{fpa\_sel}: \expression{mode\_status}}} \\
+		\text{\declaration{\term{alt\_eng}: \expression{mode\_status}}} \\
+		\text{\declaration{\term{cas\_eng}: \expression{mode\_status}}} 
 \end{schema}}
+
+\draschema{OS2}{Only one of the first three modes can be engaged at any time. However, the \term{cas\_eng} mode
+can be engaged at the same time as any of the other modes.} \draschema{CS1}{The pilot engages a mode by pressing
+the corresponding button on the panel. One of the three modes, \term{att\_cws}, \term{fpa\_sel}, or \term{alz\_eng},
+should be engaged at all times.}
+\draschema{CS2}{Engaging any of the first three modes will automatically cause the
+other two to be disengaged since only one of these three modes can be engaged at a time.}
+
+\uses{OS2}{SS1}
+\uses{CS1}{SS1}
+\uses{CS2}{SS1}
 
 \draschema{SS2}{
 \begin{schema}{AutoPilot'}
@@ -60,7 +65,7 @@ other two to be disengaged since only one of these three modes can be engaged at
 
 \uses{SS2}{SS1}
 
-\draschema{CS1}{
+\draschema{CS3}{
 \begin{schema}{att\_cwsDo}
 \text{\Delta AutoPilot }
 \where
@@ -74,9 +79,9 @@ other two to be disengaged since only one of these three modes can be engaged at
  \expression{\term{cas\_eng'} = \term{engaged}}}}}
 \end{schema}}
 
-\uses{CS1}{SS2}
+\uses{CS3}{SS2}
 \allows{PRE1}{PO1}
-\requires{CS1}{PRE1}
+\requires{CS3}{PRE1}
 
 \item There are three displays on the panel: and altitude [ALT], flight path angle [FPA], and
 calibrated air speed [CAS]. The displays usually show the current values for the altitude, flight

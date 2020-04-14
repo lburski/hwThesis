@@ -953,8 +953,15 @@ paragraph. This is shown in figure \ref{fig:sfzcgacorrect}.
 
  The user can then add \gls{zdra} annotations to chunk part of the specification
 together and add relations together. These chunks can be from the informal or
-formal part of the specification. Figure \ref{...} shows the Autopilot
-specification labelled in \gls{zdra} ) (blue) and \gls{zcga} (grey).
+formal part of the specification. Figure \ref{fig:sfzdrazcgaout} shows the Autopilot
+specification labelled in \gls{zdra} (blue) and \gls{zcga} (grey) and figure
+\ref{fig:sfcompzcgazdra} shows the compiled result.
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{Figures/fullexample/sfzdracorrectout.png}
+\caption{Compiled results of the autopilot specification written in ZCGa and ZDRa \label{fig:sfcompzcgazdra}}
+\end{figure}
 
  \begin{figure}[H]
  \vspace{-0.2in}
@@ -963,162 +970,138 @@ specification labelled in \gls{zdra} ) (blue) and \gls{zcga} (grey).
  \centering
  \begin{tiny}
  \begin{BVerbatim}[commandchars=+\[\]]
- \documentclass{article}
- \usepackage{zmathlang}
- \begin{document}
- [+color[blue]\dratheory{T1}{0.4}{]
+\documentclass{article}
+\usepackage{zmathlang}
+\begin{document}
+[+color[blue]\dratheory{T1}{0.4}{]
+\begin{enumerate}
+\item The mode-control panel contains four buttons for 
+selecting modes and three displays for dialling in or
+displaying values. The system supports the following four modes:
+\begin{itemize}
+\item attitude control wheel steering (att\_cws)
+\item flight path angle selected (fpa\_sel)
+\item altitude engage (alt\_eng)
+\item calibrated air speed (cas\_eng)
+\end{itemize}
  
- \begin{enumerate}
- \item The mode-control panel contains four buttons for selecting modes and three displays for
- dialling in or displaying values. The system supports the following four modes:
+\begin{zed}
+[+color[gray]\set{]events} ::=[+color[gray]\term{]press\_att\_cws[+color[gray]}] |  [+color[gray]\term{]press\_cas\_eng[+color[gray]}] |
+[+color[gray]\term{]press\_alt\_eng[+color[gray]}] | [+color[gray]\term{]press\_fpa\_sel[+color[gray]}]
+\end{zed}
  
- \begin{itemize}
- \item attitude control wheel steering (att\_cws)
- \item flight path angle selected (fpa\_sel)
- \item altitude engage (alt\_eng)
- \item calibrated air speed (cas\_eng)
- \end{itemize}
+\begin{zed}
+[+color[gray]\set{]mode\_status} ::= [+color[gray]\term{]off[+color[gray]}] | [+color[gray]\term{]engaged[+color[gray]}]
+\end{zed}
  
- \begin{zed}
-[+color[gray]\set{]events} ::= \term{press\_att\_cws} |  \term{press\_cas\_eng} | \term{press\_alt\_eng} | \\
-  \term{press\_fpa\_sel}
- \end{zed}
+[+color[blue]\draschema{OS1}{]
+\begin{schema}{off\_eng}
+[+color[gray]\text{\declaration{\term{]mode[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}]
+\where
+[+color[blue]\draline{O1}{]
+[+color[gray]\text{\expression{\expression{\term{]mode[+color[gray]}] =
+[+color[gray]\term{]off[+color[gray]}}] \lor
+[+color[gray]\expression{\term{]mode[+color[gray]}] = [+color[gray]\term{]engaged[+color[gray]}}}}][+color[blue]}]
+\end{schema}[+color[blue]}]
+[+color[blue]\requires{OS1}{O1}]
  
- \begin{zed}
-      \set{mode\_status} ::= \term{off} | \term{engaged}
- \end{zed}
+[+color[blue]\draschema{SS1}{]
+\begin{schema}{AutoPilot}
+[+color[gray]\text{\declaration{\term{]att\_cws[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}] \\
+[+color[gray]\text{\declaration{\term{]fpa\_sel[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}] \\
+[+color[gray]\text{\declaration{\term{]alt\_eng[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}] \\
+[+color[gray]\text{\declaration{\term{]cas\_eng[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}] 
+\end{schema}[+color[blue]}]
  
- \draschema{OS1}{
-      \begin{schema}{off\_eng}
-           \text{\declaration{\term{mode}: \expression{mode\_status}}}
-           \where
-           \draschema{O1}{
-                \text{\expression{\expression{\term{mode} = \term{off}} \lor \expression{\term{mode} = \term{engaged}}}}}
- \end{schema}}
+[+color[blue]\draschema{OS2}{]Only one of the first three modes can be engaged
+at any time. However, the [+color[gray]\term{]cas\_eng[+color[gray]}] mode can 
+be engaged at the same time as any of the other modes.[+color[blue]}]
+[+color[blue]\draschema{CS1}{]The pilot engages a mode by pressing
+the corresponding button on the panel. One of the three modes, 
+[+color[gray]\term{]att\_cws[+color[gray]}], [+color[gray]\term{]fpa\_sel[+color[gray]}], or [+color[gray]\term{]alz\_eng[+color[gray]}],
+should be engaged at all times.[+color[blue]}]
+[+color[blue]\draschema{CS2}{]Engaging any of the first three modes will 
+automatically cause the other two to be disengaged since only one of 
+these three modes can be engaged at a time.[+color[blue]}] 
+[+color[blue]\uses{OS2}{SS1}
+\uses{CS1}{SS1}
+\uses{CS2}{SS1}]
  
- \requires{OS1}{O1}
- 
- \draschema{SS1}{
-      \begin{schema}{AutoPilot}
-           \text{\declaration{\term{att\_cws}: \expression{mode\_status}}} \\
-           \text{\declaration{\term{fpa\_sel}: \expression{mode\_status}}} \\
-           \text{\declaration{\term{alt\_eng}: \expression{mode\_status}}} \\
-           \text{\declaration{\term{cas\_eng}: \expression{mode\_status}}} 
- \end{schema}}
- 
- \draschema{OS2}{Only one of the first three modes can be engaged at any time. However, the \term{cas\_eng} mode
- can be engaged at the same time as any of the other modes.} \draschema{CS1}{The pilot engages a mode by pressing
- the corresponding button on the panel. One of the three modes, \term{att\_cws}, \term{fpa\_sel}, or \term{alz\_eng},
- should be engaged at all times.}
- \draschema{CS2}{Engaging any of the first three modes will automatically cause the
- other two to be disengaged since only one of these three modes can be engaged at a time.}
- 
- \uses{OS2}{SS1}
- \uses{CS1}{SS1}
- \uses{CS2}{SS1}
- 
- \draschema{SS2}{
- \begin{schema}{AutoPilot'}
- \text{\declaration{\term{att\_cws'}: \expression{mode\_status}}} \\
- \text{\declaration{\term{fpa\_sel'}: \expression{mode\_status}}} \\
- \text{\declaration{\term{alt\_eng'}: \expression{mode\_status}}} \\
- \text{\declaration{\term{cas\_eng'}: \expression{mode\_status}}} 
- \end{schema}}
- 
- \uses{SS2}{SS1}
- 
- \draschema{CS3}{
- \begin{schema}{att\_cwsDo}
- \text{\Delta AutoPilot }
- \where
- \draline{PRE1}{
- \text{\expression{\term{att\_cws} = \term{off}}}} \\
- \draline{PO1}{
- \text{\expression{\term{att\_cws'} = \term{engaged}}} \\
- \text{\expression{\term{fpa\_sel'} = \term{off}}} \\
- \text{\expression{\term{alt\_eng'} = \term{off}}} \\
- \text{\expression{\expression{\term{cas\_eng'} = \term{off}} \lor
-  \expression{\term{cas\_eng'} = \term{engaged}}}}}
- \end{schema}}
- 
- \uses{CS3}{SS2}
- \allows{PRE1}{PO1}
- \requires{CS3}{PRE1}
- 
- \item There are three displays on the panel: and altitude [ALT], flight path angle [FPA], and
- calibrated air speed [CAS]. The displays usually show the current values for the altitude, flight
- path angle, and air speed of the aircraft. However, the pilot can enter a new value into a display by
- dialling in the value using the knob next to the display. This is the target or "pre-selected" value that
- the pilot wishes the aircraft to attain. For example, if the pilot wishes to climb to 25,000 feet, he 
- will dial 25,000 into the altitude display window and then press the alz\_eng button to engage the 
- altitude mode. Once the target value is achieved or the mode is disengaged, the display reverts to 
- showing the "current" value.
+[+color[blue]\draschema{SS2}{]
+\begin{schema}{AutoPilot'}
+[+color[gray]\text{\declaration{\term{]att\_cws'[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}] \\
+[+color[gray]\text{\declaration{\term{]fpa\_sel'[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}] \\
+[+color[gray]\text{\declaration{\term{]alt\_eng'[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}] \\
+[+color[gray]\text{\declaration{\term{]cas\_eng'[+color[gray]}]: [+color[gray]\expression{]mode\_status[+color[gray]}}}] 
+\end{schema}[+color[blue]}]
+\end{BVerbatim}
+\end{tiny}
+%\caption{An example of a specification labelled in \gls{zcga} and \gls{zdra}.\label{fig:zdrazcgaAno}}
+ \end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\begin{tiny}
+\begin{BVerbatim}[commandchars=+\[\]]
+[+color[blue]\uses{SS2}{SS1}]
+[+color[blue]\draschema{CS3}{]
+\begin{schema}{att\_cwsDo}
+[+color[gray]\text{]\Delta AutoPilot[+color[gray]}]
+\where
+[+color[blue]\draline{PRE1}{]
+[+color[gray]\text{\expression{\term{]att\_cws[+color[gray]}] = [+color[gray]\term{]off[+color[gray]}}}][+color[blue]}] \\
+[+color[blue]\draline{PO1}{]
+[+color[gray]\text{\expression{\term{]att\_cws'[+color[gray]}] = [+color[gray]\term{]engaged[+color[gray]}}}] \\
+[+color[gray]\text{\expression{\term{]fpa\_sel'[+color[gray]}] = [+color[gray]\term{]off[+color[gray]}}}] \\
+[+color[gray]\text{\expression{\term{]alt\_eng'[+color[gray]}] = [+color[gray]\term{]off[+color[gray]}}}] \\
+[+color[gray]\text{\expression{\expression{\term{]cas\_eng'[+color[gray]}] = [+color[gray]\term{]off[+color[gray]}}] \lor
+[+color[gray]\expression{\term{]cas\_eng'[+color[gray]}] = [+color[gray]\term{]engaged[+color[gray]}}}}][+color[blue]}]
+\end{schema}[+color[blue]}]
+     
+[+color[blue]\uses{CS3}{SS2}
+\allows{PRE1}{PO1}
+\requires{CS3}{PRE1}]
+     
+\item There are three displays on the panel: and altitude [ALT],
+flight path angle [FPA], and calibrated air speed [CAS]. 
+The displays usually show the current values for the altitude, 
+flight path angle, and air speed of the aircraft. However, the 
+pilot can enter a new value into a display by dialling in the value 
+using the knob next to the display. This is the target or 
+"pre-selected" value that the pilot wishes the aircraft to attain. 
+For example, if the pilot wishes to climb to 25,000 feet, he 
+will dial 25,000 into the altitude display window and then press 
+the alz\_eng button to engage the altitude mode. Once the target 
+value is achieved or the mode is disengaged, the display reverts to 
+showing the "current" value.
  \end{BVerbatim}
  \end{tiny}
- %\vspace{-0.18in}
- \caption{An example of a specification labelled in \gls{zcga} and \gls{zdra}.\label{fig:zdrazcgaAno}}
- %\vspace{-0.2in}
- \end{minipage}\hfill
- \begin{minipage}{0.45\textwidth}
- \centering
-% \begin{tiny}
-% \begin{BVerbatim}[commandchars=+\[\]]
-% [+color[blue]\draline{PRE2}{]
-% [+color[gray]\text{\expression{\term{]p?[+color[gray]}] \in
-% [+color[gray]\set{]students[+color[gray]}}}]\\
-% [+color[gray]\text{\expression{\term{]m?[+color[gray]}] \in
-% [+color[gray]\set{]degModules[+color[gray]}}}]\\
-% [+color[gray]\text{\expression{\term{\term{]p?[+color[gray]}] \mapsto
-% [+color[gray]\term{]m?[+color[gray]}}] \notin
-% [+color[gray]\set{]taking[+color[gray]}}}][+color[blue]}]\\
-% [+color[blue]\draline{PO2}{]
-% [+color[gray]\text{\expression{\set{]taking'[+color[gray]}] =
-% [+color[gray]\set{\set{]taking[+color[gray]}] \cup
-% [+color[gray]\set{]\{[+color[gray]\term{\term{]p?[+color[gray]}] \mapsto
-% [+color[gray]\term{]m?[+color[gray]}}]\}[+color[gray]}}}}]\\
-% [+color[gray]\text{\expression{\set{]students'[+color[gray]}] =
-% [+color[gray]\set{]students[+color[gray]}}}]\\
-%% [+color[gray]\text{\expression{\set{]degModules'[+color[gray]}] =
-% [+color[gray]\set{]degModules[+color[gray]}}}][+color[blue]}]
-% \end{schema}[+color[blue]}] [+color[blue]}]
-%
- %\end{BVerbatim}
- %\end{tiny}
- %\includegraphics[scale=1, clip, trim=2cm 3cm 2cm 3cm, width=1.00\textwidth]{Figures/fullexample/1n2.pdf}
- \includegraphics[scale=0.75]{Figures/fullexample/sfzdracorrectout.png}
- %\vspace{-0.18in}
- \caption{An example of a specification output labelled in \gls{zcga} and \gls{zdra}.\label{fig:sfzdrazcgaout}}
- %\vspace{-0.2in}
+ \includegraphics[scale=0.3]{Figures/fullexample/sfzdramessage.png}
+ \caption{The autopilot specification written in \gls{zcga} and \gls{zdra} and the message displayed when run through the \gls{zdra} checker.\label{fig:sfzdrazcgaout}}
  \end{minipage}
  \end{figure}
 
-% After annotating our example in \gls{zdra} labels we can then run our
-% specification through the \gls{zdra} checker. Figure \ref{fig:zdracorrect} shows
-% the message which appears after we check our example with \gls{zdra}.
+\subsection{Step 2.5\\Graphs}
 
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=0.3]{Figures/fullexample/zdracorrect.png}
-% \caption{Message which appears after running the ZDRa checker on our example. \label{fig:zdracorrect}}
-% \end{figure}
+Since the semiformal specification is \gls{zdra} correct the dependency and goto
+graph are automatically produced. These are shown in figure \ref{fig:sfdepgoto}.
 
-% \section{Step 2.5\\Graphs}
+\begin{figure}[H]
+\centering
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[scale=0.5]{Figures/fullexample/sfdp.png}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+\centering
+\includegraphics[scale=0.5]{Figures/fullexample/sfgoto.png}
+\end{minipage}
+\caption{Dependency graph (left) and goto graph (right) of the semiformal autopilot specification\label{fig:sfdepgoto}}
+\end{figure}
 
-% Since the example is \gls{zdra} correct the two graphs shown in figures
-% \ref{fig:depexample} and \ref{fig:gotoexample} are automatically produced and
-% saved on the users computer.
+\subsection{Informal Specification}
 
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=0.7]{Figures/fullexample/dp_fullexample.png}
-% \caption{Dependency graph automatically generated from the ZDRa for our example. \label{fig:depexample}}
-% \end{figure}
-
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=0.7]{Figures/fullexample/goto_fullexample.jpg}
-% \caption{GoTo graph automatically generated from the ZDRa for our example. \label{fig:gotoexample}}
-% \end{figure}
+One of the benefits of the \gls{zdra} check is that the chunks of text can even be
+written informally.
 
 % \section{Skeletons}
 

@@ -44,16 +44,17 @@ dialling in or displaying values. The system supports the following four modes:
 		\text{\declaration{\term{cas\_eng}: \expression{mode\_status}}} 
 \end{schema}}
 
-\draschema{OS2}{Only one of the first three modes can be engaged at any time. However, the \term{cas\_eng} mode
-can be engaged at the same time as any of the other modes.} \draschema{CS1}{The pilot engages a mode by pressing
-the corresponding button on the panel. One of the three modes, \term{att\_cws}, \term{fpa\_sel}, or \term{alz\_eng},
-should be engaged at all times.}
-\draschema{CS2}{Engaging any of the first three modes will automatically cause the
-other two to be disengaged since only one of these three modes can be engaged at a time.}
+\draschema{CS1}{\draschema{PRE1}{Only one of the first three modes can be engaged at any time. However, the cas\_eng mode
+		can be engaged at the same time as any of the other modes.}
+	\draschema{PO1}{The pilot engages a mode by pressing
+		the corresponding button on the panel. One of the three modes, att\_cws, fpa\_sel, or alz\_eng,
+		should be engaged at all times.
+		Engaging any of the first three modes will automatically cause the
+		other two to be disengaged since only one of these three modes can be engaged at a time.}}
 
-\uses{OS2}{SS1}
-\uses{CS1}{SS1}
-\uses{CS2}{SS1}
+\requires{CS1}{PRE1}
+\allows{PRE1}{PO1}
+\uses{SS1}{CS1}
 
 \draschema{SS2}{
 \begin{schema}{AutoPilot'}
@@ -69,9 +70,9 @@ other two to be disengaged since only one of these three modes can be engaged at
 \begin{schema}{att\_cwsDo}
 \text{\Delta AutoPilot }
 \where
-\draline{PRE1}{
+\draline{PRE2}{
 \text{\expression{\term{att\_cws} = \term{off}}}} \\
-\draline{PO1}{
+\draline{PO2}{
 \text{\expression{\term{att\_cws'} = \term{engaged}}} \\
 \text{\expression{\term{fpa\_sel'} = \term{off}}} \\
 \text{\expression{\term{alt\_eng'} = \term{off}}} \\
@@ -80,8 +81,8 @@ other two to be disengaged since only one of these three modes can be engaged at
 \end{schema}}
 
 \uses{CS3}{SS2}
-\allows{PRE1}{PO1}
-\requires{CS3}{PRE1}
+\allows{PRE2}{PO2}
+\requires{CS3}{PRE2}
 
 \item There are three displays on the panel: and altitude [ALT], flight path angle [FPA], and
 calibrated air speed [CAS]. The displays usually show the current values for the altitude, flight

@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{zmathlang}
+\pagenumbering{gobble}
+
+\begin{document}
+
+\dratheory{T1}{0.4}{
+\begin{enumerate}
+\draschema{SS1}{\item The mode-control panel contains four buttons for selecting modes and three displays for
+dialing in or displaying values. The system supports the following four modes:
+
+\begin{itemize}
+\item attitude control wheel steering (att\_cws)
+\item flight path angle selected (fpa\_sel)
+\item altitude engage (alt\_eng)
+\item calibrated air speed (cas\_eng)
+\end{itemize}
+}
+
+\draschema{CS1}{\draschema{PRE1}{Only one of the first three modes can be engaged at any time. However, the cas\_eng mode
+can be engaged at the same time as any of the other modes.}
+\draschema{PO1}{There is a mode-control panel which has four buttons for selecting modes. The pilot engages a mode by pressing
+the corresponding button on the panel. One of the three modes, att\_cws, fpa\_sel, or alz\_eng,
+should be engaged at all times.
+Engaging any of the first three modes will automatically cause the
+other two to be disengaged since only one of these three modes can be engaged at a time.}}
+
+\requires{CS1}{PRE1}
+\allows{PRE1}{PO1}
+\uses{CS1}{SS1}
+\uses{SS1}{CS1}
+
+\end{enumerate}
+}
+
+\end{document}

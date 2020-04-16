@@ -27,31 +27,52 @@ other two to be disengaged since only one of these three modes can be engaged at
 
 \requires{CS1}{PRE1}
 \allows{PRE1}{PO1}
-\uses{SS1}{CS1}
+\uses{CS1}{SS1}
 
 \item \draschema{CS2}{There are three displays on the panel: and altitude [ALT], flight path angle [FPA], and
 calibrated air speed [CAS]. 
 \draschema{PRE2}{The displays usually show the current values for the altitude, flight
 path angle, and air speed of the aircraft.}
-\draschema{PO2}{However, the pilot can enter a new value into a display by dialing in the value using the knob next to the display. This is the target or "pre-selected" value that the pilot wishes the aircraft to attain.} For example, if the pilot wishes to climb to 25,000 feet, he will dial 25,000 into the altitude display window and then press the alz\_eng button to engage the altitude mode. \draline{PO3}{Once the target value is achieved or the mode is disengaged, the display reverts to showing the "current" value.}}
+\draschema{PO2}{However, the pilot can enter a new value into a display by dialing in the value using the knob next to the display. This is the target or "pre-selected" value that the pilot wishes the aircraft to attain.} For example, if the pilot wishes to climb to 25,000 feet, he will dial 25,000 into the altitude display window and then press the alz\_eng button to engage the altitude mode. \draschema{PO3}{Once the target value is achieved or the mode is disengaged, the display reverts to showing the "current" value.}}
 
-\item \draschema{CS4}{\draschema{PRE3}{If the pilot dials in an altitude that is more than 1,200 feet above the current altitude and
-then presses the alz\_eng button}, \draschema{PO3}{the altitude mode will not directly engage. Instead, the altitude
+\requires{CS2}{PRE2}
+\allows{PRE2}{PO2}
+\allows{PRE2}{PO3}
+\uses{CS2}{SS1}
+
+\item \draschema{CS3}{\draschema{PRE3}{If the pilot dials in an altitude that is more than 1,200 feet above the current altitude and
+then presses the alz\_eng button}, \draschema{PO4}{the altitude mode will not directly engage. Instead, the altitude
 engage mode will change to "armed" and the flight-path angle select mode is engaged. The pilot
 must then dial in a flight-path angle for the flight-control system to follow until the aircraft attains the desired altitude. The flight-path angle select mode will remain engaged until the aircraft is within 1,200 feet of the desired altitude, then the altitude engage mode is automatically engaged.}}
 
-\item \draschema{CS5}{\draschema{PRE4}{The calibrated air speed and the flight-path angle values need not be pre-selected before the
+\requires{CS3}{PRE3}
+\allows{PRE3}{PO4}
+\uses{CS3}{SS1}
+
+\item \draschema{CS4}{\draschema{PRE4}{The calibrated air speed and the flight-path angle values need not be pre-selected before the
 corresponding modes are engaged--the current values displayed will be used.}
-\draschema{PO4}{The pilot can dial-in
+\draschema{PO5}{The pilot can dial-in
 a different target value after the mode is engaged. However, the altitude must be pre-selected
 before the altitude engage button is pressed. Otherwise, the command is ignored.}}
 
-\item \draschema{CS6}{The calibrated air speed and flight-path angle buttons toggle on and off every time they are
+\requires{CS4}{PRE4}
+\allows{PRE4}{PO5}
+\uses{CS4}{SS1}
+
+\item \draschema{CS5}{The calibrated air speed and flight-path angle buttons toggle on and off every time they are
 pressed. For example, \draschema{PRE5}{if the calibrated air speed button is pressed while the system is already in
-calibrated air speed mode}\draschema{PO5}{ that mode will be disengaged}. However, \draschema{PRE6}{if the attitude control wheel
-steering button is pressed while the attitude control wheel steering mode is already engaged}, \draschema{PO6}{the
+calibrated air speed mode}\draschema{PO6}{ that mode will be disengaged}. However, \draschema{PRE6}{if the attitude control wheel
+steering button is pressed while the attitude control wheel steering mode is already engaged}, \draschema{PO7}{the
 button is ignored.} Likewise, \draschema{PRE7}{pressing the altitude engage button while the system is already in
-altitude engage mode}\draschema{PO7}{ has no effect.}}
+altitude engage mode}\draschema{PO8}{ has no effect.}}
+
+\requires{CS5}{PRE5}
+\requires{CS5}{PRE6}
+\requires{CS5}{PRE7}
+\uses{CS5}{SS1}
+\allows{PRE5}{PO6}
+\allows{PRE6}{PO7}
+\allows{PRE7}{PO8}
 
 Because of space limitations, only the mode-control panel interface itself will be modeled in this
 example. The specification will only include a simple set of commands the pilot can enter plus the functionality neededto support modes switching and displays.The actual commands that would

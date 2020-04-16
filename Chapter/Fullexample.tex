@@ -1104,7 +1104,54 @@ graph are automatically produced. These are shown in figure \ref{fig:sfdepgoto}.
 \subsection{Informal Specification}
 
 One of the benefits of the \gls{zdra} check is that the chunks of text can even be
-written informally.
+written informally an example of this is shown in figure \ref{fig:informalzdra}.
+
+\begin{figure}[H]
+     \centering
+     \includegraphics[scale=0.4]{Figures/fullexample/informalZDRa.png}
+     \caption{Informal specification labelled in \gls{zdra} \label{fig:informalzdra}}
+\end{figure}
+
+If we run the \gls{zdra} labelled specification shown in figure
+\ref{fig:informalzdra} we get the message that it is \gls{zdra} correct however
+it has not been totalised. Which in this case is legal as it is an informal
+specification. Future to the message the \texttt{dependency} and \texttt{goto}
+graphs are also generated. This is show in figure \ref{fig:ifdepgoto}. This is different
+to the dependency and goto graphs of the semi-formal autopilot as the
+semi-formal specification has formal parts and therefore more details have been
+added to the specification.
+
+\begin{figure}[H]
+     \centering
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[scale=0.4]{Figures/fullexample/informaldepgraph.png}
+     \end{minipage}\hfill
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[scale=0.4]{Figures/fullexample/informalgoto.png}
+     \end{minipage}
+     \caption{Dependency graph (left) and goto graph (right) of the semiformal autopilot informal specification\label{fig:ifdepgoto}}
+     \end{figure}
+
+If the specification had a loop in the reasoning. For example if the description
+of the mode-control panel was written in SS1 and in CS1 then this would be classed
+as a loop in the reasoning. We have highlighted in yellow where the description
+is duplicated and therefore would fail the \gls{zdra} type check.
+
+\begin{figure}[H]
+     \centering
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{Figures/fullexample/ifincorrectzdra.png}
+     \caption{Loop in the informal reasoning of the autopilot specification (highlighted in yellow) \label{fig:ifzdraincorrect}}
+     \end{minipage}\hfill
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{Figures/fullexample/ifincorrectout.png}
+     \caption{A loop in the reasoning of an informal specification \label{fig:ifzdraincorrectout}}
+     \end{minipage}
+     \end{figure}
 
 % \section{Skeletons}
 
@@ -1435,7 +1482,7 @@ written informally.
 
 
 \section{Conclusion}
-In this chapter we have taken a single specification and shown the entire path
+In this chapter we have taken a two specifications and shown the entire path
 from the raw specification to it's translation in Isabelle. We have shown the
 \LaTeX{} code and the compiled output for the raw specification, \gls{zcga}
 annotated specification and \gls{zdra} annotated specification. We have shown

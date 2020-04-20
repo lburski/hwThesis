@@ -959,7 +959,7 @@ specification labelled in \gls{zdra} (blue) and \gls{zcga} (grey) and figure
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Figures/fullexample/sfzdracorrectout.png}
+\includegraphics[scale=0.6]{Figures/fullexample/sfzdracorrectout.png}
 \caption{Compiled results of the autopilot specification written in ZCGa and ZDRa \label{fig:sfcompzcgazdra}}
 \end{figure}
 
@@ -1083,8 +1083,6 @@ showing the "current" value.
  \end{minipage}
  \end{figure}
 
-\subsection{Step 2.5\\Graphs}
-
 Since the semiformal specification is \gls{zdra} correct the dependency and goto
 graph are automatically produced. These are shown in figure \ref{fig:sfdepgoto}.
 
@@ -1108,7 +1106,7 @@ written informally an example of this is shown in figure \ref{fig:informalzdra}.
 
 \begin{figure}[H]
      \centering
-     \includegraphics[scale=0.4]{Figures/fullexample/informalZDRa.png}
+     \includegraphics[scale=0.6]{Figures/fullexample/informalZDRa.png}
      \caption{Informal specification labelled in \gls{zdra} \label{fig:informalzdra}}
 \end{figure}
 
@@ -1153,69 +1151,73 @@ is duplicated and therefore would fail the \gls{zdra} type check.
      \end{minipage}
      \end{figure}
 
-% \section{Skeletons}
+ \subsection{Skeletons}
 
-% The skeletons can be automatically generated if the specification passes the
-% \gls{zcga} and \gls{zdra} check.
+ Since our semiformal specification pass the \gls{zdra} check the dependency and
+ goto graphs are automatically generated. The skeletons which could be
+ automatically generated for the semiformal specification are the general proof
+ skeleton (step 3) and the Isabelle skeleton (step 4). \Gls{zmath} can also fill
+ in the Isabelle skeleton for those parts which are in formal format and
+ correctly labelled in \gls{zcga}. The user will not be able to complete a full
+ proof of the specification (step 6) as the semi-formal specification isn't
+ complete as it is not fully formal.
 
-% \subsection{Step 3\\General Proof Skeleton}
+ \subsection{Step 3\\General Proof Skeleton}
 
-% We can generate a general proof skeleton which prints out the \gls{zdra} name
-% and the instances they should be converted to when inputting into any theorem
-% prover. If the specification is \gls{zdra} correct we can then generate the
-% \gls{gpsa} by clicking on the \gls{gpsa} menu in the interface (figure
-% \ref{fig:gpsabutton}).
+ Using the goto graph produced for the semiformal specification in figure
+ \ref{fig:sfdepgoto} the \gls{zmath} tool-set can automatically generate a
+ general proof skeleton to order the instances for them to be translated into
+ Isabelle. This general proof skeleton is shown in figure \ref{fig:sfgpsa}.
 
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=1]{Figures/fullexample/proofskelbutton.png}
-% \caption{The GPSa button allows the user to generate the general proof skeleton. \label{fig:gpsabutton}}
-% \end{figure}
+ \begin{figure}[H]
+ \centering
+ \includegraphics[scale=0.5]{Figures/fullexample/sfgpsa.png}
+ \caption{General proof skeleton for the semiformal specification. \label{fig:sfgpsa}}
+ \end{figure}
 
-% The GPSa can be created after a specification has been annotated with ZDRa. The GPSa is what orders the specification 
-% logically to put into a theorem prover. Steps 4, 5 and 6 will need to be created after the GPSa. Step 4 will use the skeleton 
-% created in step 3 and ZCGa annotations created in step 2 to create the Isabelle skeleton. The Isabelle skeleton in
-% step 4 requires ZCGa annotations and the GPSa to be complete. Without the GPSa, the logical order of the specification may not be correct
-% e.g. there may be some changeSchemas used which haven't been created yet. Without the ZCGa, some variables may be used which haven't been 
-% declared and therefore will not parse through Isabelle.
+ \subsection{Step 4\\Isabelle Skeleton}
 
-% Figure \ref{fig:gpsaFullexample} shows the general proof skeleton which was
-% generated for our example. Note all instances but the last 2 are actual
-% instances labelled by the user. Since there are 2 instances where there could be
-% a change in state (CS1 and CS2) then there are 2 proof obligations added to the
-% \gls{gpsa} (L1\_CS2 and L2\_CS1).
+ Using the \gls{gpsa} created in the previous step for the semiformal autopilot
+ specification. The \gls{zmath} toolkit can then automatically generate an
+ Isabelle skeleton which translates the \gls{gpsa} into Isabelle syntax. This is
+ shown in figure \ref{fig:sfisabelleskeleton}.
 
-% \begin{figure}[H]
-% \centering
-% \begin{scriptsize}
-% \begin{BVerbatim}
-% stateSchema SS1
-% stateInvariants SI1
-% changeSchema CS2
-% precondition PRE2
-% changeSchema CS1
-% precondition PRE1
-% postcondition PO2
-% postcondition PO1
-% lemma L1_(CS2)
-% lemmaL2_(CS1) 
-% \end{BVerbatim}
-% \end{scriptsize}
-% \caption{General proof skeleton. \label{fig:gpsaFullexample}}
-% \end{figure}
+ \begin{figure}[H]
+     \centering
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{Figures/fullexample/sfisabelle1.png}
+     \end{minipage}\hfill
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{Figures/fullexample/sfisabelle2.png}
+     \end{minipage}
+     \caption{The Isabelle skeleton for the semiformal autopilot specification. \label{fig:sfisabelleskeleton}}
+\end{figure}
 
-% \subsection{Step 4\\Isabelle Skeleton}
+\subsection{Step 5\\Isabelle Skeleton filled in}
 
-% From \gls{gpsa}, the ZMathLang program can automatically generate an Isabelle
-% Skeleton. The user can do this by clicking on the \gls{gpsa} menu on the
-% interface then clicking `\texttt{Isabelle Skeleton}' shown in figure
-% \ref{fig:isabutton}.
+The \gls{zmath} toolkit can now fill in the Isabelle skeleton using the
+\gls{zcga} and \gls{zdra} annotated document. The \gls{zmath} can only translate
+the parts of the specification which are written formally and have been
+annotated. Figure \ref{fig:sfisabelleskeletonfill} shows the Isabelle skeleton filled in as much as
+automatically is possible.
 
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=1]{Figures/fullexample/isaskelbutton.png}
-% \caption{The Isabelle skeleton button allows the user to generate an Isabelle skeleton of their specification. \label{fig:isabutton}}
-% \end{figure}
+\begin{figure}[H]
+     \centering
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{Figures/fullexample/sfisabellefill1.png}
+     \end{minipage}\hfill
+     \begin{minipage}{0.45\textwidth}
+     \centering
+     \includegraphics[width=\linewidth]{Figures/fullexample/sfisabellefill2.png}
+     \end{minipage}
+     \caption{The Isabelle skeleton filled in for the semiformal autopilot specification. \label{fig:sfisabelleskeletonfill}}
+\end{figure}
+
+Since the specification isn't completely filled in, this is as far as we can get
+with the translation.
 
 %  The Isabelle skeleton consists of the information generated in the general
 %  proof skeleton along with the environment to begin an Isabelle theory. It

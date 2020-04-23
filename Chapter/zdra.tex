@@ -831,310 +831,75 @@ The dependency and GoTo graphs contain the same instances and the same
 relations, however  the direction of the relations may be different. These differences between the dependency and GoTo graphs are
 described in the next chapter.
 
-% %\section{A formal view on the \gls{zdra}.}
-
-% % We denote the star character `*' to denote one or many. We remind the reader
-% that `$\mathbf{\Gamma}$' denotes the schematext of a specification,
-% $\mathcal{Z}, \mathcal{E}, \mathcal{T}$ and $\mathbb{S}$ are correctly typed
-% \emph{declaration}, \emph{expression}, \emph{term} and \emph{set} respectively
-% (from table \ref{tab:zcga1} in chapter \ref{ch:zcga}).
-
-% \begin{defin}
-% Let $\mathcal{E}$ be a correctly typed expression. \\ Let $\mathcal{D}$ be a
-% correctly typed definition. \\
-% Where $((\mathcal{Z}@\mathcal{E})$*$|\mathcal{T}$*$|\mathbb{S}$*$) \in
-% \mathcal{E}$ and $(\mathcal{T}$*$|\mathbb{S}$*$) \in \mathcal{D}$\\
-% Let $\mathcal{ED}$ be the set containing $\mathcal{E}$'s and $\mathcal{D}$'s.
-% \end{defin}
-
-% For example an expression can be the following: \verb|t = t| where $t$ is a
-% term. Therefore this expression contains two terms. Another example of an
-% expression could be: $\forall t: S \bullet t = 0$. This expression contains a
-% declaration within an expression ($(\mathcal{Z}@\mathcal{E})$, which is $t:S$.
-
-
-% \begin{table}[H]
-% \begin{footnotesize}
-% \begin{tabular}{| l | l | l |}
-% \hline
-% \textbf{Instance} & \textbf{Allowed weak types} & \textbf{Annotations} \\
-% \hline
-% \hline
-% precondition & $\mathcal{ED} \in \mathbf{\Gamma}$ &
-% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
-
-% postcondition & $\mathcal{ED} \in \mathbf{\Gamma}$ &
-% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
-
-% output & $\mathcal{ED} \in \mathbf{\Gamma}$ &
-% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
-
-% stateInvariants & $\mathcal{ED} \in \mathbf{\Gamma}$ &
-% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}} \\
-
-% stateSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \in \mathbf{\Gamma}$
-% & $(\cgatext{\declaration{\mathcal{Z}$*$} \&
-% \expression{\mathcal{E}}\definition{\mathcal{D}}}) |
-% \cgatext{\declaration{\mathcal{Z}$*$}}$ \\
-
-% theory & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \in \mathbf{\Gamma}$ &
-% $(\cgatext{\declaration{\mathcal{Z}$*$} \&
-% \expression{\mathcal{E}}\definition{\mathcal{D}}}) |
-% \cgatext{\declaration{\mathcal{Z}$*$}}$\\
-
-% changeSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \in
-% \mathbf{\Gamma}$ & $(\cgatext{\declaration{\mathcal{Z}$*$} \&
-% \expression{\mathcal{E}}\definition{\mathcal{D}}}) |
-% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
-
-% totaliseSchema & $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \in
-% \mathbf{\Gamma}$ & $(\cgatext{\declaration{\mathcal{Z}$*$} \&
-% \expression{\mathcal{E}}\definition{\mathcal{D}}}) |
-% \cgatext{\expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
-
-% axiom & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
-% $\cgatext{\declaration{\mathcal{Z}$*$} \&
-% \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
-
-% outputSchema & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
-% $\cgatext{\declaration{\mathcal{Z}$*$} \&
-% \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
-
-% initSchema & $\mathcal{Z} \& \mathcal{ED} \in \mathbf{\Gamma} $ &
-% $\cgatext{\declaration{\mathcal{Z}$*$} \&
-% \expression{\mathcal{E}}\definition{\mathcal{D}}}$ \\
-
-% \hline
-% \end{tabular}
-
-% \end{footnotesize}
-% \caption{ZCGa annotations allowed in ZDRa instances \label{tab:zcgainzdra}}
-% \end{table}
-
-% Table \ref{tab:zcgainzdra} shows which \gls{zcga} are allowed to be in certain
-% \gls{zdra} instances. Where `\&' means these weak type categories must be
-% included in the instance. For example a \emph{stateSchema} can be made up of one
-% or more $\mathcal{Z}$ \textbf{AND} one or more $\mathcal{ED}$ \textbf{OR} one or
-% more $\mathcal{Z}$ on their own. Therefore a \emph{stateSchema} can not be made
-% up of $\mathcal{ED}$ on it's own.
-
-% \paragraph{precondition, postcondition, output, stateInvariants.}
-% These instances can only contain a correctly typed expression or definition
-% within the schematext. There may be one or more expressions or definitions.
-
-% \paragraph{stateSchema, theory.}
-% These instances can only contain one or more correctly typed declaration
-% \emph{and} one or more correctly typed expression and definition or one or more
-% correctly typed declarations.
-
-% \paragraph{changeSchema, totalise.}
-% These instances can only contain one or more correctly typed declaration
-% \emph{and} one or more correctly typed expression and definition or one or more
-% correctly typed expressions or definitions.
-
-% \paragraph{axiom, outputSchema, initSchema}
-% These instances can only contain one or more correctly typed declarations
-% \emph{and} one or more correctly typed expression and definitions.
-
-% \subsection{Allowances when combining the ZCGa and ZDRa}
-
-% Since we have formally outlined the \gls{zdra} in table \ref{tab:zcgainzdra} we
-% can now show some rules which occur when we combing the \gls{zcga} and
-% \gls{zdra} together.
-
-% \begin{thm}
-% Using table \ref{tab:zcgainzdra}, the initialOf relation only permits the
-% annotations: \\
-%  $\mathcal{Z} \& \mathcal{ED}, initialOf, (\mathcal{Z} \& \mathcal{ED}) |
-%  \mathcal{Z}$.
-% \end{thm}
-
-% \begin{proof}
-% From table \ref{tab:relationsallowed} (section \ref{subsec:zdrarelations}) we
-% can see the only legal relation for initialOf is `initSchema $\longrightarrow$
-% stateSchema'. An initSchema can only have the annotation $\mathcal{Z} \&
-% \mathcal{ED}$ and a stateSchema can only have the annotations $(\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{Z}$ (from table \ref{tab:zcgainzdra}). Since
-% $\longrightarrow$ represents the relation \emph{initialOf} then we get
-% $\mathcal{Z} \& \mathcal{ED}, initialOf, ((\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z})$.
-% \end{proof}
-
-% \begin{thm}
-% Using table \ref{tab:zcgainzdra}, the allows relation only permits the
-% annotations: \\
-% $\mathcal{ED}, allows, \mathcal{ED}$.
-% \end{thm}
-
-% \begin{proof}
-% The allows relation only permits `precondition $\longrightarrow$ postcondition'
-% (table \ref{tab:relationsallowed}). Both a precondition and postcondition have
-% the \gls{zcga} annotations $\mathcal{ED}$. Since $\longrightarrow$ represents
-% the relation. Then the result is $\mathcal{ED}, allows, \mathcal{ED}$.
-% \end{proof}
-
-% \begin{thm}
-% Using table \ref{tab:zcgainzdra}, the requires relation only permits the
-% annotations:
-% \begin{itemize}
-% \item $\mathcal{Z} \& \mathcal{ED}, requires, \mathcal{ED}$
-% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, requires, \mathcal{ED}$
-% \end{itemize}
-% \end{thm}
-
-% \begin{proof}
-% Using table (table \ref{tab:relationsallowed}) of permitted relations the
-% requires relation has the following syntax:
-% \begin{enumerate}
-% \item `outputSchema $\longrightarrow$ precondition'
-% \item `outputSchema $\longrightarrow$ output', 
-% \item `changeSchema $\longrightarrow$ precondition', 
-% \item `changeSchema $\longrightarrow$ postcondition', 
-% \end{enumerate} 
-% \begin{itemize}
-
-% \item Using the allowed \gls{zcga} annotations in table \ref{tab:zcgainzdra} we
-% can see that an outputSchema contains only $\mathcal{Z} \& \mathcal{ED}$ and a
-% precondition and output both only contain $\mathcal{ED}$ thus 1 and 2 become
-% $\mathcal{Z} \& \mathcal{ED} \longrightarrow \mathcal{ED}$. Since
-% $\longrightarrow$ represents the relation then we end up with $\mathcal{Z} \&
-% \mathcal{ED}, requires, \mathcal{ED}$.
-
-% \item The allowed \gls{zcga} annotations for changeSchema are $(\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{ED}$ and the allowed \gls{zcga} annotations for both
-% precondition and postcondition are $\mathcal{ED}$ therefore we end up with
-% ($(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED} \longrightarrow \mathcal{ED}$.
-% Again the $\longrightarrow$ represents the relation so the $\longrightarrow$
-% becomes `requires' and we are left with $(\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{ED}, requires, \mathcal{ED}$.
-% \end{itemize}
-% \end{proof}
-
-% \begin{thm}
-% Using table \ref{tab:zcgainzdra}, the totalises relation only permits the
-% annotations:
-% \begin{itemize}
-% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, (\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{ED}$
-% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}), totalises, \mathcal{Z} \&
-% \mathcal{ED}$
-% \end{itemize}
-% \end{thm}
-
-% \begin{proof}
-% Using table (table \ref{tab:relationsallowed}) of permitted relations the
-% totalises relation has the following syntax:
-% \begin{enumerate}
-% \item `totaliseSchema $\longrightarrow$ changeSchema'
-% \item `totaliseSchema $\longrightarrow$ outputSchema'
-% \item `totaliseSchema $\longrightarrow$ totaliseSchema'
-% \end{enumerate} 
-
-% \begin{itemize}
-% \item Table \ref{tab:relationsallowed} shows the \gls{zcga} syntax for
-% totaliseSchema and changeSchema is $(\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{ED})$. Thus the permitted relations would be $(\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{ED}) \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{ED})$ for points 1 and 3. Since $\longrightarrow$ represents the
-% relation `totalises' in this case we would have $(\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{ED}), totalises, (\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$. Hence
-% the first part of the theorem is proven.
-
-% \item Output schema has the \gls{zcga} syntax $(\mathcal{Z} \& \mathcal{ED})$
-% according to table \ref{tab:zcgainzdra}. If totaliseSchema has the \gls{zcga}
-% syntax $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})$ then using point 2 the
-% permitted relation would be $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED})
-% \longrightarrow \mathcal{Z} \& \mathcal{ED}$. Again since $\longrightarrow$
-% represent totalise in this case we conclude with $(\mathcal{Z} \& \mathcal{ED})
-% | \mathcal{ED}), totalises, \mathcal{Z} \& \mathcal{ED}$.
-% \end{itemize}
-% \end{proof}
-
-% \begin{thm}
-% Using table \ref{tab:zcgainzdra}, the uses relation only permits the
-% annotations:
-% \begin{itemize}
-% \item $\mathcal{Z} \& \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z}$
-% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, (\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{Z}$
-% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, (\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{Z}$
-% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}, uses, \mathcal{Z} \&
-% \mathcal{ED}$
-% \item $\mathcal{Z} \& \mathcal{ED}, uses, \mathcal{Z} \& \mathcal{ED}$
-% \item $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, \mathcal{Z} \&
-% \mathcal{ED}$
-% \end{itemize}
-% \end{thm}
-
-% \begin{proof}
-% Using table (table \ref{tab:relationsallowed}) of permitted relations the uses
-% relation has the following syntax:
-% \begin{enumerate}
-% \item `outputSchema $\longrightarrow$ stateSchema'
-% \item `changeSchema $\longrightarrow$ stateSchema'
-% \item `stateSchema $\longrightarrow$ stateSchema'
-% \item `stateSchema $\longrightarrow$ axiom'
-% \item `outputSchema $\longrightarrow$ axiom'
-% \item `changeSchema $\longrightarrow$ axiom'
-% \end{enumerate} 
-
-% \begin{itemize}
-% \item According to table \ref{tab:zcgainzdra} the \gls{zcga} syntax for
-% outputSchema is $\mathcal{Z}\&\mathcal{ED}$ and the syntax for stateSchema is
-% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Therefore using point 1 we get
-% `$\mathcal{Z}\&\mathcal{ED} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z}$'. Since $\longrightarrow$ represents the relation uses in this case
-% we get $\mathcal{Z} \& \mathcal{ED}, uses, (\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z}$.
-
-% \item The syntax for changeSchema is $(\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{ED}$ and the syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z}$ according from table \ref{tab:zcgainzdra}. Substituting the
-% \gls{zcga} for instance names in point 2 we get $(\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{ED} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. By
-% substituting the relation uses for $\longrightarrow$ we end up with
-% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, (\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{Z}$.
-
-% \item Using table \ref{tab:zcgainzdra} the \gls{zcga} syntax for stateSchema is
-% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z}$. Using point 3, we substitute the
-% \gls{zcga} syntax for the instance name and we get $(\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{Z} \longrightarrow (\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z}$. Since $\longrightarrow$ represents uses then we get $(\mathcal{Z}
-% \& \mathcal{ED}) | \mathcal{Z}, uses, (\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z}$.
-
-% \item The \gls{zcga} syntax for stateSchema is $(\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z}$ and the \gls{zcga} syntax for axiom is  $\mathcal{Z} \&
-% \mathcal{ED}$. By substituting these \gls{zcga} syntax's in point 4 we get
-% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{Z} \longrightarrow \mathcal{Z} \&
-% \mathcal{ED}$. Since $\longrightarrow$ in this case is the relationship uses, we
-% can change $\longrightarrow$ to `uses' and get $(\mathcal{Z} \& \mathcal{ED}) |
-% \mathcal{Z}, uses, \mathcal{Z} \& \mathcal{ED}$.
-
-% \item According to table \ref{tab:zcgainzdra} the \gls{zcga} syntax for
-% outputSchema and axiom are both $\mathcal{Z} \& \mathcal{ED}$. Therefore if we
-% put in the \gls{zcga} syntax instead of the instance names in point 5 we get
-% $\mathcal{Z} \& \mathcal{ED} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. From
-% table \ref{tab:relationsallowed} we can deduce that $\longrightarrow$ mean
-% `uses' so we finish with $\mathcal{Z} \& \mathcal{ED}, uses, \mathcal{Z} \&
-% \mathcal{ED}$.
-
-% \item Finally, the \gls{zcga} syntax for changeSchema is $(\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{ED}$ and the \gls{zcga} syntax for axiom is
-% $\mathcal{Z} \& \mathcal{ED}$ according to table \ref{tab:zcgainzdra}. If we
-% substitute the allowed \gls{zcga} syntax in point 6 we get $(\mathcal{Z} \&
-% \mathcal{ED}) | \mathcal{ED} \longrightarrow \mathcal{Z} \& \mathcal{ED}$. Since
-% $\longrightarrow$ is the relation `uses' in this case we end up with
-% $(\mathcal{Z} \& \mathcal{ED}) | \mathcal{ED}, uses, \mathcal{Z} \&
-% \mathcal{ED}$.
-% \end{itemize}
-% \end{proof}
-
 \section{ZDRa on an Informal Specification}
 \label{sec:zdrainformal}
+
+One of the main benefits is that the \gls{zdra} checker can be used on
+specifications which are written entirely in natural language. This is
+particularly useful if the specification has been written by multiple people.
+
+For example the specification below shows a list of requirements.
+
+\noindent\fbox{%
+    \parbox{\textwidth}{%
+    \begin{enumerate}
+    \item The Unmanned Air Vehicle takes command from the Wildcat Helicopter.
+    \item The Unmanned Air Vehicle shall stay in it's allocated airspace.
+    \item The Wildcat Helicopter takes command from the Chinook.
+    \item The Wildcat Helicopter shall stay on base until told to deploy.
+    \item The Chinook takes command from the Unmanned Air Vehicle.
+    \end{enumerate}
+    }
+}
+
+The user can then annotated these informal requirements in \gls{zdra}. This is
+shown in figure \ref{fig:informalzdraexample} where the \gls{zdra} commands are in {\color{blue}blue}.
+
+\begin{figure}[H]
+    \centering
+    \begin{minipage}{0.45\textwidth}
+    \centering
+    \begin{tiny}
+    \begin{BVerbatim}[commandchars=+\[\]]
+\documentclass{article}
+\usepackage{zmathlang}
+\begin{document}
+[+color[blue]\dratheory{T5}{0.3}{        ]
+[+color[blue]\draschema{CS1}{]The Unmanned Air Vehicle takes command from the
+Wildcat Helicopter.[+color[blue]}]
+[+color[blue]\draschema{CS2}{]The Unmanned Air Vehicle shall stay in it's
+allocated airspace.[+color[blue]}]
+[+color[blue]\draschema{CS3}{]The Wildcat Helicopter takes command from the 
+Chinook.[+color[blue]}]
+[+color[blue]\draschema{CS4}{]The Wildcat Helicopter shall stay on base until
+told to deploy.[+color[blue]}]
+[+color[blue]\draschema{CS5}{]The Chinook takes command from the Unmanned Air Vehicle.[+color[blue]}]
+           
+[+color[blue]\uses{CS1}{CS5}]
+[+color[blue]\uses{CS5}{CS3}]
+[+color[blue]\uses{CS3}{CS1}}]
+\end{document}      
+    \end{BVerbatim}
+    \end{tiny}
+    \end{minipage}\hfill
+    \begin{minipage}{0.45\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{Figures/fullexample/zdrainformalexample.png}
+    \end{minipage}
+    \caption{Informal requirements example \gls{zdra}.\label{fig:informalzdraexample}}
+    \end{figure}
+
+The ZMathLang toolkit will identify the circular reasoning and tell the
+user(requirements 1, 3 and 5). 
+It will also produce the following graph to show that the 3 requirements are
+dependent on each other and therefore show there is an error. This loop is shown
+in figure \ref{fig:informalloop}.
+
+\begin{figure}[H]
+    \includegraphics[width=12cm]{informal/dep.png}
+    \caption{Dependency graph of the loop in the informal specification example detailed in figure \ref{fig:informalzdraexample}. \label{fig:informalloop}}
+\end{figure}
+
 
 \section{Conclusion}
 In this chapter the \gls{zdra} step of the \gls{zmath} has been described. A

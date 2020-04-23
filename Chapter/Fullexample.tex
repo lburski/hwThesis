@@ -2,7 +2,7 @@
 \label{ch:fullexample}
 %Chapter 9
 
-In this chapter we take a system specification through all the steps of
+In this chapter we take two system specifications through all the steps of
 \gls{zmath} to demonstrate how we can get from a raw specification to a full
 proof. We have added commentary throughout so the reader can understand how we
 can get from one step to another. We have added figures and screenshots of each
@@ -671,6 +671,8 @@ have been translated back to the original names used in the Z Specification.
 Here, we show a section of an autopilot specification \cite{Butler96} in natural
 language, which describes
 the control of an aircraft without constant manual input by the human pilot.
+We have chosen to demonstrate this specification as it presents the \gls{zmath}
+toolkit on a specification which is semi-formal.
 
 \subsection{Step 0\\Raw Specification}
 
@@ -1078,7 +1080,7 @@ showing the "current" value.
 
  \end{BVerbatim}
  \end{tiny}
- \includegraphics[scale=0.4]{Figures/fullexample/sfzdramessage.png}
+ \includegraphics[scale=0.5]{Figures/fullexample/sfzdramessage.png}
  \caption{The autopilot specification written in \gls{zcga} and \gls{zdra} and the message displayed when run through the \gls{zdra} checker.\label{fig:sfzdrazcgaout}}
  \end{minipage}
  \end{figure}
@@ -1201,7 +1203,8 @@ The \gls{zmath} toolkit can now fill in the Isabelle skeleton using the
 \gls{zcga} and \gls{zdra} annotated document. The \gls{zmath} can only translate
 the parts of the specification which are written formally and have been
 annotated. Figure \ref{fig:sfisabelleskeletonfill} shows the Isabelle skeleton filled in as much as
-automatically is possible.
+automatically is possible. Since the specification isn't completely filled in, this is as far as we can get
+with the translation.
 
 \begin{figure}[H]
      \centering
@@ -1215,273 +1218,6 @@ automatically is possible.
      \end{minipage}
      \caption{The Isabelle skeleton filled in for the semiformal autopilot specification. \label{fig:sfisabelleskeletonfill}}
 \end{figure}
-
-Since the specification isn't completely filled in, this is as far as we can get
-with the translation.
-
-%  The Isabelle skeleton consists of the information generated in the general
-%  proof skeleton along with the environment to begin an Isabelle theory. It
-%  contains comments in between \verb|(* .. *)| parenthesis to show the parts which
-%  need to be filled in either by using the \gls{zcga} document or by the user.
-%  Figure \ref{fig:isaFullexample} shows the automatically generated Isabelle
-%  skeleton for our \texttt{modulereg} example.
-
-% \begin{figure}[H]
-% \centering
-% \begin{scriptsize}
-% \begin{BVerbatim}
-% theory gpsaModuleReg
-% imports Main begin (*DATATYPES*)
-% record SS1 = (*DECLARATIONS*)
-% locale 1n2 = fixes (*GLOBAL DECLARATIONS*)
-% assumes SI1 begin definition CS2 ::
-% "(*CS2_TYPES*) => bool"
-% where
-% "CS2 (*CS2_VARIABLES*) == (PRE2) \<and> (PO2)"
-% definition CS1 :: "(*CS1_TYPES*) => bool"
-% where
-% "CS1 (*CS1_VARIABLES*) == (PRE1) \<and> (PO1)"
-
-% lemma CS2_L1: "(\<exists> (*CS2_VARIABLESANDTYPES*).
-% (PRE2) \<and> (PO2) \<longrightarrow> 
-% (SI1) \<and> (SI1'))" 
-% sorry 
-% lemma CS1_L2: "(\<exists> (*CS1_VARIABLESANDTYPES*).
-% (PRE1) \<and> (PO1) \<longrightarrow> 
-% ((SI1) \<and> (SI1')))" sorry 
-% end
-% end
-% \end{BVerbatim}
-% \end{scriptsize}
-% \caption{Isabelle proof skeleton. \label{fig:isaFullexample}}
-% \end{figure}
-
-% \subsection{Step 5\\Isabelle Skeleton Filled in}
-
-% Using the \gls{zcga} annotated document and the Isabelle skeleton described in
-% the previous section. The user can then automatically fill in the missing
-% information which is needed between the comment parenthesis \verb|(* ...*)|.
-% This is the final step which is automated by the program and the user can click
-% on the \gls{gpsa} button on the main menu bar in the interface and then click on
-% `\texttt{FillInIsa Skeleton}' in the sub menu (shown in figure
-% \ref{fig:fillinisa}).
-
-% \begin{figure}[H]
-% \centering
-% \includegraphics[scale=1]{Figures/fullexample/fillinisabutton.png}
-% \caption{The "FillInIsa Skeleton" button allows the user to fill in the skeleton they previously created. \label{fig:fillinisa}}
-% \end{figure}
-
-% Figure \ref{fig:fillinFullexample} shows our example with a filled in Isabelle
-% skeleton. It is important to note that the program also changes some of the
-% syntax from \LaTeX{} to Isabelle so that it is fully parsable by Isabelle.
-% We have used the rules described in section \ref{sec:zcga2fillin} to fill in the Isabelle
-%  skeleton with the ZCGa annotations.
-
-% \begin{figure}[H]
-% \centering
-% \begin{minipage}{0.45\textwidth}
-% \centering
-% \begin{scriptsize}
-% \begin{BVerbatim}
-% theory gpsaModuleReg imports Main 
-
-% begin typedecl PERSON typedecl MODULE
-
-% record ModuleReg = STUDENTS :: " PERSON set"
-% DEGMODULES :: " MODULE set" TAKING
-% :: "(PERSON * MODULE) set"
-
-% locale gpsaModuleReg = fixes students :: 
-% " PERSON set" and degModules :: "
-% MODULE set" and taking :: "(PERSON * MODULE) set"
-%  assumes "Domain taking
-% \<subseteq> students" and 
-% "Range taking \<subseteq> degModules" begin
-
-% definition RegForModule :: 
-% "ModuleReg \<Rightarrow> ModuleReg \<Rightarrow>
-% PERSON \<Rightarrow> MODULE => MODULE set 
-% \<Rightarrow> PERSON set \<Rightarrow>
-% (PERSON * MODULE) set \<Rightarrow> bool" where 
-% "RegForModule modulereg
-% modulereg' p m degModules' students' taking' == 
-% (p \<in> students) \<and> (m
-% \<in> degModules) \<and> ((p, m) \<notin> taking) 
-% \<and> (taking' = taking\<union> {(p, m)}) \<and> 
-% (students' = students) 
-% \<and> (degModules' =degModules)"
-
-% definition AddStudent :: "ModuleReg \<Rightarrow> 
-% ModuleReg => PERSON
-% \<Rightarrow>  MODULE set \<Rightarrow> PERSON set 
-% \<Rightarrow> (PERSON *
-% MODULE) set \<Rightarrow> bool" where "AddStudent 
-% modulereg modulereg' p
-% degModules' students' taking' == ((p \<notin> students) 
-% \<and> (students' =
-% students \<union> {(p)}) 
-% \end{BVerbatim}
-% \end{scriptsize}
-% \end{minipage}\hfill
-% \begin{minipage}{0.45\textwidth}
-% \begin{scriptsize}
-% \begin{BVerbatim}
-% \<and> (degModules' = degModules) \<and> 
-% (taking' = taking))"
-
-% lemma RegForModule_L1: 
-% "(\<exists> degModules:: MODULE set. 
-% \<exists> students
-% :: PERSON set. \<exists> taking :: 
-% (PERSON * MODULE) set. \<exists> p :: PERSON.
-% \<exists> degModules':: MODULE set. 
-% \<exists> students' :: PERSON set. \<exists>
-% taking' :: (PERSON * MODULE) set. 
-% \<exists> m :: MODULE. ((p \<in> students)
-% \<and> (m \<in> degModules) \<and> ((p, m) 
-% \<notin> taking) \<and> (taking' =
-% taking \<union> {(p, m)}) \<and> 
-% (students' = students) 
-% \<and> (degModules' =
-% degModules)) \<longrightarrow> ((Domain taking 
-% \<subseteq> students) \<and>
-% (Range taking \<subseteq> degModules) \<and> 
-% (Domain taking' \<subseteq>
-% students') \<and> (Range taking' 
-% \<subseteq> degModules')))" sorry
-
-% lemma AddStudent_L2: 
-% "(\<exists> degModules:: MODULE set. 
-% \<exists> students ::
-% PERSON set. \<exists> taking :: 
-% (PERSON * MODULE) set. 
-% \<exists> p :: PERSON.
-% \<exists> degModules':: MODULE set. 
-% \<exists> students' :: PERSON set. \<exists>
-% taking' :: (PERSON * MODULE) set. 
-% ( (students' = students \<union> {(p)}) \<and>
-% (degModules' = degModules) \<and> 
-% (taking' = taking)) 
-% \<longrightarrow ((Domain
-% taking \<subseteq> students) \<and> 
-% (Range taking \<subseteq> degModules) \<and>
-% (Domain taking' \<subseteq> students') 
-% \<and> (Range taking' \<subseteq>
-% degModules')))" sorry end end
-% \end{BVerbatim}
-% \end{scriptsize}
-% \end{minipage}
-% \caption{Filled In proof skeleton. \label{fig:fillinFullexample}}
-% \end{figure}
-
-% Figure \ref{fig:fillinFullexample} shows the original specification we started
-% with in step 0 in Isabelle syntax. It is important to the reader to note that we
-% have come this far without the user knowing any Isabelle at all. In our example
-% we have 2 existing lemma's to prove to check the consistency of the
-% specification. That is the state before \texttt{RegForModule} (PRE2), \emph{and}
-% the state after \texttt{RegforModule} (PO2), \emph{implies}
-% \texttt{stateInvariants} (SI1), \emph{and} the \texttt{stateInvariants'} (SI1')
-% is true. So the precondition and postcondition imply that the stateInvariants
-% and stateInvariants prime hold. The same goes for the \texttt{AddStudent}
-% operation. When the skeleton is filled in, \gls{zmath} is unable to prove the
-% lemma's automatically and it is up to the user to do this (explained in the next
-% section). However at this stage \gls{zmath} puts the Isar command
-% `\texttt{sorry}' as to ignore the lemma and act as if it was proven.
-
-% In this case the new "Lemmas" are added to the end of the specification at random.
-% For this specification it doesn't matter which lemma comes first (RegForModule\_L1 or AddStudent\_L2)
-% as the schemas \texttt{RegForModule} and \texttt{AddStudent} are independent of
-% each other
-% and one does not `\textit{use}' the other. If we did have a changeSchema which did use another changeSchema
-% then this would have to be annotated in the ZDRa and therefore the order would matter when the lemmas are produced.
-
-
-% \section{Step 6\\Full Proof}
-
-% The next part is to prove any existing lemmas from the filled in Isabelle
-% Skeleton or add new lemma's to prove safety properties about the specification.
-% However, this final stage is difficult to automate with \gls{zmath} as everyone
-% has different properties they wish to prove and all specification are different
-% themselves. So the final step will need some theorem prover knowledge, but not
-% as much as translating the specification and proving it in one step as the
-% specification is already put into the theorem prover syntax. In this case the
-% user may wish to use theorem prover tools which already exist such as
-% Sledgehammer \cite{sledgehammer} to help them prove the properties. An example
-% is shown in figure \ref{fig:propertyproof} the proof obligations being proven by
-% hand for the \texttt{modulereg} specification.
-
-% \begin{figure}[H]
-% \centering
-% \begin{minipage}{0.45\textwidth}
-% \centering
-% \begin{scriptsize}
- 
-
-% \begin{BVerbatim}[commandchars=+\[\]] 
-% lemma RegForModule_L1: "(\<exists>
-% degModules:: MODULE set. \<exists> students ::
-%  PERSON set. \<exists> taking ::
-% (PERSON * MODULE) set. \<exists> p :: PERSON. 
-% \<exists> degModules':: MODULE
-% set. \<exists> students' :: PERSON set. 
-% \<exists> taking' :: (PERSON * MODULE)
-% set. \<exists> m :: MODULE. ((p \<in> students) 
-% \<and> (m \<in> degModules)
-% \<and> ((p, m) \<notin> taking) \<and> 
-% (taking' = taking \<union> {(p, m)})
-% \<and> (students' = students) \<and> 
-% (degModules' = degModules))
-% \<longrightarrow> ((Domain taking 
-% \<subseteq> students)  \<and> (Range taking
-% \<subseteq> degModules) \<and> (Domain taking' 
-% \<subseteq> students') \<and>
-% (Range taking' \<subseteq> degModules')))"
-
-% [+color[red]by (smt Domain_empty Domain_insert] 
-% [+color[red]Range.intros
-% Range_empty Range_insert]
-% \end{BVerbatim}
-% \end{scriptsize}
-% \end{minipage}\hfill
-% \begin{minipage}{0.45\textwidth}
-% \begin{scriptsize}
-% \begin{BVerbatim}[commandchars=+\[\]]
-% [+color[red]Un_empty Un_insert_right empty_iff] 
-% [+color[red]empty_subsetI 
-%  empty_subsetI insert_mono]
-% [+color[red]insert_mono singletonI singletonI ]
-% [+color[red]singleton_insert_inj_eq' ]
-% [+color[red]singleton_insert_inj_eq')]
-
-% lemma AddStudent_L2: 
-% "(\<exists> degModules:: MODULE set. 
-% \<exists> students :: PERSON set. 
-% \<exists> taking :: (PERSON * MODULE) set. 
-% \<exists> p :: PERSON.
-% \<exists> degModules':: MODULE set. 
-% \<exists> students' :: PERSON set. \<exists>
-% taking' :: (PERSON * MODULE) set. 
-% ((students' = students \<union> {(p)}) \<and>
-% (degModules' = degModules) \<and> 
-% (taking' = taking))
-%  \<longrightarrow> ((Domain
-% taking \<subseteq> students) \<and> 
-% (Range taking \<subseteq> degModules) \<and>
-% (Domain taking' \<subseteq> students') \<and> 
-% (Range taking' \<subseteq>
-% degModules')))"
-
-% [+color[red]by blast]
-% \end{BVerbatim}
-% \end{scriptsize}
-% \end{minipage}
-% \caption{An example of a property and it's proof for the Module Reg example. \label{fig:propertyproof}}
-% \end{figure}
-
-
-
-
 
 \section{Conclusion}
 In this chapter we have taken a two specifications and shown the entire path

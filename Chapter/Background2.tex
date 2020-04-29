@@ -1326,28 +1326,6 @@ learn as well as using the environment for proofs. Type checking is undecidable
 for the PVS type system. The PVS also provides a language for defining
 high-level inference strategies.
 
-
-\subsection{Proving Systems specific for Z}
-\label{subsec:provingSystemsForZ}
-
-A tool which analysis the Z notation is Hol-Z \cite{hol-z}, which is also a
-proof environment for Z. Hol-Z is embedded in Isabelle/HOL therefore it provides
-a Z type checker, documentation facilities and refinement proofs with a theorem
-prover. The Z specification is implemented in \LaTeX{} then typed checked using
-an external plug in Zeta, it is then transformed into SML files to be added into
-the Hol-Z theorem prover environment. The user will need to have some good
-expertise in using the Hol-Z proof environment in order to fully prove the
-specification.
-
-Fuzz \cite{spiveyfuzz} is another example of a type-checker for the Z language.
-It includes style files for \LaTeX{} and checks for the logical correctness and
-Z type correctness of Z specifications. This is different to the \gls{zcga} type
-checker as the weak types in \gls{zcga} check for the grammatical correctness
-and not the full logical correctness of Z. Therefore the grammatical correctness
-of partially formal specification can also be checked. The \gls{zmath} framework
-presented in this thesis uses the `zed' \LaTeX{} style package to typeset the Z
-specifications in the documents.
-
 There are many other tools for Z which can be found on the Z Notation Wikia page
 \cite{zwikia}. For this thesis we will concentrate on translating Z
 specifications into theorem prover Isabelle \cite{isabelle}. Isabelle is a
@@ -1360,7 +1338,7 @@ free, easy to find, download and install and is regularly updated. The original
 (\cite{mathintoisa}) therefore we can use parts of that research to aid the
 research in this thesis.
 
-\subsection{Other properties to prove}
+\subsection{Properties to prove}
 \label{subsec:propertiestoprove}
 
 \begin{defin}

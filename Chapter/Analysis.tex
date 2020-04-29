@@ -374,6 +374,31 @@ specification will be automatically translated into Isabelle/Hol when using the
 is a skeleton of the specification and then automatically fill in the
 specification using the information from the ZCGa annotations.
 
+\subsection{Comparison with similar tools for Z}
+\label{subsec:provingSystemsForZ}
+
+Hol-Z \cite{hol-z} also analysis the Z notation, and is also a
+proof environment for Z. Hol-Z is embedded in Isabelle/HOL therefore it provides
+a Z type checker, documentation facilities and refinement proofs with a theorem
+prover. The Z specification is implemented in \LaTeX{} then typed checked using
+an external plug in Zeta, it is then transformed into SML files to be added into
+the Hol-Z theorem prover environment. The user will need to have some good
+expertise in using the Hol-Z proof environment in order to fully prove the
+specification.
+
+Fuzz \cite{spiveyfuzz} is Mike Spiveys typechecker for Z specifications.
+It includes style files for \LaTeX{} and checks for the logical correctness and
+Z type correctness of Z specifications. It is a strong tpe checker for Z which
+takes Z specifications written in \LaTeX{} as input. This is similar to the Zeta
+checker as it checks the specific "Z Types" and whether the correct symbols are
+used. This is different to the \gls{zcga} type
+checker as the ZCGa checks for weak types and is aimed at early soft type
+checking (as full type checking is done once the specification is translated
+into ISabelle). The \gls{zcga} . Therefore the grammatical correctness
+of partially formal specification can also be checked. The \gls{zmath} framework
+presented in this thesis uses the `zed' \LaTeX{} style package to typeset the Z
+specifications in the documents.
+
 \section{Conclusion}
 This section compares 2 specifications written in Z which have been proven in a
 theorem prover previously with the proofs done using \gls{zmath}. The

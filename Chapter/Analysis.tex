@@ -384,9 +384,25 @@ prover. The Z specification is implemented in \LaTeX{} then typed checked using
 an external plug in Zeta, it is then transformed into SML files to be added into
 the Hol-Z theorem prover environment. The user will need to have some good
 expertise in using the Hol-Z proof environment in order to fully prove the
-specification.
+specification. Hol-Z works differently to \gls{zmath} as it is a proof
+environment for Z specifications and will only analyse the parts of the document
+written in Z syntax, whereas \gls{zmath} will check any parts of the document
+which have been annotated by the user using the \gls{zcga} and \gls{zdra}
+annotations. Hol-Z uses Zeta \cite{zeta} as a Z type checker.
 
-Fuzz \cite{spiveyfuzz} is Mike Spiveys typechecker for Z specifications.
+Zeta \cite{zeta} is an open environnement for the development, analysis and
+animation of Z specifications. The system is aware of dependencies between the
+units and attempt to exploit the units when they are changed. Zeta is different
+to the \gls{zcga} type checker because the \gls{zcga} will read the annotations
+written y the user which could include some informal text as well as Z syntax.
+The \gls{zcga} did not aim to be a strong type checker like Zeta as the
+\gls{zcga} intends to check the grammatical correctness of the specification at
+a high level, where the weak types can be check when a specification is in the
+process of being developed. The Z specification would be \underline{strongly
+type checked} once the user would have translated the specification into
+Isabelle (step 6 of the \gls{zmath} path.)
+
+Fuzz \cite{spiveyfuzz} is Mike Spiveys type-checker for Z specifications.
 It includes style files for \LaTeX{} and checks for the logical correctness and
 Z type correctness of Z specifications. It is a strong tpe checker for Z which
 takes Z specifications written in \LaTeX{} as input. This is similar to the Zeta
@@ -398,6 +414,17 @@ into ISabelle). The \gls{zcga} . Therefore the grammatical correctness
 of partially formal specification can also be checked. The \gls{zmath} framework
 presented in this thesis uses the `zed' \LaTeX{} style package to typeset the Z
 specifications in the documents.
+
+Proofpower \cite{pp} is a suite of tools supporting specification and proof in
+Higher Order Logic (HOL) and in the Z notation. Proofpower contains 6 packages:
+\begin{enumerate}
+    \item[PPDev] - The ProofPower developer kit, mainly comprising SLRP, a parser generator for Standard ML.
+    \item[PPTex] - The ProofPower interface to TeX and LaTeX.
+    \item[PPXpp] - The X Windows/Motif front-end for ProofPower.
+    \item[PPHol] - The HOL specification and proof development system.
+    \item[PPZed] - The Z specification and proof development system.
+    \item[PPDaz] - The Compliance Tool for specifying and verifying Ada programs.
+\end{enumerate}
 
 \section{Conclusion}
 This section compares 2 specifications written in Z which have been proven in a

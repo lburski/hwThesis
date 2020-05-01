@@ -418,30 +418,46 @@ specifications in the documents.
 Proofpower \cite{pp} is a suite of tools supporting specification and proof in
 Higher Order Logic (HOL) and in the Z notation. Proofpower contains 6 packages:
 \begin{enumerate}
-    \item[PPDev] - The ProofPower developer kit, mainly comprising SLRP, a parser generator for Standard ML.
-    \item[PPTex] - The ProofPower interface to TeX and LaTeX.
-    \item[PPXpp] - The X Windows/Motif front-end for ProofPower.
-    \item[PPHol] - The HOL specification and proof development system.
-    \item[PPZed] - The Z specification and proof development system.
-    \item[PPDaz] - The Compliance Tool for specifying and verifying Ada programs.
+    \item \textbf{PPDev} - The ProofPower developer kit, mainly comprising SLRP, a parser generator for Standard ML.
+    \item \textbf{PPTex} - The ProofPower interface to TeX and LaTeX.
+    \item \textbf{PPXpp} - The X Windows/Motif front-end for ProofPower.
+    \item \textbf{PPHol} - The HOL specification and proof development system.
+    \item \textbf{PPZed} - The Z specification and proof development system.
+    \item \textbf{PPDaz} - The Compliance Tool for specifying and verifying Ada programs.
 \end{enumerate}
 
+Proofpower Z is a theorem proving environment specific for Z notations. PPZed has
+its own user interface to input specifications. Users can input specifications
+using Proofpower syntax or an extended character set in which the user cn click
+on the characters required. The type checking and proofs are all done within the
+the Proofpower interface.
+
+Proofpower syntax is more similar to a normal drawing of a schema
+than the way we have translated schemas to Isabelle using \gls{zmath}. This is
+because Isabelle is a generic theorem prover for all of mathematics whereas
+Proofpower is made specific to Z specifications. The aim of \gls{zmath} was to
+incorporate all specifications and not just ones written in Z. Again proofpower
+has incorporated type checking like Zeta and Fuzz which is also done in Isabelle
+using the \gls{zmath} method. However as mentioned before the \gls{zcga} is a
+weak type checker which checks grammatical categories at a higher level then a
+usual type checker.
+
 \section{Conclusion}
-This section compares 2 specifications written in Z which have been proven in a
+This section compares two specifications written in Z which have been proven in a
 theorem prover previously with the proofs done using \gls{zmath}. The
 \gls{zmath} framework allows the user analyse their formal specification and
 assists them translating the specification itself into a theorem prover. However
 the last step of the framework to prove properties about the specification is
 still a difficult step in both translation paths (via \gls{zmath} or via another
-route). However the \gls{zmath} framework is there to give a helping hand to
+route). This chapter also compared other similar tools which have been
+implemented to analyse Z specification. We have identified that although these
+tools are similar- none are identifical to the \gls{zmath} toolkit.
+The \gls{zmath} framework is there to give a helping hand to
 users who are complete beginners in proving formal specifications. Proving the
 actual properties and the proof obligations of the specification are a whole
 research area on their own and beyond the scope of this thesis but touched upon
-in chapter \ref{ch:background}.
-
-The \gls{zmath} aspects and it's tools can be used as helpful means to the user digest 
-the specification and allow them to understand
-the syntax of their specifications.
+in chapter \ref{ch:background}. The \gls{zmath} aspects and it's tools can be used as helpful means to the user digest 
+the specification and allow them to understand the syntax of their specifications.
 
 In the next chapter we conclude our findings of this thesis and highlight what
 areas are of interest for future work.

@@ -48,12 +48,36 @@ the large jump is broken up into multiple smaller jumps, allowing the level 3 of
 rigour to be more accessible and thus more widely used. 
 
 \section{Aims and Objectives}
-This thesis present a toolkit in order to translate a specification in a step by
+This thesis present a toolkit in to translate a specification into a theorem prover, in a step by
 step method with various safety checks a long the way. 
 Our hypothesis is as follows:
 
-\textbf{To what extent is breaking up the translation path from a formal/semi-formal specification into a theorem prover useful?}
+\textbf{To what extent is breaking up the translation path from a
+formal/semi-formal specification into a theorem prover, with various
+safety checks along the way useful?}
 
+To answer this hypothesis we have broken it down into the following research
+questions:
+
+\begin{enumerate}
+    \item What and how many steps do we need to break up the translation path?
+    \item Which steps can be automated to make it less labour-intensive for the user?
+    \item What are the safety checks we can do along the way to a fully proven specification?
+    \item Where could a toolkit such as \gls{zmath} be applied?
+\end{enumerate}
+
+The answer to the first research question is presented in chapter
+\ref{ch:design} where the design of the toolkit is described and shows the six
+steps needed to translate the specification. A high level description of the
+automated tools are also described in chapter \ref{ch:design} and in particular
+Figure \ref{fig:zmathflow}. Then the specific chapters on each aspects (chapters
+\ref{ch:zcga} to \ref{chap:gpsa2isa}) describe in detail the automated
+components, which gives us an answer to the second research question. We
+describe the possible safety checks in the background chapter (chapter
+\ref{ch:background}) but incorporate particular safety checks to help with the
+translation identified in chapter \ref{ch:skeletons}. We presented the toolkit
+to various industry experts from different domains and recorded their comments
+in chapter \ref{ch:evaluation} which answers our final research question.
 
 \section{Contributions}
 

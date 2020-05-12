@@ -207,6 +207,49 @@ Further work using the ZMathLang toolkit could include conducting experiments
 with theorem prover experts and participants not proficient with theorem proving
 and get their feedback on which method they prefer to prove specifications.
 
+\section{Hypothesis and research questions}
+
+At the start of this thesis we asked
+\textbf{`to what extent is breaking up the translation path from a
+formal/semi-formal specification into a theorem prover, with various
+safety checks along the way useful?'}
+To help us answer this we asked the following research questions:
+
+\begin{enumerate}
+    \item What and how many steps do we need to break up the translation path?
+    \item Which steps can be automated to make it less labour-intensive for the user?
+    \item What are the safety checks we can do along the way to a fully proven specification?
+    \item Where could a toolkit such as \gls{zmath} be applied?
+\end{enumerate}
+
+We can now answer the research questions as follows:
+
+\begin{enumerate}
+    \item In chapter \ref{ch:design} we designed the step by step translation
+    into 6 steps. We have chosen 6 steps as we tried to follow similar steps as
+    the \gls{math} framework for mathematics. This seemed to worked quite well
+    as we managed to automate a lot of the translation path using these steps.
+    If there were more steps then the jumps from one aspect to another may be
+    too large and the user wouldn't be able to digest what was happening. If
+    there were more steps then the translation could take too long as there
+    would be too much work to do in between. The 6 steps allow for the
+    specification to be analysed by various members of the project team. However
+    the most \textbf{useful} amount of steps would depend on the project/project
+    team and specification in question.
+
+    \item The overview in chapter \ref{ch:design} and detailed in chapters
+    \ref{ch:zcga} to \ref{chap:gpsa2isa} we have managed to automate the
+    \gls{zcga} and \gls{zdra} correctness checks (after they have been manually
+    annotated). The \gls{gpsa}, Isabelle skeleton, and filled-in Isabelle
+    skeleton have also been automated. The last step to prove the specification
+    has to be done manually and thus the user would need some theorem prover
+    knowledge. It is useful to have the first couple of steps automated as they
+    proved to be the most practical according to the comments given by
+    industrial experts (written in \ref{ch:evaluation}).
+
+
+\end{enumerate}
+
 
 \section{ZMathLang Current and Future Developments}
 \label{sec:zmathcurandfut}

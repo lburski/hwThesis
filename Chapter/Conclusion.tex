@@ -235,7 +235,8 @@ We can now answer the research questions as follows:
     would be too much work to do in between. The 6 steps allow for the
     specification to be analysed by various members of the project team. However
     the most \textbf{useful} amount of steps would depend on the project/project
-    team and specification in question.
+    team and specification in question. Each step has it's own benefits (as
+    outlined in each corresponding chapter) therefore none of the steps are expendable.
 
     \item The overview in chapter \ref{ch:design} and detailed in chapters
     \ref{ch:zcga} to \ref{chap:gpsa2isa} we have managed to automate the
@@ -247,7 +248,24 @@ We can now answer the research questions as follows:
     proved to be the most practical according to the comments given by
     industrial experts (written in \ref{ch:evaluation}).
 
+    \item We have written what type of safety checks can be done on a
+    specification in chapter \ref{ch:background}. However the safety checks we
+    decided to do on our thesis was a weak type check, ZDRa check and proof
+    obligations to check the sanity of the specification. These safety checks
+    were noted to be quite useful to the industrial experts as written in
+    chapter \ref{ch:evaluation}. In particular the Document Rhetorical
+    correctness was identified to be helpful in order to identify
+    `\textit{knock-on effects}' to solutions in system designs.
 
+    \item The \gls{zmath} toolkit is aimed to be used for `\textbf{high
+    integrity}' systems. The Traffic Signal Engineers' review in chapter
+    \ref{ch:evaluation} mentions that the \gls{zmath} framework would be useful
+    when autonomous vehicles are introduced onto the road. That is when more
+    complex solutions are integrated with current solutions. Since autonomous
+    vehicles are still a hot-topic for research there is still time to analyse
+    the requirements of such systems thus a toolset such as \gls{zmath} still
+    has time to be applied. However, \gls{zmath} would probably not be ideal for
+     systems which require a quick turn around.
 \end{enumerate}
 
 

@@ -442,6 +442,17 @@ using the \gls{zmath} method. However as mentioned before the \gls{zcga} is a
 weak type checker which checks grammatical categories at a higher level then a
 usual type checker.
 
+Although \gls{zmath} is based on \gls{math} the two have quite a few
+differences. \Gls{math} also has a CGa, ZDRa, Proof Skeleton and theorem prover
+skeleton. However the names of the weak types are different. Also the program to
+carry out the weak type check now accommodates specifications written in Z
+syntax. In the \gls{zdra} the names and rules are different to the DRa and the
+\gls{zdra} fuses together parts of the specification written formally and
+informally. The converter from the
+\gls{zdra} to graphs and skeletons have different rules and different algorithms
+compared to Mathlangs. All the software development was written fresh as the source files
+for the original mathlang were unfortunately lost.
+
 \section{Conclusion}
 This section compares two specifications written in Z which have been proven in a
 theorem prover previously with the proofs done using \gls{zmath}. The

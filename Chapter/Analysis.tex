@@ -451,7 +451,59 @@ syntax. In the \gls{zdra} the names and rules are different to the DRa and the
 informally. The converter from the
 \gls{zdra} to graphs and skeletons have different rules and different algorithms
 compared to Mathlangs. All the software development was written fresh as the source files
-for the original mathlang were unfortunately lost.
+for the original \gls{math} were unfortunately lost.
+
+\begin{table}[H]
+    \centering
+\begin{tabular}{|l | l|}
+\hline
+Mathlang & ZMathLang \\
+\hline
+term & term \\
+set & set \\
+noun & schemaText \\
+adjective & declaration \\
+expression & expression \\
+definition & definition \\
+step & specification \\
+context & \\
+\hline
+\end{tabular}
+\caption{A table to compare the CGa annotations in Mathlang and ZCGa annotations in ZMathlang \label{tab:comparecga}}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l | l || l | l |}
+        \hline
+        MathLang Roles & ZMathLang Roles & MathLang Relations & ZMathLang Relations \\
+        \hline
+        lemma & theory & justifies & initialOf \\
+        proof & stateschema & uses & uses \\
+        corollary & initialschema & subpartOf & requires \\
+        definition & changeSchema & & allows \\
+        claim & outputschema & & totalises \\
+        case & totaliseschema & & \\
+        & axiom & & \\
+        & stateInvariants & & \\
+        & preconditions & & \\
+        & postcondition & & \\
+        & output & & \\       
+        \hline
+    \end{tabular}
+    
+\end{table}
+
+
+
+
+Although the GPSa is in a similar format both in Mathlang and ZMathlang. The
+translations rules are different. This is because the components between a
+mathematical text and a Z specification are different, therefore the ordering in
+in a GPSa would not be the same. In turn, the Isabelle proof skeleton and beyond
+for ZMathLang uses the translation shown in chapter \ref{chap:gpsa2isa}.
+Translating a mathematical text would use a different syntax and different
+rules to be put into Isabelle.
 
 \section{Conclusion}
 This section compares two specifications written in Z which have been proven in a

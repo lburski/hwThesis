@@ -15,7 +15,7 @@ invariants which means we can demonstrate \gls{zmath} automatically generating
 the lemmas to prove. The  Modulereg specification is also a good size to fit
 onto one page to make it easy for the reader.
 
-\subsection{Step 0\\Raw Specification}
+\subsection{Step 0: Raw Specification}
 We take the raw specification ModuleReg \cite{essenceofz}, which displays students
 taking modules in a school environment (shown in figure \ref{fig:rawschema}) The
 output for the specification can be seen in figure \ref{fig:rawschemaout}. The
@@ -86,7 +86,7 @@ degModules' = degModules
 \end{figure}
 
 
-\subsection{Step 1\\ZCGa}
+\subsection{Step 1: ZCGa}
 
 The user then goes to label the raw specification with the \gls{zcga} labels.
 The labelled specification can be seen in figure \ref{fig:zcgaschema}. The words
@@ -185,7 +185,7 @@ specification has been checked.
 \caption{Message which appears after running the ZCGa checker on our example. \label{fig:zcgacorrect}}
 \end{figure}
 
-\subsection{Step 2\\ZDRa}
+\subsection{Step 2: ZDRa}
 
 Next the user can add \gls{zdra} relations to chunk parts of the specification
 together and add relations to them. Figure \ref{fig:zdrazcgaAno} shows our
@@ -310,7 +310,7 @@ the message which appears after we check our example with \gls{zdra}.
 \caption{Message which appears after running the ZDRa checker on our example. \label{fig:zdracorrect}}
 \end{figure}
 
-\subsection{Step 2.5\\Graphs}
+\subsection{Step 2.5: Graphs}
 
 Since the example is \gls{zdra} correct the two graphs shown in figures
 \ref{fig:depexample} and \ref{fig:gotoexample} are automatically produced and
@@ -333,7 +333,7 @@ saved on the users computer.
 The skeletons can be automatically generated if the specification passes the
 \gls{zcga} and \gls{zdra} check.
 
-\subsubsection{Step 3\\General Proof Skeleton}
+\subsubsection{Step 3: General Proof Skeleton}
 
 We can generate a general proof skeleton which prints out the \gls{zdra} name
 and the instances they should be converted to when inputting into any theorem
@@ -379,7 +379,7 @@ lemmaL2_(CS1)
 \caption{General proof skeleton. \label{fig:gpsaFullexample}}
 \end{figure}
 
-\subsubsection{Step 4\\Isabelle Skeleton}
+\subsubsection{Step 4: Isabelle Skeleton}
 
 From \gls{gpsa}, the ZMathLang program can automatically generate an Isabelle
 Skeleton. The user can do this by clicking on the \gls{gpsa} menu on the
@@ -429,7 +429,7 @@ end
 \caption{Isabelle proof skeleton. \label{fig:isaFullexample}}
 \end{figure}
 
-\subsubsection{Step 5\\Isabelle Skeleton Filled in}
+\subsubsection{Step 5: Isabelle Skeleton Filled in}
 
 Using the \gls{zcga} annotated document and the Isabelle skeleton described in
 the previous section. The user can then automatically fill in the missing
@@ -570,7 +570,7 @@ and one does not `\textit{use}' the other. If we did have a changeSchema which d
 then this would have to be annotated in the ZDRa and therefore the order would matter when the lemmas are produced.
 
 
-\subsection{Step 6\\Full Proof}
+\subsection{Step 6: Full Proof}
 
 The next part is to prove any existing lemmas from the filled in Isabelle
 Skeleton or add new lemma's to prove safety properties about the specification.
@@ -674,7 +674,7 @@ the control of an aircraft without constant manual input by the human pilot.
 We have chosen to demonstrate this specification as it presents the \gls{zmath}
 toolkit on a specification which is semi-formal.
 
-\subsection{Step 0\\Raw Specification}
+\subsection{Step 0: Raw Specification}
 
  \begin{figure}[H]
      \vspace{-0.2in}
@@ -825,7 +825,7 @@ specification written in figure \ref{fig:rawauto}.
 
 
 
- \section{Step 1\\ZCGa}
+ \subsection{Step 1: ZCGa}
 
  The use can then start labelling the semi-formal specification using the
  \gls{zcga} annotations. As this specification is not complete, the \gls{zcga}
@@ -951,7 +951,7 @@ paragraph. This is shown in figure \ref{fig:sfzcgacorrect}.
      \caption{Part of the autopilot specification which is \gls{zcga} correct.\label{fig:sfzcgacorrect}}
      \end{figure}
 
- \section{Step 2\\ZDRa}
+ \subsection{Step 2: ZDRa}
 
  The user can then add \gls{zdra} annotations to chunk part of the specification
 together and add relations together. These chunks can be from the informal or
@@ -1101,7 +1101,7 @@ graph are automatically produced. These are shown in figure \ref{fig:sfdepgoto}.
 \caption{Dependency graph (left) and goto graph (right) of the semiformal autopilot specification\label{fig:sfdepgoto}}
 \end{figure}
 
-\subsection{Informal Specification}
+\subsubsection{Informal Specification}
 
 One of the benefits of the \gls{zdra} check is that the chunks of text can even be
 written informally an example of this is shown in figure \ref{fig:informalzdra}.
@@ -1164,7 +1164,7 @@ is duplicated and therefore would fail the \gls{zdra} type check.
  proof of the specification (step 6) as the semi-formal specification isn't
  complete as it is not fully formal.
 
- \subsection{Step 3\\General Proof Skeleton}
+ \subsubsection{Step 3: General Proof Skeleton}
 
  Using the goto graph produced for the semiformal specification in figure
  \ref{fig:sfdepgoto} the \gls{zmath} tool-set can automatically generate a
@@ -1177,7 +1177,7 @@ is duplicated and therefore would fail the \gls{zdra} type check.
  \caption{General proof skeleton for the semiformal specification. \label{fig:sfgpsa}}
  \end{figure}
 
- \subsection{Step 4\\Isabelle Skeleton}
+ \subsubsection{Step 4: Isabelle Skeleton}
 
  Using the \gls{gpsa} created in the previous step for the semiformal autopilot
  specification. The \gls{zmath} toolkit can then automatically generate an
@@ -1197,7 +1197,7 @@ is duplicated and therefore would fail the \gls{zdra} type check.
      \caption{The Isabelle skeleton for the semiformal autopilot specification. \label{fig:sfisabelleskeleton}}
 \end{figure}
 
-\subsection{Step 5\\Isabelle Skeleton filled in}
+\subsubsection{Step 5: Isabelle Skeleton filled in}
 
 The \gls{zmath} toolkit can now fill in the Isabelle skeleton using the
 \gls{zcga} and \gls{zdra} annotated document. The \gls{zmath} can only translate

@@ -374,7 +374,7 @@ specification will be automatically translated into Isabelle/Hol when using the
 is a skeleton of the specification and then automatically fill in the
 specification using the information from the ZCGa annotations.
 
-\subsection{Comparison with similar tools for Z}
+\subsection{Comparison with similar tools}
 \label{subsec:provingSystemsForZ}
 
 Hol-Z \cite{hol-z} also analysis the Z notation, and is also a
@@ -472,6 +472,13 @@ context & \\
 \caption{A table to compare the CGa annotations in Mathlang and ZCGa annotations in ZMathlang \label{tab:comparecga}}
 \end{table}
 
+Table \ref{tab:comparecga} shows the CGa categories of the original \gls{math}
+and the ZCGa categories of \gls{zmath}. Some categories are the same in both
+such as \texttt{term}, \texttt{set} and \texttt{definitions}. Other categories
+such as \texttt{schematext}, \texttt{declaration} and \texttt{specifications} do
+not exist in the original \gls{math}. We wrote the program check for grammatical
+correctness of Z specifications in python and the rules are specific to the Z notation.
+
 \begin{table}[H]
     \centering
     \begin{tabular}{|l | l || l | l |}
@@ -484,18 +491,23 @@ context & \\
         definition & changeSchema & & allows \\
         claim & outputschema & & totalises \\
         case & totaliseschema & & \\
-        & axiom & & \\
+        theory & axiom & & \\
         & stateInvariants & & \\
         & preconditions & & \\
         & postcondition & & \\
         & output & & \\       
         \hline
     \end{tabular}
-    
+    \caption{A table to compare the DRa annotations in Mathlang and ZDRa annotations in ZMathlang \label{tab:comparedra}}
 \end{table}
 
-
-
+Table \ref{tab:comparedra} shows the rules and relations in the DRa for
+\gls{math} and the ZDRa in \gls{zmath}. Again some roles and relations are the same in both
+such as \texttt{theory} and \texttt{uses}. However the majority of ZDRa roles
+and relations are specific to \gls{zmath}. There for the rules to check for
+rhetorical correctness are different to the original \gls{math}. Although both
+the DRa and ZDRa "check for loops in the reasoning" the novel way in which the
+loops are being checked are specific to specifications.
 
 Although the GPSa is in a similar format both in Mathlang and ZMathlang. The
 translations rules are different. This is because the components between a

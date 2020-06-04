@@ -668,8 +668,7 @@ All variables have been declared before they are used in Isabelle and all the ZC
 have been translated back to the original names used in the Z Specification.
 
 \section{Autopilot Specification}
-Here, we show a section of an autopilot specification \cite{Butler96} in natural
-language, which describes
+Here, we show a section of an autopilot specification \cite{Butler96}, which describes
 the control of an aircraft without constant manual input by the human pilot.
 We have chosen to demonstrate this specification as it presents the \gls{zmath}
 toolkit on a specification which is semi-formal.
@@ -806,7 +805,7 @@ cas\_eng: mode\_status
      \end{figure}
 
 When we compile the raw \LaTeX{} specification shown in figure \ref{fig:rawauto}
-we get the output in \ref{fig:rawautocomp}. This output is very similar to the semi-formal
+we get the raw output in \ref{fig:rawautocomp}. This output is very similar to the semi-formal
 specification written in figure \ref{fig:rawauto}.
 
     \begin{figure}[H]
@@ -827,10 +826,10 @@ specification written in figure \ref{fig:rawauto}.
 
  \subsection{Step 1: ZCGa}
 
- The use can then start labelling the semi-formal specification using the
+ The user can then start labelling the semi-formal specification using the
  \gls{zcga} annotations. As this specification is not complete, the \gls{zcga}
- labelling is not complete either. However, we can already see the benefits the
- \gls{zcga} weak type checker can bring to an semi-formal specification.
+ labelling will not be complete either. However, we can already see the benefits the
+ \gls{zcga} weak type checker can bring to a semi-formal specification.
 
  \begin{figure}[H]
  \centering
@@ -907,7 +906,6 @@ disengaged, the display reverts to showing the "current" value.
  \centering
  \includegraphics[width=\linewidth]{Figures/fullexample/semiform1a.png}
  \includegraphics[width=7cm]{Figures/fullexample/semiform1b.png}
- %\includegraphics[width=7cm]{Figures/fullexample/semiform1c.png}
  \end{minipage}
  \caption{Part of the autopilot specification labeled in \gls{zcga}.\label{fig:zcgaschemasemiform}}
  \end{figure}
@@ -1085,7 +1083,7 @@ showing the "current" value.
  \end{minipage}
  \end{figure}
 
-Since the semiformal specification is \gls{zdra} correct the dependency and goto
+The dependency and goto
 graph are automatically produced. These are shown in figure \ref{fig:sfdepgoto}.
 
 \begin{figure}[H]
@@ -1098,7 +1096,7 @@ graph are automatically produced. These are shown in figure \ref{fig:sfdepgoto}.
 \centering
 \includegraphics[scale=0.4]{Figures/fullexample/sfgoto.png}
 \end{minipage}
-\caption{Dependency graph (left) and goto graph (right) of the semiformal autopilot specification\label{fig:sfdepgoto}}
+\caption{Dependency graph (left) and goto graph (right) of the semi-formal autopilot specification\label{fig:sfdepgoto}}
 \end{figure}
 
 \subsubsection{Informal Specification}
@@ -1115,11 +1113,10 @@ written informally an example of this is shown in figure \ref{fig:informalzdra}.
 If we run the \gls{zdra} labelled specification shown in figure
 \ref{fig:informalzdra} we get the message that it is \gls{zdra} correct however
 it has not been totalised. Which in this case is legal as it is an informal
-specification. Future to the message the \texttt{dependency} and \texttt{goto}
-graphs are also generated. This is show in figure \ref{fig:ifdepgoto}. This is different
+specification. The dependency and goto graphs have also been
+generated, this is show in figure \ref{fig:ifdepgoto}. These are different
 to the dependency and goto graphs of the semi-formal autopilot as the
-semi-formal specification has formal parts and therefore more details have been
-added to the specification.
+semi-formal specification has formal parts.
 
 \begin{figure}[H]
      \centering
@@ -1131,7 +1128,7 @@ added to the specification.
      \centering
      \includegraphics[scale=0.4]{Figures/fullexample/informalgoto.png}
      \end{minipage}
-     \caption{Dependency graph (left) and goto graph (right) of the semiformal autopilot informal specification\label{fig:ifdepgoto}}
+     \caption{Dependency graph (left) and goto graph (right) of the semi-formal autopilot informal specification\label{fig:ifdepgoto}}
      \end{figure}
 
 If the specification had a loop in the reasoning. For example if the description
@@ -1155,9 +1152,9 @@ is duplicated and therefore would fail the \gls{zdra} type check.
 
  \subsection{Skeletons}
 
- Since our semiformal specification pass the \gls{zdra} check the dependency and
+ Since our semi-formal specification pass the \gls{zdra} check the dependency and
  goto graphs are automatically generated. The skeletons which could be
- automatically generated for the semiformal specification are the general proof
+ automatically generated for the semi-formal specification are the general proof
  skeleton (step 3) and the Isabelle skeleton (step 4). \Gls{zmath} can also fill
  in the Isabelle skeleton for those parts which are in formal format and
  correctly labelled in \gls{zcga}. The user will not be able to complete a full
@@ -1166,20 +1163,20 @@ is duplicated and therefore would fail the \gls{zdra} type check.
 
  \subsubsection{Step 3: General Proof Skeleton}
 
- Using the goto graph produced for the semiformal specification in figure
- \ref{fig:sfdepgoto} the \gls{zmath} tool-set can automatically generate a
+ Using the goto graph produced for the semi-formal specification in figure
+ \ref{fig:sfdepgoto} the \gls{zmath} toolset can automatically generate a
  general proof skeleton to order the instances for them to be translated into
  Isabelle. This general proof skeleton is shown in figure \ref{fig:sfgpsa}.
 
  \begin{figure}[H]
  \centering
  \includegraphics[scale=0.5]{Figures/fullexample/sfgpsa.png}
- \caption{General proof skeleton for the semiformal specification. \label{fig:sfgpsa}}
+ \caption{General proof skeleton for the semi-formal specification. \label{fig:sfgpsa}}
  \end{figure}
 
  \subsubsection{Step 4: Isabelle Skeleton}
 
- Using the \gls{gpsa} created in the previous step for the semiformal autopilot
+ Using the \gls{gpsa} created in the previous step for the semi-formal autopilot
  specification. The \gls{zmath} toolkit can then automatically generate an
  Isabelle skeleton which translates the \gls{gpsa} into Isabelle syntax. This is
  shown in figure \ref{fig:sfisabelleskeleton}.
@@ -1194,7 +1191,7 @@ is duplicated and therefore would fail the \gls{zdra} type check.
      \centering
      \includegraphics[width=\linewidth]{Figures/fullexample/sfisabelle2.png}
      \end{minipage}
-     \caption{The Isabelle skeleton for the semiformal autopilot specification. \label{fig:sfisabelleskeleton}}
+     \caption{The Isabelle skeleton for the semi-formal autopilot specification. \label{fig:sfisabelleskeleton}}
 \end{figure}
 
 \subsubsection{Step 5: Isabelle Skeleton filled in}
@@ -1216,19 +1213,19 @@ with the translation.
      \centering
      \includegraphics[width=\linewidth]{Figures/fullexample/sfisabellefill2.png}
      \end{minipage}
-     \caption{The Isabelle skeleton filled in for the semiformal autopilot specification. \label{fig:sfisabelleskeletonfill}}
+     \caption{The Isabelle skeleton filled in for the semi-formal autopilot specification. \label{fig:sfisabelleskeletonfill}}
 \end{figure}
 
 \section{Conclusion}
-In this chapter we have taken a two specifications and shown the entire path
+In this chapter we have taken two specifications and shown the entire path
 from the raw specification to it's translation in Isabelle. We have shown the
 \LaTeX{} code and the compiled output for the raw specification, \gls{zcga}
 annotated specification and \gls{zdra} annotated specification. We have shown
 screenshots of the interface to demonstrate of how to check for each step of
 correctness. The dependency and goto graphs where automatically generated and
 displayed. Then the general proof skeleton, (which shows the order the instances
-must be in to input into a theorem prover) was displayed. We then generated an
-Isabelle proof skeleton for the modulereg and automatically filled it in
+must be in to input into a theorem prover) was displayed. We generated an
+Isabelle proof skeleton for the modulereg and autopilot specifications and automatically filled it in
 using the \gls{zmath} program. In the final section we explained that it would
 be difficult to automate a proof due to the fact that the lemma's which need to
 be proved for a specification will vary due to the nature of the specification

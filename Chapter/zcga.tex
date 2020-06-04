@@ -9,7 +9,7 @@ type theory for mathematics \cite{wtt}. Core grammatical correctness for Z has
 also adapted the rules from the \gls{cga} for mathematics (see section
 \ref{sec:mathlangbackground} in chapter \ref{ch:background}).
 
-This chapter focuses on the first step of the \gls{zmath} tool-set. The user can
+This chapter focuses on the first step of the \gls{zmath} toolset. The user can
 check for grammatical correctness with the aim to translate the specification
 fully into a theorem prover or they can use this step on it's own to check their
 specification for some level of rigor.
@@ -716,7 +716,7 @@ types like a Z type checker would find, such as fuzz.
 The \gls{zcga} program uses regular expressions to read the annotations written
 by the user to determine if a specification is \gls{zcga} correct. It ignores
 all the parts which are not labelled in \gls{zcga} which allows for
-\gls{semiform} to be checked as well. Look at the following:
+semi-formal specification to be checked as well. Look at the following:
 
 \begin{exam}
 \begin{verbatim}
@@ -911,27 +911,21 @@ looking at it with the naked eye, however with the user going through and
 labelling each part in \gls{zcga} annotations along with the \gls{zcga} checker,
 all these grammatical errors should be identified.
 
-%If the user wished to ammend this then the set would change to
-%\verb|\set{\set{w} \cup \set{\{\term{v}\}}}|. By adding the curly brackets
-%\verb|\{..\}| it changes the term into a set which can now be applied as a
-%parameter to \verb|\cup|.
-
-\section{ZCGa on a semiformal specification}
+\section{ZCGa on a semi-formal specification}
 \label{sec:zcgaonsemi}
 
-The \gls{zcga} can also be used on semiformal specification. An example is shown
+The \gls{zcga} can also be used on a semi-formal specification. An example is shown
 in appendix \ref{app:semiform}, which describes an auto pilot system. This
 specification is written partly in the English natural language and partly in Z.
-Therefore the specification is on it's way to becoming formal. The user can then
+Therefore the specification is on it's way to becoming formal. The user can
 annotate the formal parts and some of the informal parts in \gls{zcga}, it can
-then be checked and will the user if there are any grammatical errors in the
-specification so far, and if any variables which have been used need to be
-declared etc. For example, in the auto pilot specification, the \verb|off_eng|
-schema has a declaration which states \verb|mode:mode_status| (figure
-\ref{fig:zcgautopilot}). If the \verb|mode_status| type was not declared before
-it was used in the \verb|off_eng| schema, then the \gls{zcga} checker would
+then be checked and will notify the user if there are any grammatical errors in the
+specification so far, if any variables need to be
+declared etc. In the auto pilot specification (shown in figure \ref{fig:zcgautopilot}), the \verb|off_eng|
+schema has a declaration which states `\verb|mode:mode_status|'. If the \verb|mode_status| type was not declared before
+it was used in the `\verb|off_eng|' schema, then the \gls{zcga} checker would
 identify this and would display an error message. However, after the type
-\verb|mode_status| has been declared in the specification it can be used
+`\verb|mode_status|' has been declared in the specification it can be used
 throughout the rest of the specification, including in the informal text part.
 
 \begin{figure}[H]
@@ -943,8 +937,8 @@ throughout the rest of the specification, including in the informal text part.
 \subsection{Semi-formal specification is ZCGa incorrect}
 
 One main advantage of the ZCGa is that a semi-formal specification
-can be checked for weak type correctness. This is useful during times when a
-specification for a system is written by many people which is usually the case.
+can be checked for weak type correctness. This is useful during times when a  system
+specification is written by many people, which is usually the case in industry.
 
 \begin{figure}[H]
     \centering
@@ -954,7 +948,7 @@ specification for a system is written by many people which is usually the case.
     \end{figure}
 
 Figure \ref{fig:zcgautopilotzcgaincorrect} shows part of the semi-formal autopilot
-specification but the user has annotated the terms within the informal part of
+specification where the user has annotated the terms within the informal part of
 the specification. This annotation is legal in \gls{zmath}.
 
 If we run this specification through the ZCGa checker the output message will
@@ -996,7 +990,7 @@ System Engineer A writes the following requirements:
      }
  }
 
- System engineer B writes the following set of requirements:
+ System Engineer B writes the following set of requirements:
 
 
  \noindent\fbox{%
@@ -1018,7 +1012,7 @@ System Engineer A writes the following requirements:
 
  \begin{figure}[H]
     \centering
-    \includegraphics[scale=0.18]{Figures/zcga/driverdeclared.png}
+    \includegraphics[scale=0.5]{Figures/zcga/driverdeclared.png}
     \caption{Output result of running passing informal requirements
          through the ZCGa checker. \label{fig:zcgaautopilotresult}}
     \end{figure}

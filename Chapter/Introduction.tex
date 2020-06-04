@@ -43,13 +43,15 @@ practically worthwhile when the cost of making mistakes is extremely high
 \cite{encyclopedia}.
 
 The jump from Level 1 rigour to Level 3 rigour is very difficult, but in many
-cases worthwhile. The purpose of this thesis is to introduce an tool- set where
+cases worthwhile. The purpose of this thesis is to introduce an toolset where
 the large jump is broken up into multiple smaller jumps, allowing the level 3 of
 rigour to be more accessible and thus more widely used. 
 
 \section{Aims and Objectives}
-This thesis present a toolkit in to translate a specification into a theorem prover, in a step by
-step method with various safety checks a long the way. 
+This thesis presents a toolkit which analysis specifications for various degrees
+of correctness and ultimately translates them into the theorem prover Isabelle.
+The toolkit does this in a step by
+step fashion. 
 Our hypothesis is as follows:
 
 \textbf{To what extent is breaking up the translation path from a
@@ -113,7 +115,7 @@ Translating specifications into theorem provers has been shown to be a great
 difficult task \cite{johnharrisonslides}. Not everyone on the software project
 team will know how to computerise specifications. The main contribution this
 thesis presents a tool support to assist in the translating formal
-specifications into theorem provers. The \gls{zmath} tool-set has been designed
+specifications into theorem provers. The \gls{zmath} toolset has been designed
 for individuals who have no or little expertise in the chosen theorem prover. It
 is broken up so that each step in the path checks for some form of correctness
 of the specification. The checks become more and more rigorous the further one
@@ -258,7 +260,7 @@ each specification.
 
 Figure \ref{fig:timeline} shows a diagram showing how far one can automate a
 specification using automated \gls{zmath} and Isabelle tools. \Gls{zmath} is a
-tool-set which assists the user in translating and proving a specification (going
+toolset which assists the user in translating and proving a specification (going
 from left to right). There are also other automating tools within Isabelle which
 also assist the user with proving specifications (going from right to left) in
 the diagram.
@@ -282,7 +284,7 @@ up to step 6 is automated.
 The black line shows the path going from a raw specification to a fully proven
 specification with a milestone in the middle, which signifies when a
 specification has been translated into Isabelle syntax but has no properties or
-proof. \Gls{zmath} takes the user a little past this milestone as the tool-set
+proof. \Gls{zmath} takes the user a little past this milestone as the toolset
 also generates properties to check the specification for consistency (see
 section \ref{sec:proofobl}). These properties are added to the specification
 during step 3 and continued throughout the translation. It is important to note

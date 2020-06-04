@@ -26,7 +26,7 @@ As well as having instances, the ZDRa shows relations between them to make sure
 there are no loops in reasoning and to give warning in some situations (e.g.
 specification is not totalised).
 
-We have chosen to identify loops in the reasoning as it determines whether the
+We have chosen to identify loops in the reasoning as it establishes whether the
 program is deterministic. Safety-critical systems must be deterministic,
 practices which can lead to non-determinism must be avoided or carefully
 controlled \cite{rierson2013developing}. Identifying loops in the reasoning is
@@ -834,7 +834,7 @@ described in the next chapter.
 \section{ZDRa on an Informal Specification}
 \label{sec:zdrainformal}
 
-One of the main benefits is that the \gls{zdra} checker can be used on
+One of the main benefits of \gls{zmath} is that the \gls{zdra} checker can be used on
 specifications which are written entirely in natural language. This is
 particularly useful if the specification has been written by multiple people.
 
@@ -889,8 +889,8 @@ told to deploy.[+color[blue]}]
     \caption{Informal requirements example \gls{zdra}.\label{fig:informalzdraexample}}
     \end{figure}
 
-The ZMathLang toolkit will identify the circular reasoning and tell the
-user(requirements 1, 3 and 5). 
+The ZMathLang toolkit will identify the circular reasoning (requirements 1, 3 and 5) and notify the
+user. 
 It will also produce the following graph to show that the 3 requirements are
 dependent on each other and therefore show there is an error. This loop is shown
 in figure \ref{fig:informalloop}.

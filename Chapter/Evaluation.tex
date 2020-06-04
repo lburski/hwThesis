@@ -5,7 +5,7 @@ In this chapter we go through a few case studies and discuss the difference
 between the specification translations if any. Table \ref{tab:specstranslated}
 shows the specifications we have translated into Isabelle using \gls{zmath}. We
 have classified these examples to show the different types of specifications
-which can be translated using the \gls{zmath} tool-kit. In this chapter we take
+which can be translated using the \gls{zmath} toolkit. In this chapter we take
 one example from each class (Steamboiler from appendix \ref{app:steamboiler}, ModuleReg from chapter \ref{ch:fullexample}
  and AutoPilot from appendix \ref{app:semiform}) 
 and describe in more detail how the translation was done.
@@ -544,7 +544,7 @@ steamboiler specification is shown in figure \ref{fig:steamgpsa}.
 \end{figure}
 
 We can now translate the \gls{gps} into Isabelle syntax using the \gls{zmath}
-tool-kit.
+toolkit.
 
 \begin{figure}[H]
     \hfill
@@ -557,7 +557,7 @@ tool-kit.
 
 Part of the isabelle skeleton for the steamboiler specification is shown in
 figure \ref{fig:steamisaskel}. Since the steamboiler example has 2 stateSchema's
-the \gls{zmath} tool-set creates 2 isabelle 	\texttt{records} in the theory file.
+the \gls{zmath} toolset creates 2 isabelle 	\texttt{records} in the theory file.
 The top left image shows the beginning part of the isabelle skeleton, where the
 first stateSchema (or record) sets the state of the theory. Midway down the
 theory file the first record \texttt{ends} and a new one is added with the line
@@ -936,10 +936,10 @@ The vending machine example has 3 state changing schemas (shown in table
 stateInvariants, \gls{zmath} can not automatically produce any properties to
 prove the consistency of the specification. If we refer back to figure
 \ref{fig:timeline} in chapter \ref{ch:design} it shows that the \gls{zmath}
-tool-kit goes slightly past the point of `\emph{specification in isabelle with no
+toolkit goes slightly past the point of `\emph{specification in isabelle with no
 proof}' however the automation of \gls{zmath} can only go past that point
 \textbf{if} there are changeschema's and stateInvariants labelled. Otherwise the
-\gls{zmath} tool-kit can only translate the specification into isabelle syntax
+\gls{zmath} toolkit can only translate the specification into isabelle syntax
 with no lemma's or properties to prove. Thus it is up to the user to carry on
 manually inputting their properties to obtain a fully proven specification.
 
@@ -1407,10 +1407,10 @@ specification to be proven.
 
 To check the consistency (section \ref{sec:proofobl}) of all our specification we had to prove 56 lemmas with
 a total of 120 tactics. In this section we discuss how far the \gls{zmath}
-tool-kit can take us,how difficult it is for the user to get the full proof and
+toolkit can take us,how difficult it is for the user to get the full proof and
 what other proof is left.
 
-\subsection{How far can ZMathLang tool-kit take us and what is left for the user to do manually.}
+\subsection{How far can ZMathLang toolkit take us and what is left for the user to do manually.}
 
 Looking back at our examples described in the previous section. The more
 complex the language of the specification (whether it uses terms and set or just
@@ -1459,7 +1459,7 @@ Again, to add these extra properties, a little bit more Isabelle knowledge is
 needed.
 
 In the second scenario we will need only 1 person to complete the proof (the
-system designer). Using the \gls{zmath} tool-kit will assist the designer
+system designer). Using the \gls{zmath} toolkit will assist the designer
 translating the specification into Isabelle syntax, however the user will then
 need to learn more Isabelle to finish of the proof for their specification.
 Since the \gls{zmath} has already produced an Isabelle file the user can then
@@ -1475,7 +1475,7 @@ again is down to the system designer to learn.
 The third case is a compromise between the first two scenarios, it will require
 the system designer and on some occasions and an Isabelle expert. The system
 engineer translates the specification into Isabelle using the \gls{zmath}
-tool-kit to assist them. They then learn the very basic automated proving tools,
+toolkit to assist them. They then learn the very basic automated proving tools,
 to assist them in proving the lemmas to check for consistency. By doing this the
 system engineer may be able to prove the entire specification for consistency
 using the automated tool. However some lemmas if they are more complex may
@@ -1508,11 +1508,11 @@ However, once the user wishes to build a more complex system, the user will then
 need to learn more about their chosen theorem in order to check for complete
 correctness.
 
-\subsection{Assumptions and limitations of the ZMathLang tool-kit}
+\subsection{Assumptions and limitations of the ZMathLang toolkit}
 
 The recommendations made in this thesis are based on several assumptions and
 limitations as to what may be done to translate a Z specification into Isabelle
-using our \gls{zmath} tool-kit.
+using our \gls{zmath} toolkit.
 
 The assumptions are as follows:
 
@@ -1523,7 +1523,7 @@ mathematical notation is vast we can not incorporate the entire syntax of
 mathematics in the \gls{zmath} within the scope of this thesis. More explanation
 is given on this topic in the next chapter.
 
-\item The \gls{zmath} tool-kit uses \LaTeX{} and is implemented in 
+\item The \gls{zmath} toolkit uses \LaTeX{} and is implemented in 
 \verb|python2.7|. It uses the following python packages:
 \begin{itemize}
 \item \textbf{re:} To read the users annotations from \gls{zcga} and \gls{zdra}.
@@ -1533,10 +1533,10 @@ graph form.
 \item \textbf{Tkinter:} To run the user interface.
 \end{itemize}
 
-We assume that a user wanting to use the \gls{zmath} tool-kit has installed the
+We assume that a user wanting to use the \gls{zmath} toolkit has installed the
 correct packages.
 
-\item One of the assumptions the tool-kit makes is that if the specification
+\item One of the assumptions the toolkit makes is that if the specification
 holds 1 state schema (and thus 1 record) then all the lemma's produced are under
 that record. Thus, if the specification holds 2 or more records then the lemmas
 produced will need to define which record they belong to. For example in the
@@ -1544,7 +1544,7 @@ SteamBoiler specification we manually input `\verb|(in thesteamboiler)|' after
 the word `\verb|lemma|'. This does not have to be done to specification which
 only hold one state schema.
 
-\item Another assumption the \gls{zmath} tool-kit makes is that the document it is
+\item Another assumption the \gls{zmath} toolkit makes is that the document it is
 checking contains a single specification. Although the \gls{zcga} can check
 multiple specification in a single document, the rest of the tools assume that
 it is checking 1 system. Thus, when producing the dependency and goto graphs and
@@ -1566,11 +1566,11 @@ the Isabelle file manually.
 
 \end{itemize}
 
-We like to highlight the limitations of the \gls{zmath} tool-kit. They are as
+We like to highlight the limitations of the \gls{zmath} toolkit. They are as
 follows:
 
 \begin{itemize}
-\item One of the limitations of the \gls{zmath} tool-kit is in the way the
+\item One of the limitations of the \gls{zmath} toolkit is in the way the
 \gls{zdra} checks if the specification is correctly totalised. Although an
 incorrectly totalised specification can still be translated into Isabelle a
 warning message comes up for incorrectly totalised specifications. If the users
@@ -1680,19 +1680,19 @@ for the system engineer review where \gls{zmath} was physically demonstrated).
 
 \section{Conclusion}
 
-The \gls{zmath} tool-kit has been tried and tested on various examples of Z
+The \gls{zmath} toolkit has been tried and tested on various examples of Z
 specifications. We have translated specifications with syntax using set and
 terms and specifications using terms only. It seems that the grammatical types
 do not affect the ease of translation, but the amount of instances and the
 notations of mathematics do. The Steamboiler specification was our most complex
 example and we had to manually input extra parts to the lemmas in order to prove
 them. The amount of changeSchema's and stateInvariants affect how many
-properties the tool-kit will produce. The complexity of the mathematical notation
+properties the toolkit will produce. The complexity of the mathematical notation
 will determine how difficult the properties are to prove, whether they can be
 proven with the assistance of automatic tools or whether they need more Isabelle
 expertise to prove. Expert reviews on the \gls{zmath} toolkit conclude that
 toolset could be useful in various domains.
 
 We have outlined some of the assumptions and limitation of the \gls{zmath}
-tool-kit and we discuss the achievements of the system and future work in the next
+toolkit and we discuss the achievements of the system and future work in the next
 chapter.

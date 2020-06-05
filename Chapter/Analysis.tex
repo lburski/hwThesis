@@ -377,8 +377,9 @@ specification using the information from the ZCGa annotations.
 \subsection{Comparison with similar tools}
 \label{subsec:provingSystemsForZ}
 
-\subsubsection{Hol-Z}
+This section compares \gls{zmath} to other similar tools.
 
+\subsubsection{Hol-Z}
 Hol-Z \cite{hol-z} also analysis the Z notation, and is also a
 proof environment for Z. Hol-Z is embedded in Isabelle/HOL therefore it provides
 a Z type checker, documentation facilities and refinement proofs with a theorem
@@ -392,11 +393,12 @@ written in Z syntax, whereas \gls{zmath} will check any parts of the document
 which have been annotated by the user using the \gls{zcga} and \gls{zdra}
 annotations. Hol-Z uses Zeta \cite{zeta} as a Z type checker.
 
+\subsubsection{Zeta}
 Zeta \cite{zeta} is an open environnement for the development, analysis and
 animation of Z specifications. The system is aware of dependencies between the
 units and attempt to exploit the units when they are changed. Zeta is different
 to the \gls{zcga} type checker because the \gls{zcga} will read the annotations
-written y the user which could include some informal text as well as Z syntax.
+written by the user which could include some informal text as well as Z syntax.
 The \gls{zcga} did not aim to be a strong type checker like Zeta as the
 \gls{zcga} intends to check the grammatical correctness of the specification at
 a high level, where the weak types can be check when a specification is in the
@@ -404,6 +406,7 @@ process of being developed. The Z specification would be \underline{strongly
 type checked} once the user would have translated the specification into
 Isabelle (step 6 of the \gls{zmath} path.)
 
+\subsubsection{Fuzz}
 Fuzz \cite{spiveyfuzz} is Mike Spiveys type-checker for Z specifications.
 It includes style files for \LaTeX{} and checks for the logical correctness and
 Z type correctness of Z specifications. It is a strong tpe checker for Z which
@@ -412,11 +415,12 @@ checker as it checks the specific "Z Types" and whether the correct symbols are
 used. This is different to the \gls{zcga} type
 checker as the ZCGa checks for weak types and is aimed at early soft type
 checking (as full type checking is done once the specification is translated
-into ISabelle). The \gls{zcga} . Therefore the grammatical correctness
+into Isabelle). Therefore the grammatical correctness
 of partially formal specification can also be checked. The \gls{zmath} framework
 presented in this thesis uses the `zed' \LaTeX{} style package to typeset the Z
 specifications in the documents.
 
+\subsubsection{Proofpower}
 Proofpower \cite{pp} is a suite of tools supporting specification and proof in
 Higher Order Logic (HOL) and in the Z notation. Proofpower contains 6 packages:
 \begin{enumerate}
@@ -430,7 +434,7 @@ Higher Order Logic (HOL) and in the Z notation. Proofpower contains 6 packages:
 
 Proofpower Z is a theorem proving environment specific for Z notations. PPZed has
 its own user interface to input specifications. Users can input specifications
-using Proofpower syntax or an extended character set in which the user cn click
+using Proofpower syntax or an extended character set in which the user can click
 on the characters required. The type checking and proofs are all done within the
 the Proofpower interface.
 
@@ -442,10 +446,11 @@ incorporate all specifications and not just ones written in Z. Again proofpower
 has incorporated type checking like Zeta and Fuzz which is also done in Isabelle
 using the \gls{zmath} method. However as mentioned before the \gls{zcga} is a
 weak type checker which checks grammatical categories at a higher level then a
-usual type checker.
+usual Z type checker.
 
+\subsubsection{MathLang}
 Although \gls{zmath} is based on \gls{math} the two have quite a few
-differences. \Gls{math} also has a CGa, ZDRa, Proof Skeleton and theorem prover
+differences. \Gls{math} also has a CGa, DRa, Proof Skeleton and theorem prover
 skeleton. However the names of the weak types are different. Also the program to
 carry out the weak type check now accommodates specifications written in Z
 syntax. In the \gls{zdra} the names and rules are different to the DRa and the
@@ -508,7 +513,7 @@ Table \ref{tab:comparedra} shows the rules and relations in the DRa for
 such as \texttt{theory} and \texttt{uses}. However the majority of ZDRa roles
 and relations are specific to \gls{zmath}. There for the rules to check for
 rhetorical correctness are different to the original \gls{math}. Although both
-the DRa and ZDRa "check for loops in the reasoning" the novel way in which the
+the DRa and ZDRa `check for loops in the reasoning' the novel way in which the
 loops are being checked are specific to specifications.
 
 Although the GPSa is in a similar format both in Mathlang and ZMathlang. The

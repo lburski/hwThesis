@@ -361,7 +361,7 @@ When checking for ZDRa correctness the program adds all the annotated chunks
 into a dependency graph and a GoTo graph. Both these graphs are directed graphs.
 
 We then run an algorithm on the GoTo graph to generate a proof sketch.
-Algorithm \ref{alg:code} shows psuedocode in generating this proof sketech.
+Algorithm \ref{alg:code} shows pseudocode in generating this proof sketch.
 
 \begin{figure}[H]
       \includegraphics[scale=0.5]{Figures/skeleton/code.png}
@@ -379,7 +379,7 @@ in OrderOfGraph}{remove node from ListOfAllNodes}{$nothing$}} \While{there are
 nodes in ListOfAllNodes}{\For{each node in ListOfAllNodes}{predes = predecessor
 of each node\; \eIf{predes is a subset of OrderOfGraph}{push each node to
 OrderOfGraph\; remove each node\;}{$nothing$}}}
-\caption{Psuedo algorithm to create a proof sketech\label{alg:code}.}
+\caption{Pseudo algorithm to create a proof sketch\label{alg:code}.}
 \end{algorithm}
 
 \section{Creating the Graph}
@@ -447,7 +447,7 @@ Figure \ref{fig:4} shows the next stage of adding nodes to the Proof sketch.
 Since CS1 and CS2 are now added to the proof sketch then the next row of nodes
 can be added. Since PO1 only had one parent (CS1) it is added first, PO2 also
 had one parent (CS2) it is added second. The others had more parents which are
-already in the proof sketech so they are added randomly.
+already in the proof sketch so they are added randomly.
 
 \begin{figure}[H]
 \includegraphics[scale=0.3]{Figures/skeleton/5.png}
@@ -571,22 +571,6 @@ to define these themselves if they so wish.
 
 Since the POb2 are specific to the specification only POb1 are automatically
 added. They are generated as `\emph{lemma's}' in the proof sketch. 
-
-%\begin{algorithm}[H] \KwData{instances are known as `nodes'}
-%\KwData{OrderOfGraph is an ordered graph which lists the general proof
-%skeleton} \KwData{ListOfAllNodes is an unordered list containing all nodes}
-%\For{dupa}{If node is a root\; push to OrderOfGraph\;} \For{each node in
-%ListOfAllNodes}{if node in OrderOfGraph\; remove node from ListOfAllNodes\;}
-%\While{there are nodes in ListOfAllNodes}{\For{each node in
-%ListOfAllNodes}{predes = predecessor of each node\; if predes is a subset of
-%OrderOfGraph\; push each node to OrderOfGraph\; remove each node\;}
-%}
-%\caption{Part of the algorithm to create a proof sketch\label{fig:code}.}
-%\end{algorithm}
-
-%\begin{figure}[H] \includegraphics[scale=0.6]{Figures/skeleton/pobcode.png}
-%\caption{Part of the algorithm to create Proof Obligation ZDRa names.}
-%\label{fig:codepob} \end{figure}
 
 \begin{algorithm}[h] \KwData{listOfProofObligations is a set containing the ZDRa
 names of properties to prove} \KwData{i is the highest value of lemma, e.g if we

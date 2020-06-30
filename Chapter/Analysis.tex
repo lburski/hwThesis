@@ -261,16 +261,6 @@ order to get from a specification into a fully proof.
 Since starting this thesis the Hol-Z project is no longer developed. Therefore the
 comparison done here is limited with the support available.
 
-%How can we judge based on table 10.2 that it is more efficient to do
-%PPZed than in MathLang?  The discussion you give in sections
-%10.1.1.. 10.1.4 does not conclude the efficiency.  Reading your
-%section 10.1.4, you seem to be focusing on knowledge of the language
-%of Isabelle.  So here the question that poses itself is again that to
-%fill the Isabelle part, an Isabelle expert is needed and the non
-%Isabelle expert will neither contribute nor understand that part. So,
-%what is the role of a non Isabelle expert?  Why is he ever included in
-%the process?
-
 It is important to note that the time it takes translating a Z specification into 
 a theorem prover with full proofs may or may not be longer using small steps in ZMathLang Vs
 using Hol-Z, as that will depend on the user and their expertise/ typing skills/
@@ -336,7 +326,7 @@ about Hol-Z:
 `\texttt{The port of the library is not particularly difficult though.
 What is hairy, is the front-end, and in particular the Zeta Parser.
 A project around 2012 trying to port it to a more recent Isabelle-version
-and a \\ new Z parser/typechecker front-end was abandoned.}'
+and a \\ new Z parser/type checker front-end was abandoned.}'
 
 \subsection{Knowledge of \LaTeX}
 
@@ -533,7 +523,7 @@ the last step of the framework to prove properties about the specification is
 still a difficult step in both translation paths (via \gls{zmath} or via another
 route). This chapter also compared other similar tools which have been
 implemented to analyse Z specification. We have identified that although these
-tools are similar- none are identifical to the \gls{zmath} toolkit.
+tools are similar- none are identical to the \gls{zmath} toolkit.
 The \gls{zmath} framework is there to give a helping hand to
 users who are complete beginners in proving formal specifications. Proving the
 actual properties and the proof obligations of the specification are a whole
@@ -543,213 +533,3 @@ the specification and allow them to understand the syntax of their specification
 
 In the next chapter we conclude our findings of this thesis and highlight what
 areas are of interest for future work.
-
-%
-%
-%\subsubsection{Specification Input}
-%
-%We compare the way the specification is imputed into the theorem prover. Also
-%it may be interesting to see how many lines are needed for the first lemma. We
-%could compare the entire proof however with additional comments and information
-%needed for the proofs this may be more complicating to analyse.
-%
-%\begin{figure}[H] \begin{BVerbatim}[fontsize=\scriptsize, baseline=t]
-%%EZ%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH%
-%%SZS%exact_cash%BH%%BH%%BH%%BH%%BH%%BH%%BH% %BV%   cash_tendered? :%bbN%
-%%BT%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH% %BV%   cash_tendered? = price
-%%EZ%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH%%BH% \end{BVerbatim}
-%\begin{BVerbatim}[fontsize=\scriptsize, baseline=t] definition exact_cash ::
-%"nat  \<Rightarrow> bool" where "exact_cash cash_tendered  \<equiv>
-%(cash_tendered = price)" \end{BVerbatim} \caption{The exact\_cash schema
-%written in \gls{ppz} (left) and Isabelle (right).} \label{fig:exact_cash}
-%\end{figure}
-%
-%The input for a \gls{ppz} proof can be either in ascii or an extended character
-%set. The ascii character set is to input the schemas of a Z specification into
-%a normal text editor. Figure \ref{fig:exact_cash} shows the same schema
-%(\emph{exact\_cash}), written both \gls{ppz} and Isabelle syntax. Note that the
-%schema written in \gls{ppz} is more similar to a normal drawing of a schema
-%than the Isabelle version. However with the ascii version of the Z schema it is
-%difficult to distinguish between the actual words of the schema and the actual
-%schema frame itself.
-%
-%\begin{figure}[H] \begin{center} \includegraphics
-% [width=6cm]{Figures/Conclusion/exactcash.png} \caption{The exact\_cash schema
-% written in \gls{ppz} using the extended character set.}
-% \label{fig:exactcash_ext} \end{center} \end{figure}
-%
-%On the other hand, when converting a \gls{ppz} proof into the extended
-%character set. The Z specification is neater and shows the proper frames for
-%the schema boxes. Figure \ref{fig:exactcash_ext} shows the exact\_cash schema
-%box with the extended character set. However to get to this stage the user must
-%first learn how to convert between the ascii and the extended character
-%versions. They must also learn how to use the \textbf{xpp} interface
-%\cite{xppMan}, which combines a general purpose editor with a command interface
-%for the use of \gls{ppz}.
-%
-%\subsubsection{Expertise required in order to get a full proof}
-%
-%To actual obtain the full proof of the vending machine requires a lot less
-%expertise if using the MathLang method than if going straight into a \gls{ppz}
-%proof. Some knowledge about Z specifications may be required so that one may
-%annotate what are declarations, expressions, state schemas etc. But no theorem
-%prover knowledge is needed to actual insert the specification itself into
-%Isabelle syntax (step 5 in figure \ref{fig:steps}). However to start writing
-%the specification into \gls{ppz} the user will first need to read the \gls{ppz}
-%manual to know how to get started. If using the ascii version they must know
-%how to translate schema frames into ascii code and how to run the code. If
-%using the extended character set, not only does the user need to learn
-%\gls{ppz} syntax but also how to start and run the \textbf{Xpp} interface as
-%well as the \gls{ppz} syntax. The user must also open the palette of symbols
-%(which shows all symbols which can be used in Z) and search for the symbols
-%needed.
-%
-%By using the \gls{zmath} steps as long as the user has labelled their
-%specification correctly and checked it using ZCGa and ZDRa then the actual
-%specification is automatically converted into Isabelle syntax. At no point
-%during this translation does the user need to know or have used Isabelle
-%previously. Nonetheless, from step 5 to step 7 the user will need to at least
-%familiarise themselves with their chosen theorem prover (in this case
-%Isabelle). Step 6 and step 7 include adding the properties the user wishes to
-%prove as lemmas and then proving them. Since this is done in \gls{ppz} as well
-%then this would be no extra effort then if the user has chosen to do it in one
-%steps. But since the work from step 0 to step 5 is easier in steps using
-%\gls{zmath} then the overall translation in \gls{zmath} would be easier to do.
-%
-%\subsubsection{Proof and tactics used to prove the lemma}
-%
-%\begin{figure}[H] \begin{BVerbatim}[fontsize=\scriptsize, baseline=t]
-%set_goal([],%SZT%pre VM1 %equiv% (0 < stock %and% cash_tendered? = price %and%
-%0 %leq% takings)%>%);
-%
-%a (rewrite_tac [VM1, VM_sale, some_stock, VM_operation, VMSTATE, exact_cash]);
-% a (pure_rewrite_tac [z_get_spec %SZT%(_ %leq% _)%>%]); a (rewrite_tac[]); a
-% (REPEAT z_strip_tac); a (z_%exists%_tac %SZT%(bars_delivered! %def% 1,
-% cash_refunded! %def% cash_tendered? 
-%   + ~ price, stock' %def% stock + ~ 1, takings' %def% takings + price)%>% THEN
-%     rewrite_tac[]); a (PC_T1 "z_library_ext" asm_rewrite_tac [rewrite_rule []
-%     price]); a (LEMMA_T %SZT%stock + ~ 1 %leq% stock%>% asm_tac THEN1
-%     rewrite_tac[]); a (all_fc_tac [z_%leq%_trans_thm]); a (asm_rewrite_tac
-%     []); a (strip_asm_tac (z_get_spec %SZT%price%>%)); a (all_fc_tac
-%     [z_%bbN%_plus_thm]); val pre_VM1_thm = save_pop_thm "pre_VM1_thm";
-%     \end{BVerbatim} \begin{BVerbatim}[fontsize=\scriptsize, baseline=t] lemma
-%     pre_VM1: "(\<exists> stock' takings' cash_refunded bars_delivered. VM1
-%     cash_tendered stock takings stock' takings' cash_refunded bars_delivered)
-%     \<longleftrightarrow> (0 < stock) \<and> (cash_tendered = price) \<and> (0
-%     \<le> takings)"
-%
-%apply (unfold VM1_def exact_cash_def some_stock_def VM_sale_def) apply auto
-% done \end{BVerbatim} \caption{The exact\_cash schema written in \gls{ppz}
-% (left) and Isabelle (right).} \label{fig:lemma1proof} \end{figure}
-%
-%We will now compare a lemma and it's proof inputted in both \gls{ppz} and
-%Isabelle. Figure \ref{fig:lemma1proof} shows the same lemma and it's proof
-%written in both \gls{ppz} (left) and Isabelle (right). The lemma and it's proof
-%are both for the vending machine example. We can imagine that the vending
-%machine specification is already in putted in the theorem prover before this
-%lemma is added. We can see that the lemma itself is slightly longer written in
-%Isabelle then it is in \gls{ppz}. However the proof of this lemma is a lot
-%longer in \gls{ppz} then it is in Isabelle. Note that at the end of the proof in
-%\gls{ppz} we have the following line: \begin{verbatim} val pre_VM1_thm =
-%save_pop_thm "pre_VM1_thm";. \end{verbatim} This saves the lemma and names it
-%"pre\_VM1\_thm" whereas in Isabelle we have the lemma saved as "pre\_VM1"
-%automatically. As this lemma and it's proof are part of step 6 and 7 of figure
-%\ref{fig:steps} which are both manual input. It is both up to the user to
-%acquire at least some knowledge of the targeted theorem prover in order to
-%choose the lemmas and prove them. In this case writing the properties and
-%proving them require the same amount of work in both scenarios, whether the
-%user is proving the specification all at once or using the \gls{zmath} steps.
-%However when using the \gls{zmath} path, steps 0 to 6 require less expertise
-%knowledge.
-%
-%
-%\subsection{Birthday Book Example} Spiveys birthday book is a specification
-%which adds names and birthdays to a birthday book. It uses it's own types and
-%sets.
-%
-%\begin{table}[H] \begin{center} \begin{tabular}{| l || l | l | l |} \hline
-%\textbf{Method} & \textbf{expertise} &  \textbf{input}  \\
-%& \textbf{required} &   \\
-%\hline 1 step into \gls{hol} & much & \LaTeX{} into    \\
-%&  &  ZeTa into \gls{hol}   \\
-%\hline stepwise using & little & \LaTeX{} into Isabelle    \\
-%\gls{zmath} & &  \\
-%\hline \end{tabular} \end{center} \caption{Comparison of the vending machine
-%proof using \gls{ppz} Vs the \gls{zmath} method.} \label{tab:comparebb}
-%\end{table}
-%
-%\subsubsection{Expertise required to get into a full proof}
-%
-%Similarly to \gls{zmath}, \gls{hol} breaks the translation into steps. It first
-%reads a \LaTeX{} specification (again similar to \gls{zmath}), is type checked
-%by ZeTa type checker and then is converted into SML-files that can be loaded in
-%Isabelle. The SML files which are loaded into Isabelle need all the extra
-%\gls{hol} .thy files to be checked, whereas \gls{zmath} only uses Isabelle's
-%Main.thy package and nothing else. Therefore in order to prove the
-%specification the user must learn all the extra \gls{hol} proving syntax as
-%well as Isabelle's syntax and the Zeta type checker. Whereas in \gls{zmath} the
-%user will only need to learn some Isabelle syntax in order to prove the
-%properties of the specification.
-%
-%On the other hand \gls{hol} does have an advantage in that the by using the
-%holz.sty package the user can use labels to automatically generate constancy
-%conditions, refinement conditions or special safety properties. Thus, removing
-%the effort from the user of doing these by hand.
-%
-%Since \gls{zmath} breaks the translation in more steps then \gls{hol}, it also
-%has the advantage of being able to translate semi-formal specifications into
-%theorem provers. Such that the specification can be written partially in Z
-%format and partially in natural language. Another asset of the \gls{zmath}
-%method is that the files produced from this method give not only the user but
-%the programmers more information about the specification. By labelling the
-%specification, the user is giving information about the types in the
-%specification which can aid the developer in his work. The dependency graph and
-%GoTo graph produced from the ZDRa also benefit the developers as they are then
-%able to view the relationships between different parts of the specification.
-%This will be especially beneficially on large scale projects where the
-%different parts of the specification which relate to each other are far apart
-%on the specification document.
-%
-%\subsubsection{Input}
-%
-%\begin{figure}[H] \begin{BVerbatim}[fontsize=\scriptsize, baseline=t]
-%(ZAbsy.Eqn("AddBirthday", ZAbsy.SchemaText
-%([ZAbsy.Unary(ZAbsy.Delta,ZAbsy.NameAppl ("BirthdayBook",[])),ZAbsy.Direct
-%(["name?"],ZAbsy.NameAppl("NAME",[])), ZAbsy.Direct(["date?"], ZAbsy.NameAppl
-%("DATE",[]))],[ZAbsy.Test(ZAbsy.Tuple ([ZAbsy.NameAppl("name?",[]),ZAbsy.
-%NameAppl("known",[])]), ZAbsy.NameAppl ("_notin_",[])),ZAbsy.Test(ZAbsy.Tuple
-%([ZAbsy.NameAppl("birthday'",[]),ZAbsy. Binary(ZAbsy.Apply,ZAbsy.NameAppl
-%("_cup_",[]),|Absy.Tuple([ZAbsy.NameAppl ("birthday",[]),ZAbsy.Display([ZAbsy.
-%Binary(ZAbsy.Apply,ZAbsy.NameAppl ("_mapsto_",[]),ZAbsy.Tuple([ZAbsy.
-%NameAppl("name?",[]),ZAbsy.NameAppl ("date?",[])]))])]))]),ZAbsy.NameAppl
-%("_=_",[]))]),ZAbsy.Type(ZAbsy.Unary(ZAbsy.
-%Power,ZAbsy.Signature([("birthday",ZAbsy.
-%Unary(ZAbsy.Power,ZAbsy.Product([ZAbsy.
-%NameAppl("NAME",[]),ZAbsy.NameAppl("DATE", [])]))),
-%("birthday'",ZAbsy.Unary(ZAbsy.
-%Power,ZAbsy.Product([ZAbsy.NameAppl("NAME",[]),ZAbsy.NameAppl("DATE",[])]))),("date?",
-%ZAbsy.NameAppl("DATE",[]("known",ZAbsy.
-%Unary(ZAbsy.Power,ZAbsy.NameAppl("NAME",[]))),
-%("known'",ZAbsy.Unary(ZAbsy.Power,ZAbsy. NameAppl("NAME",[]))),("name?",ZAbsy.
-%NameAppl("NAME",[]))]))))), \end{BVerbatim}
-%\begin{BVerbatim}[fontsize=\scriptsize, baseline=t] definition AddBirthday ::
-%"BirthdayBook => BirthdayBook =>  NAME set => (NAME * DATE) set => NAME => DATE
-%=> bool" where "AddBirthday birthdaybook birthdaybook' known' birthday' name
-%date ==
-%(
-%(name \<notin> known) \<and> (birthday' = birthday \<union> {(name, date)})
-%)"
-%\end{BVerbatim} \caption{The AddBirthday schema written in \gls{hol} (left),
-%and \gls{zmath} (right).} \label{fig:addbirthdaydef} \end{figure}
-%
-%Figure \ref{fig:addbirthdaydef} shows the AddBirthday Schema from the birthday
-%book automatically generated into \gls{hol} on the left and \gls{zmath} on the
-%right. Although both of these are automatically generated and not user input,
-%the input into Isabelle through \gls{zmath} would be a lot easier for anyone to
-%understand. The \gls{hol} input is a separate theory  file and in the main .thy
-%file has the line "load\_holz "BBSpec"" is added. The user may want to go
-%through some functions and make changes to the original specification, to do
-%this the user would need to go back to the \LaTeX{} specification and go
-%through the process again, or learn the syntax of Isabelle and \gls{hol} in
-%greater detail in order to add more functions.
-%

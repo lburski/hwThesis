@@ -423,49 +423,6 @@ definition, or $defcons(\mathcal{D})$, is $c$.
     \caption{Weak typing rules used by the ZCGa type checker. \label{tab:wttrules}}
 \end{table}
 
-
-%\begin{table}[H]
-%\begin{tabular}{| c | c | } \hline 
-%(var) & $\dfrac{OK(spec;\Gamma), x \in V^{\mathcal{T}/\mathbb{S}}, x \in
-%dvar(\Gamma)}{spec;\Gamma \vdash x \mathbf{::}\mathcal{T}/\mathbb{S}}$
-%\\[0.25cm] \hline
-%(int-cons) & $\dfrac{\begin{aligned} OK(spec;\Gamma), \Gamma' \rres \mathcal{D}
-%\in spec, \\[0.0001em]
-%dvar(\Gamma')=\{x_{1}, ..., x_{n}\}, defcons(\mathcal{D}) = c \in
-%C^{\mathcal{T}/\mathbb{S}/\mathcal{E}}, \\
-%wt_{spec;\Gamma}(P_{i})=wt_{spec;\Gamma'}(x_{i}),\text{ for all }i = 1, ..., n
-%\end{aligned}}% {spec;\Gamma \vdash c(P_{1}, ...,
-%P_{n})::\mathcal{T}/\mathbb{S}/\mathcal{E}}$ \\[0.25cm] \hline
-%(ext-cons) & $\dfrac{\begin{aligned} OK(spec;\Gamma), c \text{ external to
-%spec}, c \mathbf{::} k_{1} \times... \times k_{n} \rightarrow k, \\
-%spec;\Gamma \vdash P_{i} \mathbf{::} k_{i} (i=1,...,n) \end{aligned}}%
-%{spec;\Gamma \vdash c(P_{1},...,P_{n}) \mathbf{::}k}$ \\[0.25cm] \hline
-%(bind) & $\dfrac{OK(spec;\Gamma;Z), b \in B, b \mathbf{::}k_{1}\rightarrow
-%k_{2}, spec;\Gamma, Z \vdash E \mathbf{::}k_{1}}{spec;\Gamma \vdash
-%b_{z}(E)\mathbf{::}k_{2}}$ \\[0.25cm] \hline
-%(defin)& $\dfrac{\begin{aligned} spec;\Gamma \vdash s \mathbf{::} \mathbb{S} \\
-%dvar(\Gamma)=\{x_{1},...,x_{n}\}, c \in C^{\mathbb{S}}, c \notin prefcons(spec)
-%\cup defcons(spec) \end{aligned}}% {spec;\Gamma \vdash c(x_{1},...,x_{n}):= s
-%\mathbf{::} \mathcal{D}}$ \\[0.25cm] \hline
-%& $\dfrac{\vdash spec \mathbf{:: Spec}}{spec \vdash \emptyset \mathbf{::
-%\Gamma}}(emp-cont)$ \\[0.25cm] \hline
-%(set-dec) & $\dfrac{OK(spec;\Gamma), x \in V^{\mathbb{S}}, x \notin
-%dvar(\Gamma)}{spec \vdash \Gamma, x:SET \mathbf{:: \Gamma}}$ \\[0.25cm] \hline
-%(term-dec) & $\dfrac{OK(spec;\Gamma), spec;\Gamma \vdash s \mathbf{::}
-%\mathbb{S}, x \in V^{\mathcal{T}}, x \notin dvar(\Gamma)}{spec \vdash \Gamma,
-%x:s \mathbf{:: \Gamma}}$ \\[0.25cm] \hline
-%(assump) & $\dfrac{OK(spec;\Gamma), spec;\Gamma \vdash
-%e\mathbf{::}\mathcal{E}}{spec \vdash \Gamma, e \mathbf{:: \Gamma}}$ \\[0.25cm]
-%\hline
-%(emp-spec) & $\dfrac{ }{\vdash \emptyset \mathbf{:: Spec}}$ \\[0.25cm] \hline
-%(spec-ext) & $\dfrac{spec \vdash \Gamma \mathbf{:: \Gamma}}{\vdash spec, \Gamma
-%\mathbf{:: Spec}}$ \\[0.25cm] \hline
-%\end{tabular}
-%\caption{Weak typing rules used by the ZCGa type checker. \label{tab:wttrules}}
-%\end{table} 
-
-
-
 \subsection{Weak typing properties and definitions}
 
 Since the categories and rules of the Z syntax $WT_{Z}$ are a subset of the
@@ -532,7 +489,7 @@ minimum amount needed in order to check for weak type correctness. The weak
 types \texttt{term}, \texttt{set}, \texttt{declaration} and \texttt{expression}
 can be used in a semi-formal specification. An example of this is shown in
 section \ref{sec:zcgaonsemi}. At this early stage we wanted to weak-type check
-our specification and strongl-type checkers already exists, and the
+our specification and strong-type checkers already exists, and the
 specification will be strongly typed when translated to Isabelle anyway. This
 weak type check will also allow us to check semi-formal specifications.
 
@@ -914,10 +871,10 @@ all these grammatical errors should be identified.
 \section{ZCGa on a semi-formal specification}
 \label{sec:zcgaonsemi}
 
-The \gls{zcga} can also be used on a semi-formal specification. An example is shown
-in appendix \ref{app:semiform}, which describes an auto pilot system. This
+The \gls{zcga} can also be used on a semi-formal specification. The example we
+use in this thesis describes an autopilot systems (appendix \ref{app:semiform}). This
 specification is written partly in the English natural language and partly in Z.
-Therefore the specification is on it's way to becoming formal. The user can
+Therefore, the specification is on it's way to becoming formal. The user can
 annotate the formal parts and some of the informal parts in \gls{zcga}, it can
 then be checked and will notify the user if there are any grammatical errors in the
 specification so far, if any variables need to be
@@ -952,20 +909,20 @@ specification where the user has annotated the terms within the informal part of
 the specification. This annotation is legal in \gls{zmath}.
 
 If we run this specification through the ZCGa checker the output message will
-show that there are 4 errors and the terms \texttt{att\_cws}, \texttt{fpa\_sel},
-\texttt{alt\_eng} and \texttt{cas\_eng} have not been declared. This is shown in
-figure \ref{fig:zcgaautopilotresult}.
+show that there are 4 errors and the terms `'\texttt{att\_cws}', `'\texttt{fpa\_sel}',
+`'\texttt{alt\_eng}' and `'\texttt{cas\_eng}' have not been declared. This is shown in
+figure \ref{fig:zcgaautopilotresult1}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[scale=0.5]{Figures/zcga/semiformsmessage.png}
     \caption{Output result of running passing Figure \ref{fig:zcgautopilotzcgaincorrect} 
-    through the ZCGa checker. \label{fig:zcgaautopilotresult}}
+    through the ZCGa checker. \label{fig:zcgaautopilotresult1}}
 \end{figure}
 
-The full version of the semi formal specification is shown in appendix
+The full version of the semi-formal specification is shown in appendix
 \ref{app:zcgazdrasemiform}. Even though this specification is only partially
-formal, we are able to translate the annotated parts all the way to the Isabelle
+formal, we are able to translate the annotated parts into the Isabelle
 syntax (step 5 from figure \ref{fig:steps}).
 
 \section{ZCGa on an informal specification}
@@ -985,7 +942,7 @@ System Engineer A writes the following requirements:
      \item A \term{driver}: \expression{shall\ be\ a\ human\ being\ over\ the\
      age\ of\ 18} \\
      \expression{sitting\ inside\ the\ vehicle}
-     \item etc, etc
+     \item etc.
      \end{enumerate}
      }
  }
@@ -996,11 +953,11 @@ System Engineer A writes the following requirements:
  \noindent\fbox{%
  \parbox{\textwidth}{%
  \begin{enumerate}
- \item The driver shall be in sitting in a comfortable position in the vehicle.
+ \item The driver shall be sitting in a comfortable position in the vehicle.
  \item The \term{driver}: \expression{shall\ be\ a\ human\ being\ over\ the\ age\ of\ 17} \\
         \expression{sitting\ inside\ the\ vehicle}
  \item The driver shall be relaxed
- \item etc, etc
+ \item etc.
  \end{enumerate}
  }
 }
